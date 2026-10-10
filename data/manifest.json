@@ -1,0 +1,26 @@
+{
+  "binance_BTCUSDT_1d_20261010.csv": {
+    "first": "2017-08-17",
+    "last": "2026-10-09",
+    "rows": 3341,
+    "sha256": "c31fbd986d06d84e394bc12e08174c66aa5df6e9419e17e8d32ffedaa747ea40"
+  },
+  "binance_ETHUSDT_1d_20261010.csv": {
+    "first": "2017-08-17",
+    "last": "2026-10-09",
+    "rows": 3341,
+    "sha256": "4cf5e22688ee000cafffcfe006c82fdc4db351ed66f6426e632b70478d159474"
+  },
+  "coinbase_BTC-USD_1d_20261010.csv": {
+    "first": "2015-07-20",
+    "last": "2026-10-10",
+    "rows": 4101,
+    "sha256": "6a737b1acd81208c4cc6eb56b9771814663e97cb832152cf2f35804e0fe0506c"
+  },
+  "coinbase_ETH-USD_1d_20261010.csv": {
+    "first": "2016-05-18",
+    "last": "2026-10-10",
+    "rows": 3796,
+    "sha256": "104836b6bd940006ecc05165f926615e328b0d0a6e4b8705ba6cc88d14968df6"
+  }
+}
