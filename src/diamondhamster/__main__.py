@@ -26,7 +26,7 @@ def fetch() -> None:
 
 def run_baselines() -> None:
     pd.set_option("display.width", 160)
-    for src, sym in [("binance", "BTCUSDT"), ("binance", "ETHUSDT"), ("coinbase", "BTC-USD")]:
+    for src, sym in [("binance", "BTCUSDT"), ("binance", "ETHUSDT"), ("coinbase", "BTC-USD"), ("coinbase", "ETH-USD")]:
         df = data.load(src, sym).loc[:IN_SAMPLE_END]
         bh = baselines.buy_and_hold(df)
         print(f"\n== {src} {sym} in-sample {df.index[0].date()} .. {df.index[-1].date()}")
