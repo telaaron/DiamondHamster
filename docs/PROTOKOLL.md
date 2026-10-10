@@ -124,3 +124,9 @@ Backtest-Kern, Baselines, Kosten, Experiment-Log. Die KI wird nur eine neue Quel
 - **Durchsatz statt Kosten ist der Engpass.** 400 Wochenentscheidungen × 5 Läufe × N Prompts sind tausende Entscheidungen. Deshalb Batches: ein Subagent bekommt viele gemischte Fenster auf einmal. Risiko: er vergleicht Fenster untereinander. Gegenmittel: Fenster einzeln anonymisiert, Reihenfolge zufällig, Batchgröße als Parameter protokolliert.
 - **Subagents haben Werkzeuge.** Ein Subagent mit Datei- oder Webzugriff könnte Holdout-Daten oder echte Kurse nachschlagen. Für Entscheidungen bekommt er deshalb nur den Request-Inhalt im Prompt und keinen Repo-Zugriff; das muss technisch abgesichert werden (eigener Agent-Typ ohne Tools), bevor Ergebnisse zählen.
 - **Trainings-Cutoff.** Das aktuelle Modell hat Wissen bis ca. Juni 2026. Sauber messbar als Trader sind damit nur Juli 2026 bis heute (ca. 3 Monate) plus Live-Forward. Der Live-Teil passt gut zu einer wöchentlichen Routine in diesem Projekt, die jeden Sonntag eine Entscheidung trifft und loggt.
+
+## 10. Beide Rollen (Aaron, 2026-10-10)
+
+- **Trader:** Prompts `prompts/T-*.md`, entschieden vom Subagent-Typ `decider` (`.claude/agents/decider.md`, alle Werkzeuge gesperrt). Bewertung nur auf Daten nach Modell-Cutoff (ab 2026-07) und live über eine wöchentliche Routine. Bis dahin dienen historische Läufe nur zum Debuggen, nicht zur Auswahl.
+- **Forscher:** Prompts `prompts/R-*.md`. Ein Subagent liefert Hypothesen-Karte + `weights`-Funktion, die Pipeline testet. Güte eines Forscher-Prompts = Anteil seiner Hypothesen, die Stufe 4 (Validierung 2023/24) überleben, über mindestens 10 Hypothesen pro Prompt.
+- **Offen:** Ob der `decider` wirklich keine Werkzeuge hat, wird vor dem ersten zählenden Lauf empirisch geprüft.

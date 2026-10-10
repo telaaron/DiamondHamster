@@ -28,4 +28,5 @@ python -m diamondhamster baselines   # buy & hold, DCA, random timing on the in-
 - `src/diamondhamster/experiment.py` append-only run log, refuses runs from uncommitted code
 - `src/diamondhamster/ai.py` model harness: point-in-time, anonymized windows, versioned prompts, response cache
 - `prompts/` one file per prompt; put prompt id, hash and model id into the run's params
+- `.claude/agents/decider.md` tool-less subagent for trader decisions
 - `hypotheses/` one card per idea, written before testing
