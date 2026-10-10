@@ -113,3 +113,14 @@ Backtest-Kern, Baselines, Kosten, Experiment-Log. Die KI wird nur eine neue Quel
 - Point-in-time-Fenster: KI sieht an Tag t nur Daten bis Close t (gleicher Vertrag wie Backtest)
 - Anonymisierungs-Schicht
 - Bewertung über N Wiederholungen pro Prompt, Ergebnis als Verteilung
+
+## 9. Intelligenz-Schicht = Subagents im Projekt, keine API (Aaron, 2026-10-10)
+
+### Was sich ändert
+- **Austausch über Dateien statt Funktionsaufruf.** Python schreibt `requests.json` (Prompt + anonymisierte Fenster mit zufälligen IDs, gemischte Reihenfolge), die Session verteilt sie an Subagents, die Antworten landen in `responses.json`. Die Zuordnung ID → Datum liegt in `key.json`, das kein Subagent sieht. Code: `ai.export_requests` / `ai.load_responses`.
+- **Modell nicht pinbar.** Es antwortet das Modell, das die Session gerade bedient; das kann wechseln. Jeder Lauf protokolliert das bediente Modell. Ergebnisse verschiedener Modelle werden nicht gemischt.
+- **Kein Temperatur-Regler, keine Seeds.** Streuung messen wir nur über Wiederholungen: jeder Prompt mindestens 5 unabhängige Läufe, Ergebnis als Verteilung.
+- **Cache = einziges Replay.** Antworten werden committet. Ein Lauf ist reproduzierbar, weil seine Antworten gespeichert sind, nicht weil man ihn neu erzeugen kann.
+- **Durchsatz statt Kosten ist der Engpass.** 400 Wochenentscheidungen × 5 Läufe × N Prompts sind tausende Entscheidungen. Deshalb Batches: ein Subagent bekommt viele gemischte Fenster auf einmal. Risiko: er vergleicht Fenster untereinander. Gegenmittel: Fenster einzeln anonymisiert, Reihenfolge zufällig, Batchgröße als Parameter protokolliert.
+- **Subagents haben Werkzeuge.** Ein Subagent mit Datei- oder Webzugriff könnte Holdout-Daten oder echte Kurse nachschlagen. Für Entscheidungen bekommt er deshalb nur den Request-Inhalt im Prompt und keinen Repo-Zugriff; das muss technisch abgesichert werden (eigener Agent-Typ ohne Tools), bevor Ergebnisse zählen.
+- **Trainings-Cutoff.** Das aktuelle Modell hat Wissen bis ca. Juni 2026. Sauber messbar als Trader sind damit nur Juli 2026 bis heute (ca. 3 Monate) plus Live-Forward. Der Live-Teil passt gut zu einer wöchentlichen Routine in diesem Projekt, die jeden Sonntag eine Entscheidung trifft und loggt.

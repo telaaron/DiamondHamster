@@ -1,15 +1,21 @@
-"""Provider-agnostic harness for letting a model produce positions.
+"""Harness for letting a model produce positions.
 
-The model is just another source of `weights` for backtest.run, so the timing contract is the same:
-on decision day t it sees only rows up to and including the close of t.
-Prompts live in prompts/<id>.md and are identified by id + content hash; responses are cached
-by (model, prompt hash, input) so every logged run can be replayed without new API calls.
+No LLM API is called from here. The intelligence layer is Claude subagents run inside the project:
+Python writes a request batch to a file, the orchestrating session hands it to subagents, and their
+answers come back as a response file that Python turns into `weights` for backtest.run.
+
+The timing contract is the same as the backtest: on decision day t the model sees only rows up to
+and including the close of t. Requests carry opaque ids in shuffled order; the id -> date key is
+written to a separate file that is never shown to a subagent.
+Prompts live in prompts/<id>.md and are identified by id + content hash; responses are kept so every
+logged run can be replayed without running the subagents again.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+import random
 from pathlib import Path
 from typing import Callable
 
@@ -59,7 +65,35 @@ class ResponseCache:
 
 def decide_series(df: pd.DataFrame, decide: Callable[[pd.DataFrame], float], lookback: int = 180, freq: str = "W-SUN", anonymize: bool = True) -> pd.Series:
     """Call `decide(window)` on each rebalance day and hold the weight until the next one."""
-    days = df.index[lookback - 1 :]
-    rebalance = days[days.isin(pd.date_range(days[0], days[-1], freq=freq, tz=days.tz))]
+    rebalance = rebalance_days(df, lookback, freq)
     w = pd.Series({t: float(decide(window(df, t, lookback, anonymize))) for t in rebalance})
+    return w.reindex(df.index).ffill().fillna(0.0).clip(0.0, 1.0)
+
+
+def rebalance_days(df: pd.DataFrame, lookback: int, freq: str = "W-SUN") -> pd.DatetimeIndex:
+    days = df.index[lookback - 1 :]
+    return days[days.isin(pd.date_range(days[0], days[-1], freq=freq, tz=days.tz))]
+
+
+def export_requests(df: pd.DataFrame, prompt_id: str, out_dir: Path, lookback: int = 180, freq: str = "W-SUN", seed: int = 0) -> Path:
+    """Write requests.json (for subagents) and key.json (id -> date, for Python only)."""
+    text, phash = load_prompt(prompt_id)
+    days = list(rebalance_days(df, lookback, freq))
+    random.Random(seed).shuffle(days)
+    ids = [hashlib.sha256(f"{seed}{t}".encode()).hexdigest()[:10] for t in days]
+    out_dir.mkdir(parents=True, exist_ok=True)
+    requests = [{"id": i, "window": window(df, t, lookback).to_csv()} for i, t in zip(ids, days)]
+    (out_dir / "requests.json").write_text(json.dumps({"prompt_id": prompt_id, "prompt_hash": phash, "prompt": text, "requests": requests}, indent=1))
+    (out_dir / "key.json").write_text(json.dumps({i: str(t) for i, t in zip(ids, days)}, indent=1))
+    return out_dir
+
+
+def load_responses(df: pd.DataFrame, out_dir: Path) -> pd.Series:
+    """Read responses.json ({"model": ..., "responses": {id: weight}}) and map back to dates via key.json."""
+    key = json.loads((out_dir / "key.json").read_text())
+    resp = json.loads((out_dir / "responses.json").read_text())["responses"]
+    missing = set(key) - set(resp)
+    if missing:
+        raise ValueError(f"{len(missing)} requests have no response")
+    w = pd.Series({pd.Timestamp(key[i]): float(v) for i, v in resp.items()}).sort_index()
     return w.reindex(df.index).ffill().fillna(0.0).clip(0.0, 1.0)

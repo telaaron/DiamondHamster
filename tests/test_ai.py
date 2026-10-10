@@ -43,3 +43,21 @@ def test_cache_roundtrip(tmp_path):
     c.put(k, "0.5", {"model": "model-x"})
     assert c.get(k) == "0.5"
     assert k != ai.cache_key("model-y", "abc", "input")
+
+
+def test_export_hides_dates_and_roundtrips(tmp_path, monkeypatch):
+    import json
+    monkeypatch.setattr(ai, "PROMPTS", tmp_path)
+    (tmp_path / "p1.md").write_text("decide")
+    df = synthetic(400)
+    ai.export_requests(df, "p1", tmp_path / "run", lookback=90)
+    req = (tmp_path / "run" / "requests.json").read_text()
+    import re
+    assert not re.search(r"\d{4}-\d{2}-\d{2}", req)
+    key = json.loads((tmp_path / "run" / "key.json").read_text())
+    ordered = sorted(key, key=key.get)
+    assert list(key) != ordered  # shuffled, order leaks no chronology
+    (tmp_path / "run" / "responses.json").write_text(json.dumps({"model": "m", "responses": {i: 1.0 for i in key}}))
+    w = ai.load_responses(df, tmp_path / "run")
+    first = min(map(pd.Timestamp, key.values()))
+    assert w.loc[first:].eq(1.0).all() and w.loc[: first - pd.Timedelta(days=1)].eq(0.0).all()
