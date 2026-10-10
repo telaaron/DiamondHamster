@@ -80,3 +80,36 @@ Jede Ausführung eine Zeile, append-only: Datum, Hypothesen-ID, Code-Commit, Par
 Parallel (Aarons Teil): 3 bis 5 eigene Beobachtungen als Hypothesen-Karten aufschreiben. Die Methode soll aus deinen Ideen kommen, nicht aus meinen.
 
 Tech: Python, pandas, kein Backtest-Framework am Anfang (eigener, kleiner, vollständig verstandener Kern; Frameworks verstecken Lookahead- und Kostenannahmen).
+
+## 8. Neues Ziel (2026-10-10): bester KI-Ansatz statt beste Strategie
+
+Aaron: Wir suchen nicht die beste Strategie, sondern den Ansatz (praktisch: den Prompt), mit dem eine KI aus den Daten nachweislich die besten Ergebnisse holt.
+
+### Was gleich bleibt
+Backtest-Kern, Baselines, Kosten, Experiment-Log. Die KI wird nur eine neue Quelle für Positionen (`weights`), bewertet wird exakt gleich.
+
+### Drei Probleme, die vorher gelöst sein müssen
+
+1. **Das Modell kennt die Geschichte.** Ein LLM wurde auf Texten trainiert, die den BTC-Kurs bis zu seinem Trainings-Cutoff beschreiben. Es "weiß", dass Ende 2017 ein Top war und 2022 ein Bärenmarkt. Ein Backtest auf diesen Jahren misst Erinnerung, nicht Können. Anonymisieren (keine Daten, keine Asset-Namen, normierte Preise) hilft teilweise, aber markante Verläufe (2017-Blase, März-2020-Crash) bleiben erkennbar.
+   Folge: Ehrlich messbar ist ein LLM-Trader nur auf Daten **nach** dem Trainings-Cutoff des Modells und live im Forward-Test. Unser Holdout 2025 liegt vor dem Cutoff aktueller Modelle und ist für diesen Zweck wertlos.
+
+2. **Prompt-Suche ist Overfitting mit unendlich vielen Parametern.** Jede Prompt-Variante ist ein Versuch. 50 Prompts testen und den besten nehmen ist dasselbe wie 50 Parameter testen. Versuchszählung und Holdout werden wichtiger, nicht unwichtiger.
+
+3. **Nicht-Determinismus, Modellwechsel, Kosten.** Gleicher Prompt, gleiche Daten, andere Antwort. Jeder Prompt braucht mehrere Läufe. Ergebnisse gelten nur für eine gepinnte Modell-Version. Wöchentliche Entscheidungen über 8 Jahre sind ca. 400 Calls pro Lauf.
+
+### Zwei Rollen für die KI
+
+| | KI als Forscher | KI als Trader |
+|---|---|---|
+| Was der Prompt tut | schlägt Hypothesen + Code vor, Pipeline testet deterministisch | entscheidet direkt Long/Flat aus einem Datenfenster |
+| Leak-Risiko | geringer (Ideen können historisch geprägt sein, Test ist sauberer Code) | hoch auf allen Daten vor Cutoff |
+| Messbar auf | Historie mit Walk-Forward | nur Daten nach Cutoff + live |
+| Zeit bis Aussage | Tage bis Wochen | Monate |
+| Metrik für "bester Prompt" | Anteil Hypothesen, die Stufe 4 überleben, und deren Out-of-Sample-Güte | Out-of-Sample-Rendite vs. Baselines nach Kosten |
+
+### Code-Erweiterungen (nach Entscheidung)
+- `prompts/` versioniert, jeder Prompt hat eine ID; Log speichert Prompt-ID + Modell-ID
+- Response-Cache (Hash aus Prompt, Input, Modell) für Reproduzierbarkeit und Kosten
+- Point-in-time-Fenster: KI sieht an Tag t nur Daten bis Close t (gleicher Vertrag wie Backtest)
+- Anonymisierungs-Schicht
+- Bewertung über N Wiederholungen pro Prompt, Ergebnis als Verteilung

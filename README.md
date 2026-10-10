@@ -26,4 +26,6 @@ python -m diamondhamster baselines   # buy & hold, DCA, random timing on the in-
 - `src/diamondhamster/backtest.py` long/flat core: signal at close t, trade at open t+1, costs on turnover
 - `src/diamondhamster/baselines.py` the bar every method has to clear
 - `src/diamondhamster/experiment.py` append-only run log, refuses runs from uncommitted code
+- `src/diamondhamster/ai.py` model harness: point-in-time, anonymized windows, versioned prompts, response cache
+- `prompts/` one file per prompt; put prompt id, hash and model id into the run's params
 - `hypotheses/` one card per idea, written before testing
