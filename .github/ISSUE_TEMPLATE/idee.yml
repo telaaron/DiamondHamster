@@ -1,0 +1,56 @@
+name: Idee für einen Versuch
+description: Prompt, Daten, Format oder Regel, die getestet werden soll
+title: "Idee: "
+labels: ["idee"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke! Jede Idee wird als genau eine Änderung gegen den aktuellen Champion getestet. Vorher kurz in [docs/VERSUCHE.md](https://github.com/telaaron/DiamondHamster/blob/main/docs/VERSUCHE.md) schauen, ob es sie schon gibt.
+  - type: dropdown
+    id: achse
+    attributes:
+      label: Art der Idee
+      options:
+        - Prompt (wie die KI angeleitet wird)
+        - Daten (was die KI zusätzlich oder weniger bekommt)
+        - Format (wie die Daten aufbereitet sind)
+        - Regel-Hypothese (ohne KI)
+        - Kritik an der Methode
+    validations:
+      required: true
+  - type: textarea
+    id: aenderung
+    attributes:
+      label: Die Änderung
+      description: Genau eine Sache. Bei Prompts gern der konkrete Satz, der dazu oder weg soll.
+    validations:
+      required: true
+  - type: textarea
+    id: warum
+    attributes:
+      label: Warum sollte das helfen?
+      description: Der Mechanismus. Wer ist auf der anderen Seite, warum ist das noch nicht eingepreist?
+    validations:
+      required: true
+  - type: textarea
+    id: widerlegt
+    attributes:
+      label: Woran sieht man, dass es nicht klappt?
+      description: Was müsste im Test herauskommen, damit die Idee als widerlegt gilt?
+    validations:
+      required: true
+  - type: textarea
+    id: quelle
+    attributes:
+      label: Quelle oder Daten (optional)
+      description: Link, Indikator-Code, Datenquelle mit Historie ab wann.
+  - type: checkboxes
+    id: regeln
+    attributes:
+      label: Regeln
+      options:
+        - label: Die Idee braucht keine Daten aus der Zukunft und verrät weder Datum noch Coin.
+          required: true
+        - label: Mir ist klar, dass auch eine widerlegte Idee veröffentlicht wird.
+          required: true
