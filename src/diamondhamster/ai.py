@@ -46,6 +46,12 @@ def window(df: pd.DataFrame, t: pd.Timestamp, lookback: int, anonymize: bool = T
     return out.round(4)
 
 
+def compact(w: pd.DataFrame) -> str:
+    """One line per day, 'day o h l c v', 1 decimal for prices, 2 for relative volume (keeps batches small)."""
+    lines = [f"{d} {r.open:.1f} {r.high:.1f} {r.low:.1f} {r.close:.1f} {r.volume:.2f}" for d, r in w.iterrows()]
+    return "day o h l c v\n" + "\n".join(lines)
+
+
 def cache_key(model: str, prompt_hash: str, payload: str) -> str:
     return hashlib.sha256(f"{model}\n{prompt_hash}\n{payload}".encode()).hexdigest()
 
@@ -70,19 +76,20 @@ def decide_series(df: pd.DataFrame, decide: Callable[[pd.DataFrame], float], loo
     return w.reindex(df.index).ffill().fillna(0.0).clip(0.0, 1.0)
 
 
-def rebalance_days(df: pd.DataFrame, lookback: int, freq: str = "W-SUN") -> pd.DatetimeIndex:
+def rebalance_days(df: pd.DataFrame, lookback: int, freq: str = "W-SUN", start: str | None = None) -> pd.DatetimeIndex:
     days = df.index[lookback - 1 :]
-    return days[days.isin(pd.date_range(days[0], days[-1], freq=freq, tz=days.tz))]
+    days = days[days.isin(pd.date_range(days[0], days[-1], freq=freq, tz=days.tz))]
+    return days[days >= pd.Timestamp(start, tz="UTC")] if start else days
 
 
-def export_requests(df: pd.DataFrame, prompt_id: str, out_dir: Path, lookback: int = 180, freq: str = "W-SUN", seed: int = 0) -> Path:
+def export_requests(df: pd.DataFrame, prompt_id: str, out_dir: Path, lookback: int = 180, freq: str = "W-SUN", seed: int = 0, start: str | None = None) -> Path:
     """Write requests.json (for subagents) and key.json (id -> date, for Python only)."""
     text, phash = load_prompt(prompt_id)
-    days = list(rebalance_days(df, lookback, freq))
+    days = list(rebalance_days(df, lookback, freq, start))
     random.Random(seed).shuffle(days)
     ids = [hashlib.sha256(f"{seed}{t}".encode()).hexdigest()[:10] for t in days]
     out_dir.mkdir(parents=True, exist_ok=True)
-    requests = [{"id": i, "window": window(df, t, lookback).to_csv()} for i, t in zip(ids, days)]
+    requests = [{"id": i, "window": compact(window(df, t, lookback))} for i, t in zip(ids, days)]
     (out_dir / "requests.json").write_text(json.dumps({"prompt_id": prompt_id, "prompt_hash": phash, "prompt": text, "requests": requests}, indent=1))
     (out_dir / "key.json").write_text(json.dumps({i: str(t) for i, t in zip(ids, days)}, indent=1))
     return out_dir
@@ -97,3 +104,41 @@ def load_responses(df: pd.DataFrame, out_dir: Path) -> pd.Series:
         raise ValueError(f"{len(missing)} requests have no response")
     w = pd.Series({pd.Timestamp(key[i]): float(v) for i, v in resp.items()}).sort_index()
     return w.reindex(df.index).ffill().fillna(0.0).clip(0.0, 1.0)
+
+
+def build_prompt(out_dir: Path) -> str:
+    r = json.loads((out_dir / "requests.json").read_text())
+    return r["prompt"] + "\n\n# Windows\n\n" + "\n\n".join(f"## {q['id']}\n{q['window']}" for q in r["requests"])
+
+
+def parse_weights(text: str) -> dict[str, float]:
+    """Take the last JSON object in a model answer and return {id: weight}."""
+    start = text.rfind("{")
+    while start >= 0:
+        try:
+            obj = json.loads(text[start : text.index("}", start) + 1])
+            return {k: float(v) for k, v in obj.items()}
+        except (ValueError, json.JSONDecodeError):
+            start = text.rfind("{", 0, start)
+    raise ValueError("no JSON object with weights found")
+
+
+def run_claude_cli(out_dir: Path, model: str, workdir: Path) -> Path:
+    """Answer a request batch with a fresh headless Claude Code run: no tools, no MCP, no memory, neutral cwd.
+
+    This is the project's own Claude (no separate LLM API key). The full answer is stored next to the
+    parsed weights so a run can be audited and replayed.
+    """
+    import os
+    import subprocess
+
+    env = {**os.environ, "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"}
+    cmd = ["claude", "-p", "--tools", "", "--strict-mcp-config", "--settings", '{"autoMemoryEnabled":false}', "--model", model, "--output-format", "json"]
+    proc = subprocess.run(cmd, input=build_prompt(out_dir), capture_output=True, text=True, cwd=workdir, env=env, timeout=1800)
+    out = json.loads(proc.stdout)
+    if out.get("is_error"):
+        raise RuntimeError(out.get("result"))
+    weights = parse_weights(out["result"])
+    served = [m for m in out.get("modelUsage", {}) if "haiku" not in m] or [model]
+    (out_dir / "responses.json").write_text(json.dumps({"model": served[0], "responses": weights, "raw": out["result"], "cost_usd": out.get("total_cost_usd")}, indent=1))
+    return out_dir

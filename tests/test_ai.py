@@ -61,3 +61,8 @@ def test_export_hides_dates_and_roundtrips(tmp_path, monkeypatch):
     w = ai.load_responses(df, tmp_path / "run")
     first = min(map(pd.Timestamp, key.values()))
     assert w.loc[first:].eq(1.0).all() and w.loc[: first - pd.Timedelta(days=1)].eq(0.0).all()
+
+
+def test_parse_weights_takes_last_json_object():
+    text = 'Thinking {"not": "this"} ... final: {"a1": 0.5, "b2": 1}'
+    assert ai.parse_weights(text) == {"a1": 0.5, "b2": 1.0}
