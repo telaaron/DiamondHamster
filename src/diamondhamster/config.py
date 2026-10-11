@@ -6,6 +6,8 @@ IN_SAMPLE_END = pd.Timestamp("2022-12-31", tz="UTC")
 VALIDATION_START = pd.Timestamp("2023-01-01", tz="UTC")
 VALIDATION_END = pd.Timestamp("2024-12-31", tz="UTC")
 HOLDOUT_START = pd.Timestamp("2025-01-01", tz="UTC")
+# Holdout for human rule hypotheses ends here (protocol section 11). From 2026-07 only forward tests count.
+HOLDOUT_END = pd.Timestamp("2026-06-30", tz="UTC")
 
 # Round-trip friction is 2x this: fees plus slippage, deliberately conservative.
 COST_PER_SIDE = 0.002

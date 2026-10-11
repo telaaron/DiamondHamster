@@ -1,6 +1,6 @@
 # Forschungsprotokoll: eigene Trading-Methode
 
-Stand: 2026-10-10 · Scope: nur Research, kein Live-Trading, keine Exchange-Keys · Assets: BTC, ETH (bis Aaron anderes sagt) · Horizont: Wochen bis Monate
+Stand: 2026-10-11 · Scope: nur Research, kein Live-Trading, keine Exchange-Keys · Assets: BTC, ETH (bis Aaron anderes sagt) · Horizont: Wochen bis Monate
 
 ## 1. Was "nicht auf Sand" konkret heißt
 
@@ -8,7 +8,7 @@ Die meisten selbstgebauten Strategien scheitern nicht an der Idee, sondern am Pr
 
 Regeln, die ab Tag 1 gelten:
 
-1. **Holdout wird eingefroren.** Daten ab 2025-01-01 bis heute werden nicht angeschaut, nicht geplottet, nicht getestet. Einmaliger Test am Ende einer Methode. Wer einmal reinschaut, hat ihn verbrannt.
+1. **Holdout wird eingefroren.** Daten ab 2025-01-01 bis 2026-06-30 (siehe Abschnitt 11) werden nicht angeschaut, nicht geplottet, nicht getestet. Einmaliger Test am Ende einer Methode. Wer einmal reinschaut, hat ihn verbrannt.
 2. **Jeder Versuch wird geloggt, auch die gescheiterten.** Die Anzahl der Versuche ist Teil des Ergebnisses (Multiple-Testing-Korrektur, z. B. Deflated Sharpe Ratio). Ohne Log ist kein Ergebnis bewertbar.
 3. **Hypothese vor Test.** Erst aufschreiben: Was erwarte ich, warum (Mechanismus), was würde es widerlegen. Dann testen. Nachträgliche Story-Erfindung zählt nicht.
 4. **Immer gegen Baselines.** Buy & Hold, monatlicher DCA, zufälliges Timing mit gleicher Exposure. Eine Methode muss diese *nach Kosten* schlagen, sonst ist sie keine.
@@ -35,7 +35,7 @@ Bei einem Horizont von Wochen bis Monaten gibt es wenig unabhängige Datenpunkte
 | 2 In-Sample-Test | 2013/2017 bis 2022-12 | schlägt Baselines nach Kosten nicht |
 | 3 Walk-Forward | rollierend, Parameter nur aus Vergangenheit | bricht außerhalb des Fit-Fensters ein |
 | 4 Validierung | 2023-01 bis 2024-12 | Performance-Kollaps vs. In-Sample |
-| 5 Holdout | 2025-01 bis heute, **einmal** | verfehlt vorab definierte Schwelle |
+| 5 Holdout | 2025-01 bis 2026-06, **einmal** | verfehlt vorab definierte Schwelle |
 | 6 Paper-Forward | live mitlaufen, ohne Geld, min. 3 bis 6 Monate | weicht deutlich vom Backtest ab |
 | 7 Bot | erst danach | |
 
@@ -130,3 +130,29 @@ Backtest-Kern, Baselines, Kosten, Experiment-Log. Die KI wird nur eine neue Quel
 - **Trader:** Prompts `prompts/T-*.md`, entschieden vom Subagent-Typ `decider` (`.claude/agents/decider.md`, alle Werkzeuge gesperrt). Bewertung nur auf Daten nach Modell-Cutoff (ab 2026-07) und live über eine wöchentliche Routine. Bis dahin dienen historische Läufe nur zum Debuggen, nicht zur Auswahl.
 - **Forscher:** Prompts `prompts/R-*.md`. Ein Subagent liefert Hypothesen-Karte + `weights`-Funktion, die Pipeline testet. Güte eines Forscher-Prompts = Anteil seiner Hypothesen, die Stufe 4 (Validierung 2023/24) überleben, über mindestens 10 Hypothesen pro Prompt.
 - **Offen:** Ob der `decider` wirklich keine Werkzeuge hat, wird vor dem ersten zählenden Lauf empirisch geprüft.
+
+## 11. Zukunfts-Turnier ist die Messgrundlage (Aaron, 2026-10-11)
+
+Grundlage: Review 001 des Methodik-Wächters (research/methodik/review-001-2026-10-11.md), Befunde B-01 bis B-07. Aaron hat am 2026-10-11 entschieden: das Turnier gilt, bevor T-002 gebaut wird.
+
+### Trader-Prompts zählen nur noch im Turnier
+- Ein Prompt wird mit ID, Hash und Datum eingefroren (`tournament/prompts.json`). Er zählt nur auf Runden **nach** seinem Einfrier-Datum. Text ändern = neue ID.
+- Jeden Sonntag (Close, UTC) entscheiden alle aktiven Prompts auf denselben 30 Coins (`tournament/universe.json`), 3 Wiederholungen, frische Claude-Läufe ohne Werkzeuge. Höchstens 4 Prompts gleichzeitig aktiv. Ein neuer Prompt beantwortet eine benannte Frage (z. B. "helfen Indikatoren?").
+- Juli bis Oktober 2026 sind ab jetzt Entwicklungsdaten. Ergebnisse dort zählen nicht als Beweis.
+- Erste Runde: Sonntag 2026-10-11 (Routine montags 00:23 UTC), T-001 (eingefroren 2026-10-11 vor dem Close) als Nulllinie. Neue Prompts steigen ab 2026-10-18 ein.
+
+### Hauptmetrik: Timing-Wert
+- Timing-Wert = Ergebnis der KI-Gewichte minus konstante Position in Höhe ihrer mittleren Gewichtung pro Coin, nach Kosten (0,2 % pro Seite), pro Woche über alle Coins gemittelt.
+- t-Statistik über Wochen (nicht über Coins, weil Coins gemeinsam laufen).
+- "Nachgewiesen" = Timing-Wert > 0 mit t > 2 auf Turnier-Wochen. Alles darunter heißt "nicht nachgewiesen".
+- Nebenwerte: Rank-IC (gewichtet die KI die besseren Coins höher? Das ist Auswahl, nicht Timing), Abstand zu Buy & Hold, Drawdown.
+
+### Zwei Wege für Hypothesen
+- **Menschliche Regel-Hypothesen** (Aaron, Fynn): Pipeline aus Abschnitt 3 bleibt. Holdout für sie ist **2025-01-01 bis 2026-06-30**, einmal. Ab 2026-07 sind die Kurse allen bekannt; dort zählt nur noch der Forward-Test. Zusatzfrage pro Idee: ist sie aus Beobachtungen von 2025 oder später entstanden? Dann ist auch dieser Holdout für sie nicht sauber.
+- **KI-Hypothesen** (Forscher-Rolle, R-*): das Modell kennt 2023 bis Mitte 2026. Validierung und Holdout prüfen dort nur sein Gedächtnis. KI-Hypothesen zählen deshalb nur auf Zukunftswochen, im Turnier.
+
+### Abbruchregel (offen)
+Die Zahlen legen Aaron und Fynn fest. Vorschlag des Wächters: Zeigt nach 26 Turnier-Wochen auf mindestens 20 Coins kein eingefrorener Prompt einen Timing-Wert mit t > 1, bekommt die KI eine andere Rolle (Forscher oder Filter) statt weiterem Prompt-Tuning.
+
+### Kommunikation
+Posts nennen nur die Hauptmetrik mit Zahl der Wochen und Entscheidungen.
