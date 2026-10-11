@@ -22,5 +22,11 @@
     "last": "2026-10-10",
     "rows": 3796,
     "sha256": "104836b6bd940006ecc05165f926615e328b0d0a6e4b8705ba6cc88d14968df6"
+  },
+  "tradingview_INDEX-BTCUSD_1d_20261011.csv": {
+    "first": "2010-01-01",
+    "last": "2026-10-10",
+    "rows": 6035,
+    "sha256": "ef601720a5cd5d95e43a49fdbe3fec31c6ba50eea0c738ae63f968f3f53de107"
   }
 }
