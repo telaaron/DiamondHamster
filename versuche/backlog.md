@@ -1,14 +1,14 @@
 # Versuchs-Backlog
 
-Reihenfolge = nächster zuerst. Jeder Eintrag ist eine einzige Änderung gegen den jeweiligen Champion. Wer einen Eintrag nimmt, setzt dahinter die Versuchs-ID; erledigte bleiben stehen (mit Urteil). Gepflegt vom Forschungs-Thread; neue Ideen dürfen alle unten anhängen.
+Reihenfolge = nächster zuerst. Jeder Eintrag ist eine einzige Änderung gegen den jeweiligen Champion. Wer einen Eintrag nimmt, setzt dahinter die Versuchs-ID; erledigte bleiben stehen (mit Urteil). Gepflegt vom Forschungs-Thread; neue Ideen dürfen alle unten anhängen. Jeder Versuchs-Thread trägt beim Start "E-NNN läuft" in seine Zeile ein und am Ende das Urteil dort und unter "Erledigt".
 
 Leitbefund bisher: Die KI verliert durch Umschichten (Timing-Wert negativ), sie läuft dem Kurs hinterher (Gewicht ≈ Position in der 180-Tage-Spanne). Die ersten Versuche greifen genau das an.
 
 | # | Achse | Änderung | Warum / Hypothese | Versuch |
 |---|---|---|---|---|
 | 1 | prompt | Ruhe als Standard: "Ändere das Gewicht nur bei klarer Evidenz; jede Umschichtung kostet." | Umschichtung kostet ihn heute Geld; weniger Hin und Her sollte Timing-Wert Richtung 0 heben | E-002: kein messbarer Unterschied |
-| 2 | prompt | Relativ statt absolut: "Du siehst 10 Märkte derselben Woche. Verteile mehr auf die stärksten, weniger auf die schwächsten." | Cross-Section ist oft leichter als Timing; Rank-IC heute ≈ 0 | E-004 läuft |
-| 3 | format | Renditen statt Preise: Tageszeilen als %-Änderung und Spanne statt o/h/l/c | Gleiche Information, weniger Zahlen, keine Ankerung auf "100" | |
+| 2 | prompt | Relativ statt absolut: "Du siehst 10 Märkte derselben Woche. Verteile mehr auf die stärksten, weniger auf die schwächsten." | Cross-Section ist oft leichter als Timing; Rank-IC heute ≈ 0 | E-004: schlechter |
+| 3 | format | Renditen statt Preise: Tageszeilen als %-Änderung und Spanne statt o/h/l/c | Gleiche Information, weniger Zahlen, keine Ankerung auf "100" | E-005 läuft |
 | 4 | daten | Weniger: 60 statt 180 Tage | Zu viel Daten kann schaden; prüft, ob die lange Historie hilft | |
 | 5 | daten | Mehr: 365 statt 180 Tage | Gegenprobe zu 4 | |
 | 6 | format | Verdichtet: letzte 30 Tage täglich, davor Wochenkerzen | Lange Historie ohne lange Tabelle | |
@@ -34,3 +34,4 @@ Erledigt:
 | E-001 | T-002: plus 19 Indikatoren | kein messbarer Unterschied |
 | E-002 | Ruhe als Standard (#1) | kein messbarer Unterschied (A +0,06 %/Woche, t 0,3) |
 | E-003 | Analyse vor den Gewichten (T-001 + Strategie, Lage, Gewicht, Kippunkt je Fenster) | kein messbarer Unterschied (A +0,08 % t 1,0; B+C −0,26 % t −1,2); seit 2026-10-11 Champion, weil Pflicht (README §4a) |
+| E-004 | Relativ statt absolut (#2), Basis E-003 | schlechter (A −0,49 %/Woche, t −2,2; Rank-IC 0,00): die KI verteilt nicht treffsicherer, verliert aber mehr |
