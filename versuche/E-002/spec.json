@@ -1,0 +1,10 @@
+{
+ "id": "E-002",
+ "parent": "E-000",
+ "axis": "prompt",
+ "change": "Ruhe als Standard: mittleres Gewicht (~0,5) halten, nur bei klarer Evidenz abweichen; jede Umschichtung kostet",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDD3MYEvodR83Vg998zcfS9X",
+ "notes": "Hypothese: T-001 verliert durch Umschichten (Timing-Wert -0,24 %/Woche auf A). Ein ruhiger Standard senkt die Streuung der Gewichte und hebt den Timing-Wert Richtung 0 oder darüber. Umsetzung: Der Decider sieht sein Gewicht der Vorwoche nicht (jede Woche frisch). 'Nur bei klarer Evidenz ändern' braucht deshalb einen festen Anker; gewählt: 0,5. Falsifiziert, wenn die Differenz zu E-000 auf A nicht t >= 2 erreicht. Befund: Die Anweisung wirkt aufs Verhalten (Streuung der Gewichte 0,17 -> 0,08, Spanne 0,3 bis 0,7 statt 0,1 bis 0,85), aber die verbleibenden Abweichungen verlieren weiter (Timing-Wert -0,18 %/Woche). Der Vorsprung hängt an der Woche ab 2026-08-16. Ruhiger heißt also nur: weniger Verlust pro Woche, kein Timing-Können."
+}

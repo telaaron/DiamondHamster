@@ -1,0 +1,45 @@
+{
+ "id": "E-000",
+ "vs": "E-000",
+ "A": {
+  "sets": "A",
+  "coins": 10,
+  "weeks": 13,
+  "decisions": 130,
+  "timing_week_pct": -0.235,
+  "timing_t": -0.8,
+  "base_timing_week_pct": -0.235,
+  "diff_week_pct": 0.0,
+  "diff_t": null,
+  "diff_ex_best_week_pct": 0.0,
+  "best_week": "2026-07-05",
+  "exposure": 0.453,
+  "base_exposure": 0.453,
+  "rank_ic": -0.022,
+  "weeks_better": 0
+ },
+ "check": {
+  "sets": "B+C",
+  "coins": 20,
+  "weeks": 13,
+  "decisions": 260,
+  "timing_week_pct": -0.304,
+  "timing_t": -0.91,
+  "base_timing_week_pct": -0.304,
+  "diff_week_pct": 0.0,
+  "diff_t": null,
+  "diff_ex_best_week_pct": 0.0,
+  "best_week": "2026-07-05",
+  "exposure": 0.373,
+  "base_exposure": 0.373,
+  "rank_ic": -0.052,
+  "weeks_better": 0
+ },
+ "verdict": "Referenz",
+ "model": "claude-opus-5-5",
+ "usage": {
+  "calls": 39,
+  "chars": 2338240,
+  "cost_usd_list": 14.06
+ }
+}

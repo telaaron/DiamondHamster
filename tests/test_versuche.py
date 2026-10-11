@@ -128,3 +128,14 @@ def test_reasoning_before_the_weights_is_kept_and_shown(lab):
     broken.write_text(json.dumps(r))
     with pytest.raises(ValueError, match="no weight"):
         vs.weights("E-000", "A", home)
+
+
+def test_publish_copies_cards_but_not_runs(lab, tmp_path):
+    home, candles = lab
+    make(home, "E-000")
+    vs.export("E-000", "A", home, candles)
+    (home / "UEBERSICHT.md").write_text("x")
+    dest = tmp_path / "repo" / "versuche"
+    vs.publish(home, dest)
+    assert (dest / "E-000" / "prompt.md").exists() and (dest / "UEBERSICHT.md").exists()
+    assert not (dest / "E-000" / "runs").exists()

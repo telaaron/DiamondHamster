@@ -38,6 +38,8 @@ from . import ai, features, snapshot, tournament
 from .config import COST_PER_SIDE
 
 HOME = Path("/mnt/project-files/research/versuche")
+REPO_COPY = Path(__file__).resolve().parents[2] / "versuche"  # readable copy in the repo, without runs/
+PUBLISHED = ("spec.json", "prompt.md", "render.py", "result.json", "card.md", "denken.md", "denken-B.md", "denken-C.md")
 MODEL = "claude-opus-5-5"
 WEEKS = [d.date() for d in pd.date_range("2026-07-05", "2026-09-27", freq="W-SUN")]
 SETS = {
@@ -326,17 +328,37 @@ def overview(home: Path = HOME) -> str:
     return text
 
 
+def publish(home: Path = HOME, dest: Path = REPO_COPY) -> list[Path]:
+    """Copy the readable part of every experiment into the repo: specs, prompts, results, cards, reasoning. Not runs/."""
+    written = []
+    for name in ("README.md", "UEBERSICHT.md", "backlog.md", "champion.json"):
+        if (home / name).exists():
+            written.append(dest / name)
+            written[-1].parent.mkdir(parents=True, exist_ok=True)
+            written[-1].write_text((home / name).read_text())
+    for d in sorted(p for p in home.glob("E-*") if (p / "spec.json").exists()):
+        for name in PUBLISHED:
+            if (d / name).exists():
+                out = dest / d.name / name
+                out.parent.mkdir(parents=True, exist_ok=True)
+                out.write_text((d / name).read_text())
+                written.append(out)
+    return written
+
+
 if __name__ == "__main__":
     import argparse
 
     p = argparse.ArgumentParser(prog="python -m diamondhamster.versuche")
-    p.add_argument("cmd", choices=["export", "decide", "run", "score", "card", "overview"])
+    p.add_argument("cmd", choices=["export", "decide", "run", "score", "card", "overview", "publish"])
     p.add_argument("exp_id", nargs="?")
     p.add_argument("--set", default="A", choices=list(SETS))
     p.add_argument("--home", type=Path, default=HOME)
     a = p.parse_args()
     if a.cmd == "overview":
         print(overview(a.home))
+    elif a.cmd == "publish":
+        print(len(publish(a.home)), "files copied to", REPO_COPY)
     elif a.cmd == "export":
         print(len(export(a.exp_id, a.set, a.home)), "batches")
     elif a.cmd == "decide":
