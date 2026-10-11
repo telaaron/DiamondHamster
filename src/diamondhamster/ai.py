@@ -82,14 +82,19 @@ def rebalance_days(df: pd.DataFrame, lookback: int, freq: str = "W-SUN", start: 
     return days[days >= pd.Timestamp(start, tz="UTC")] if start else days
 
 
-def export_requests(df: pd.DataFrame, prompt_id: str, out_dir: Path, lookback: int = 180, freq: str = "W-SUN", seed: int = 0, start: str | None = None) -> Path:
-    """Write requests.json (for subagents) and key.json (id -> date, for Python only)."""
+def export_requests(df: pd.DataFrame, prompt_id: str, out_dir: Path, lookback: int = 180, freq: str = "W-SUN", seed: int = 0, start: str | None = None,
+                    render: Callable[[pd.DataFrame, pd.Timestamp], str] | None = None) -> Path:
+    """Write requests.json (for subagents) and key.json (id -> date, for Python only).
+
+    `render(df, t)` builds the text for one decision day; default is the compact candle window.
+    """
+    render = render or (lambda d, t: compact(window(d, t, lookback)))
     text, phash = load_prompt(prompt_id)
     days = list(rebalance_days(df, lookback, freq, start))
     random.Random(seed).shuffle(days)
     ids = [hashlib.sha256(f"{seed}{t}".encode()).hexdigest()[:10] for t in days]
     out_dir.mkdir(parents=True, exist_ok=True)
-    requests = [{"id": i, "window": compact(window(df, t, lookback))} for i, t in zip(ids, days)]
+    requests = [{"id": i, "window": render(df, t)} for i, t in zip(ids, days)]
     (out_dir / "requests.json").write_text(json.dumps({"prompt_id": prompt_id, "prompt_hash": phash, "prompt": text, "requests": requests}, indent=1))
     (out_dir / "key.json").write_text(json.dumps({i: str(t) for i, t in zip(ids, days)}, indent=1))
     return out_dir

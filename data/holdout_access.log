@@ -6,3 +6,5 @@
 2026-10-11T06:54:03.034526+00:00	T-001 post-cutoff evaluation: model knowledge ends ~2026-06, so 2026-07+ is the only clean window for an LLM trader (ETH, scoring)
 2026-10-11T13:32:35.460220+00:00	T-001 post-cutoff comparison vs constant-exposure and random-timing baselines (Mac, read-only analysis, no new runs logged) (BTC)
 2026-10-11T13:32:37.191220+00:00	T-001 post-cutoff comparison vs constant-exposure and random-timing baselines (Mac, read-only analysis, no new runs logged) (ETH)
+2026-10-11T19:52:26.816519+00:00	T-002 dev comparison on the T-001 post-cutoff window (dev data since T-001 was scored there) (BTC)
+2026-10-11T19:52:27.433656+00:00	T-002 dev comparison on the T-001 post-cutoff window (dev data since T-001 was scored there) (ETH)
