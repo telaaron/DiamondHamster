@@ -163,7 +163,16 @@ Posts nennen nur die Hauptmetrik mit Zahl der Wochen und Entscheidungen.
 |---|---|---|---|---|
 | T-001 | 2026-10-10 | Nulllinien-Trader-Prompt, nur Kerzen | eingefroren 2026-10-11, läuft im Turnier | experiments/log.csv, tournament/prompts.json |
 | H-002 | 2026-10-11 | QS-Klassen je Zyklus (Pine-Script über Fynn, Anker 2011-11-17, 2015-08-18, 2018-12-15, 2022-11-21; Klassenpaare 4/6, 6/3, 3/5, 5/9) | **verworfen** in-sample: Swing-Wenden k=14 Lift 1,18, p = 0,078 gegen alle 36^4 Klassenpaare; 2023/24 Lift 0,98; QS-Filter senkt Sharpe einer einfachen Einstiegsregel von 0,86 auf 0,60. 7 Läufe geloggt, Holdout nicht geöffnet | research/qs-indikator/H-002-qs-zyklen.md, PR #3 |
-| T-002 | 2026-10-11 | T-001 plus 19 Indikatoren (einzige Änderung) | Dev-Fenster Jul bis Okt 2026: Timing-Wert −0,30 %/Woche gegen −0,10 % bei T-001, in allen 3 Wiederholungen schlechter; vorsichtiger (Exposure 0,45 statt 0,56); beide folgen fast nur der Lage im 180-Tage-Bereich (Korrelation 0,97); eine Woche (16.08.) entscheidet fast alles. Kein Beweis (Dev-Daten) | experiments/log.csv, experiments/runs/T-002_* |
+| T-002 | 2026-10-11 | T-001 plus 19 Indikatoren (einzige Änderung) | Dev-Fenster Jul bis Okt 2026: Timing-Wert −0,30 %/Woche gegen −0,10 % bei T-001, in allen 3 Wiederholungen schlechter; vorsichtiger (Exposure 0,45 statt 0,56); beide folgen fast nur der Lage im 180-Tage-Bereich (Korrelation 0,97); eine Woche (16.08.) entscheidet fast alles. Kein Beweis (Dev-Daten). **Nachtrag 2026-10-11:** dieser Dev-Lauf (wie der von T-001) hatte einen Überlappungs-Leak: ein Batch enthielt aufeinanderfolgende Wochen eines Coins, spätere Fenster zeigten die Zukunft früherer. Sauber wiederholt als E-001 auf 30 Coins: kein messbarer Unterschied (A +0,12 %/Woche t 1,7; B+C −0,06 %) | experiments/log.csv, experiments/runs/T-002_*, research/versuche/E-001 |
 | H-003 | 2026-10-11 | Fynns Zeitstruktur: Wendepunkte und Impulse bei Kurs und RSI ab 2022-11-21 nach festen Regeln, erst ohne QS-Tage, dann Häufung auf QS9/QS5-Tagen, zyklusspezifische RSI-Längen | wartet auf Fynns Definitionen (QS9/QS5, RSI-Länge je Zyklus, Wendepunkt-Regel) | Thread "Forschung neu gestartet" |
 
 Zu H-003: H-002 hat die QS-Tage bereits einmal getestet. Jeder weitere QS-Test zählt als zusätzliche Variante derselben Ideenfamilie. Die Schwelle für H-003 liegt deshalb höher (Bonferroni über alle QS-Varianten), und eine Definition, die erst nach Sicht auf das H-002-Ergebnis gewählt wird, ist zu markieren.
+
+## 13. Stündliche Versuche (Aaron, 2026-10-11 20:05)
+
+Die Methode ist Prompt + Daten + Aufbereitung. Sie wird laufend in Einzelversuchen verbessert, je Versuch eine Änderung gegen den Dev-Champion, auf einem festen Prüfstand (13 Sonntage Jul bis Sep 2026, 30 Coins in Set A und Check-Sets B+C, gepaarte Bewertung über den Timing-Wert, Ergebnis auch ohne die beste Woche). Regeln, Ablauf und Anti-Schummel-Regeln: research/versuche/README.md. Übersicht mit Zähler aller getesteten Varianten: research/versuche/UEBERSICHT.md.
+
+- Ein Dev-Sieg ist ein Filter, kein Nachweis. Nachweis bleibt allein das Turnier (§11).
+- Höchstens ein neuer Prompt pro Woche wird ins Turnier eingefroren (samstags), und nur ein Dev-Champion, der den besten aktiven Turnier-Prompt auf A und B+C schlägt.
+- Ein Versuch läuft genau einmal; Wiederholungen bekommen eine neue ID und zählen als weitere Variante.
+- Batches werden pro Entscheidungswoche quer über Coins gebaut (Überlappungs-Leak, siehe §12 T-002).
