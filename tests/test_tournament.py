@@ -120,3 +120,21 @@ def test_score_skips_unfinished_week():
     rows = [{"decision": d, "prompt": "p", "coin": "C0", "weight": 0.5} for d in [*decisions, late]]
     weekly, summary = tm.score(pd.DataFrame(rows), closes)
     assert summary.loc["p", "weeks"] == len(decisions)
+
+
+def test_indicator_prompts_get_the_snapshot_line(tmp_path, monkeypatch):
+    prompts = tmp_path / "prompts"
+    prompts.mkdir()
+    for p in ("P-0", "P-1"):
+        (prompts / f"{p}.md").write_text(p)
+    monkeypatch.setattr(ai, "PROMPTS", prompts)
+    reg = tmp_path / "reg.json"
+    tm.freeze("P-0", date(2026, 10, 1), reg)
+    tm.freeze("P-1", date(2026, 10, 1), reg, input="indicators")
+    candles, rounds = tmp_path / "candles", tmp_path / "rounds"
+    candles.mkdir()
+    synthetic(400, start="2025-10-01").to_csv(candles / "AAA.csv")
+    d0, d1 = tm.export_round(date(2026, 10, 18), ["AAA"], repeats=1, candles=candles, rounds=rounds, registry_path=reg)
+    w0 = json.loads((d0 / "requests.json").read_text())["requests"][0]["window"]
+    w1 = json.loads((d1 / "requests.json").read_text())["requests"][0]["window"]
+    assert w0.startswith("day o h l c v") and w1.startswith("indicators ") and w1.endswith(w0)

@@ -6,7 +6,7 @@ Background: research/methodik/review-001 (B-01 to B-03). Code: `src/diamondhamst
 ## Files
 - `universe.json`: the 30 coins, fixed before the first round.
 - `candles/<COIN>.csv`: daily Binance candles from TradingView, append-only. A closed bar never changes; a re-ingest that disagrees fails.
-- `prompts.json`: frozen prompts with content hash and freeze date. A prompt counts only on rounds after its freeze date. At most 4 active.
+- `prompts.json`: frozen prompts with content hash, freeze date and input (`candles`, or `indicators` = indicator line from `snapshot.py` before the window). A prompt counts only on rounds after its freeze date. At most 4 active.
 - `rounds/<sunday>/`: one request batch per prompt and repeat (`requests.json`, `key.json` id -> coin, `responses.json`), plus `round.json` with the coins used.
 - `scores_weekly.csv`: one row per prompt and finished week.
 

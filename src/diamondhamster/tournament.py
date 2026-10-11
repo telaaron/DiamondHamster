@@ -30,7 +30,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from . import ai
+from . import ai, features, snapshot
 from .config import COST_PER_SIDE
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -126,8 +126,13 @@ def registry(path: Path = REGISTRY) -> dict:
     return json.loads(path.read_text()) if path.exists() else {}
 
 
-def freeze(prompt_id: str, on: date, path: Path = REGISTRY) -> dict:
-    """Enter a prompt into the tournament. Its text may never change afterwards."""
+def freeze(prompt_id: str, on: date, path: Path = REGISTRY, input: str = "candles") -> dict:
+    """Enter a prompt into the tournament. Its text may never change afterwards.
+
+    input: "candles" (window only) or "indicators" (snapshot.snapshot line, then the window).
+    """
+    if input not in ("candles", "indicators"):
+        raise ValueError(input)
     reg = registry(path)
     _, phash = ai.load_prompt(prompt_id)
     if prompt_id in reg:
@@ -135,7 +140,7 @@ def freeze(prompt_id: str, on: date, path: Path = REGISTRY) -> dict:
     active = [p for p, e in reg.items() if not e.get("retired_at")]
     if len(active) >= MAX_ACTIVE:
         raise ValueError(f"already {len(active)} active prompts ({', '.join(active)}); retire one first")
-    reg[prompt_id] = {"hash": phash, "frozen_at": on.isoformat()}
+    reg[prompt_id] = {"hash": phash, "frozen_at": on.isoformat(), "input": input}
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(reg, indent=1, sort_keys=True) + "\n")
     return reg[prompt_id]
@@ -164,7 +169,7 @@ def export_round(decision: date, coins: list[str], repeats: int = REPEATS, candl
     if decision.weekday() != 6:
         raise ValueError("decisions are taken at the Sunday close")
     t = pd.Timestamp(decision, tz="UTC")
-    windows, skipped = {}, {}
+    windows, snapshots, skipped = {}, {}, {}
     for c in coins:
         df = read_candles(c, candles)
         if t not in df.index:
@@ -173,11 +178,14 @@ def export_round(decision: date, coins: list[str], repeats: int = REPEATS, candl
             skipped[c] = f"only {len(df.loc[:t])} bars"
         else:
             windows[c] = ai.compact(ai.window(df, t, LOOKBACK))
+            snapshots[c] = snapshot.snapshot(features.compute(df.loc[:t]), t)
     if not windows:
         raise ValueError(f"no coin has data for {decision}: {skipped}")
     out = []
+    reg = registry(registry_path)
     for p in active_prompts(decision, registry_path):
         text, phash = ai.load_prompt(p)
+        with_indicators = reg[p].get("input", "candles") == "indicators"
         for k in range(1, repeats + 1):
             d = round_dir(decision, p, k, rounds)
             if (d / "requests.json").exists():
@@ -188,7 +196,7 @@ def export_round(decision: date, coins: list[str], repeats: int = REPEATS, candl
             random.Random(seed).shuffle(order)
             ids = {c: hashlib.sha256(f"{seed}{c}".encode()).hexdigest()[:10] for c in order}
             d.mkdir(parents=True, exist_ok=True)
-            reqs = [{"id": ids[c], "window": windows[c]} for c in order]
+            reqs = [{"id": ids[c], "window": (snapshots[c] + "\n" if with_indicators else "") + windows[c]} for c in order]
             (d / "requests.json").write_text(json.dumps({"prompt_id": p, "prompt_hash": phash, "prompt": text, "requests": reqs}, indent=1))
             (d / "key.json").write_text(json.dumps({ids[c]: c for c in order}, indent=1))
             out.append(d)
@@ -293,6 +301,7 @@ if __name__ == "__main__":
     s = sub.add_parser("freeze")
     s.add_argument("prompt_id")
     s.add_argument("--on", type=date.fromisoformat, default=date.today())
+    s.add_argument("--input", choices=["candles", "indicators"], default="candles")
     for name in ("export", "decide"):
         s = sub.add_parser(name)
         s.add_argument("decision", type=date.fromisoformat)
@@ -305,7 +314,7 @@ if __name__ == "__main__":
             coin = coin_of(payload.get("symbol", "")) or f.stem
             print(coin, ingest(coin, payload, a.today, last=a.last), "new bars")
     elif a.cmd == "freeze":
-        print(a.prompt_id, freeze(a.prompt_id, a.on))
+        print(a.prompt_id, freeze(a.prompt_id, a.on, input=a.input))
     elif a.cmd == "export":
         for d in export_round(a.decision, universe()):
             print(d)
