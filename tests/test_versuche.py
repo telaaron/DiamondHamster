@@ -108,3 +108,23 @@ def test_a_lucky_single_week_is_not_a_win(lab):
     (first / "responses.json").write_text(json.dumps(resp))
     r = vs.score("E-003", home)
     assert r["A"]["diff_week_pct"] > 0 and r["verdict"] == "kein messbarer Unterschied"
+
+
+def test_reasoning_before_the_weights_is_kept_and_shown(lab):
+    home, candles = lab
+    make(home, "E-000")
+    runs = vs.export("E-000", "A", home, candles)
+    for run in runs:
+        key = json.loads((run / "key.json").read_text())
+        raw = "Lage: seitwärts, ich bleibe halb drin.\n" + json.dumps({i: 0.5 for i in key})
+        (run / "responses.json").write_text(json.dumps({"responses": vs.ai.parse_weights(raw), "raw": raw, "cost_usd": 0.1}))
+    assert len(vs.weights("E-000", "A", home)) == 3 * len(vs.WEEKS)
+    vs.card("E-000", home)
+    card = (home / "E-000" / "card.md").read_text()
+    assert "Lage: seitwärts" in card and "(AAA)" in (home / "E-000" / "denken.md").read_text()
+    broken = runs[0] / "responses.json"
+    r = json.loads(broken.read_text())
+    r["responses"].popitem()
+    broken.write_text(json.dumps(r))
+    with pytest.raises(ValueError, match="no weight"):
+        vs.weights("E-000", "A", home)

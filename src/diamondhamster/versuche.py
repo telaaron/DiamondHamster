@@ -144,6 +144,8 @@ def weights(exp_id: str, which: str, home: Path = HOME) -> pd.DataFrame:
             continue
         key = json.loads((run / "key.json").read_text())
         resp = json.loads((run / "responses.json").read_text())["responses"]
+        if missing := set(key) - set(resp):
+            raise ValueError(f"{run}: answer has no weight for {len(missing)} of {len(key)} windows")
         for i, coin in key.items():
             rows.append({"decision": pd.Timestamp(run.name, tz="UTC"), "coin": coin, "weight": min(max(float(resp.get(i, np.nan)), 0.0), 1.0)})
     return pd.DataFrame(rows)
@@ -239,6 +241,25 @@ def score(exp_id: str, home: Path = HOME) -> dict:
     return result
 
 
+def transcript(exp_id: str, which: str = "A", home: Path = HOME) -> str:
+    """denken.md: the decider's full answer per week, window ids resolved to coins after the fact."""
+    d = folder(exp_id, home)
+    lines = [f"# {exp_id}: was die KI gedacht hat (Set {which})", "",
+             "Volle Antwort des Deciders pro Entscheidungswoche, unverändert. Er sah weder Datum noch Coin-Namen; "
+             "die Namen in Klammern sind erst danach eingesetzt. Gesendeter Prompt und Daten: runs/<set>/<woche>/requests.json."]
+    for run in sorted((d / "runs" / which).glob("*")):
+        if not (run / "responses.json").exists():
+            continue
+        key = json.loads((run / "key.json").read_text())
+        raw = json.loads((run / "responses.json").read_text()).get("raw", "")
+        for i, coin in key.items():
+            raw = raw.replace(i, f"{i} ({coin})")
+        lines += ["", f"## Entscheidung {run.name}", "", raw.strip()]
+    text = "\n".join(lines) + "\n"
+    (d / f"denken{'' if which == 'A' else '-' + which}.md").write_text(text)
+    return text
+
+
 def card(exp_id: str, home: Path = HOME) -> str:
     """Markdown card: what changed, the exact prompt, the data, the score and the verdict."""
     d, s = folder(exp_id, home), spec(exp_id, home)
@@ -263,6 +284,15 @@ def card(exp_id: str, home: Path = HOME) -> str:
                 lines.append(f"| {x['sets']} ({x['coins']}) | {x['weeks']} | {x['decisions']} | {x['timing_week_pct']} % | {x['base_timing_week_pct']} % | {x['diff_week_pct']} % | {x['diff_t']} | {x['diff_ex_best_week_pct']} % (ohne {x['best_week']}) | {x['weeks_better']}/{x['weeks']} | {x['exposure']} (Basis {x['base_exposure']}) | {x['rank_ic']} |")
         u = r.get("usage", {})
         lines += ["", f"**Urteil: {r['verdict']}**", "", f"Verbrauch: {u.get('calls')} Claude-Aufrufe, {u.get('chars', 0) // 1000}k Zeichen, Listenpreis {u.get('cost_usd_list')} USD (zählt gegen Aarons Limit, keine Rechnung)"]
+    first = sorted((d / "runs" / "A").glob("*/responses.json"))
+    if first:
+        transcript(exp_id, "A", home)
+        key = json.loads((first[0].parent / "key.json").read_text())
+        raw = json.loads(first[0].read_text()).get("raw", "")
+        for i, coin in key.items():
+            raw = raw.replace(i, f"{i} ({coin})")
+        lines += ["", f"## Was die KI gedacht hat (Beispiel: Entscheidung {first[0].parent.name})", "",
+                  "Alle Wochen: [denken.md](denken.md)", "", "````", raw.strip(), "````"]
     if s.get("notes"):
         lines += ["", "## Notizen", s["notes"]]
     text = "\n".join(lines) + "\n"

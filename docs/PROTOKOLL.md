@@ -176,3 +176,4 @@ Die Methode ist Prompt + Daten + Aufbereitung. Sie wird laufend in Einzelversuch
 - Höchstens ein neuer Prompt pro Woche wird ins Turnier eingefroren (samstags), und nur ein Dev-Champion, der den besten aktiven Turnier-Prompt auf A und B+C schlägt.
 - Ein Versuch läuft genau einmal; Wiederholungen bekommen eine neue ID und zählen als weitere Variante.
 - Batches werden pro Entscheidungswoche quer über Coins gebaut (Überlappungs-Leak, siehe §12 T-002).
+- Ab E-003 schreibt der Decider vor seinen Gewichten seine Überlegung auf (Aaron, 2026-10-11 20:42). Die volle Antwort wird gespeichert und gezeigt. E-003 (T-001 plus Überlegung) wird danach Referenz und Champion, weil sich das Entscheidungsverhalten damit ändert (README §4a).
