@@ -52,6 +52,39 @@ combinations used as filter, vs buy and hold and monthly DCA.
 - Even if not refuted in-sample: if the chosen pair ranks top 3 of 36 in at least 3 of 4 cycles, the
   result is marked "consistent with selection" and only data after the pair was fixed counts.
 
-## Result
+## Result (2026-10-11, commit eaf5453, `python experiments/h002_qs_backtest.py`)
 
-(only after the test, see below)
+Period 2011-11-17..2024-12-31, holdout not opened. Hit days are 22.2 % of all days.
+
+| Events | n | on hit days | share | lift | p (36^4 class pairs) | rank of chosen pair 2011/2015/2018/2022 |
+|---|---|---|---|---|---|---|
+| E1 swing k=14 (primary) | 195 | 51 | 26.2 % | 1.18 | 0.078 | 26 / 4 / 2 / 9 |
+| E2 swing k=7 | 397 | 100 | 25.2 % | 1.13 | 0.070 | 28 / 2 / 8 / 1 |
+| E3 swing k=30 | 92 | 25 | 27.2 % | 1.22 | 0.175 | 19 / 1 / 18 / 5 |
+| E4 lows k=14 | 95 | 26 | 27.4 % | 1.23 | 0.147 | 15 / 3 / 2 / 19 |
+| E5 highs k=14 | 100 | 25 | 25.0 % | 1.12 | 0.262 | 31 / 9 / 7 / 6 |
+| E6 RSI swing k=14 | 249 | 68 | 27.3 % | 1.23 | 0.068 | 12 / 14 / 2 / 5 |
+
+E1 per cycle (lift): 2011 0.87, 2015 1.30, 2018 1.40, 2022-2024 1.06.
+Validation 2023-01..2024-12: 7 of 32 turns on hit days = 21.9 % against a 22.3 % base rate (lift 0.98).
+
+Trading check (close = 14-day low, hold 30 days, 0.2 % per side, 2011-11-17..2024-12-31):
+
+| Rule | CAGR | Sharpe | Max DD | Exposure |
+|---|---|---|---|---|
+| with QS filter | 19 % | 0.60 | -62 % | 42 % |
+| without filter | 41 % | 0.86 | -80 % | 72 % |
+| buy and hold | 125 % | 1.41 | -85 % | 100 % |
+
+QS-filtered Sharpe sits at the 78th percentile of 2,000 random class-pair filters (95th percentile = 0.75).
+Monthly DCA: IRR 108 %.
+
+- Primary criterion: p = 0.078 >= 0.05 and lift 1.18 < 1.2. **Refuted.**
+- Trading: the QS filter lowers Sharpe against the same signal without it and does not reach the 95th
+  percentile of random filters. **Refuted.**
+- Selection check: chosen pair in the top 3 in only 1 of 4 cycles on E1, so the weak in-sample lift does not
+  even look like a strong fit; 2011 is below chance, and the 2023-24 slice shows no effect at all.
+- Variants tested: 7 rows in experiments/log.csv (E1..E6, trading rule).
+- Decision: **drop.** Holdout stays closed; spending it on a hypothesis that fails in-sample would waste it.
+  If Fynn wants it kept alive, the only fair test left is paper-forward from today with the 2022 pair 5/9,
+  scored with the same E1 statistic.
