@@ -1,7 +1,6 @@
 name: Idee für einen Versuch
 description: Prompt, Daten, Format oder Regel, die getestet werden soll
 title: "Idee: "
-labels: ["idee"]
 body:
   - type: markdown
     attributes:

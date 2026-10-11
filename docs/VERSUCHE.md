@@ -1,6 +1,6 @@
 # Versuche und Learnings
 
-Chronologisch, inklusive aller Fehlschläge. Die Zahlen stammen aus `experiments/log.csv`, `docs/PROTOKOLL.md` §12 und den Versuchskarten des Spielplatzes. Alles hier sind **Entwicklungsdaten** (Jul bis Okt 2026). Beweiskraft hat nur das [Zukunfts-Turnier](../tournament/README.md).
+Chronologisch, inklusive aller Fehlschläge. Die laufend aktualisierte Tabelle aller Spielplatz-Versuche steht in [versuche/UEBERSICHT.md](../versuche/UEBERSICHT.md); diese Seite ist die erzählte Fassung mit den Learnings. Die Zahlen stammen aus `experiments/log.csv`, `docs/PROTOKOLL.md` §12 und den Versuchskarten des Spielplatzes. Alles hier sind **Entwicklungsdaten** (Jul bis Okt 2026). Beweiskraft hat nur das [Zukunfts-Turnier](../tournament/README.md).
 
 *Stand: 2026-10-11.*
 
@@ -32,7 +32,7 @@ Chronologisch, inklusive aller Fehlschläge. Die Zahlen stammen aus `experiments
 
 ## Was als Nächstes getestet wird
 
-Aus dem Backlog, je eine Änderung gegen den Champion:
+Aus dem [Backlog](../versuche/backlog.md), je eine Änderung gegen den Champion:
 
 1. **Relativ statt absolut:** "Du siehst 10 Märkte derselben Woche, verteile mehr auf die stärksten." Cross-Section ist oft leichter als Timing.
 2. **Renditen statt Preise:** Tageszeilen als %-Änderung statt o/h/l/c auf 100.
@@ -52,4 +52,4 @@ Eigene Idee? → [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 - `experiments/log.csv` und `experiments/runs/`: jede Anfrage und jede Antwort der KI aus den T-001/T-002-Läufen.
 - `tournament/`: eingefrorene Prompts mit Hash, Kerzen, Runden, Wertung.
-- Spielplatz-Versuche (E-NNN): Karten mit vollem Prompt, Diff zur Basis, Bewertung und der kompletten schriftlichen Überlegung der KI liegen im Projektordner unter `research/versuche/`. Sie werden noch nicht ins Repo gespiegelt.
+- `versuche/`: Spielplatz-Versuche (E-NNN) mit vollem Prompt, Diff zur Basis, Bewertung (`card.md`) und der kompletten schriftlichen Überlegung der KI (`denken.md`). Übersicht: [versuche/UEBERSICHT.md](../versuche/UEBERSICHT.md), Backlog: [versuche/backlog.md](../versuche/backlog.md).

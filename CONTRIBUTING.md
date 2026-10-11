@@ -23,7 +23,7 @@ Danke, dass du mitdenkst. Das Projekt lebt von Ideen, die wir selbst nicht hatte
 
 ## Was danach passiert
 
-1. Die Idee kommt in den Backlog (Label `idee`), mit Verweis auf dein Issue.
+1. Die Idee kommt in den [Backlog](versuche/backlog.md), mit Verweis auf dein Issue.
 2. Sie läuft als Versuch E-NNN im Spielplatz: eine Änderung gegen den aktuellen Champion, 13 feste Wochen, 30 Coins, automatisches Urteil (`schlechter` / `kein messbarer Unterschied` / `Kandidat` / `neuer Dev-Champion` / `verworfen`).
 3. Ergebnis, voller Prompt und die komplette Überlegung der KI werden im Issue verlinkt. Das Issue wird mit dem Urteil geschlossen.
 4. Ein Dev-Champion kann samstags ins Zukunfts-Turnier (höchstens einer pro Woche). Erst dort zählt er.

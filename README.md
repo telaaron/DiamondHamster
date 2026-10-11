@@ -42,7 +42,7 @@ Vollständige Regeln: [docs/PROTOKOLL.md](docs/PROTOKOLL.md).
 
 **Wichtigstes Learning bisher:** Die KI läuft dem Kurs hinterher. Ihr Gewicht entspricht fast nur der Lage im 180-Tage-Bereich (Korrelation 0,97): oben viel, unten wenig. Genau dieses Trendfolgen kostet sie gegenüber einer festen Position Geld. Mehr Indikatoren, "bleib ruhig" oder "denk erst laut nach" haben daran bisher nichts Messbares geändert.
 
-Alle Versuche mit Zahlen und Begründung: **[docs/VERSUCHE.md](docs/VERSUCHE.md)**.
+Alle Versuche mit Zahlen und Begründung: **[docs/VERSUCHE.md](docs/VERSUCHE.md)**. Live-Tabelle mit jedem Prompt und dem Denken der KI: [versuche/UEBERSICHT.md](versuche/UEBERSICHT.md).
 
 ## Bester Prompt
 
@@ -70,6 +70,7 @@ Jede Idee wird gleich behandelt: als eine einzelne Änderung gegen den Champion,
 | `docs/VERSUCHE.md` | Alle Versuche, Ergebnisse, Learnings, Backlog |
 | `prompts/` | Jeder Prompt als eigene Datei (`T-*` Trader, `R-*` Forscher, `ANALYST` zum Selbstnutzen). Ein Prompt mit geloggten Läufen wird nie geändert, nur kopiert. |
 | `tournament/` | Zukunfts-Turnier: Coin-Universum, eingefrorene Prompts, Kerzen, Runden, Wertung |
+| `versuche/` | Spielplatz: je Versuch Prompt, Bewertung und die Überlegung der KI; Übersicht und Backlog |
 | `experiments/` | Append-only Log aller Läufe (`log.csv`) mit gespeicherten KI-Antworten |
 | `hypotheses/` | Vorlage für Hypothesen-Karten (vor dem Test ausgefüllt) |
 | `src/diamondhamster/` | Code: Daten-Loader mit Holdout-Sperre, Backtest-Kern, Baselines, Indikatoren, KI-Harness, Turnier, Spielplatz |
