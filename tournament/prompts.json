@@ -1,0 +1,12 @@
+{
+ "T-001": {
+  "frozen_at": "2026-10-11",
+  "hash": "e41205856d85",
+  "input": "candles"
+ },
+ "T-002": {
+  "frozen_at": "2026-10-12",
+  "hash": "0f0b64ac31a8",
+  "input": "indicators"
+ }
+}

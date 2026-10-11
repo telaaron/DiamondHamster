@@ -1,6 +1,6 @@
 # Forschungsprotokoll: eigene Trading-Methode
 
-Stand: 2026-10-10 · Scope: nur Research, kein Live-Trading, keine Exchange-Keys · Assets: BTC, ETH (bis Aaron anderes sagt) · Horizont: Wochen bis Monate
+Stand: 2026-10-11 · Scope: nur Research, kein Live-Trading, keine Exchange-Keys · Assets: BTC, ETH (bis Aaron anderes sagt) · Horizont: Wochen bis Monate
 
 ## 1. Was "nicht auf Sand" konkret heißt
 
@@ -8,7 +8,7 @@ Die meisten selbstgebauten Strategien scheitern nicht an der Idee, sondern am Pr
 
 Regeln, die ab Tag 1 gelten:
 
-1. **Holdout wird eingefroren.** Daten ab 2025-01-01 bis heute werden nicht angeschaut, nicht geplottet, nicht getestet. Einmaliger Test am Ende einer Methode. Wer einmal reinschaut, hat ihn verbrannt.
+1. **Holdout wird eingefroren.** Daten ab 2025-01-01 bis 2026-06-30 (siehe Abschnitt 11) werden nicht angeschaut, nicht geplottet, nicht getestet. Einmaliger Test am Ende einer Methode. Wer einmal reinschaut, hat ihn verbrannt.
 2. **Jeder Versuch wird geloggt, auch die gescheiterten.** Die Anzahl der Versuche ist Teil des Ergebnisses (Multiple-Testing-Korrektur, z. B. Deflated Sharpe Ratio). Ohne Log ist kein Ergebnis bewertbar.
 3. **Hypothese vor Test.** Erst aufschreiben: Was erwarte ich, warum (Mechanismus), was würde es widerlegen. Dann testen. Nachträgliche Story-Erfindung zählt nicht.
 4. **Immer gegen Baselines.** Buy & Hold, monatlicher DCA, zufälliges Timing mit gleicher Exposure. Eine Methode muss diese *nach Kosten* schlagen, sonst ist sie keine.
@@ -35,7 +35,7 @@ Bei einem Horizont von Wochen bis Monaten gibt es wenig unabhängige Datenpunkte
 | 2 In-Sample-Test | 2013/2017 bis 2022-12 | schlägt Baselines nach Kosten nicht |
 | 3 Walk-Forward | rollierend, Parameter nur aus Vergangenheit | bricht außerhalb des Fit-Fensters ein |
 | 4 Validierung | 2023-01 bis 2024-12 | Performance-Kollaps vs. In-Sample |
-| 5 Holdout | 2025-01 bis heute, **einmal** | verfehlt vorab definierte Schwelle |
+| 5 Holdout | 2025-01 bis 2026-06, **einmal** | verfehlt vorab definierte Schwelle |
 | 6 Paper-Forward | live mitlaufen, ohne Geld, min. 3 bis 6 Monate | weicht deutlich vom Backtest ab |
 | 7 Bot | erst danach | |
 
@@ -130,3 +130,50 @@ Backtest-Kern, Baselines, Kosten, Experiment-Log. Die KI wird nur eine neue Quel
 - **Trader:** Prompts `prompts/T-*.md`, entschieden vom Subagent-Typ `decider` (`.claude/agents/decider.md`, alle Werkzeuge gesperrt). Bewertung nur auf Daten nach Modell-Cutoff (ab 2026-07) und live über eine wöchentliche Routine. Bis dahin dienen historische Läufe nur zum Debuggen, nicht zur Auswahl.
 - **Forscher:** Prompts `prompts/R-*.md`. Ein Subagent liefert Hypothesen-Karte + `weights`-Funktion, die Pipeline testet. Güte eines Forscher-Prompts = Anteil seiner Hypothesen, die Stufe 4 (Validierung 2023/24) überleben, über mindestens 10 Hypothesen pro Prompt.
 - **Offen:** Ob der `decider` wirklich keine Werkzeuge hat, wird vor dem ersten zählenden Lauf empirisch geprüft.
+
+## 11. Zukunfts-Turnier ist die Messgrundlage (Aaron, 2026-10-11)
+
+Grundlage: Review 001 des Methodik-Wächters (research/methodik/review-001-2026-10-11.md), Befunde B-01 bis B-07. Aaron hat am 2026-10-11 entschieden: das Turnier gilt, bevor T-002 gebaut wird.
+
+### Trader-Prompts zählen nur noch im Turnier
+- Ein Prompt wird mit ID, Hash und Datum eingefroren (`tournament/prompts.json`). Er zählt nur auf Runden **nach** seinem Einfrier-Datum. Text ändern = neue ID.
+- Jeden Sonntag (Close, UTC) entscheiden alle aktiven Prompts auf denselben 30 Coins (`tournament/universe.json`), 3 Wiederholungen, frische Claude-Läufe ohne Werkzeuge. Höchstens 4 Prompts gleichzeitig aktiv. Ein neuer Prompt beantwortet eine benannte Frage (z. B. "helfen Indikatoren?").
+- Juli bis Oktober 2026 sind ab jetzt Entwicklungsdaten. Ergebnisse dort zählen nicht als Beweis.
+- Erste Runde: Sonntag 2026-10-11 (Routine montags 00:23 UTC), T-001 (eingefroren 2026-10-11 vor dem Close) als Nulllinie. Neue Prompts steigen ab 2026-10-18 ein.
+
+### Hauptmetrik: Timing-Wert
+- Timing-Wert = Ergebnis der KI-Gewichte minus konstante Position in Höhe ihrer mittleren Gewichtung pro Coin, nach Kosten (0,2 % pro Seite), pro Woche über alle Coins gemittelt.
+- t-Statistik über Wochen (nicht über Coins, weil Coins gemeinsam laufen).
+- "Nachgewiesen" = Timing-Wert > 0 mit t > 2 auf Turnier-Wochen. Alles darunter heißt "nicht nachgewiesen".
+- Nebenwerte: Rank-IC (gewichtet die KI die besseren Coins höher? Das ist Auswahl, nicht Timing), Abstand zu Buy & Hold, Drawdown.
+
+### Zwei Wege für Hypothesen
+- **Menschliche Regel-Hypothesen** (Aaron, Fynn): Pipeline aus Abschnitt 3 bleibt. Holdout für sie ist **2025-01-01 bis 2026-06-30**, einmal. Ab 2026-07 sind die Kurse allen bekannt; dort zählt nur noch der Forward-Test. Zusatzfrage pro Idee: ist sie aus Beobachtungen von 2025 oder später entstanden? Dann ist auch dieser Holdout für sie nicht sauber.
+- **KI-Hypothesen** (Forscher-Rolle, R-*): das Modell kennt 2023 bis Mitte 2026. Validierung und Holdout prüfen dort nur sein Gedächtnis. KI-Hypothesen zählen deshalb nur auf Zukunftswochen, im Turnier.
+
+### Abbruchregel (offen)
+Die Zahlen legen Aaron und Fynn fest. Vorschlag des Wächters: Zeigt nach 26 Turnier-Wochen auf mindestens 20 Coins kein eingefrorener Prompt einen Timing-Wert mit t > 1, bekommt die KI eine andere Rolle (Forscher oder Filter) statt weiterem Prompt-Tuning.
+
+### Kommunikation
+Posts nennen nur die Hauptmetrik mit Zahl der Wochen und Entscheidungen.
+
+## 12. Hypothesen-Register
+
+| ID | Datum | Idee | Stand | Nachweis |
+|---|---|---|---|---|
+| T-001 | 2026-10-10 | Nulllinien-Trader-Prompt, nur Kerzen | eingefroren 2026-10-11, läuft im Turnier | experiments/log.csv, tournament/prompts.json |
+| H-002 | 2026-10-11 | QS-Klassen je Zyklus (Pine-Script über Fynn, Anker 2011-11-17, 2015-08-18, 2018-12-15, 2022-11-21; Klassenpaare 4/6, 6/3, 3/5, 5/9) | **verworfen** in-sample: Swing-Wenden k=14 Lift 1,18, p = 0,078 gegen alle 36^4 Klassenpaare; 2023/24 Lift 0,98; QS-Filter senkt Sharpe einer einfachen Einstiegsregel von 0,86 auf 0,60. 7 Läufe geloggt, Holdout nicht geöffnet | research/qs-indikator/H-002-qs-zyklen.md, PR #3 |
+| T-002 | 2026-10-11 | T-001 plus 19 Indikatoren (einzige Änderung) | Dev-Fenster Jul bis Okt 2026: Timing-Wert −0,30 %/Woche gegen −0,10 % bei T-001, in allen 3 Wiederholungen schlechter; vorsichtiger (Exposure 0,45 statt 0,56); beide folgen fast nur der Lage im 180-Tage-Bereich (Korrelation 0,97); eine Woche (16.08.) entscheidet fast alles. Kein Beweis (Dev-Daten). **Nachtrag 2026-10-11:** dieser Dev-Lauf (wie der von T-001) hatte einen Überlappungs-Leak: ein Batch enthielt aufeinanderfolgende Wochen eines Coins, spätere Fenster zeigten die Zukunft früherer. Sauber wiederholt als E-001 auf 30 Coins: kein messbarer Unterschied (A +0,12 %/Woche t 1,7; B+C −0,06 %) | experiments/log.csv, experiments/runs/T-002_*, research/versuche/E-001 |
+| H-003 | 2026-10-11 | Fynns Zeitstruktur: Wendepunkte und Impulse bei Kurs und RSI ab 2022-11-21 nach festen Regeln, erst ohne QS-Tage, dann Häufung auf QS9/QS5-Tagen, zyklusspezifische RSI-Längen | wartet auf Fynns Definitionen (QS9/QS5, RSI-Länge je Zyklus, Wendepunkt-Regel) | Thread "Forschung neu gestartet" |
+
+Zu H-003: H-002 hat die QS-Tage bereits einmal getestet. Jeder weitere QS-Test zählt als zusätzliche Variante derselben Ideenfamilie. Die Schwelle für H-003 liegt deshalb höher (Bonferroni über alle QS-Varianten), und eine Definition, die erst nach Sicht auf das H-002-Ergebnis gewählt wird, ist zu markieren.
+
+## 13. Stündliche Versuche (Aaron, 2026-10-11 20:05)
+
+Die Methode ist Prompt + Daten + Aufbereitung. Sie wird laufend in Einzelversuchen verbessert, je Versuch eine Änderung gegen den Dev-Champion, auf einem festen Prüfstand (13 Sonntage Jul bis Sep 2026, 30 Coins in Set A und Check-Sets B+C, gepaarte Bewertung über den Timing-Wert, Ergebnis auch ohne die beste Woche). Regeln, Ablauf und Anti-Schummel-Regeln: research/versuche/README.md. Übersicht mit Zähler aller getesteten Varianten: research/versuche/UEBERSICHT.md.
+
+- Ein Dev-Sieg ist ein Filter, kein Nachweis. Nachweis bleibt allein das Turnier (§11).
+- Höchstens ein neuer Prompt pro Woche wird ins Turnier eingefroren (samstags), und nur ein Dev-Champion, der den besten aktiven Turnier-Prompt auf A und B+C schlägt.
+- Ein Versuch läuft genau einmal; Wiederholungen bekommen eine neue ID und zählen als weitere Variante.
+- Batches werden pro Entscheidungswoche quer über Coins gebaut (Überlappungs-Leak, siehe §12 T-002).
+- Ab E-003 schreibt der Decider vor seinen Gewichten seine Überlegung auf (Aaron, 2026-10-11 20:42). Die volle Antwort wird gespeichert und gezeigt. E-003 (T-001 plus Überlegung) wird danach Referenz und Champion, weil sich das Entscheidungsverhalten damit ändert (README §4a).
