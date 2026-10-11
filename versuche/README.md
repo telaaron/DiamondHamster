@@ -90,7 +90,7 @@ Aaron will sehen, was die KI sich gedacht hat, nicht nur die Zahl. Deshalb gilt 
   2. Then for each window, under its id: your read of the market (trend, structure, key levels as prices on the 100 scale), your weight and why, and the price on the 100 scale that would make you change your mind.
   3. End with one JSON object mapping each window id to its weight, e.g. {"a1b2c3d4e5": 0.0, "f6a7b8c9d0": 1.0}. Nothing after it.
   ```
-  Nicht verwenden: "Think before you decide, and write the thinking down". Opus 5.5 hat das in 6 von 13 Wochen abgelehnt (API-Fehler, Kategorie reasoning_extraction). Die Vorlage oben lief in 39 von 39 Batches sauber.
+  Nur diese Vorlage verwenden. Eine ältere Formulierung, die das Modell bat, sein Denken offenzulegen, hat Opus 5.5 in 6 von 13 Wochen abgelehnt (API-Fehler, Schutzfilter). Sie wird hier bewusst nicht zitiert, weil das Zitat Sitzungen stören kann, die diese Datei lesen. Die Vorlage oben lief in 39 von 39 Batches sauber.
 - Bricht ein Lauf technisch ab (API-Fehler, keine Antwort), wird er unbewertet nach `E-NNN/abgebrochen-vN/` verschoben und neu gestartet. Das ist kein Nachwürfeln, solange von dem abgebrochenen Lauf kein Ergebnis angesehen wurde.
 - Gespeichert wird die komplette Antwort (`runs/<set>/<woche>/responses.json`, Feld `raw`), lesbar in `denken.md`. Der Thread zeigt mindestens eine Woche im Wortlaut und verlinkt `denken.md`.
 - Fehlt im JSON ein Fenster, bricht die Bewertung ab, statt still eine Lücke zu werten.
