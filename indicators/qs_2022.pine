@@ -1,0 +1,30 @@
+//@version=6
+indicator("BTC QS5 / QS9 seit 21.11.2022 (1D)", shorttitle="BTC QS 2022", overlay=true, max_labels_count=500)
+
+// Reiner Kalenderindikator: Anker 21.11.2022 = Tag 0 (ohne Markierung), 22.11.2022 = Tag 1.
+// Kalendertage seit dem Anker in UTC, iterierte Quersumme bis einstellig.
+// Markiert nur Tage mit QS5 oder QS9. Keine RSI-Berechnung, Statistik oder Handelssignale.
+
+const int DAY_MS = 86400000
+
+color color5 = input.color(#00A6A6, "Farbe QS5")
+color color9 = input.color(#9758D8, "Farbe QS9")
+
+if not (timeframe.isdaily and timeframe.multiplier == 1)
+    runtime.error("Bitte im 1D-Tageschart verwenden.")
+
+int anchor = timestamp("UTC", 2022, 11, 21, 0, 0)
+int dayUtc = timestamp("UTC", year(time, "UTC"), month(time, "UTC"), dayofmonth(time, "UTC"), 0, 0)
+int n = int((dayUtc - anchor) / DAY_MS)
+
+// Iterierte Quersumme einer positiven Zahl = 1 + (n - 1) mod 9.
+int qs = n > 0 ? 1 + ((n - 1) % 9) : na
+
+bool is5 = qs == 5
+bool is9 = qs == 9
+
+plotshape(is5, title="QS5", style=shape.circle, location=location.belowbar, color=color5, text="QS5", textcolor=color5, size=size.tiny)
+plotshape(is9, title="QS9", style=shape.circle, location=location.belowbar, color=color9, text="QS9", textcolor=color9, size=size.tiny)
+
+plot(n >= 0 ? n : na, "Tage seit 21.11.2022", display=display.data_window)
+plot(qs, "QS", display=display.data_window)
