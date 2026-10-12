@@ -139,3 +139,17 @@ def test_publish_copies_cards_but_not_runs(lab, tmp_path):
     vs.publish(home, dest)
     assert (dest / "E-000" / "prompt.md").exists() and (dest / "UEBERSICHT.md").exists()
     assert not (dest / "E-000" / "runs").exists()
+
+
+def test_a_champion_must_also_beat_the_fixed_reference(lab, monkeypatch):
+    home, candles = lab
+    monkeypatch.setattr(vs, "REFERENCE", "E-000")
+    for e, parent in (("E-000", None), ("E-001", "E-000"), ("E-002", "E-001")):
+        make(home, e, parent=parent)
+    oracle = lambda r: 1.0 if r > 0 else 0.0
+    for k in vs.SETS:
+        answer(home, "E-000", k, candles, oracle)  # the reference is strong
+        answer(home, "E-001", k, candles, lambda r: 0.5)  # a weak champion
+        answer(home, "E-002", k, candles, lambda r: 0.75 if r > 0 else 0.25)  # beats E-001, not E-000
+    r = vs.score("E-002", home)
+    assert r["A"]["diff_week_pct"] > 0 and r["verdict"].startswith("verworfen: schlägt die feste Referenz")

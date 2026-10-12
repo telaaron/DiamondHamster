@@ -1,8 +1,8 @@
 # Versuche: Übersicht
 
 Dev-Champion: **E-003**
-Varianten bisher getestet: **4**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
-Verbrauch gesamt: 55 USD Listenpreis (gegen Aarons Claude-Limit)
+Varianten bisher getestet: **6**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
+Verbrauch gesamt: 63 USD Listenpreis (gegen Aarons Claude-Limit)
 
 | ID | Achse | Änderung | Basis | Diff/Woche A | t | ohne beste Woche | B+C | Urteil | Thread |
 |---|---|---|---|---|---|---|---|---|---|
@@ -11,3 +11,5 @@ Verbrauch gesamt: 55 USD Listenpreis (gegen Aarons Claude-Limit)
 | [E-002](E-002/card.md) | prompt | Ruhe als Standard: mittleres Gewicht (~0,5) halten, nur bei klarer Evidenz abweichen; jede Umschichtung kostet | E-000 | 0.055 | 0.34 | -0.039 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDD3MYEvodR83Vg998zcfS9X) |
 | [E-003](E-003/card.md) | prompt | Sichtbares Denken: erst Strategie, dann pro Fenster Marktlesart, Gewicht mit Begründung und Kipp-Preis, zuletzt das JSON | E-000 | 0.084 | 1.04 | 0.049 | -0.262 | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDPqfqsXbf1uUjcQYGgzfjDy) |
 | [E-004](E-004/card.md) | prompt | Relativ statt absolut: Fenster sind verschiedene Märkte derselben Woche; vergleichen, mehr Gewicht auf die stärksten, weniger auf die schwächsten (ersetzt 'Judge every window on its own') | E-003 | -0.487 | -2.16 | -0.557 |  | schlechter | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD4mK27Xxe67JynWUkCdjmgV) |
+| [E-005](E-005/card.md) | format | Renditen statt Preise: Tageszeilen als %-Änderung (Schluss zu Schluss) und Spanne (Hoch minus Tief in % des Vortagesschlusses) statt o/h/l/c; Kipp-Niveau in % vom letzten Schluss statt auf der 100-Skala | E-003 | -0.351 | -1.3 | -0.454 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDLv8xzUuvaWVQcdnptRZr6x) |
+| [E-006](E-006/card.md) | daten | Weniger Historie: 60 statt 180 Tage Tageskerzen pro Fenster; im Prompt nur die Angabe '180 days' auf '60 days' angepasst, damit sie zu den Daten passt | E-003 | -0.231 | -1.41 | -0.283 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDKHQMpHebko568V85GKVMRu) |

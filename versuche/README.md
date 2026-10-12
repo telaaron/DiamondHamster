@@ -32,10 +32,13 @@ Ein Batch = eine Entscheidungswoche mit je einem Fenster pro Coin, in zufällige
 | schlechter | t ≤ −2 auf Set A |
 | kein messbarer Unterschied | t < 2 auf A, oder ohne beste Woche nicht mehr vorn |
 | Kandidat | t ≥ 2 auf A und ohne beste Woche vorn → B+C laufen lassen |
-| neuer Dev-Champion | zusätzlich auf B+C (20 Coins): vorn, t ≥ 1, ohne beste Woche vorn |
+| neuer Dev-Champion | zusätzlich auf B+C (20 Coins): vorn, t ≥ 1, ohne beste Woche vorn; und gegen die feste Referenz E-003 auf A (auch ohne beste Woche) und B+C vorn |
+| verworfen: schlägt die feste Referenz nicht | schlägt den Champion, aber nicht E-003 |
 | verworfen | Kandidat, hält auf B+C nicht |
 
 Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`). Er ist damit noch nicht im Turnier.
+
+**Feste Referenz (B-12, übernommen 2026-10-12).** Bei rund 24 Versuchen am Tag wird ab und zu einer nur durch Glück Champion. Würde er die Messlatte, sähen danach echte Verbesserungen schlechter aus. Deshalb muss jeder neue Champion zusätzlich die feste Referenz E-003 schlagen; `score` prüft das automatisch und schreibt es als `vs_reference` in result.json.
 
 ## 3. Anti-Schummel-Regeln
 
@@ -101,7 +104,7 @@ Aaron will sehen, was die KI sich gedacht hat, nicht nur die Zahl. Deshalb gilt 
 
 - **Höchstens ein neuer Prompt pro Woche** wird eingefroren, samstags, vor dem Sonntagsschluss. Kandidat ist der zuletzt gekürte Dev-Champion, wenn er nicht schon im Turnier ist.
 - Ein Prompt mit Überlegung kann ins Turnier, ohne dass die laufenden Turnier-Prompte (T-001, T-002, nur Zahl) geändert werden; sie bleiben, wie sie eingefroren sind.
-- Er muss den aktuell im Turnier laufenden besten Prompt auf dem Prüfstand (A und B+C) schlagen, nicht nur seinen Vorgänger.
+- Er muss den aktuell im Turnier laufenden besten Prompt auf dem Prüfstand (A und B+C) schlagen, nicht nur seinen Vorgänger, und zwar auf B+C mit t ≥ 2 (nicht nur t ≥ 1 wie für den Dev-Champion; B-12).
 - T-001 bleibt als Grundlinie. Höchstens 4 Prompts gleichzeitig aktiv. Ist das voll, nimmt nur Aaron einen heraus.
 - Einfrieren ist eine Protokoll-Handlung mit Datum und Hash (Protokoll §11). Bewertet wird nur, was danach entschieden wurde.
 
@@ -117,6 +120,7 @@ Stündlich nur Set A: etwa 24 × 4,70 = 113 USD Listenpreis am Tag, plus Kandida
 |---|---|
 | Dev-Ergebnis nur als Filter, nur das Turnier zählt | ja (§2, §5) |
 | Höchstens eine Beförderung ins Turnier pro Woche | ja (§5) |
+| B-12: Champion nur, wenn er auch E-003 schlägt; Turnier erst bei t ≥ 2 auf B+C | ja (§2, §5), seit 2026-10-12 |
 | Sichtbarer Zähler aller getesteten Varianten | ja (UEBERSICHT.md) |
 | Ergebnis ohne beste Woche mitberichten | ja, und es entscheidet mit (§2) |
 | Jeder Versuch auf allen 30 Coins | teilweise: alle 30 Coins für jeden Kandidaten, aber nicht für jeden Versuch. Grund: das verdreifacht den Verbrauch (14 statt 4,70 USD) für Versuche, die schon auf 10 Coins nichts zeigen. Ein Gewinner muss auf den anderen 20 Coins bestehen, die er nie gesehen hat; das ist strenger als ein Ergebnis über alle 30. |

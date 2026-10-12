@@ -52,6 +52,7 @@ AXES = ("prompt", "daten", "format")
 INPUTS = ("candles", "indicators", "custom")
 FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b", re.I)
 WIN_T, CHECK_T = 2.0, 1.0
+REFERENCE = "E-003"  # fixed yardstick: a new champion must also beat it, so one lucky champion can't move the bar (B-12)
 
 
 def folder(exp_id: str, home: Path = HOME) -> Path:
@@ -239,6 +240,11 @@ def score(exp_id: str, home: Path = HOME) -> dict:
     ran = all((folder(x, home) / "runs" / k).exists() for x in (exp_id, base) for k in CHECK)
     check = compare(exp_id, base, CHECK, home) if ran else None
     result = {"id": exp_id, "vs": base, "A": a, "check": check, "verdict": verdict(a, check), "model": MODEL, "usage": usage(exp_id, home)}
+    if result["verdict"] == "neuer Dev-Champion" and base != REFERENCE and (folder(REFERENCE, home) / "spec.json").exists():
+        ref = {"A": compare(exp_id, REFERENCE, "A", home), "check": compare(exp_id, REFERENCE, CHECK, home)}
+        result["vs_reference"] = ref
+        if not (ref["A"]["diff_week_pct"] > 0 and ref["A"]["diff_ex_best_week_pct"] > 0 and ref["check"]["diff_week_pct"] > 0):
+            result["verdict"] = f"verworfen: schlägt die feste Referenz {REFERENCE} nicht"
     (folder(exp_id, home) / "result.json").write_text(json.dumps(clean(result), indent=1, ensure_ascii=False))
     return result
 

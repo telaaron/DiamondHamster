@@ -8,8 +8,8 @@ Leitbefund bisher: Die KI verliert durch Umschichten (Timing-Wert negativ), sie 
 |---|---|---|---|---|
 | 1 | prompt | Ruhe als Standard: "Ändere das Gewicht nur bei klarer Evidenz; jede Umschichtung kostet." | Umschichtung kostet ihn heute Geld; weniger Hin und Her sollte Timing-Wert Richtung 0 heben | E-002: kein messbarer Unterschied |
 | 2 | prompt | Relativ statt absolut: "Du siehst 10 Märkte derselben Woche. Verteile mehr auf die stärksten, weniger auf die schwächsten." | Cross-Section ist oft leichter als Timing; Rank-IC heute ≈ 0 | E-004: schlechter |
-| 3 | format | Renditen statt Preise: Tageszeilen als %-Änderung und Spanne statt o/h/l/c | Gleiche Information, weniger Zahlen, keine Ankerung auf "100" | E-005 läuft |
-| 4 | daten | Weniger: 60 statt 180 Tage | Zu viel Daten kann schaden; prüft, ob die lange Historie hilft | |
+| 3 | format | Renditen statt Preise: Tageszeilen als %-Änderung und Spanne statt o/h/l/c | Gleiche Information, weniger Zahlen, keine Ankerung auf "100" | E-005: kein messbarer Unterschied (A −0,35 %/Woche, t −1,3) |
+| 4 | daten | Weniger: 60 statt 180 Tage | Zu viel Daten kann schaden; prüft, ob die lange Historie hilft | E-006: kein messbarer Unterschied (A −0,23 %/Woche vs E-003, t −1,4) |
 | 5 | daten | Mehr: 365 statt 180 Tage | Gegenprobe zu 4 | |
 | 6 | format | Verdichtet: letzte 30 Tage täglich, davor Wochenkerzen | Lange Historie ohne lange Tabelle | |
 | 7 | daten | Marktkontext: dasselbe Fenster des Gesamtmarkts (BTC, anonym) als zweite Tabelle | Altcoins hängen am Gesamtmarkt; relative Stärke | |
@@ -35,3 +35,5 @@ Erledigt:
 | E-002 | Ruhe als Standard (#1) | kein messbarer Unterschied (A +0,06 %/Woche, t 0,3) |
 | E-003 | Analyse vor den Gewichten (T-001 + Strategie, Lage, Gewicht, Kippunkt je Fenster) | kein messbarer Unterschied (A +0,08 % t 1,0; B+C −0,26 % t −1,2); seit 2026-10-11 Champion, weil Pflicht (README §4a) |
 | E-004 | Relativ statt absolut (#2), Basis E-003 | schlechter (A −0,49 %/Woche, t −2,2; Rank-IC 0,00): die KI verteilt nicht treffsicherer, verliert aber mehr |
+| E-005 | Renditen statt Preise (#3), Basis E-003 | kein messbarer Unterschied (A −0,35 %/Woche vs E-003, t −1,3, ohne beste Woche −0,45 %); KI rechnet sich den Kursverlauf aus den Renditen zurück und bleibt Trendfolger |
+| E-006 | Weniger: 60 statt 180 Tage (#4), Basis E-003 | kein messbarer Unterschied (A −0,23 %/Woche vs E-003, t −1,4, ohne beste Woche −0,28 %); Korrelation Gewicht zu 180-Tage-Spanne 0,61 statt 0,79, aber mehr Umschichtung (0,15 statt 0,12 je Woche); bleibt Trendfolger, jetzt mit Ausbruchs-Logik |
