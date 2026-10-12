@@ -1,55 +1,67 @@
 # Versuche und Learnings
 
-Chronologisch, inklusive aller Fehlschläge. Die laufend aktualisierte Tabelle aller Spielplatz-Versuche steht in [versuche/UEBERSICHT.md](../versuche/UEBERSICHT.md); diese Seite ist die erzählte Fassung mit den Learnings. Die Zahlen stammen aus `experiments/log.csv`, `docs/PROTOKOLL.md` §12 und den Versuchskarten des Spielplatzes. Alles hier sind **Entwicklungsdaten** (Jul bis Okt 2026). Beweiskraft hat nur das [Zukunfts-Turnier](../tournament/README.md).
+Was wir ausprobiert haben und was dabei rauskam, in einfachen Worten. Auch alles, was nicht funktioniert hat.
 
-*Stand: 2026-10-11.*
+*Stand: 12. Oktober 2026. Die genauen Zahlen zu jedem Versuch stehen in der [Tabelle aller Versuche](../versuche/UEBERSICHT.md).*
 
-## Kurzfassung
+## Die Messlatte
 
-| # | Datum | Was | Ergebnis | Urteil |
-|---|---|---|---|---|
-| T-001 | 10.10. | Nulllinien-Prompt: 180 Tageskerzen, ein Gewicht pro Woche (BTC, ETH) | BTC +12 % vs. Buy & Hold +36 %; schlägt nur 46 % (ETH 40 %) der Zufalls-Timings mit gleicher Exposure | kein Können gezeigt |
-| T-001b | 11.10. | Dieselben Antworten gegen konstante Position in Höhe des KI-Durchschnitts | BTC: KI +12 % (Sharpe 2,1) vs. konstant +18 % (Sharpe 3,1). ETH: +19 % vs. +29 % | Umschichten kostet Rendite |
-| H-002 | 11.10. | QS-Zyklen-Indikator (Quersummen-Tage seit Bärenmarkt-Tiefs, Pine-Script über Fynn) | Lift 1,18, p = 0,078 gegen alle 36⁴ Klassenpaare; 2023/24 Lift 0,98; als Filter senkt er die Sharpe einer einfachen Regel von 0,86 auf 0,60 | **verworfen** (in-sample, Holdout nicht geöffnet) |
-| T-002 | 11.10. | T-001 plus eine Zeile mit 19 Indikatoren | zuerst scheinbar schlechter; Lauf hatte einen Leak (siehe unten) | ersetzt durch E-001 |
-| E-000 | 11.10. | Referenz im Spielplatz: T-001 sauber neu gerechnet, 30 Coins | Timing-Wert −0,24 %/Woche (Set A), −0,30 % (B+C) | Referenz / Dev-Champion |
-| E-001 | 11.10. | T-002 sauber: plus 19 Indikatoren | A +0,12 %/Woche vs. Referenz (t 1,7), ohne beste Woche +0,08 %; B+C −0,06 % | kein messbarer Unterschied |
-| E-002 | 11.10. | "Ruhe als Standard": mittleres Gewicht halten, nur bei klarer Evidenz abweichen | A +0,06 % (t 0,3), ohne beste Woche −0,04 %; Streuung der Gewichte halbiert, die verbliebenen Bewegungen verlieren trotzdem | kein messbarer Unterschied |
-| E-003 | 11.10. | "Sichtbares Denken": erst Strategie, dann pro Coin Lesart, Gewicht, Kipp-Preis, zuletzt JSON | A +0,08 % (t 1,0, 9 von 13 Wochen besser); B+C −0,26 % (t −1,2) | kein messbarer Unterschied; Format wird trotzdem Standard |
+Jeder Versuch muss gegen dasselbe antreten: **eine feste Menge liegen lassen.** Wer jede Woche umschichtet, zahlt Gebühren und muss richtig liegen, sonst verliert er gegen das Liegenlassen.
 
-*Timing-Wert-Differenz = Versuch minus Referenz, gepaart über dieselben 13 Wochen und Coins. Set A = 10 große Coins (Filter), B+C = 20 weitere (Gegenprobe).*
+Bisher liegt die KI **leicht darunter**: Ihr Hin und Her kostet sie etwa 0,2 bis 0,3 % pro Woche gegenüber dem Liegenlassen.
 
-## Learnings
+## Was wir gelernt haben
 
-1. **Die KI ist ein Trendfolger.** Ihr Gewicht entspricht fast nur der Lage im 180-Tage-Bereich (Korrelation 0,97 zwischen T-001 und T-002). Oben investiert, unten draußen. Das kostet gegenüber einer festen Position.
-2. **Mehr Daten ≠ besser.** 19 Indikatoren zusätzlich haben das Verhalten kaum verändert. Die KI liest dieselbe Information schon aus den Kerzen.
-3. **"Sei ruhig" macht ruhiger, aber nicht besser.** E-002 halbierte die Umschichtung, die restlichen Bewegungen waren aber genauso falsch getimt.
-4. **Laut denken lassen verbessert nicht messbar, macht aber nachvollziehbar.** E-003 zeigt eine klare, sinnvoll klingende Swing-Logik (höhere Tiefs, Ausbruch über das letzte Zwischenhoch). Dass sie überzeugend klingt, heißt nicht, dass sie Geld bringt. Deshalb ist ab E-003 die schriftliche Überlegung Standard: Man sieht, *welche* Logik versagt.
-5. **Leaks verstecken sich im Aufbau, nicht im Prompt.** Die ersten Dev-Läufe von T-001 und T-002 schickten aufeinanderfolgende Wochen desselben Coins im selben Batch: das spätere Fenster zeigte, was nach dem früheren passierte. Seitdem werden Batches pro Woche quer über Coins gebaut, und jedes Fenster wird vor dem Versand auf Jahreszahlen, Monatsnamen und Ticker geprüft.
-6. **Eine Woche kann alles entscheiden.** Bei T-002 hing fast das ganze Ergebnis an einer Woche (16.08.). Deshalb wird jedes Ergebnis auch ohne die beste Woche berichtet.
-7. **Zahlenmystik hält dem Test nicht stand.** Der QS-Indikator wirkte im Chart überzeugend, lag aber im Rauschen der zufällig gewählten Klassenpaare. Hauptrisiko war Auswahl nach Augenmaß.
-8. **Kleine Stichprobe.** 13 Wochen sind sehr wenig. Für einen starken Effekt braucht es grob Jahre an Wochen; darum vorwärts im Turnier mit 30 Coins.
+**1. Die KI läuft dem Kurs hinterher.**
+Ist ein Coin nahe seinem Hoch, investiert sie viel. Ist er nahe am Tief, wenig. Damit kauft sie spät und verkauft spät. Das ist der Hauptgrund, warum sie verliert.
 
-## Was als Nächstes getestet wird
+**2. Mehr Daten machen sie nicht schlauer.**
+19 zusätzliche Indikatoren (RSI, MACD, Bollinger und Co.): kein Unterschied. Weniger Historie (60 statt 180 Tage) oder mehr (365 Tage): auch keiner. Die KI liest offenbar schon alles Wichtige aus den Kursen selbst.
 
-Aus dem [Backlog](../versuche/backlog.md), je eine Änderung gegen den Champion:
+**3. Gut gemeinte Anweisungen wirken nicht.**
+"Bleib ruhig und schichte wenig um": Sie schichtet weniger um, aber die übrigen Wechsel sind genauso schlecht getimt. "Hohe Kurse sind kein Kaufgrund": kein Unterschied. "Benenne erst den Trend": kein Unterschied.
 
-1. **Relativ statt absolut:** "Du siehst 10 Märkte derselben Woche, verteile mehr auf die stärksten." Cross-Section ist oft leichter als Timing.
-2. **Renditen statt Preise:** Tageszeilen als %-Änderung statt o/h/l/c auf 100.
-3. **Weniger Daten:** 60 statt 180 Tage. Gegenprobe: 365 Tage.
-4. **Verdichtet:** letzte 30 Tage täglich, davor Wochenkerzen.
-5. **Marktkontext:** dasselbe Fenster für den Gesamtmarkt (BTC, anonym) daneben.
-6. **Erst Regime benennen** (Trend auf, ab, seitwärts), dann Gewicht.
-7. **Gegen den Strich:** "Hohe Kurse nach starkem Anstieg sind kein Kaufgrund an sich."
-8. **Nur Kennzahlen,** keine Kerzentabelle.
-9. Ohne Volumen; kurzer Prompt ohne Erklärungen; Volatilitäts-Zeile; Open Interest und Funding; M2 als Makro-Zeile.
+**4. Coins miteinander vergleichen macht es schlechter.**
+Als die KI die stärksten Coins höher gewichten sollte, wurde das Ergebnis messbar schlechter. Das ist bisher der einzige klare Effekt, leider der falsche.
 
-Offene Hypothese **H-003** (Fynns Zeitstruktur: Wendepunkte bei Kurs und RSI ab dem Tief 2022-11-21, nach festen Regeln) wartet auf genaue Definitionen. Weil H-002 die QS-Tage schon getestet hat, liegt die Schwelle für jeden weiteren QS-Test höher.
+**5. Die KI denken zu lassen, macht sie nicht besser, aber durchschaubar.**
+Seit Versuch E-003 schreibt die KI erst auf, wie sie den Markt liest und ab welchem Preis sie ihre Meinung ändert. Ihre Begründungen klingen überzeugend (Hochs, Tiefs, Ausbrüche). Gute Begründungen heißen aber nicht gute Ergebnisse.
 
-Eigene Idee? → [CONTRIBUTING.md](../CONTRIBUTING.md)
+**6. Der Zufall ist groß.**
+Wir haben denselben Versuch dreimal laufen lassen. Die Ergebnisse unterschieden sich so stark wie die Effekte, die wir messen wollten. Darum vergleichen wir jetzt gegen den Durchschnitt aus drei Läufen.
 
-## Wo die Rohdaten liegen
+**7. Zahlenmystik hält dem Test nicht stand.**
+Ein Indikator, der Wendepunkte über Quersummen von Tagen vorhersagen soll (der "QS-Zyklen-Indikator"), wirkte im Chart überzeugend. Im Test auf BTC von 2011 bis 2024 lag er im Bereich des Zufalls. Verworfen.
 
-- `experiments/log.csv` und `experiments/runs/`: jede Anfrage und jede Antwort der KI aus den T-001/T-002-Läufen.
-- `tournament/`: eingefrorene Prompts mit Hash, Kerzen, Runden, Wertung.
-- `versuche/`: Spielplatz-Versuche (E-NNN) mit vollem Prompt, Diff zur Basis, Bewertung (`card.md`) und der kompletten schriftlichen Überlegung der KI (`denken.md`). Übersicht: [versuche/UEBERSICHT.md](../versuche/UEBERSICHT.md), Backlog: [versuche/backlog.md](../versuche/backlog.md).
+**8. Fehler verstecken sich im Aufbau.**
+In den ersten Tests konnte die KI versehentlich sehen, wie es nach einer Woche weiterging. Das haben wir gefunden, behoben und alles neu gerechnet. Seitdem prüft der Code jedes Datenpaket, bevor die KI es sieht.
+
+## Alle Versuche auf einen Blick
+
+| Versuch | Was wurde geändert? | Ergebnis |
+|---|---|---|
+| T-001 / E-000 | Ausgangspunkt: nur Kurse der letzten 180 Tage | etwas schlechter als Liegenlassen |
+| T-002 / E-001 | plus 19 Indikatoren | kein Unterschied |
+| E-002 | "Bleib ruhig, schichte wenig um" | kein Unterschied |
+| E-003 | KI schreibt erst ihre Überlegung auf | kein Unterschied, aber ab jetzt Standard |
+| E-003 Wdh. 2 + 3 | derselbe Versuch nochmal | zeigt, wie groß der Zufall ist |
+| E-004 | Coins untereinander vergleichen | **schlechter** |
+| E-005 | Prozent-Änderungen statt Preise | kein Unterschied |
+| E-006 | nur 60 Tage Historie | kein Unterschied |
+| E-007 | 365 Tage Historie | kein Unterschied |
+| E-008 | letzte 30 Tage täglich, davor wöchentlich | kein Unterschied |
+| E-009 | "Hohe Kurse sind kein Kaufgrund" | kein Unterschied |
+| E-010 | erst Trend benennen, dann entscheiden | kein Unterschied |
+| E-011 | erst Wahrscheinlichkeiten für hoch, seitwärts, runter | kein Unterschied |
+| E-012 | KI als Risikomanager: Verluste klein halten statt Rendite jagen | läuft |
+| H-002 | QS-Zyklen-Indikator (ohne KI) | verworfen |
+
+"Kein Unterschied" heißt: Der Versuch war mal etwas besser, mal etwas schlechter, aber nicht klar genug, um es vom Zufall zu unterscheiden.
+
+## Wie es weitergeht
+
+- **Das Turnier läuft seit dem 11. Oktober.** Jede Woche müssen die eingefrorenen Anleitungen gegen echte, neue Kurse antreten. Nach einigen Wochen gibt es erste belastbare Zahlen.
+- **Weitere Versuche** stehen in der [Warteschlange](../versuche/backlog.md), zum Beispiel: den Gesamtmarkt als Vergleich mitgeben, Funding und Open Interest, Geldmenge (M2).
+- **Fynns Zeitstruktur-Idee** (Wendepunkte bei Kurs und RSI seit dem Tief im November 2022) wird getestet, sobald die Regeln genau festgelegt sind.
+
+Eigene Idee? 👉 [Idee einreichen](../CONTRIBUTING.md)
