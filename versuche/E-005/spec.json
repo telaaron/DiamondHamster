@@ -1,0 +1,10 @@
+{
+ "id": "E-005",
+ "parent": "E-003",
+ "axis": "format",
+ "change": "Renditen statt Preise: Tageszeilen als %-Änderung (Schluss zu Schluss) und Spanne (Hoch minus Tief in % des Vortagesschlusses) statt o/h/l/c; Kipp-Niveau in % vom letzten Schluss statt auf der 100-Skala",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDLv8xzUuvaWVQcdnptRZr6x",
+ "notes": "Backlog #3. Hypothese: E-003 ordnet das Gewicht stark der Position in der 180-Tage-Spanne zu (Korrelation 0,79); ohne Preisniveau sieht die KI die Lage in der Spanne nicht direkt und muss aus Renditen und Spannweiten lesen (Momentum, Volatilitaet). Weniger Zahlen pro Zeile (3 statt 5). Erwartung: geringere Korrelation Gewicht zu Spannen-Position, Timing-Wert hoeher als E-003. Falsifiziert, wenn die Differenz zu E-003 auf A nicht t >= 2 erreicht. Bewusster Informationsverlust gegenueber o/h/l/c: Eroeffnung (bei Krypto ca. Vortagesschluss) und Lage des Schlusses in der Tagesspanne. Notwendige Folgeaenderung im Prompt: §4a-Vorlage nennt Niveaus 'auf der 100-Skala', die es hier nicht gibt; ersetzt durch '% vom letzten Schluss', sonst Wortlaut unveraendert."
+}

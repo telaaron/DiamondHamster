@@ -1,0 +1,10 @@
+{
+ "id": "E-004",
+ "parent": "E-003",
+ "axis": "prompt",
+ "change": "Relativ statt absolut: Fenster sind verschiedene Märkte derselben Woche; vergleichen, mehr Gewicht auf die stärksten, weniger auf die schwächsten (ersetzt 'Judge every window on its own')",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD4mK27Xxe67JynWUkCdjmgV",
+ "notes": "Backlog #2. Hypothese: Querschnitt (welcher Coin) ist leichter als Timing (wann). E-003 Rank-IC ca. 0. Erwartung: Rank-IC > 0 und Timing-Wert höher als E-003. Falsifiziert, wenn die Differenz zu E-003 auf A nicht t >= 2 erreicht."
+}

@@ -117,13 +117,19 @@ def build_prompt(out_dir: Path) -> str:
 
 
 def parse_weights(text: str) -> dict[str, float]:
-    """Take the last JSON object in a model answer and return {id: weight}."""
-    start = text.rfind("{")
-    while start >= 0:
-        try:
-            obj = json.loads(text[start : text.index("}", start) + 1])
-            return {k: float(v) for k, v in obj.items()}
-        except (ValueError, json.JSONDecodeError):
+    """Take the JSON object a model answer ends with and return {id: weight}.
+
+    Values may be plain numbers or objects with a "weight" (and e.g. a "flip" price)."""
+    dec = json.JSONDecoder()
+    for must_end in (True, False):  # prefer the object the answer ends with; else the last one that parses
+        start = text.rfind("{")
+        while start >= 0:
+            try:
+                obj, end = dec.raw_decode(text[start:])
+                if isinstance(obj, dict) and obj and (not must_end or text[start + end:].strip().strip("`").strip() == ""):
+                    return {k: float(v["weight"] if isinstance(v, dict) else v) for k, v in obj.items()}
+            except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+                pass
             start = text.rfind("{", 0, start)
     raise ValueError("no JSON object with weights found")
 

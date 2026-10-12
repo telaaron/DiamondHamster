@@ -1,0 +1,10 @@
+{
+ "id": "E-008",
+ "parent": "E-003",
+ "axis": "format",
+ "change": "Verdichtet: letzte 30 Tage als Tageskerzen, Tage 31 bis 177 davor als 21 Wochenkerzen (aus den Tageskerzen gebaut); im Prompt nur die Beschreibung der Tabelle angepasst",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDRc5AJXU9i7RvmQh8eGQA1n",
+ "notes": "Backlog #6. Hypothese: Die KI ankert das Gewicht an der Position in der 180-Tage-Spanne (E-003 Korrelation 0,79) und schichtet Woche fuer Woche nach den letzten Tagen um. Wochenkerzen fuer die aeltere Historie zeigen die grosse Struktur ohne 150 Zeilen Tagesrauschen; 51 statt 180 Zeilen. Erwartung: weniger Umschichtung, Timing-Wert hoeher als E-003. Falsifiziert, wenn die Differenz zu E-003 auf A nicht t >= 2 erreicht. Abweichungen: Fenster 177 statt 180 Tage, weil 150 Tage keine ganzen Wochen ergeben (die 3 aeltesten Tage fallen weg); Volumen als mittleres Tagesvolumen je Zeile relativ zum Fensterschnitt. Die Paragraph-4a-Vorlage ist unveraendert; Kipp-Niveaus bleiben auf der 100-Skala."
+}

@@ -177,3 +177,6 @@ Die Methode ist Prompt + Daten + Aufbereitung. Sie wird laufend in Einzelversuch
 - Ein Versuch läuft genau einmal; Wiederholungen bekommen eine neue ID und zählen als weitere Variante.
 - Batches werden pro Entscheidungswoche quer über Coins gebaut (Überlappungs-Leak, siehe §12 T-002).
 - Ab E-003 schreibt der Decider vor seinen Gewichten seine Überlegung auf (Aaron, 2026-10-11 20:42). Die volle Antwort wird gespeichert und gezeigt. E-003 (T-001 plus Überlegung) wird danach Referenz und Champion, weil sich das Entscheidungsverhalten damit ändert (README §4a).
+- Seit 2026-10-12 (Wächter B-12): ein neuer Dev-Champion muss zusätzlich die feste Referenz E-003 schlagen; ins Turnier nur mit t ≥ 2 auch auf B+C.
+- Seit 2026-10-12 04:30: Referenz und Champion ist E-003M, das Mittel aus drei Läufen des E-003-Prompts. Der erste Lauf war zu gut (Timing-Wert A −0,15 gegen −0,26 und −0,32 %/Woche in den Wiederholungen); die Streuung zwischen Läufen desselben Prompts ist so groß wie die bisher gemessenen Effekte.
+- Seit 2026-10-12 (Wächter B-14): ein Kandidat (t ≥ 2 auf A) wird genau einmal auf A wiederholt; weiter geht er nur, wenn das Mittel beider Läufe t ≥ 2 hält. Keine weitere Wiederholung. Jedes Ergebnis nennt die Werkzeug-Version (Commit und Datei-Hash).

@@ -38,6 +38,8 @@ from . import ai, features, snapshot, tournament
 from .config import COST_PER_SIDE
 
 HOME = Path("/mnt/project-files/research/versuche")
+REPO_COPY = Path(__file__).resolve().parents[2] / "versuche"  # readable copy in the repo, without runs/
+PUBLISHED = ("spec.json", "prompt.md", "render.py", "result.json", "card.md", "denken.md", "denken-B.md", "denken-C.md")
 MODEL = "claude-opus-5-5"
 WEEKS = [d.date() for d in pd.date_range("2026-07-05", "2026-09-27", freq="W-SUN")]
 SETS = {
@@ -45,11 +47,13 @@ SETS = {
     "B": ["BNB", "TRX", "BCH", "SHIB", "UNI", "NEAR", "APT", "SUI", "ARB", "OP"],
     "C": ["ATOM", "ETC", "FIL", "AAVE", "INJ", "HBAR", "XLM", "ICP", "PEPE", "ALGO"],
 }
-CHECK = ("B", "C")  # a candidate from set A is re-run on the other 20 coins
+CHECK = ("B", "C")
+REPEAT = {"A2": "A"}  # a candidate's one fixed repeat on set A; its timing is averaged with the first run (B-14)  # a candidate from set A is re-run on the other 20 coins
 AXES = ("prompt", "daten", "format")
 INPUTS = ("candles", "indicators", "custom")
-FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b", re.I)
+FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|june?|july?|aug(ust)?|sept?(ember)?|oct(ober)?|nov(ember)?|dec(ember)?)\b", re.I)
 WIN_T, CHECK_T = 2.0, 1.0
+REFERENCE = "E-003M"  # fixed yardstick: a new champion must also beat it, so one lucky champion can't move the bar (B-12)
 
 
 def folder(exp_id: str, home: Path = HOME) -> Path:
@@ -101,21 +105,36 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     phash = hashlib.sha256(text.encode()).hexdigest()[:12]
     render = renderer(d, s)
     universe = tournament.universe()
-    frames = {c: tournament.read_candles(c, candles) for c in SETS[which]}
+    coins_of = SETS.get(which) or SETS[REPEAT[which]]
+    frames = {c: tournament.read_candles(c, candles) for c in coins_of}
     out = []
-    for week in WEEKS:
+    k = int(s.get("ensemble", 1))  # ensemble: k independent batches per week, the decision is their mean weight
+    memory = bool(s.get("memory"))  # the decider sees its own weight and flip price of the week before
+    if memory and k > 1:
+        raise ValueError("memory and ensemble together are not supported")
+    for week, e in ((w, e) for w in WEEKS for e in range(1, k + 1)):
         t = pd.Timestamp(week, tz="UTC")
-        run = d / "runs" / which / week.isoformat()
+        last = {}
+        if memory and week != WEEKS[0]:
+            prev = d / "runs" / which / WEEKS[WEEKS.index(week) - 1].isoformat()
+            if not (prev / "responses.json").exists():
+                break  # weeks are decided one after another
+            last = previous_decision(prev, frames, t)
+        run = d / "runs" / which / (week.isoformat() + (f"-e{e}" if k > 1 else ""))
         if (run / "requests.json").exists():
             out.append(run)
             continue
-        seed = f"{exp_id}{which}{week}"
-        coins = list(SETS[which])
+        seed = f"{exp_id}{which}{week}" + (f"e{e}" if k > 1 else "")
+        coins = list(coins_of)
         random.Random(seed).shuffle(coins)
         ids = {c: hashlib.sha256(f"{seed}{c}".encode()).hexdigest()[:10] for c in coins}
         reqs = []
         for c in coins:
             window = render(frames[c].loc[:t], t)
+            if memory:
+                w, f = last.get(c, (None, None))
+                window = (f"last week: weight {w:.2f}, flip price {f:.1f} on today's scale" if w is not None and f is not None
+                          else f"last week: weight {w:.2f}, no flip price" if w is not None else "last week: no decision") + "\n" + window
             problems = leak_check(window, universe)
             if problems:
                 raise ValueError(f"{exp_id} {c} {week}: {problems}")
@@ -127,11 +146,58 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     return out
 
 
+def last_json(text: str) -> dict:
+    """The JSON object an answer ends with (nested values allowed); trailing code fences are ignored."""
+    dec = json.JSONDecoder()
+    start = text.rfind("{")
+    while start >= 0:
+        try:
+            obj, end = dec.raw_decode(text[start:])
+            if isinstance(obj, dict) and text[start + end:].strip().strip("`").strip() == "":
+                return obj
+        except json.JSONDecodeError:
+            pass
+        start = text.rfind("{", 0, start)
+    return {}
+
+
+def parse_flips(text: str) -> dict[str, float]:
+    """Flip prices from answers whose JSON values look like {"weight": .., "flip": ..}."""
+    out = {}
+    for k, v in last_json(text).items():
+        if isinstance(v, dict) and isinstance(v.get("flip"), (int, float)):
+            out[k] = float(v["flip"])
+    return out
+
+
+def previous_decision(prev: Path, frames: dict[str, pd.DataFrame], t: pd.Timestamp) -> dict[str, tuple[float, float | None]]:
+    """Per coin: last week's weight and flip price, the flip rescaled from last week's 100 to today's 100."""
+    key = json.loads((prev / "key.json").read_text())
+    resp = json.loads((prev / "responses.json").read_text())
+    flips = parse_flips(resp.get("raw", ""))
+    t_prev = pd.Timestamp(prev.name[:10], tz="UTC")
+    out = {}
+    for i, c in key.items():
+        if c not in frames or i not in resp["responses"]:
+            continue
+        f = flips.get(i)
+        scale = frames[c].loc[t_prev, "close"] / frames[c].loc[t, "close"]
+        out[c] = (float(resp["responses"][i]), f * scale if f is not None else None)
+    return out
+
+
 def decide(exp_id: str, which: str = "A", home: Path = HOME, workers: int = 5) -> list[Path]:
     import tempfile
     from concurrent.futures import ThreadPoolExecutor
 
     work = Path(tempfile.mkdtemp(prefix="decider-"))  # empty cwd: no repo, no CLAUDE.md
+    if spec(exp_id, home).get("memory"):  # one week after another: each week's input holds the week before
+        done = []
+        while True:
+            pending = [r for r in export(exp_id, which, home) if not (r / "responses.json").exists()]
+            if not pending:
+                return done
+            done.append(ai.run_claude_cli(pending[0], MODEL, work))
     runs = sorted(r for r in (folder(exp_id, home) / "runs" / which).iterdir() if not (r / "responses.json").exists())
     with ThreadPoolExecutor(max_workers=workers) as ex:
         return list(ex.map(lambda r: ai.run_claude_cli(r, MODEL, work), runs))
@@ -147,8 +213,11 @@ def weights(exp_id: str, which: str, home: Path = HOME) -> pd.DataFrame:
         if missing := set(key) - set(resp):
             raise ValueError(f"{run}: answer has no weight for {len(missing)} of {len(key)} windows")
         for i, coin in key.items():
-            rows.append({"decision": pd.Timestamp(run.name, tz="UTC"), "coin": coin, "weight": min(max(float(resp.get(i, np.nan)), 0.0), 1.0)})
-    return pd.DataFrame(rows)
+            rows.append({"decision": pd.Timestamp(run.name[:10], tz="UTC"), "coin": coin, "weight": min(max(float(resp.get(i, np.nan)), 0.0), 1.0)})
+    if not rows:
+        return pd.DataFrame(columns=["decision", "coin", "weight"])
+    # ensemble members of the same week (<week>-e1, -e2, ...) collapse to their mean weight
+    return pd.DataFrame(rows).groupby(["decision", "coin"], as_index=False)["weight"].mean()
 
 
 def timing(w: pd.DataFrame, closes: dict[str, pd.Series], cost: float = COST_PER_SIDE) -> pd.DataFrame:
@@ -169,6 +238,27 @@ def clean(x):
     return None if isinstance(x, float) and np.isnan(x) else x
 
 
+def timed(exp_id: str, sets: tuple[str, ...], closes: dict[str, pd.Series], home: Path = HOME) -> pd.DataFrame:
+    """Timing frame of one experiment, or of a composite reference: the mean over its runs per decision and coin.
+
+    Averaging the timing value (not the weights) keeps the comparison fair: smoothed weights would turn over less
+    and look better than any single run could."""
+    runs = spec(exp_id, home).get("composite") or [exp_id]
+    frames = []
+    for r in runs:
+        have = [k for k in sets if (folder(r, home) / "runs" / k).exists()]
+        if have:
+            frames.append(timing(pd.concat([weights(r, k, home) for k in have], ignore_index=True), closes))
+        for rep_set, orig in REPEAT.items():  # the repeat counts as one more run of the same coins
+            if orig in sets and (folder(r, home) / "runs" / rep_set).exists():
+                frames.append(timing(weights(r, rep_set, home), closes))
+    if not frames:
+        raise ValueError(f"{exp_id}: no runs on {sets}")
+    if len(frames) == 1:
+        return frames[0]
+    return pd.concat(frames).groupby(["decision", "coin"], as_index=False)[["weight", "ret", "timing"]].mean()
+
+
 def tstat(x: pd.Series) -> float:
     x = x.dropna()
     return float(x.mean() / (x.std(ddof=1) / np.sqrt(len(x)))) if len(x) > 1 and x.std(ddof=1) > 0 else float("nan")
@@ -180,8 +270,7 @@ def compare(exp_id: str, base_id: str, sets: str | tuple[str, ...], home: Path =
     sets = (sets,) if isinstance(sets, str) else tuple(sets)
     coins = [c for k in sets for c in SETS[k]]
     closes = {c: tournament.read_candles(c, candles)["close"] for c in coins}
-    v = timing(pd.concat([weights(exp_id, k, home) for k in sets], ignore_index=True), closes)
-    b = timing(pd.concat([weights(base_id, k, home) for k in sets], ignore_index=True), closes)
+    v, b = timed(exp_id, sets, closes, home), timed(base_id, sets, closes, home)
     m = v.merge(b, on=["decision", "coin"], suffixes=("", "_base"))
     if m.empty:
         raise ValueError(f"no paired decisions for {exp_id} vs {base_id} on {sets}")
@@ -201,18 +290,32 @@ def compare(exp_id: str, base_id: str, sets: str | tuple[str, ...], home: Path =
     }
 
 
-def verdict(a: dict, check: dict | None) -> str:
+def verdict(a: dict, check: dict | None, repeated: bool = True) -> str:
     """Set A filters, the other 20 coins confirm. Robust means: still ahead without its single best week."""
     t = np.nan_to_num(a["diff_t"] if a["diff_t"] is not None else np.nan)
     if t <= -WIN_T:
         return "schlechter"
     if t < WIN_T or a["diff_ex_best_week_pct"] <= 0:
         return "kein messbarer Unterschied"
+    if not repeated:
+        return "Kandidat: einmal auf A wiederholen (--set A2); zählt nur, wenn das Mittel beider Läufe t ≥ 2 hält"
     if check is None:
         return "Kandidat, Check-Sets B+C laufen lassen"
     if check["diff_week_pct"] > 0 and np.nan_to_num(check["diff_t"]) >= CHECK_T and check["diff_ex_best_week_pct"] > 0:
         return "neuer Dev-Champion"
     return "verworfen: hält auf B+C nicht"
+
+
+def tool_version() -> str:
+    """Repo commit plus the hash of this file, so a result names the exact scoring code (B-14)."""
+    import subprocess
+    root = Path(__file__).resolve().parents[2]
+    try:
+        head = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=root, capture_output=True, text=True).stdout.strip()
+        blob = subprocess.run(["git", "hash-object", __file__], cwd=root, capture_output=True, text=True).stdout.strip()[:10]
+        return f"{head or '?'} versuche.py@{blob or '?'}"
+    except OSError:
+        return "unbekannt"
 
 
 def usage(exp_id: str, home: Path = HOME) -> dict:
@@ -231,12 +334,19 @@ def score(exp_id: str, home: Path = HOME) -> dict:
     a = compare(exp_id, base, "A", home)
     if base == exp_id:  # the reference itself: absolute numbers only
         result = {"id": exp_id, "vs": base, "A": a, "check": compare(exp_id, base, CHECK, home) if (folder(exp_id, home) / "runs" / "B").exists() else None,
-                  "verdict": "Referenz", "model": MODEL, "usage": usage(exp_id, home)}
+                  "verdict": "Referenz", "model": MODEL, "usage": usage(exp_id, home), "tool": tool_version()}
         (folder(exp_id, home) / "result.json").write_text(json.dumps(clean(result), indent=1, ensure_ascii=False))
         return result
     ran = all((folder(x, home) / "runs" / k).exists() for x in (exp_id, base) for k in CHECK)
     check = compare(exp_id, base, CHECK, home) if ran else None
-    result = {"id": exp_id, "vs": base, "A": a, "check": check, "verdict": verdict(a, check), "model": MODEL, "usage": usage(exp_id, home)}
+    repeated = (folder(exp_id, home) / "runs" / "A2").exists()
+    result = {"id": exp_id, "vs": base, "A": a, "check": check, "verdict": verdict(a, check, repeated), "repeated_A": repeated,
+              "model": MODEL, "usage": usage(exp_id, home), "tool": tool_version()}
+    if result["verdict"] == "neuer Dev-Champion" and base != REFERENCE and (folder(REFERENCE, home) / "spec.json").exists():
+        ref = {"A": compare(exp_id, REFERENCE, "A", home), "check": compare(exp_id, REFERENCE, CHECK, home)}
+        result["vs_reference"] = ref
+        if not (ref["A"]["diff_week_pct"] > 0 and ref["A"]["diff_ex_best_week_pct"] > 0 and ref["check"]["diff_week_pct"] > 0):
+            result["verdict"] = f"verworfen: schlägt die feste Referenz {REFERENCE} nicht"
     (folder(exp_id, home) / "result.json").write_text(json.dumps(clean(result), indent=1, ensure_ascii=False))
     return result
 
@@ -268,6 +378,12 @@ def card(exp_id: str, home: Path = HOME) -> str:
     parent = s.get("parent")
     lines = [f"# {exp_id}: {s['change']}", "", f"- Achse: {s['axis']}", f"- Basis: {parent or '(keine)'}",
              f"- Daten: {s.get('input', 'candles')}, {s.get('lookback', 180)} Tage", f"- Modell: {MODEL}"]
+    if int(s.get("ensemble", 1)) > 1:
+        lines.append(f"- Ensemble: {s['ensemble']} unabhängige Läufe pro Woche, entschieden wird mit ihrem mittleren Gewicht")
+    if r and r.get("tool"):
+        lines.append(f"- Werkzeug: {r['tool']}")
+    if r and r.get("repeated_A"):
+        lines.append("- Set A zweimal gelaufen (A und A2), bewertet wird das Mittel")
     if s.get("thread"):
         lines.append(f"- Thread: {s['thread']}")
     if parent and (folder(parent, home) / "prompt.md").exists():
@@ -326,17 +442,37 @@ def overview(home: Path = HOME) -> str:
     return text
 
 
+def publish(home: Path = HOME, dest: Path = REPO_COPY) -> list[Path]:
+    """Copy the readable part of every experiment into the repo: specs, prompts, results, cards, reasoning. Not runs/."""
+    written = []
+    for name in ("README.md", "UEBERSICHT.md", "backlog.md", "champion.json"):
+        if (home / name).exists():
+            written.append(dest / name)
+            written[-1].parent.mkdir(parents=True, exist_ok=True)
+            written[-1].write_text((home / name).read_text())
+    for d in sorted(p for p in home.glob("E-*") if (p / "spec.json").exists()):
+        for name in PUBLISHED:
+            if (d / name).exists():
+                out = dest / d.name / name
+                out.parent.mkdir(parents=True, exist_ok=True)
+                out.write_text((d / name).read_text())
+                written.append(out)
+    return written
+
+
 if __name__ == "__main__":
     import argparse
 
     p = argparse.ArgumentParser(prog="python -m diamondhamster.versuche")
-    p.add_argument("cmd", choices=["export", "decide", "run", "score", "card", "overview"])
+    p.add_argument("cmd", choices=["export", "decide", "run", "score", "card", "overview", "publish"])
     p.add_argument("exp_id", nargs="?")
-    p.add_argument("--set", default="A", choices=list(SETS))
+    p.add_argument("--set", default="A", choices=[*SETS, *REPEAT])
     p.add_argument("--home", type=Path, default=HOME)
     a = p.parse_args()
     if a.cmd == "overview":
         print(overview(a.home))
+    elif a.cmd == "publish":
+        print(len(publish(a.home)), "files copied to", REPO_COPY)
     elif a.cmd == "export":
         print(len(export(a.exp_id, a.set, a.home)), "batches")
     elif a.cmd == "decide":
