@@ -1,0 +1,10 @@
+{
+ "id": "E-015",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Grobe Stufen: Gewicht nur 0, 0,5 oder 1 statt beliebig zwischen 0 und 1",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDByD9cQxAgykbkNsAyGcmCT",
+ "notes": "Backlog #27, Waechter B-16 (Traegheit ohne Gedaechtnis). Hypothese: Ein Teil des Verlusts von E-003M sind kleine Umschichtungen (0,1 bis 0,2 je Woche), die nur Kosten und Rauschen bringen. Mit drei Stufen bleibt das Gewicht stehen, solange die Lesart nicht eine ganze Stufe kippt. Erwartung: weniger Umschichtung, Timing-Wert ueber E-003M. Falsifiziert, wenn die Differenz zu E-003M auf A nicht t >= 2 erreicht. Gegenrisiko: Stufen koennen die Umschichtung auch vergroessern (Spruenge von 0,5 statt 0,1, vgl. E-010 Regime-Label). Informativ: Anteil Werte ausserhalb {0, 0.5, 1} (das Werkzeug erzwingt die Stufen nicht), Umschichtung je Coin und Woche. Paragraph-4a-Vorlage unveraendert, 180 Tage Kerzen."
+}

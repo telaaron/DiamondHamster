@@ -1,8 +1,8 @@
 # Versuche: Übersicht
 
 Dev-Champion: **E-003M**
-Varianten bisher getestet: **13**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
-Verbrauch gesamt: 102 USD Listenpreis (gegen Aarons Claude-Limit)
+Varianten bisher getestet: **17**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
+Verbrauch gesamt: 135 USD Listenpreis (gegen Aarons Claude-Limit)
 
 | ID | Achse | Änderung | Basis | Diff/Woche A | t | ohne beste Woche | B+C | Urteil | Thread |
 |---|---|---|---|---|---|---|---|---|---|
@@ -21,3 +21,7 @@ Verbrauch gesamt: 102 USD Listenpreis (gegen Aarons Claude-Limit)
 | [E-009](E-009/card.md) | prompt | Gegen den Strich: ein Satz im Prompt, 'High prices after a strong rise are not a reason to buy in themselves.' | E-003 | -0.083 | -0.72 | -0.11 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDGkgg84HpjwuhViLJyZE7PN) |
 | [E-010](E-010/card.md) | prompt | Erst Regime benennen (up, down, sideways), dann Gewicht: ein Satz im Prompt, Analyse je Fenster beginnt mit der Zeile 'Regime: ...' | E-003 | -0.197 | -0.64 | -0.333 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD4wx96dyJ8XrdtVv6TxhGkH) |
 | [E-011](E-011/card.md) | prompt | Szenarien zuerst: je Fenster Wahrscheinlichkeiten fuer hoch (>103), seitwaerts (97 bis 103), runter (<97) am Tag +7, Gewicht folgt daraus; Analyse je Fenster beginnt mit der Zeile 'Scenarios: up X, sideways Y, down Z' | E-003M | 0.052 | 0.26 | -0.077 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD2rR1bXM6Y5nySDnyYQvXTm) |
+| [E-012](E-012/card.md) | prompt | Rolle Risikomanager: Ziel kleinster Drawdown bei etwa gleicher Rendite wie eine feste Position, nicht maximale Rendite (zwei Saetze am Anfang des Prompts) | E-003M | 0.127 | 0.85 | 0.014 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDEczCxpNCwsA96V6YQRWWgY) |
+| [E-013](E-013/card.md) | prompt | Ensemble: Prompt E-003M unveraendert, 3 unabhaengige Laeufe pro Woche, entschieden wird mit dem mittleren Gewicht | E-003M | -0.039 | -0.51 | -0.067 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD1FAEzfSp1ExEC126cZsyuR) |
+| [E-014](E-014/card.md) | prompt | Veto statt Gewicht: eine feste Regel (Schluss ueber 50-Tage-Schnitt = 1, sonst 0) gibt das Signal, die erste Fensterzeile zeigt es; die KI darf ein 1-Signal nur bestaetigen (1) oder per Veto auf 0 setzen, ein 0-Signal bleibt 0 | E-003M | 0.18 | 0.33 | -0.121 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDLJsu6tSB4T2Gq8pVzx97xX) |
+| [E-015](E-015/card.md) | prompt | Grobe Stufen: Gewicht nur 0, 0,5 oder 1 statt beliebig zwischen 0 und 1 | E-003M | -0.163 | -0.32 | -0.499 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDByD9cQxAgykbkNsAyGcmCT) |
