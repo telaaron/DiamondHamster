@@ -183,3 +183,18 @@ def test_repeat_on_a_is_averaged_and_can_sink_a_lucky_candidate(lab):
     answer(home, "E-001", "A2", candles, lambda r: 0.0 if r > 0 else 1.0)  # the repeat is the opposite
     r = vs.score("E-001", home)
     assert r["repeated_A"] and r["verdict"] in ("kein messbarer Unterschied", "schlechter")
+
+
+def test_ensemble_decides_by_the_mean_of_k_batches(lab):
+    home, candles = lab
+    make(home, "E-000")
+    spec = json.loads((home / "E-000" / "spec.json").read_text())
+    spec["ensemble"] = 3
+    (home / "E-000" / "spec.json").write_text(json.dumps(spec))
+    runs = vs.export("E-000", "A", home, candles)
+    assert len(runs) == 3 * len(vs.WEEKS) and runs[0].name.endswith("-e1")
+    for n, run in enumerate(runs):
+        key = json.loads((run / "key.json").read_text())
+        (run / "responses.json").write_text(json.dumps({"responses": {i: [0.0, 0.5, 1.0][n % 3] for i in key}}))
+    w = vs.weights("E-000", "A", home)
+    assert len(w) == 3 * len(vs.WEEKS) and (w["weight"] == 0.5).all()

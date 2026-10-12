@@ -23,3 +23,18 @@ Background: research/methodik/review-001 (B-01 to B-03). Code: `src/diamondhamst
 5. Commit candles, round and scores; push.
 
 The decider never sees dates, coin names or anything after the Sunday close.
+
+## Blocker on a round day: every one has a default (Wächter B-15, 2026-10-12)
+A round must never wait on an answer. The first round sat blocked for 6 hours on a question nobody answered. So every blocker below has a default that applies on its own. A card may still go to Aaron, but it names the default and says that it applies after **2 hours** without an answer; the round thread then carries on and logs what it did in `round.json` (`notes`).
+
+| Blocker | Default |
+|---|---|
+| Re-ingest shows changed **volume** on closed bars (≤ 0.1 %) | accept, keep the stored history, log every difference (built into `ingest`) |
+| Re-ingest shows changed **prices** on closed bars, or volume > 0.1 % | keep the stored history unchanged, use it for the round, log the difference; the research thread looks at it afterwards |
+| A coin has no data or fails the bar checks | leave that coin out of this round (`skipped` in `round.json`), run the rest |
+| The Sunday bar is not closed or not available yet | wait and retry; the round may run any time before the next Sunday, since the windows end at the Sunday close anyway |
+| A decider batch fails (API error, refusal, no JSON) | retry that batch once; if it fails again, archive it and count that prompt and repeat as "no decision" for the week; the other prompts and repeats still count |
+| Usage limit reached | stop, resume when the limit resets, same rules as above |
+| Anything not listed | the option the round thread recommends on its card, after 2 hours |
+
+Rules never change during a round: no edits to frozen prompts, the universe, or scoring to get a round through.

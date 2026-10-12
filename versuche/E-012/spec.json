@@ -1,0 +1,10 @@
+{
+ "id": "E-012",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Rolle Risikomanager: Ziel kleinster Drawdown bei etwa gleicher Rendite wie eine feste Position, nicht maximale Rendite (zwei Saetze am Anfang des Prompts)",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDEczCxpNCwsA96V6YQRWWgY",
+ "notes": "Backlog #21, Fynns und Aarons Produktidee (aehnliche Rendite, kleinere Drawdowns) als Auftrag. Hypothese: Ein Risiko-Auftrag statt Rendite-Auftrag laesst die KI nach Risiko statt nach Spannen-Position gewichten und das teure Hinterherlaufen bremsen. Falsifiziert, wenn die Differenz zu E-003M auf A nicht t >= 2 erreicht. Urteil nur ueber den Standard-Timing-Wert; Max-Drawdown und Rendite gegen E-003M nur informativ auf der Karte. Daten unveraendert (180 Tage Tageskerzen), Paragraph-4a-Vorlage woertlich unveraendert."
+}

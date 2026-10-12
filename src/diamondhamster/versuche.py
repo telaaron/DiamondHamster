@@ -108,13 +108,14 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     coins_of = SETS.get(which) or SETS[REPEAT[which]]
     frames = {c: tournament.read_candles(c, candles) for c in coins_of}
     out = []
-    for week in WEEKS:
+    k = int(s.get("ensemble", 1))  # ensemble: k independent batches per week, the decision is their mean weight
+    for week, e in ((w, e) for w in WEEKS for e in range(1, k + 1)):
         t = pd.Timestamp(week, tz="UTC")
-        run = d / "runs" / which / week.isoformat()
+        run = d / "runs" / which / (week.isoformat() + (f"-e{e}" if k > 1 else ""))
         if (run / "requests.json").exists():
             out.append(run)
             continue
-        seed = f"{exp_id}{which}{week}"
+        seed = f"{exp_id}{which}{week}" + (f"e{e}" if k > 1 else "")
         coins = list(coins_of)
         random.Random(seed).shuffle(coins)
         ids = {c: hashlib.sha256(f"{seed}{c}".encode()).hexdigest()[:10] for c in coins}
@@ -152,8 +153,11 @@ def weights(exp_id: str, which: str, home: Path = HOME) -> pd.DataFrame:
         if missing := set(key) - set(resp):
             raise ValueError(f"{run}: answer has no weight for {len(missing)} of {len(key)} windows")
         for i, coin in key.items():
-            rows.append({"decision": pd.Timestamp(run.name, tz="UTC"), "coin": coin, "weight": min(max(float(resp.get(i, np.nan)), 0.0), 1.0)})
-    return pd.DataFrame(rows)
+            rows.append({"decision": pd.Timestamp(run.name[:10], tz="UTC"), "coin": coin, "weight": min(max(float(resp.get(i, np.nan)), 0.0), 1.0)})
+    if not rows:
+        return pd.DataFrame(columns=["decision", "coin", "weight"])
+    # ensemble members of the same week (<week>-e1, -e2, ...) collapse to their mean weight
+    return pd.DataFrame(rows).groupby(["decision", "coin"], as_index=False)["weight"].mean()
 
 
 def timing(w: pd.DataFrame, closes: dict[str, pd.Series], cost: float = COST_PER_SIDE) -> pd.DataFrame:
@@ -314,6 +318,8 @@ def card(exp_id: str, home: Path = HOME) -> str:
     parent = s.get("parent")
     lines = [f"# {exp_id}: {s['change']}", "", f"- Achse: {s['axis']}", f"- Basis: {parent or '(keine)'}",
              f"- Daten: {s.get('input', 'candles')}, {s.get('lookback', 180)} Tage", f"- Modell: {MODEL}"]
+    if int(s.get("ensemble", 1)) > 1:
+        lines.append(f"- Ensemble: {s['ensemble']} unabhängige Läufe pro Woche, entschieden wird mit ihrem mittleren Gewicht")
     if r and r.get("tool"):
         lines.append(f"- Werkzeug: {r['tool']}")
     if r and r.get("repeated_A"):

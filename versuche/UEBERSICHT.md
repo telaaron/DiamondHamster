@@ -1,8 +1,8 @@
 # Versuche: Übersicht
 
 Dev-Champion: **E-003M**
-Varianten bisher getestet: **12**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
-Verbrauch gesamt: 97 USD Listenpreis (gegen Aarons Claude-Limit)
+Varianten bisher getestet: **13**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
+Verbrauch gesamt: 102 USD Listenpreis (gegen Aarons Claude-Limit)
 
 | ID | Achse | Änderung | Basis | Diff/Woche A | t | ohne beste Woche | B+C | Urteil | Thread |
 |---|---|---|---|---|---|---|---|---|---|
@@ -20,3 +20,4 @@ Verbrauch gesamt: 97 USD Listenpreis (gegen Aarons Claude-Limit)
 | [E-008](E-008/card.md) | format | Verdichtet: letzte 30 Tage als Tageskerzen, Tage 31 bis 177 davor als 21 Wochenkerzen (aus den Tageskerzen gebaut); im Prompt nur die Beschreibung der Tabelle angepasst | E-003 | -0.121 | -1.16 | -0.163 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDRc5AJXU9i7RvmQh8eGQA1n) |
 | [E-009](E-009/card.md) | prompt | Gegen den Strich: ein Satz im Prompt, 'High prices after a strong rise are not a reason to buy in themselves.' | E-003 | -0.083 | -0.72 | -0.11 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDGkgg84HpjwuhViLJyZE7PN) |
 | [E-010](E-010/card.md) | prompt | Erst Regime benennen (up, down, sideways), dann Gewicht: ein Satz im Prompt, Analyse je Fenster beginnt mit der Zeile 'Regime: ...' | E-003 | -0.197 | -0.64 | -0.333 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD4wx96dyJ8XrdtVv6TxhGkH) |
+| [E-011](E-011/card.md) | prompt | Szenarien zuerst: je Fenster Wahrscheinlichkeiten fuer hoch (>103), seitwaerts (97 bis 103), runter (<97) am Tag +7, Gewicht folgt daraus; Analyse je Fenster beginnt mit der Zeile 'Scenarios: up X, sideways Y, down Z' | E-003M | 0.052 | 0.26 | -0.077 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD2rR1bXM6Y5nySDnyYQvXTm) |
