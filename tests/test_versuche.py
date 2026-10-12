@@ -222,3 +222,20 @@ def test_memory_feeds_last_weeks_weight_and_rescaled_flip(lab):
         coin = k2[r["id"]]
         close = vs.tournament.read_candles(coin, candles)["close"]
         assert r["window"].startswith(f"last week: weight 0.60, flip price {95.0 * close[t0] / close[t1]:.1f}")
+
+
+def test_every_decides_only_every_nth_week_and_holds_the_weight(lab):
+    home, candles = lab
+    make(home, "E-000")
+    spec = json.loads((home / "E-000" / "spec.json").read_text())
+    spec["every"] = 4
+    (home / "E-000" / "spec.json").write_text(json.dumps(spec))
+    runs = vs.export("E-000", "A", home, candles)
+    assert [r.name for r in runs] == [w.isoformat() for w in vs.WEEKS[::4]]
+    for n, run in enumerate(runs):
+        key = json.loads((run / "key.json").read_text())
+        (run / "responses.json").write_text(json.dumps({"responses": {i: [0.2, 0.8, 0.5][n] for i in key}}))
+    w = vs.weights("E-000", "A", home)
+    assert len(w) == 3 * len(vs.WEEKS)
+    per_week = w.groupby("decision")["weight"].first().tolist()
+    assert per_week == [0.2] * 4 + [0.8] * 4 + [0.5] * (len(vs.WEEKS) - 8)

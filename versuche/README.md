@@ -86,6 +86,7 @@ Lesbare Kopie im Repo (Ordner `versuche/`, ohne `runs/`): `python -m diamondhams
 Weitere Felder in spec.json:
 - `"ensemble": k` – k unabhängige Batches pro Woche (eigene Reihenfolge und IDs), entschieden wird mit dem mittleren Gewicht. Kostet k-fach.
 - `"memory": true` – die Wochen laufen nacheinander; jedes Fenster beginnt mit `last week: weight W, flip price F on today's scale` (Kipp-Preis der Vorwoche auf die heutige 100-Skala umgerechnet) bzw. `last week: no decision`. Der Prompt verlangt dann das JSON als `{"id": {"weight": w, "flip": Preis}}`. Nicht mit `ensemble` kombinierbar.
+- `"every": n` – die KI entscheidet nur jede n-te Woche (Woche 1, 1+n, …); dazwischen bleibt ihr Gewicht stehen, gewertet werden trotzdem alle 13 Wochen. Nicht mit `memory` kombinierbar.
 - `"composite": [IDs]` – nur für Referenzen: Mittel des Timing-Werts mehrerer Läufe (E-003M).
 
 `card` schreibt auch `E-NNN/denken.md`: die volle Antwort des Deciders für jede Woche, unverändert, mit den Coin-Namen erst nachträglich eingesetzt.

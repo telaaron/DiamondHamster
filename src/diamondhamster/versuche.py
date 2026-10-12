@@ -112,7 +112,10 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     memory = bool(s.get("memory"))  # the decider sees its own weight and flip price of the week before
     if memory and k > 1:
         raise ValueError("memory and ensemble together are not supported")
-    for week, e in ((w, e) for w in WEEKS for e in range(1, k + 1)):
+    every = int(s.get("every", 1))  # decide only every n-th week; the weight stands in between (see weights)
+    if memory and every > 1:
+        raise ValueError("memory and every together are not supported")
+    for week, e in ((w, e) for w in WEEKS[::every] for e in range(1, k + 1)):
         t = pd.Timestamp(week, tz="UTC")
         last = {}
         if memory and week != WEEKS[0]:
@@ -217,7 +220,11 @@ def weights(exp_id: str, which: str, home: Path = HOME) -> pd.DataFrame:
     if not rows:
         return pd.DataFrame(columns=["decision", "coin", "weight"])
     # ensemble members of the same week (<week>-e1, -e2, ...) collapse to their mean weight
-    return pd.DataFrame(rows).groupby(["decision", "coin"], as_index=False)["weight"].mean()
+    w = pd.DataFrame(rows).groupby(["decision", "coin"], as_index=False)["weight"].mean()
+    if int(spec(exp_id, home).get("every", 1)) > 1:  # weeks without a decision keep the last decided weight
+        grid = pd.MultiIndex.from_product([[pd.Timestamp(x, tz="UTC") for x in WEEKS], sorted(w["coin"].unique())], names=["decision", "coin"])
+        w = w.set_index(["decision", "coin"]).reindex(grid).groupby(level="coin")["weight"].ffill().dropna().reset_index()
+    return w
 
 
 def timing(w: pd.DataFrame, closes: dict[str, pd.Series], cost: float = COST_PER_SIDE) -> pd.DataFrame:
