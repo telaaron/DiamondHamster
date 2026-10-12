@@ -1,8 +1,8 @@
 # Versuche: Übersicht
 
 Dev-Champion: **E-003M**
-Varianten bisher getestet: **17**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
-Verbrauch gesamt: 135 USD Listenpreis (gegen Aarons Claude-Limit)
+Varianten bisher getestet: **21**. Je mehr Varianten, desto sicherer ist die beste davon auch Glück: ein Dev-Sieg ist nur ein Filter, zählen tut das Turnier.
+Verbrauch gesamt: 168 USD Listenpreis (gegen Aarons Claude-Limit)
 
 | ID | Achse | Änderung | Basis | Diff/Woche A | t | ohne beste Woche | B+C | Urteil | Thread |
 |---|---|---|---|---|---|---|---|---|---|
@@ -25,3 +25,7 @@ Verbrauch gesamt: 135 USD Listenpreis (gegen Aarons Claude-Limit)
 | [E-013](E-013/card.md) | prompt | Ensemble: Prompt E-003M unveraendert, 3 unabhaengige Laeufe pro Woche, entschieden wird mit dem mittleren Gewicht | E-003M | -0.039 | -0.51 | -0.067 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD1FAEzfSp1ExEC126cZsyuR) |
 | [E-014](E-014/card.md) | prompt | Veto statt Gewicht: eine feste Regel (Schluss ueber 50-Tage-Schnitt = 1, sonst 0) gibt das Signal, die erste Fensterzeile zeigt es; die KI darf ein 1-Signal nur bestaetigen (1) oder per Veto auf 0 setzen, ein 0-Signal bleibt 0 | E-003M | 0.18 | 0.33 | -0.121 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDLJsu6tSB4T2Gq8pVzx97xX) |
 | [E-015](E-015/card.md) | prompt | Grobe Stufen: Gewicht nur 0, 0,5 oder 1 statt beliebig zwischen 0 und 1 | E-003M | -0.163 | -0.32 | -0.499 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDByD9cQxAgykbkNsAyGcmCT) |
+| [E-016](E-016/card.md) | prompt | Traegheit mit Gedaechtnis: die KI sieht Gewicht und Kipp-Preis der Vorwoche und aendert nur, wenn der Kipp-Preis gebrochen ist | E-003M | 0.162 | 1.05 | 0.061 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDSRBJxoU6KX3yUnwJPrGnU5) |
+| [E-017](E-017/card.md) | prompt | Wissensblock: research/wissen/trader-wissen.md (ab Zeile 2, mit Abschnitt Wochenrhythmus) vor der Aufgabe | E-003M | 0.296 | 1.57 | 0.119 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD8nxdETMG94sm97xbtBkjor) |
+| [E-018](E-018/card.md) | prompt | Wissensblock Kurzfassung: research/wissen/kernregeln-kurz.md (ab Zeile 2) vor der Aufgabe, Laengenkontrolle zu E-017 | E-003M | 0.124 | 0.81 | 0.049 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDE65qghcumVywxYhuLnuyAp) |
+| [E-019](E-019/card.md) | daten | E-017 (Wissensblock trader-wissen.md) plus eine Zeile pro Fenster mit den Groessen, auf die das Wissen baut: z_2W/z_4W/z_8W, ER(30), sigma20/sigma90, Lage zum steigenden oder fallenden SMA100, Kreuzungen Kurs/SMA100 in 90 Tagen | E-003M | 0.187 | 1.7 | 0.102 |  | kein messbarer Unterschied | [Thread](https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDTdHQiPWRRx4UfLXmbh6MpS) |

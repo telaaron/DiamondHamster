@@ -1,0 +1,10 @@
+{
+ "id": "E-019",
+ "parent": "E-003M",
+ "axis": "daten",
+ "change": "E-017 (Wissensblock trader-wissen.md) plus eine Zeile pro Fenster mit den Groessen, auf die das Wissen baut: z_2W/z_4W/z_8W, ER(30), sigma20/sigma90, Lage zum steigenden oder fallenden SMA100, Kreuzungen Kurs/SMA100 in 90 Tagen",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDTdHQiPWRRx4UfLXmbh6MpS",
+ "notes": "Backlog #32. dev-informiert (Auflagen Waechter B-18 wie #31): ein Sieg gilt hoechstens als Kandidat, zaehlt als eine Variante, bei Sieg folgen Ablationen, nur das Turnier beweist etwas. prompt.md ist byte-gleich mit E-017/prompt.md (inkl. Wochenrhythmus); einzige Aenderung gegen E-017 ist die Datenzeile aus render.py (nur Kerzen bis zum Entscheidungstag). Hypothese: Mit den Zahlen vor Augen sinkt die Korrelation der Gewichte zur Lage in der 180-Tage-Spanne unter 0,78 (E-017: 0,89). Falsifiziert, wenn nicht. Karte berichtet auch den Anteil der Gewichtsaenderungen unter 0,15 (E-018: 51 %). Vergleich: E-017 +0,30 %/Woche t 1,57 Umschichtung 0,074; E-018 +0,12 t 0,81 Umschichtung 0,109. Vorlage aus Paragraph 4a unveraendert; versuche.py vom Branch claude/project-thread-lupsy0 (PR #6)."
+}

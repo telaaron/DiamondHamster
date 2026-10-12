@@ -59,7 +59,7 @@ Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`).
 
 ```bash
 cd <repo>   # Branch main (git pull origin main vor jedem Versuch)
-# PR #5 ist gemergt (2026-10-12), main reicht. Nur für "every" (#29), bis PR #6 gemergt ist: git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
+# PR #5 ist gemergt (2026-10-12), main reicht. Für #29 ("every") sowie #31 und #34 (Prüfung von prompt.md, B-18), bis PR #6 gemergt ist: git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
 #   (nötig für die Referenz E-003M und die Referenz-Prüfung)
 H=/mnt/project-files/research/versuche
 N=E-0XX     # nächste freie Nummer; mkdir reserviert sie (schlägt fehl, wenn vergeben)
@@ -145,6 +145,8 @@ Stündlich nur Set A: etwa 24 × 4,70 = 113 USD Listenpreis am Tag, plus Kandida
 | Verbrauch pro Versuch protokollieren | ja (Karte und Übersicht) |
 
 ## 8. Erste Ergebnisse auf diesem Prüfstand
+
+- **Anker-Metrik (seit 2026-10-12, E-019):** Im Prüfstand hängt die Spannenlage stark an Momentum (Korrelation 0,75) und am Abstand zum 100-Tage-Schnitt (0,94). Die einfache Korrelation Gewicht ~ Spannenlage trennt deshalb keine Strategien. Maßgeblich ist die partielle Korrelation nach Herausrechnen beider Größen: `PYTHONPATH=src python /mnt/project-files/research/versuche/werkzeuge/anker.py E-NNN`. Stand: E-003M 0,40, E-016 (Gedächtnis) −0,15, E-017 0,43, E-018 0,31, E-019 0,41. Falsifikatoren zur Spannenlage nutzen ab jetzt den partiellen Wert.
 
 - **E-000 = T-001**: Timing-Wert −0,24 % pro Woche auf A, −0,30 % auf B+C (t ≈ −0,8 bis −0,9). Das Hin- und Herschieben verliert also auch über 30 Coins leicht gegen eine feste Position. Exposure im Mittel 37 bis 45 %.
 - **E-001 = T-002** (plus Indikatoren): auf A besser (+0,12 % pro Woche, t 1,7, 9 von 13 Wochen), auf B+C schlechter (−0,06 %). Urteil: kein messbarer Unterschied. Der frühere Dev-Befund "T-002 schlechter" (2 Coins, mit Überlappungs-Leak) war damit Rauschen in die andere Richtung.
