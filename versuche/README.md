@@ -83,6 +83,11 @@ PYTHONPATH=src python -m diamondhamster.versuche overview
 
 Lesbare Kopie im Repo (Ordner `versuche/`, ohne `runs/`): `python -m diamondhamster.versuche publish`, committet vom Forschungs-Thread.
 
+Weitere Felder in spec.json:
+- `"ensemble": k` – k unabhängige Batches pro Woche (eigene Reihenfolge und IDs), entschieden wird mit dem mittleren Gewicht. Kostet k-fach.
+- `"memory": true` – die Wochen laufen nacheinander; jedes Fenster beginnt mit `last week: weight W, flip price F on today's scale` (Kipp-Preis der Vorwoche auf die heutige 100-Skala umgerechnet) bzw. `last week: no decision`. Der Prompt verlangt dann das JSON als `{"id": {"weight": w, "flip": Preis}}`. Nicht mit `ensemble` kombinierbar.
+- `"composite": [IDs]` – nur für Referenzen: Mittel des Timing-Werts mehrerer Läufe (E-003M).
+
 `card` schreibt auch `E-NNN/denken.md`: die volle Antwort des Deciders für jede Woche, unverändert, mit den Coin-Namen erst nachträglich eingesetzt.
 
 Ergebnis im Thread: der Inhalt von `E-NNN/card.md` (Änderung, Diff zum Prompt der Basis, voller Prompt, Aufbereitung, Bewertung, Urteil, Verbrauch). Bei "neuer Dev-Champion" meldet der Thread das dem Forschungs-Thread; der setzt `champion.json`.

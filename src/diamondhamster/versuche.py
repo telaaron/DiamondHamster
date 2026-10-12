@@ -51,7 +51,7 @@ CHECK = ("B", "C")
 REPEAT = {"A2": "A"}  # a candidate's one fixed repeat on set A; its timing is averaged with the first run (B-14)  # a candidate from set A is re-run on the other 20 coins
 AXES = ("prompt", "daten", "format")
 INPUTS = ("candles", "indicators", "custom")
-FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b", re.I)
+FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|june?|july?|aug(ust)?|sept?(ember)?|oct(ober)?|nov(ember)?|dec(ember)?)\b", re.I)
 WIN_T, CHECK_T = 2.0, 1.0
 REFERENCE = "E-003M"  # fixed yardstick: a new champion must also beat it, so one lucky champion can't move the bar (B-12)
 
@@ -109,8 +109,17 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     frames = {c: tournament.read_candles(c, candles) for c in coins_of}
     out = []
     k = int(s.get("ensemble", 1))  # ensemble: k independent batches per week, the decision is their mean weight
+    memory = bool(s.get("memory"))  # the decider sees its own weight and flip price of the week before
+    if memory and k > 1:
+        raise ValueError("memory and ensemble together are not supported")
     for week, e in ((w, e) for w in WEEKS for e in range(1, k + 1)):
         t = pd.Timestamp(week, tz="UTC")
+        last = {}
+        if memory and week != WEEKS[0]:
+            prev = d / "runs" / which / WEEKS[WEEKS.index(week) - 1].isoformat()
+            if not (prev / "responses.json").exists():
+                break  # weeks are decided one after another
+            last = previous_decision(prev, frames, t)
         run = d / "runs" / which / (week.isoformat() + (f"-e{e}" if k > 1 else ""))
         if (run / "requests.json").exists():
             out.append(run)
@@ -122,6 +131,10 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
         reqs = []
         for c in coins:
             window = render(frames[c].loc[:t], t)
+            if memory:
+                w, f = last.get(c, (None, None))
+                window = (f"last week: weight {w:.2f}, flip price {f:.1f} on today's scale" if w is not None and f is not None
+                          else f"last week: weight {w:.2f}, no flip price" if w is not None else "last week: no decision") + "\n" + window
             problems = leak_check(window, universe)
             if problems:
                 raise ValueError(f"{exp_id} {c} {week}: {problems}")
@@ -133,11 +146,58 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     return out
 
 
+def last_json(text: str) -> dict:
+    """The JSON object an answer ends with (nested values allowed); trailing code fences are ignored."""
+    dec = json.JSONDecoder()
+    start = text.rfind("{")
+    while start >= 0:
+        try:
+            obj, end = dec.raw_decode(text[start:])
+            if isinstance(obj, dict) and text[start + end:].strip().strip("`").strip() == "":
+                return obj
+        except json.JSONDecodeError:
+            pass
+        start = text.rfind("{", 0, start)
+    return {}
+
+
+def parse_flips(text: str) -> dict[str, float]:
+    """Flip prices from answers whose JSON values look like {"weight": .., "flip": ..}."""
+    out = {}
+    for k, v in last_json(text).items():
+        if isinstance(v, dict) and isinstance(v.get("flip"), (int, float)):
+            out[k] = float(v["flip"])
+    return out
+
+
+def previous_decision(prev: Path, frames: dict[str, pd.DataFrame], t: pd.Timestamp) -> dict[str, tuple[float, float | None]]:
+    """Per coin: last week's weight and flip price, the flip rescaled from last week's 100 to today's 100."""
+    key = json.loads((prev / "key.json").read_text())
+    resp = json.loads((prev / "responses.json").read_text())
+    flips = parse_flips(resp.get("raw", ""))
+    t_prev = pd.Timestamp(prev.name[:10], tz="UTC")
+    out = {}
+    for i, c in key.items():
+        if c not in frames or i not in resp["responses"]:
+            continue
+        f = flips.get(i)
+        scale = frames[c].loc[t_prev, "close"] / frames[c].loc[t, "close"]
+        out[c] = (float(resp["responses"][i]), f * scale if f is not None else None)
+    return out
+
+
 def decide(exp_id: str, which: str = "A", home: Path = HOME, workers: int = 5) -> list[Path]:
     import tempfile
     from concurrent.futures import ThreadPoolExecutor
 
     work = Path(tempfile.mkdtemp(prefix="decider-"))  # empty cwd: no repo, no CLAUDE.md
+    if spec(exp_id, home).get("memory"):  # one week after another: each week's input holds the week before
+        done = []
+        while True:
+            pending = [r for r in export(exp_id, which, home) if not (r / "responses.json").exists()]
+            if not pending:
+                return done
+            done.append(ai.run_claude_cli(pending[0], MODEL, work))
     runs = sorted(r for r in (folder(exp_id, home) / "runs" / which).iterdir() if not (r / "responses.json").exists())
     with ThreadPoolExecutor(max_workers=workers) as ex:
         return list(ex.map(lambda r: ai.run_claude_cli(r, MODEL, work), runs))

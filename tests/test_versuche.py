@@ -198,3 +198,27 @@ def test_ensemble_decides_by_the_mean_of_k_batches(lab):
         (run / "responses.json").write_text(json.dumps({"responses": {i: [0.0, 0.5, 1.0][n % 3] for i in key}}))
     w = vs.weights("E-000", "A", home)
     assert len(w) == 3 * len(vs.WEEKS) and (w["weight"] == 0.5).all()
+
+
+def test_memory_feeds_last_weeks_weight_and_rescaled_flip(lab):
+    home, candles = lab
+    make(home, "E-000")
+    spec = json.loads((home / "E-000" / "spec.json").read_text())
+    spec["memory"] = True
+    (home / "E-000" / "spec.json").write_text(json.dumps(spec))
+    runs = vs.export("E-000", "A", home, candles)
+    assert len(runs) == 1  # the second week needs the first week's answer
+    first = json.loads((runs[0] / "requests.json").read_text())["requests"]
+    assert all(r["window"].startswith("last week: no decision") for r in first)
+    key = json.loads((runs[0] / "key.json").read_text())
+    raw = "analysis\n```json\n" + json.dumps({i: {"weight": 0.6, "flip": 95.0} for i in key}) + "\n```"
+    (runs[0] / "responses.json").write_text(json.dumps({"responses": vs.ai.parse_weights(raw), "raw": raw}))
+    runs = vs.export("E-000", "A", home, candles)
+    assert len(runs) == 2
+    second = json.loads((runs[1] / "requests.json").read_text())
+    k2 = json.loads((runs[1] / "key.json").read_text())
+    t0, t1 = (pd.Timestamp(w, tz="UTC") for w in vs.WEEKS[:2])
+    for r in second["requests"]:
+        coin = k2[r["id"]]
+        close = vs.tournament.read_candles(coin, candles)["close"]
+        assert r["window"].startswith(f"last week: weight 0.60, flip price {95.0 * close[t0] / close[t1]:.1f}")
