@@ -47,7 +47,8 @@ SETS = {
     "B": ["BNB", "TRX", "BCH", "SHIB", "UNI", "NEAR", "APT", "SUI", "ARB", "OP"],
     "C": ["ATOM", "ETC", "FIL", "AAVE", "INJ", "HBAR", "XLM", "ICP", "PEPE", "ALGO"],
 }
-CHECK = ("B", "C")  # a candidate from set A is re-run on the other 20 coins
+CHECK = ("B", "C")
+REPEAT = {"A2": "A"}  # a candidate's one fixed repeat on set A; its timing is averaged with the first run (B-14)  # a candidate from set A is re-run on the other 20 coins
 AXES = ("prompt", "daten", "format")
 INPUTS = ("candles", "indicators", "custom")
 FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b", re.I)
@@ -104,7 +105,8 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     phash = hashlib.sha256(text.encode()).hexdigest()[:12]
     render = renderer(d, s)
     universe = tournament.universe()
-    frames = {c: tournament.read_candles(c, candles) for c in SETS[which]}
+    coins_of = SETS.get(which) or SETS[REPEAT[which]]
+    frames = {c: tournament.read_candles(c, candles) for c in coins_of}
     out = []
     for week in WEEKS:
         t = pd.Timestamp(week, tz="UTC")
@@ -113,7 +115,7 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
             out.append(run)
             continue
         seed = f"{exp_id}{which}{week}"
-        coins = list(SETS[which])
+        coins = list(coins_of)
         random.Random(seed).shuffle(coins)
         ids = {c: hashlib.sha256(f"{seed}{c}".encode()).hexdigest()[:10] for c in coins}
         reqs = []
@@ -183,6 +185,9 @@ def timed(exp_id: str, sets: tuple[str, ...], closes: dict[str, pd.Series], home
         have = [k for k in sets if (folder(r, home) / "runs" / k).exists()]
         if have:
             frames.append(timing(pd.concat([weights(r, k, home) for k in have], ignore_index=True), closes))
+        for rep_set, orig in REPEAT.items():  # the repeat counts as one more run of the same coins
+            if orig in sets and (folder(r, home) / "runs" / rep_set).exists():
+                frames.append(timing(weights(r, rep_set, home), closes))
     if not frames:
         raise ValueError(f"{exp_id}: no runs on {sets}")
     if len(frames) == 1:
@@ -221,18 +226,32 @@ def compare(exp_id: str, base_id: str, sets: str | tuple[str, ...], home: Path =
     }
 
 
-def verdict(a: dict, check: dict | None) -> str:
+def verdict(a: dict, check: dict | None, repeated: bool = True) -> str:
     """Set A filters, the other 20 coins confirm. Robust means: still ahead without its single best week."""
     t = np.nan_to_num(a["diff_t"] if a["diff_t"] is not None else np.nan)
     if t <= -WIN_T:
         return "schlechter"
     if t < WIN_T or a["diff_ex_best_week_pct"] <= 0:
         return "kein messbarer Unterschied"
+    if not repeated:
+        return "Kandidat: einmal auf A wiederholen (--set A2); zählt nur, wenn das Mittel beider Läufe t ≥ 2 hält"
     if check is None:
         return "Kandidat, Check-Sets B+C laufen lassen"
     if check["diff_week_pct"] > 0 and np.nan_to_num(check["diff_t"]) >= CHECK_T and check["diff_ex_best_week_pct"] > 0:
         return "neuer Dev-Champion"
     return "verworfen: hält auf B+C nicht"
+
+
+def tool_version() -> str:
+    """Repo commit plus the hash of this file, so a result names the exact scoring code (B-14)."""
+    import subprocess
+    root = Path(__file__).resolve().parents[2]
+    try:
+        head = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=root, capture_output=True, text=True).stdout.strip()
+        blob = subprocess.run(["git", "hash-object", __file__], cwd=root, capture_output=True, text=True).stdout.strip()[:10]
+        return f"{head or '?'} versuche.py@{blob or '?'}"
+    except OSError:
+        return "unbekannt"
 
 
 def usage(exp_id: str, home: Path = HOME) -> dict:
@@ -251,12 +270,14 @@ def score(exp_id: str, home: Path = HOME) -> dict:
     a = compare(exp_id, base, "A", home)
     if base == exp_id:  # the reference itself: absolute numbers only
         result = {"id": exp_id, "vs": base, "A": a, "check": compare(exp_id, base, CHECK, home) if (folder(exp_id, home) / "runs" / "B").exists() else None,
-                  "verdict": "Referenz", "model": MODEL, "usage": usage(exp_id, home)}
+                  "verdict": "Referenz", "model": MODEL, "usage": usage(exp_id, home), "tool": tool_version()}
         (folder(exp_id, home) / "result.json").write_text(json.dumps(clean(result), indent=1, ensure_ascii=False))
         return result
     ran = all((folder(x, home) / "runs" / k).exists() for x in (exp_id, base) for k in CHECK)
     check = compare(exp_id, base, CHECK, home) if ran else None
-    result = {"id": exp_id, "vs": base, "A": a, "check": check, "verdict": verdict(a, check), "model": MODEL, "usage": usage(exp_id, home)}
+    repeated = (folder(exp_id, home) / "runs" / "A2").exists()
+    result = {"id": exp_id, "vs": base, "A": a, "check": check, "verdict": verdict(a, check, repeated), "repeated_A": repeated,
+              "model": MODEL, "usage": usage(exp_id, home), "tool": tool_version()}
     if result["verdict"] == "neuer Dev-Champion" and base != REFERENCE and (folder(REFERENCE, home) / "spec.json").exists():
         ref = {"A": compare(exp_id, REFERENCE, "A", home), "check": compare(exp_id, REFERENCE, CHECK, home)}
         result["vs_reference"] = ref
@@ -293,6 +314,10 @@ def card(exp_id: str, home: Path = HOME) -> str:
     parent = s.get("parent")
     lines = [f"# {exp_id}: {s['change']}", "", f"- Achse: {s['axis']}", f"- Basis: {parent or '(keine)'}",
              f"- Daten: {s.get('input', 'candles')}, {s.get('lookback', 180)} Tage", f"- Modell: {MODEL}"]
+    if r and r.get("tool"):
+        lines.append(f"- Werkzeug: {r['tool']}")
+    if r and r.get("repeated_A"):
+        lines.append("- Set A zweimal gelaufen (A und A2), bewertet wird das Mittel")
     if s.get("thread"):
         lines.append(f"- Thread: {s['thread']}")
     if parent and (folder(parent, home) / "prompt.md").exists():
@@ -375,7 +400,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(prog="python -m diamondhamster.versuche")
     p.add_argument("cmd", choices=["export", "decide", "run", "score", "card", "overview", "publish"])
     p.add_argument("exp_id", nargs="?")
-    p.add_argument("--set", default="A", choices=list(SETS))
+    p.add_argument("--set", default="A", choices=[*SETS, *REPEAT])
     p.add_argument("--home", type=Path, default=HOME)
     a = p.parse_args()
     if a.cmd == "overview":

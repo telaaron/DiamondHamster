@@ -31,7 +31,8 @@ Ein Batch = eine Entscheidungswoche mit je einem Fenster pro Coin, in zufällige
 |---|---|
 | schlechter | t ≤ −2 auf Set A |
 | kein messbarer Unterschied | t < 2 auf A, oder ohne beste Woche nicht mehr vorn |
-| Kandidat | t ≥ 2 auf A und ohne beste Woche vorn → B+C laufen lassen |
+| Kandidat (Wiederholung) | t ≥ 2 auf A und ohne beste Woche vorn → einmal auf A wiederholen (`--set A2`) |
+| Kandidat | das Mittel beider A-Läufe hält t ≥ 2 und ohne beste Woche vorn → B+C laufen lassen |
 | neuer Dev-Champion | zusätzlich auf B+C (20 Coins): vorn, t ≥ 1, ohne beste Woche vorn; und gegen die feste Referenz E-003 auf A (auch ohne beste Woche) und B+C vorn |
 | verworfen: schlägt die feste Referenz nicht | schlägt den Champion, aber nicht E-003 |
 | verworfen | Kandidat, hält auf B+C nicht |
@@ -58,6 +59,8 @@ Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`).
 
 ```bash
 cd <repo>   # Branch main (git pull origin main vor jedem Versuch)
+# Bis PR #5 gemergt ist: git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
+#   (nötig für die Referenz E-003M und die Referenz-Prüfung)
 H=/mnt/project-files/research/versuche
 N=E-0XX     # nächste freie Nummer; mkdir reserviert sie (schlägt fehl, wenn vergeben)
 mkdir $H/$N
@@ -67,7 +70,10 @@ cp $H/$C/prompt.md $H/$N/ ; [ -f $H/$C/render.py ] && cp $H/$C/render.py $H/$N/
 #   "input": candles|indicators|custom,"lookback": Tage,"thread": Link zum Thread,"notes": Hypothese}
 # genau EINE Sache in prompt.md oder render.py ändern; render(df, lookback) -> str, df endet am Entscheidungstag
 PYTHONPATH=src python -m diamondhamster.versuche run $N --set A      # ca. 1 Minute
-# nur bei Urteil "Kandidat":
+# bei Urteil "Kandidat: einmal auf A wiederholen": genau EINE Wiederholung, danach zählt das Mittel beider Läufe
+PYTHONPATH=src python -m diamondhamster.versuche export $N --set A2 && PYTHONPATH=src python -m diamondhamster.versuche decide $N --set A2
+PYTHONPATH=src python -m diamondhamster.versuche score $N
+# nur bei Urteil "Kandidat, Check-Sets B+C laufen lassen":
 PYTHONPATH=src python -m diamondhamster.versuche export $N --set B && PYTHONPATH=src python -m diamondhamster.versuche decide $N --set B
 PYTHONPATH=src python -m diamondhamster.versuche export $N --set C && PYTHONPATH=src python -m diamondhamster.versuche decide $N --set C
 PYTHONPATH=src python -m diamondhamster.versuche score $N
@@ -122,7 +128,8 @@ Stündlich nur Set A: etwa 24 × 4,70 = 113 USD Listenpreis am Tag, plus Kandida
 |---|---|
 | Dev-Ergebnis nur als Filter, nur das Turnier zählt | ja (§2, §5) |
 | Höchstens eine Beförderung ins Turnier pro Woche | ja (§5) |
-| B-12: Champion nur, wenn er auch E-003 schlägt; Turnier erst bei t ≥ 2 auf B+C | ja (§2, §5), seit 2026-10-12 |
+| B-12: Champion nur, wenn er auch E-003 schlägt; Turnier erst bei t ≥ 2 auf B+C | ja (§2, §5), seit 2026-10-12; Referenz ist inzwischen E-003M |
+| B-14: Wiederholung eines Kandidaten vorab festgelegt (eine, Mittel beider Läufe muss t ≥ 2 halten; keine dritte); Werkzeug-Version auf jeder Karte | ja, seit 2026-10-12 (`--set A2`, Feld `tool` in result.json) |
 | Sichtbarer Zähler aller getesteten Varianten | ja (UEBERSICHT.md) |
 | Ergebnis ohne beste Woche mitberichten | ja, und es entscheidet mit (§2) |
 | Jeder Versuch auf allen 30 Coins | teilweise: alle 30 Coins für jeden Kandidaten, aber nicht für jeden Versuch. Grund: das verdreifacht den Verbrauch (14 statt 4,70 USD) für Versuche, die schon auf 10 Coins nichts zeigen. Ein Gewinner muss auf den anderen 20 Coins bestehen, die er nie gesehen hat; das ist strenger als ein Ergebnis über alle 30. |

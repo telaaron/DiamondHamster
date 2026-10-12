@@ -79,12 +79,15 @@ def test_scoring_finds_foresight_and_needs_the_check_sets(lab):
     assert ref["verdict"] == "Referenz" and ref["A"]["timing_week_pct"] == 0
     r = vs.score("E-001", home)
     assert r["A"]["diff_week_pct"] > 0 and r["A"]["diff_t"] > 2 and r["A"]["diff_ex_best_week_pct"] > 0
-    assert r["verdict"].startswith("Kandidat") and r["usage"]["calls"] == len(vs.WEEKS)
+    assert r["verdict"].startswith("Kandidat: einmal auf A wiederholen") and r["usage"]["calls"] == len(vs.WEEKS)
+    answer(home, "E-001", "A2", candles, lambda r: 1.0 if r > 0 else 0.0)
+    r = vs.score("E-001", home)
+    assert r["repeated_A"] and r["verdict"] == "Kandidat, Check-Sets B+C laufen lassen" and r["tool"]
     for k in vs.CHECK:
         answer(home, "E-001", k, candles, lambda r: 1.0 if r > 0 else 0.0)
     r = vs.score("E-001", home)
     assert r["check"]["coins"] == 4 and r["verdict"] == "neuer Dev-Champion"
-    assert r["usage"]["cost_usd_list"] == 0.5 * 3 * len(vs.WEEKS)
+    assert r["usage"]["cost_usd_list"] == 0.5 * 4 * len(vs.WEEKS)
     vs.card("E-001", home)
     card = (home / "E-001" / "card.md").read_text()
     assert "-decide" in card and "+better" in card and "neuer Dev-Champion" in card
@@ -151,6 +154,7 @@ def test_a_champion_must_also_beat_the_fixed_reference(lab, monkeypatch):
         answer(home, "E-000", k, candles, oracle)  # the reference is strong
         answer(home, "E-001", k, candles, lambda r: 0.5)  # a weak champion
         answer(home, "E-002", k, candles, lambda r: 0.75 if r > 0 else 0.25)  # beats E-001, not E-000
+    answer(home, "E-002", "A2", candles, lambda r: 0.75 if r > 0 else 0.25)
     r = vs.score("E-002", home)
     assert r["A"]["diff_week_pct"] > 0 and r["verdict"].startswith("verworfen: schlägt die feste Referenz")
 
@@ -167,3 +171,15 @@ def test_composite_reference_averages_timing_of_its_runs(lab):
     answer(home, "E-002", "A", candles, lambda r: 1.0 if r > 0 else 0.0)
     r = vs.compare("E-002", "E-00M", "A", home)
     assert r["base_timing_week_pct"] == 0 and r["diff_week_pct"] > 0
+
+
+def test_repeat_on_a_is_averaged_and_can_sink_a_lucky_candidate(lab):
+    home, candles = lab
+    make(home, "E-000")
+    make(home, "E-001", parent="E-000")
+    answer(home, "E-000", "A", candles, lambda r: 0.5)
+    answer(home, "E-001", "A", candles, lambda r: 1.0 if r > 0 else 0.0)  # lucky first run
+    assert vs.score("E-001", home)["verdict"].startswith("Kandidat: einmal")
+    answer(home, "E-001", "A2", candles, lambda r: 0.0 if r > 0 else 1.0)  # the repeat is the opposite
+    r = vs.score("E-001", home)
+    assert r["repeated_A"] and r["verdict"] in ("kein messbarer Unterschied", "schlechter")
