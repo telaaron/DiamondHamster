@@ -31,6 +31,24 @@ def test_ingest_appends_drops_forming_bar_and_rejects_changes(tmp_path):
         tm.ingest("SOL", payload(bad), today, tmp_path)
 
 
+def test_ingest_logs_small_volume_revision_and_keeps_stored_bar(tmp_path):
+    df = synthetic(30, start="2026-09-01")
+    today = df.index[-1].date()
+    root = tmp_path / "candles"
+    tm.ingest("SOL", payload(df.iloc[:20]), today, root)
+    revised = df.iloc[15:].copy()
+    revised.iloc[2, revised.columns.get_loc("volume")] *= 1.0004  # +0.04 %, like ATOM on 2026-10-06
+    assert tm.ingest("SOL", payload(revised), today, root) == 9
+    stored = tm.read_candles("SOL", root)
+    assert stored.loc[df.index[17], "volume"] == pytest.approx(df["volume"].iloc[17], rel=1e-9)
+    log = pd.read_csv(tmp_path / "volume_revisions.csv")
+    assert list(log["date"]) == [df.index[17].date().isoformat()] and log["rel"].iloc[0] == pytest.approx(4e-4, rel=1e-3)
+    bad = df.iloc[25:].copy()
+    bad.iloc[0, bad.columns.get_loc("close")] *= 1.0001  # prices stay exact
+    with pytest.raises(ValueError, match="prices changed"):
+        tm.ingest("SOL", payload(bad), today, root)
+
+
 def test_check_bars_catches_copy_errors():
     df = synthetic(20)
     assert tm.check_bars(df, payload(df)["summary"]) == []
