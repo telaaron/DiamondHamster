@@ -239,3 +239,15 @@ def test_every_decides_only_every_nth_week_and_holds_the_weight(lab):
     assert len(w) == 3 * len(vs.WEEKS)
     per_week = w.groupby("decision")["weight"].first().tolist()
     assert per_week == [0.2] * 4 + [0.8] * 4 + [0.5] * (len(vs.WEEKS) - 8)
+
+
+def test_prompt_with_calendar_text_or_project_note_is_refused(lab):
+    home, candles = lab
+    note = "<!-- Projekt-Hinweis: dev-informiert, Jul bis Sep -->\nRegel: Spannenlage ist kein Signal. You may hold."
+    make(home, "E-000", prompt=note)
+    with pytest.raises(ValueError, match="prompt.md"):
+        vs.export("E-000", "A", home, candles)
+    (home / "E-000" / "prompt.md").write_text(note.split("\n", 1)[1])  # line 1 stripped: passes
+    assert vs.export("E-000", "A", home, candles)
+    for bad in ["Juli", "im März", "2026", "Dev-Befunde"]:
+        assert vs.PROMPT_FORBIDDEN.search(bad), bad

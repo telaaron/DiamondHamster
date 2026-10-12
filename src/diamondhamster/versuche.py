@@ -52,6 +52,9 @@ REPEAT = {"A2": "A"}  # a candidate's one fixed repeat on set A; its timing is a
 AXES = ("prompt", "daten", "format")
 INPUTS = ("candles", "indicators", "custom")
 FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|june?|july?|aug(ust)?|sept?(ember)?|oct(ober)?|nov(ember)?|dec(ember)?)\b", re.I)
+# the prompt (and any knowledge block in it) gets the same calendar check, in English and German; plain "may" is a word there,
+# and project-only notes (HTML comments, as in research/wissen/*.md line 1) must be stripped before they reach the decider
+PROMPT_FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan(uary|uar)?|feb(ruary|ruar)?|mar(ch)?|märz|apr(il)?|mai|june?|juni|july?|juli|aug(ust)?|sept?(ember)?|oct(ober)?|okt(ober)?|nov(ember)?|dec(ember)?|dez(ember)?)\b|<!--|\bdev-", re.I)
 WIN_T, CHECK_T = 2.0, 1.0
 REFERENCE = "E-003M"  # fixed yardstick: a new champion must also beat it, so one lucky champion can't move the bar (B-12)
 
@@ -103,6 +106,8 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
         raise ValueError(f"axis must be one of {AXES}")
     text = (d / "prompt.md").read_text()
     phash = hashlib.sha256(text.encode()).hexdigest()[:12]
+    if m := PROMPT_FORBIDDEN.search(text):
+        raise ValueError(f"{exp_id} prompt.md: calendar text or project note {m.group(0)!r}")
     render = renderer(d, s)
     universe = tournament.universe()
     coins_of = SETS.get(which) or SETS[REPEAT[which]]

@@ -48,7 +48,7 @@ Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`).
 1. **Eine Änderung pro Versuch**, Basis ist der Champion beim Start. Sonst weiß niemand, was gewirkt hat.
 2. **Kein Nachwürfeln.** Ein Versuch läuft einmal. `export` und `decide` überspringen Vorhandenes. Antworten löschen oder neu würfeln ist verboten; eine Wiederholung bekommt eine neue ID und zählt als eigene Variante.
 3. **Nur der eigene Ordner.** Ein Versuchs-Thread schreibt nur in `E-NNN/`. `champion.json`, `UEBERSICHT.md` und Ordner anderer Versuche ändert nur das Werkzeug bzw. der Forschungs-Thread.
-4. **Keine Datums- oder Coin-Hinweise.** Jedes Fenster wird vor dem Versand geprüft: keine Jahreszahl, kein Monatsname, kein Ticker. Preise auf 100 normiert. Treffer bricht den Export ab.
+4. **Keine Datums- oder Coin-Hinweise.** Jedes Fenster wird vor dem Versand geprüft: keine Jahreszahl, kein Monatsname, kein Ticker. Preise auf 100 normiert. Treffer bricht den Export ab. Seit 2026-10-12 (B-18) wird auch prompt.md geprüft, mit jedem Wissensblock darin: keine Jahreszahl, kein Monatsname auf Englisch oder Deutsch, kein HTML-Kommentar (`<!--`), kein „dev-“. Wer eine Datei aus research/wissen/ einbaut, lässt Zeile 1 weg, den Herkunftsvermerk; bleibt sie drin, bricht der Export ab.
 5. **Keine Zukunft im Fenster.** Die Aufbereitung (`render.py`) bekommt nur Kerzen bis zum Entscheidungstag. Batches sind pro Woche quer über Coins gebaut. Der frühere Fehler (Batches mit aufeinanderfolgenden Wochen eines Coins: das spätere Fenster zeigt, was nach dem früheren kam) betrifft die Dev-Läufe von T-001 und T-002 vom 11.10. Hier und im Turnier ist er ausgeschlossen.
 6. **Decider ohne Zugriff.** Geprüft am 2026-10-11: keine Werkzeuge, kann keine Dateien lesen, kein Netz. Er kennt das heutige Datum aus seinem Systemprompt; das verrät ihm nicht, welche Woche ein Fenster zeigt.
 7. **Kein Holdout.** Der Prüfstand nutzt nur Jul bis Sep 2026. Der Regel-Holdout (2025-01 bis 2026-06) bleibt unberührt.
@@ -59,7 +59,7 @@ Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`).
 
 ```bash
 cd <repo>   # Branch main (git pull origin main vor jedem Versuch)
-# Bis PR #5 gemergt ist: git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py src/diamondhamster/ai.py
+# PR #5 ist gemergt (2026-10-12), main reicht. Nur für "every" (#29), bis PR #6 gemergt ist: git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
 #   (nötig für die Referenz E-003M und die Referenz-Prüfung)
 H=/mnt/project-files/research/versuche
 N=E-0XX     # nächste freie Nummer; mkdir reserviert sie (schlägt fehl, wenn vergeben)
