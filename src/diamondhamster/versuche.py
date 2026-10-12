@@ -52,7 +52,7 @@ AXES = ("prompt", "daten", "format")
 INPUTS = ("candles", "indicators", "custom")
 FORBIDDEN = re.compile(r"\b(19|20)\d\d\b|\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b", re.I)
 WIN_T, CHECK_T = 2.0, 1.0
-REFERENCE = "E-003"  # fixed yardstick: a new champion must also beat it, so one lucky champion can't move the bar (B-12)
+REFERENCE = "E-003M"  # fixed yardstick: a new champion must also beat it, so one lucky champion can't move the bar (B-12)
 
 
 def folder(exp_id: str, home: Path = HOME) -> Path:
@@ -172,6 +172,24 @@ def clean(x):
     return None if isinstance(x, float) and np.isnan(x) else x
 
 
+def timed(exp_id: str, sets: tuple[str, ...], closes: dict[str, pd.Series], home: Path = HOME) -> pd.DataFrame:
+    """Timing frame of one experiment, or of a composite reference: the mean over its runs per decision and coin.
+
+    Averaging the timing value (not the weights) keeps the comparison fair: smoothed weights would turn over less
+    and look better than any single run could."""
+    runs = spec(exp_id, home).get("composite") or [exp_id]
+    frames = []
+    for r in runs:
+        have = [k for k in sets if (folder(r, home) / "runs" / k).exists()]
+        if have:
+            frames.append(timing(pd.concat([weights(r, k, home) for k in have], ignore_index=True), closes))
+    if not frames:
+        raise ValueError(f"{exp_id}: no runs on {sets}")
+    if len(frames) == 1:
+        return frames[0]
+    return pd.concat(frames).groupby(["decision", "coin"], as_index=False)[["weight", "ret", "timing"]].mean()
+
+
 def tstat(x: pd.Series) -> float:
     x = x.dropna()
     return float(x.mean() / (x.std(ddof=1) / np.sqrt(len(x)))) if len(x) > 1 and x.std(ddof=1) > 0 else float("nan")
@@ -183,8 +201,7 @@ def compare(exp_id: str, base_id: str, sets: str | tuple[str, ...], home: Path =
     sets = (sets,) if isinstance(sets, str) else tuple(sets)
     coins = [c for k in sets for c in SETS[k]]
     closes = {c: tournament.read_candles(c, candles)["close"] for c in coins}
-    v = timing(pd.concat([weights(exp_id, k, home) for k in sets], ignore_index=True), closes)
-    b = timing(pd.concat([weights(base_id, k, home) for k in sets], ignore_index=True), closes)
+    v, b = timed(exp_id, sets, closes, home), timed(base_id, sets, closes, home)
     m = v.merge(b, on=["decision", "coin"], suffixes=("", "_base"))
     if m.empty:
         raise ValueError(f"no paired decisions for {exp_id} vs {base_id} on {sets}")

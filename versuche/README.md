@@ -38,7 +38,9 @@ Ein Batch = eine Entscheidungswoche mit je einem Fenster pro Coin, in zufällige
 
 Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`). Er ist damit noch nicht im Turnier.
 
-**Feste Referenz (B-12, übernommen 2026-10-12).** Bei rund 24 Versuchen am Tag wird ab und zu einer nur durch Glück Champion. Würde er die Messlatte, sähen danach echte Verbesserungen schlechter aus. Deshalb muss jeder neue Champion zusätzlich die feste Referenz E-003 schlagen; `score` prüft das automatisch und schreibt es als `vs_reference` in result.json.
+**Referenz aus drei Läufen (2026-10-12).** Zwei Wiederholungen von E-003 lagen deutlich unter dem ersten Lauf (Timing-Wert A −0,15 / −0,26 / −0,32 %/Woche): Derselbe Prompt schwankt zwischen Läufen etwa so stark wie die bisher gemessenen Effekte. Champion und Referenz ist deshalb E-003M, das Mittel der drei Läufe (gemittelt wird der Timing-Wert je Woche und Coin, nicht die Gewichte; `"composite"` in spec.json). Neue Versuche kopieren `E-003M/prompt.md` (gleich wie E-003).
+
+**Feste Referenz (B-12, übernommen 2026-10-12).** Bei rund 24 Versuchen am Tag wird ab und zu einer nur durch Glück Champion. Würde er die Messlatte, sähen danach echte Verbesserungen schlechter aus. Deshalb muss jeder neue Champion zusätzlich die feste Referenz E-003M schlagen; `score` prüft das automatisch und schreibt es als `vs_reference` in result.json.
 
 ## 3. Anti-Schummel-Regeln
 

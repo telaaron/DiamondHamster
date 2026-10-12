@@ -178,3 +178,4 @@ Die Methode ist Prompt + Daten + Aufbereitung. Sie wird laufend in Einzelversuch
 - Batches werden pro Entscheidungswoche quer über Coins gebaut (Überlappungs-Leak, siehe §12 T-002).
 - Ab E-003 schreibt der Decider vor seinen Gewichten seine Überlegung auf (Aaron, 2026-10-11 20:42). Die volle Antwort wird gespeichert und gezeigt. E-003 (T-001 plus Überlegung) wird danach Referenz und Champion, weil sich das Entscheidungsverhalten damit ändert (README §4a).
 - Seit 2026-10-12 (Wächter B-12): ein neuer Dev-Champion muss zusätzlich die feste Referenz E-003 schlagen; ins Turnier nur mit t ≥ 2 auch auf B+C.
+- Seit 2026-10-12 04:30: Referenz und Champion ist E-003M, das Mittel aus drei Läufen des E-003-Prompts. Der erste Lauf war zu gut (Timing-Wert A −0,15 gegen −0,26 und −0,32 %/Woche in den Wiederholungen); die Streuung zwischen Läufen desselben Prompts ist so groß wie die bisher gemessenen Effekte.

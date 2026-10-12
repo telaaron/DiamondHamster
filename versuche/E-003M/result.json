@@ -1,0 +1,29 @@
+{
+ "id": "E-003M",
+ "vs": "E-003M",
+ "A": {
+  "sets": "A",
+  "coins": 10,
+  "weeks": 13,
+  "decisions": 130,
+  "timing_week_pct": -0.244,
+  "timing_t": -0.8,
+  "base_timing_week_pct": -0.244,
+  "diff_week_pct": 0.0,
+  "diff_t": null,
+  "diff_ex_best_week_pct": 0.0,
+  "best_week": "2026-07-05",
+  "exposure": 0.463,
+  "base_exposure": 0.463,
+  "rank_ic": 0.059,
+  "weeks_better": 0
+ },
+ "check": null,
+ "verdict": "Referenz",
+ "model": "claude-opus-5-5",
+ "usage": {
+  "calls": 0,
+  "chars": 0,
+  "cost_usd_list": 0.0
+ }
+}

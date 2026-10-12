@@ -1,0 +1,9 @@
+{
+ "id": "E-003-w2",
+ "parent": "E-003",
+ "axis": "prompt",
+ "change": "Wiederholung 2 von E-003 (gleicher Prompt, gleiche Daten), nur zur Messung des Zufalls",
+ "input": "candles",
+ "lookback": 180,
+ "notes": "Wächter B-13: E-003 einmal zu gut? Wiederholungen bilden mit E-003 die Referenz E-003M."
+}

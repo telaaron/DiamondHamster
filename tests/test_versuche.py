@@ -153,3 +153,17 @@ def test_a_champion_must_also_beat_the_fixed_reference(lab, monkeypatch):
         answer(home, "E-002", k, candles, lambda r: 0.75 if r > 0 else 0.25)  # beats E-001, not E-000
     r = vs.score("E-002", home)
     assert r["A"]["diff_week_pct"] > 0 and r["verdict"].startswith("verworfen: schlägt die feste Referenz")
+
+
+def test_composite_reference_averages_timing_of_its_runs(lab):
+    home, candles = lab
+    for e in ("E-000", "E-001"):
+        make(home, e)
+        answer(home, e, "A", candles, lambda r: 0.5)
+    ref = home / "E-00M"
+    ref.mkdir()
+    (ref / "spec.json").write_text(json.dumps({"id": "E-00M", "composite": ["E-000", "E-001"], "axis": "prompt", "change": "mean"}))
+    make(home, "E-002", parent="E-00M")
+    answer(home, "E-002", "A", candles, lambda r: 1.0 if r > 0 else 0.0)
+    r = vs.compare("E-002", "E-00M", "A", home)
+    assert r["base_timing_week_pct"] == 0 and r["diff_week_pct"] > 0
