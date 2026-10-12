@@ -1,0 +1,10 @@
+{
+ "id": "E-006",
+ "parent": "E-003",
+ "axis": "daten",
+ "change": "Weniger Historie: 60 statt 180 Tage Tageskerzen pro Fenster; im Prompt nur die Angabe '180 days' auf '60 days' angepasst, damit sie zu den Daten passt",
+ "input": "candles",
+ "lookback": 60,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDKHQMpHebko568V85GKVMRu",
+ "notes": "Backlog #4. Hypothese: zu viel Daten kann schaden. E-003 ordnet das Gewicht stark der Position in der 180-Tage-Spanne zu (Korrelation 0,79). Mit 60 Tagen fehlt die lange Spanne; die KI muss sich auf juengere Struktur stuetzen, und der Prompt ist ein Drittel so lang. Erwartung: anderer Anker (60-Tage-Spanne), Timing-Wert hoeher als E-003. Falsifiziert, wenn die Differenz zu E-003 auf A nicht t >= 2 erreicht. Gegenprobe ist Backlog #5 (365 Tage)."
+}

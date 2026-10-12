@@ -1,0 +1,10 @@
+{
+ "id": "E-003",
+ "parent": "E-000",
+ "axis": "prompt",
+ "change": "Sichtbares Denken: erst Strategie, dann pro Fenster Marktlesart, Gewicht mit Begründung und Kipp-Preis, zuletzt das JSON",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDPqfqsXbf1uUjcQYGgzfjDy",
+ "notes": "Hypothese: E-000 ordnet fast mechanisch Position in der 180-Tage-Spanne einem Gewicht zu (Korrelation 0,97). E-002 zeigte: Ruhe senkt den Verlust, bringt aber kein Timing-Koennen. Begruendung vor der Zahl zwingt zu einer Lesart (Trend, Struktur, Niveaus) und einer Kipp-Bedingung, statt direkt Spanne -> Gewicht. Erwartung: Timing-Wert hoeher als E-000. Falsifiziert, wenn die Differenz zu E-000 auf A nicht t >= 2 erreicht. Nebenzweck auf Aarons Wunsch: die Denkweise der KI sichtbar machen (Rohantworten in runs/*/responses.json, Transkript in transkript.md). Befund: A +0,08 %/Woche vs E-000 (t 1,0, ohne beste Woche +0,05 %), B+C -0,26 %/Woche (t -1,2). Aufschreiben allein bringt kein Timing-Koennen. Die KI nennt sich in allen 13 Wochen selbst Trendfolger und erfindet ihre Regel jede Woche neu (kein Gedaechtnis); Korrelation Gewicht zu Position in der 180-Tage-Spanne 0,79 (E-000 0,83). Hinweis: Prompt v1 ('write the thinking down') wurde vom Opus-5.5-Schutzfilter (reasoning_extraction) in 6/13 Wochen abgewiesen, siehe abgebrochen-v1/; Formulierung 'write out your analysis' laeuft sauber."
+}

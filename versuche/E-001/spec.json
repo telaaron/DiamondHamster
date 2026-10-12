@@ -1,0 +1,1 @@
+{"id": "E-001", "parent": "E-000", "axis": "daten", "change": "T-002: plus eine Zeile mit 19 Indikatoren", "input": "indicators", "lookback": 180, "notes": "Identisch mit dem Turnier-Prompt T-002 (Hash 0f0b64ac31a8). Wiederholt den Dev-Test von T-002 ohne den Überlappungs-Leak und auf 30 statt 2 Coins."}

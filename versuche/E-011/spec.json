@@ -1,0 +1,10 @@
+{
+ "id": "E-011",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Szenarien zuerst: je Fenster Wahrscheinlichkeiten fuer hoch (>103), seitwaerts (97 bis 103), runter (<97) am Tag +7, Gewicht folgt daraus; Analyse je Fenster beginnt mit der Zeile 'Scenarios: up X, sideways Y, down Z'",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD2rR1bXM6Y5nySDnyYQvXTm",
+ "notes": "Backlog #20. Hypothese: Eine erzwungene Prognose (Wahrscheinlichkeiten fuer die Folgewoche) statt einer Lage-Beschreibung loest das Gewicht vom Spannen-Anker und macht die Einschaetzung pruefbar. Falsifiziert, wenn die Differenz zu E-003M auf A nicht t >= 2 erreicht. Daten unveraendert (180 Tage Tageskerzen). Paragraph-4a-Vorlage woertlich unveraendert; die Wahrscheinlichkeiten stehen nur im Text (Zeile 'Scenarios: ...'), das JSON bleibt gleich, kein Harness-Eingriff. Kalibrierung (Brier-Score, Tabelle) wird nachtraeglich aus dem Text gelesen und ist nur informativ."
+}

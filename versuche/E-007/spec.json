@@ -1,0 +1,10 @@
+{
+ "id": "E-007",
+ "parent": "E-003",
+ "axis": "daten",
+ "change": "Mehr Historie: 365 statt 180 Tage Tageskerzen pro Fenster; im Prompt nur die Angabe '180 days' auf '365 days' angepasst, damit sie zu den Daten passt",
+ "input": "candles",
+ "lookback": 365,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDJx4EaKYCY4mXSJ3b6Y29fH",
+ "notes": "Backlog #5, Gegenprobe zu E-006 (60 Tage). Hypothese: Die KI ankert das Gewicht an der Position in der sichtbaren Spanne (E-003: Korrelation 0,79 zur 180-Tage-Spanne). Mit 365 Tagen sieht sie den laengeren Zyklus; die Spanne wird breiter und traeger, das koennte Umschichtung senken. Erwartung: Timing-Wert hoeher als E-003. Falsifiziert, wenn die Differenz zu E-003 auf A nicht t >= 2 erreicht. Datenpruefung vorab: alle 30 Coins haben fuer alle 13 Entscheidungstage 365 lueckenlose Tageskerzen (Kerzen ab 2024-01-16). Nebeneffekt: Volumen ist relativ zum Fensterschnitt, also jetzt zum 365-Tage-Schnitt; Prompt etwa doppelt so lang, Kosten etwa doppelt."
+}

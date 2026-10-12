@@ -1,0 +1,29 @@
+{
+ "id": "E-005",
+ "vs": "E-003",
+ "A": {
+  "sets": "A",
+  "coins": 10,
+  "weeks": 13,
+  "decisions": 130,
+  "timing_week_pct": -0.501,
+  "timing_t": -1.06,
+  "base_timing_week_pct": -0.151,
+  "diff_week_pct": -0.351,
+  "diff_t": -1.3,
+  "diff_ex_best_week_pct": -0.454,
+  "best_week": "2026-09-20",
+  "exposure": 0.445,
+  "base_exposure": 0.457,
+  "rank_ic": 0.017,
+  "weeks_better": 4
+ },
+ "check": null,
+ "verdict": "kein messbarer Unterschied",
+ "model": "claude-opus-5-5",
+ "usage": {
+  "calls": 13,
+  "chars": 477958,
+  "cost_usd_list": 5.48
+ }
+}

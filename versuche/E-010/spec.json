@@ -1,0 +1,10 @@
+{
+ "id": "E-010",
+ "parent": "E-003",
+ "axis": "prompt",
+ "change": "Erst Regime benennen (up, down, sideways), dann Gewicht: ein Satz im Prompt, Analyse je Fenster beginnt mit der Zeile 'Regime: ...'",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD4wx96dyJ8XrdtVv6TxhGkH",
+ "notes": "Backlog #8. Hypothese: E-003 ordnet die Position in der 180-Tage-Spanne fast direkt einem Gewicht zu (Korrelation 0,79). Ein erzwungener Zwischenschritt (Regime-Label) koennte die Zuordnung strukturieren und das Hin- und Herschieben innerhalb eines Regimes senken. Erwartung: weniger Umschichtung als 0,12 und Timing-Wert hoeher als E-003. Falsifiziert, wenn die Differenz zu E-003 auf A nicht t >= 2 erreicht. Daten unveraendert (180 Tage Tageskerzen). Paragraph-4a-Vorlage woertlich unveraendert; das Regime-Label steht nur im Text (Zeile 'Regime: ...'), das JSON bleibt gleich, kein Harness-Eingriff."
+}
