@@ -1,0 +1,10 @@
+{
+ "id": "E-024",
+ "parent": "E-003M",
+ "axis": "daten",
+ "change": "E-003M plus eine Zeile je Fenster mit dem Open Interest: 4-Wochen-Veraenderung in Prozent und Perzentil der eigenen letzten 180 Tageswerte (BINANCE:<COIN>USDT.P_OI, in Coins), Stand Vortag der Entscheidung; prompt.md erklaert die Zeile in zwei Saetzen ohne Handelsregel",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDTdYRXudn4CfouaHsrsVs2p",
+ "notes": "Backlog #37. Basis E-003M (nicht E-017, sauber statt dev-informiert). Daten: TradingView get_ohlcv 1D BINANCE:<COIN>USDT.P_OI fuer die 10 Coins von Set A, 2025-09-01 bis 2026-09-27, abgerufen 2026-10-12; Tool-Antworten unveraendert in daten/raw/ (aus dem Sitzungsprotokoll extrahiert, nicht abgetippt), eingefroren in daten/oi_frozen.csv mit den Spot-Schlusskursen aus tournament/candles; sha256 f49be69181f10f139a6867e5e2e2b2ba3c04d153546400daa33ddc6db0a7493f. 392 Tage je Coin, keine Luecken. Einheit: Coins, nicht USD (BTC ca. 88k bei Kurs 109k = ca. 9,7 Mrd USD, passt zur Binance-Groessenordnung). Daten-Stichtag: Schlusswert des Vortags der Entscheidung (open-interest.md par. 7; strenger als E-023, das bis zum Entscheidungstag nahm). Format nach Backlog-Zeile (4-Wochen-Veraenderung und 180-Tage-Perzentil), nicht nach par. 7 (mehr Felder); die Zeile gewinnt. Keine Harness-Aenderung; versuche.py vom Branch claude/project-thread-lupsy0 (README par. 4). Hypothese (wie #36, Wissens-Thread): OI misst Gedraenge; die KI senkt das Gewicht bei hohem OI-Perzentil bzw. starkem OI-Anstieg, Rank-IC steigt. Falsifikator: falsifiziert, wenn Rank-IC (E-003M: 0,059) und Timing-Wert (Differenz zu E-003M) nicht steigen. Champion-Regeln B-12/B-13/B-14: bei t >= 2 genau eine Wiederholung auf A, Urteil auf dem Mittel; B+C nur bei t >= 2. Karte nennt Anteil Gewichtsaenderungen unter 0,15, partiellen Anker (werkzeuge/anker.py), Rank-IC und Exposure. Vorlage aus Paragraph 4a unveraendert."
+}

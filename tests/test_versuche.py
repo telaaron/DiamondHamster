@@ -251,3 +251,18 @@ def test_prompt_with_calendar_text_or_project_note_is_refused(lab):
     assert vs.export("E-000", "A", home, candles)
     for bad in ["Juli", "im März", "2026", "Dev-Befunde"]:
         assert vs.PROMPT_FORBIDDEN.search(bad), bad
+
+
+def test_own_data_fetches_into_the_holdout_must_be_logged(lab, tmp_path, monkeypatch):
+    home, candles = lab
+    make(home, "E-000")
+    raw = home / "E-000" / "daten" / "raw"
+    raw.mkdir(parents=True)
+    (raw / "BTC.request.json").write_text(json.dumps({"symbol": "X:BTC.P", "date_from": "2025-06-01", "date_to": "2026-09-28"}))
+    (raw / "OLD.request.json").write_text(json.dumps({"symbol": "X:OLD", "date_from": "2026-07-01", "date_to": "2026-09-28"}))
+    with pytest.raises(ValueError, match="B-19"):
+        vs.export("E-000", "A", home, candles)
+    assert vs.log_fetches("E-000", "test", home) == 1
+    assert vs.log_fetches("E-000", "test", home) == 0  # once each
+    assert "E-000 own data row X:BTC.P 2025-06-01..2026-09-28 (test)" in (home / "holdout_access.log").read_text()
+    assert vs.export("E-000", "A", home, candles)

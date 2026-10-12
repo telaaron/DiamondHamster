@@ -34,8 +34,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from . import ai, features, snapshot, tournament
-from .config import COST_PER_SIDE
+from . import ai, data, features, snapshot, tournament
+from .config import COST_PER_SIDE, HOLDOUT_END, HOLDOUT_START
 
 HOME = Path("/mnt/project-files/research/versuche")
 REPO_COPY = Path(__file__).resolve().parents[2] / "versuche"  # readable copy in the repo, without runs/
@@ -97,6 +97,35 @@ def leak_check(text: str, coins: list[str]) -> list[str]:
     return problems
 
 
+def holdout_fetches(d: Path) -> list[dict]:
+    """Own data rows (daten/raw/*.request.json) whose requested range touches the rule holdout (B-19)."""
+    out = []
+    for req in sorted(d.glob("daten/**/*.request.json")):
+        r = json.loads(req.read_text())
+        lo, hi = pd.Timestamp(r.get("date_from", "1970-01-01"), tz="UTC"), pd.Timestamp(r.get("date_to", "2100-01-01"), tz="UTC")
+        if lo <= HOLDOUT_END and hi >= HOLDOUT_START:
+            out.append({"symbol": r.get("symbol", req.stem), "from": str(lo.date()), "to": str(hi.date())})
+    return out
+
+
+def _fetch_line(exp_id: str, f: dict) -> str:
+    return f"{exp_id} own data row {f['symbol']} {f['from']}..{f['to']}"
+
+
+def log_fetches(exp_id: str, reason: str, home: Path = HOME) -> int:
+    """Write every holdout-touching fetch of an experiment to data/holdout_access.log, once each."""
+    from datetime import datetime, timezone
+
+    log = home / "holdout_access.log"  # shared across threads; publish() carries it into data/holdout_access.log
+    seen = log.read_text() if log.exists() else ""
+    new = [f for f in holdout_fetches(folder(exp_id, home)) if _fetch_line(exp_id, f) not in seen]
+    log.parent.mkdir(parents=True, exist_ok=True)
+    with log.open("a") as fh:
+        for f in new:
+            fh.write(f"{datetime.now(timezone.utc).isoformat()}\t{_fetch_line(exp_id, f)} ({reason})\n")
+    return len(new)
+
+
 def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | None = None) -> list[Path]:
     """One batch per decision week with one window per coin of the set."""
     candles = candles or tournament.CANDLES
@@ -108,6 +137,10 @@ def export(exp_id: str, which: str = "A", home: Path = HOME, candles: Path | Non
     phash = hashlib.sha256(text.encode()).hexdigest()[:12]
     if m := PROMPT_FORBIDDEN.search(text):
         raise ValueError(f"{exp_id} prompt.md: calendar text or project note {m.group(0)!r}")
+    log = (home / "holdout_access.log").read_text() if (home / "holdout_access.log").exists() else ""
+    if missing := [f for f in holdout_fetches(d) if _fetch_line(exp_id, f) not in log]:
+        raise ValueError(f"{exp_id}: {len(missing)} data fetches reach into the rule holdout without a log entry (B-19); "
+                         f"run: python -m diamondhamster.versuche log-fetches {exp_id} --reason '...'")
     render = renderer(d, s)
     universe = tournament.universe()
     coins_of = SETS.get(which) or SETS[REPEAT[which]]
@@ -469,6 +502,13 @@ def publish(home: Path = HOME, dest: Path = REPO_COPY) -> list[Path]:
                 out.parent.mkdir(parents=True, exist_ok=True)
                 out.write_text((d / name).read_text())
                 written.append(out)
+    shared = home / "holdout_access.log"  # holdout fetches of own data rows (B-19) join the repo's permanent log
+    if shared.exists() and dest == REPO_COPY:
+        repo_log = data.HOLDOUT_LOG.read_text() if data.HOLDOUT_LOG.exists() else ""
+        if new := [line for line in shared.read_text().splitlines() if line and line not in repo_log]:
+            with data.HOLDOUT_LOG.open("a") as fh:
+                fh.write("\n".join(new) + "\n")
+            written.append(data.HOLDOUT_LOG)
     return written
 
 
@@ -476,13 +516,16 @@ if __name__ == "__main__":
     import argparse
 
     p = argparse.ArgumentParser(prog="python -m diamondhamster.versuche")
-    p.add_argument("cmd", choices=["export", "decide", "run", "score", "card", "overview", "publish"])
+    p.add_argument("cmd", choices=["export", "decide", "run", "score", "card", "overview", "publish", "log-fetches"])
     p.add_argument("exp_id", nargs="?")
     p.add_argument("--set", default="A", choices=[*SETS, *REPEAT])
     p.add_argument("--home", type=Path, default=HOME)
+    p.add_argument("--reason", default="lookback for percentiles only, scored Jul-Sep 2026")
     a = p.parse_args()
     if a.cmd == "overview":
         print(overview(a.home))
+    elif a.cmd == "log-fetches":
+        print(log_fetches(a.exp_id, a.reason, a.home), "fetches logged to", a.home / "holdout_access.log")
     elif a.cmd == "publish":
         print(len(publish(a.home)), "files copied to", REPO_COPY)
     elif a.cmd == "export":

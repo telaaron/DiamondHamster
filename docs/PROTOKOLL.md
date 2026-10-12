@@ -168,6 +168,8 @@ Posts nennen nur die Hauptmetrik mit Zahl der Wochen und Entscheidungen.
 
 Zu H-003: H-002 hat die QS-Tage bereits einmal getestet. Jeder weitere QS-Test zählt als zusätzliche Variante derselben Ideenfamilie. Die Schwelle für H-003 liegt deshalb höher (Bonferroni über alle QS-Varianten), und eine Definition, die erst nach Sicht auf das H-002-Ergebnis gewählt wird, ist zu markieren.
 
+**Holdout gesehen (Wächter B-19, 2026-10-12):** Folgende Reihen wurden im Regel-Holdout (2025-01 bis 2026-06) abgerufen und angesehen: Perp-Kurse BINANCE:<COIN>USDT.P der zehn Set-A-Coins ab 2025-06 (E-023) und Open Interest *.P_OI derselben Coins ab 2025-09 (E-024). Eine spätere Regel-Hypothese auf Perp-Basis oder Open Interest gilt auf diesem Holdout-Abschnitt nicht mehr als blind. Die Abrufe stehen rückwirkend in data/holdout_access.log. Seit 2026-10-12 verweigert versuche.export jede eigene Datenzeile, deren Abruf (daten/raw/*.request.json) in den Holdout reicht und nicht geloggt ist; geloggt wird mit `python -m diamondhamster.versuche log-fetches E-NNN --reason "..."`.
+
 ## 13. Stündliche Versuche (Aaron, 2026-10-11 20:05)
 
 Die Methode ist Prompt + Daten + Aufbereitung. Sie wird laufend in Einzelversuchen verbessert, je Versuch eine Änderung gegen den Dev-Champion, auf einem festen Prüfstand (13 Sonntage Jul bis Sep 2026, 30 Coins in Set A und Check-Sets B+C, gepaarte Bewertung über den Timing-Wert, Ergebnis auch ohne die beste Woche). Regeln, Ablauf und Anti-Schummel-Regeln: research/versuche/README.md. Übersicht mit Zähler aller getesteten Varianten: research/versuche/UEBERSICHT.md.

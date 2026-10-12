@@ -1,0 +1,10 @@
+{
+ "id": "E-022",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Veto auf eine langsamere Regel: wie E-014, aber das Signal ist Schluss ueber dem 20-Wochen-Schnitt (Mittel der letzten 20 Wochenschluesse) statt ueber dem 50-Tage-Schnitt; Prompt und Signalzeile nennen den 20-Wochen-Schnitt",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDJyFcf7n7Txzc5UyoievpPG",
+ "notes": "Backlog #30. Kopiert von E-014 (Veto-Rolle auf der 50-Tage-Regel), einzige Aenderung gegen E-014 ist das Signal; \"parent\" ist E-003M, damit score wie immer gegen Champion und Referenz misst (wie bei E-014). Der Vergleich gegen E-014 steht in veto.md. Hypothese: Die 50-Tage-Regel kostet allein -0,35 %/Woche, die KI-Vetos verbessern sie um +0,29 %. Eine langsamere Regel wechselt seltener und ist die bessere Basis fuer dieselbe Veto-Rolle. Falsifiziert, wenn (a) die Differenz zu E-003M auf A <= 0 ist oder (b) der Veto-Gewinn gegenueber der nackten 20-Wochen-Regel (gleiche Wochen und Coins, ohne KI) <= 0 ist. Messbar besser erst bei t >= 2 (B-12/B-14: dann genau eine Wiederholung auf A, Urteil auf dem Mittel beider Laeufe; B+C nur bei t >= 2). Informativ wie E-014 (veto.md): Timing-Wert der Regel allein, Zahl und Trefferquote der Vetos, Regelverstoesse, Umschichtung, Anteil Gewichtsaenderungen unter 0,15, partieller Anker (werkzeuge/anker.py). Vorlage aus Paragraph 4a unveraendert; versuche.py vom Branch claude/project-thread-lupsy0 (PR #6)."
+}
