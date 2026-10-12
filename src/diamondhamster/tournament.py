@@ -6,6 +6,7 @@ collected forward in time and in breadth:
 - A prompt is frozen with id, content hash and date. It only counts on rounds after that date.
 - Every round, all active prompts decide on the same coins with the same windows (paired comparison).
 - Coin candles are append-only CSVs; a closed bar never changes, a re-ingest that disagrees fails.
+  Exception: a volume revision of at most 0.1 % is logged and the stored value is kept.
 
 Scoring, per prompt (weights averaged over repeats first):
 - timing value: sum over coins of (w - mean_w_coin) * r - turnover cost, i.e. the prompt minus a
@@ -45,6 +46,8 @@ REPEATS = 3
 MAX_ACTIVE = 4
 OPEN_GAP_TOLERANCE = 0.005  # open(t) vs close(t-1); larger gaps mean a copy error, not the market
 PRICE_TOLERANCE = 1e-6
+VOLUME_REVISION_TOLERANCE = 1e-3  # TradingView revises Binance volume of closed bars by up to ~0.05 %; prices never
+VOLUME_REVISIONS = HOME / "volume_revisions.csv"
 
 
 # ---------- candles ----------
@@ -103,8 +106,21 @@ def ingest(coin: str, payload: dict, today: date, root: Path = CANDLES, last: in
     path = root / f"{coin}.csv"
     old = read_candles(coin, root) if path.exists() else new.iloc[:0]
     both = old.index.intersection(new.index)
-    if len(both) and not np.allclose(old.loc[both].values, new.loc[both].values, rtol=1e-9):
-        raise ValueError(f"{coin}: stored bars changed on {list(both.date)[:3]}")
+    prices = ["open", "high", "low", "close"]
+    changed = ~np.isclose(old.loc[both, prices].values, new.loc[both, prices].values, rtol=1e-9).all(axis=1)
+    if changed.any():
+        raise ValueError(f"{coin}: stored prices changed on {list(both[changed].date)[:3]}")
+    vol_old, vol_new = old.loc[both, "volume"], new.loc[both, "volume"]
+    rel = ((vol_new - vol_old) / vol_old.where(vol_old != 0)).fillna(0.0)
+    revised = ~np.isclose(vol_old.values, vol_new.values, rtol=1e-9)
+    if (abs(rel[revised]) > VOLUME_REVISION_TOLERANCE).any():
+        big = rel[revised][abs(rel[revised]) > VOLUME_REVISION_TOLERANCE]
+        raise ValueError(f"{coin}: stored volume changed by more than {VOLUME_REVISION_TOLERANCE:.1%} on {list(big.index.date)[:3]}")
+    if revised.any():  # stored bars are kept; the revision is only logged
+        log = root.parent / VOLUME_REVISIONS.name
+        rows = pd.DataFrame({"ingested": today.isoformat(), "coin": coin, "date": [d.date().isoformat() for d in both[revised]],
+                             "stored": vol_old[revised].values, "new": vol_new[revised].values, "rel": rel[revised].values})
+        rows.to_csv(log, mode="a", header=not log.exists(), index=False, float_format="%.10g")
     merged = pd.concat([old, new[~new.index.isin(old.index)]]).sort_index()
     errors = check_bars(merged)
     if errors:
