@@ -1,0 +1,10 @@
+{
+ "id": "E-032",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Ruhe-Satz aus E-002 (mittleres Gewicht um 0,5 als Standard, Abweichung nur bei klarer Evidenz, jede Umschichtung kostet) nach der Horizont-Zeile eingefuegt, Vorlage aus Paragraph 4a unveraendert",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDBapVnaA5CTC7fjGMempUTr",
+ "notes": "Backlog #19 (E-002 mit Analyse, Basis E-003 = E-003M). Hypothese: ohne Analyse brachte der Ruhe-Satz weniger Streuung, aber keinen Timing-Gewinn; mit Pflicht-Analyse koennte die weichere Ruhe-Regel die teure Umschichtung senken, ohne wie E-031 (hartes Band 0,25 bis 0,75) auf konstant 0,5 zu kollabieren. Falsifikator (vor dem Lauf festgelegt, Standard aus dem Auftrag): falsifiziert, ausser der Timing-Wert liegt ueber E-003M (Differenz > 0) UND die Umschichtung liegt unter E-003M (0,121, mittlere absolute Gewichtsaenderung je Coin und Woche). Zusaetzlich berichtet: partieller Anker (werkzeuge/anker.py, E-003M 0,40), Anteil Gewichtsaenderungen unter 0,15, Exposure, Rank-IC, Vergleich mit E-031 und mit einer konstanten Position 0,5 (gleiche Kosten 0,2 % je Umschichtung, Differenz mit t-Wert). Champion-Regeln B-12/B-13/B-14: bei t >= 2 genau eine Wiederholung auf A, Urteil auf dem Mittel; B+C nur dann. Keine Harness-Option; versuche.py vom Branch claude/project-thread-lupsy0 (README par. 4). Vorlage aus Paragraph 4a woertlich unveraendert."
+}

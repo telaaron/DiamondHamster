@@ -59,7 +59,7 @@ Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`).
 
 ```bash
 cd <repo>   # Branch main (git pull origin main vor jedem Versuch)
-# PR #5 ist gemergt (2026-10-12), main reicht. Für #29 ("every") sowie #31 und #34 (Prüfung von prompt.md, B-18), bis PR #6 gemergt ist: git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
+# PR #5 ist gemergt (2026-10-12), main reicht. Für alle Versuche, bis PR #6 gemergt ist (every, Prüfung von prompt.md B-18, Holdout-Sperre für Datenzeilen B-19): git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
 #   (nötig für die Referenz E-003M und die Referenz-Prüfung)
 H=/mnt/project-files/research/versuche
 N=E-0XX     # nächste freie Nummer; mkdir reserviert sie (schlägt fehl, wenn vergeben)
@@ -138,7 +138,7 @@ Stündlich nur Set A: etwa 24 × 4,70 = 113 USD Listenpreis am Tag, plus Kandida
 | B-14: Wiederholung eines Kandidaten vorab festgelegt (eine, Mittel beider Läufe muss t ≥ 2 halten; keine dritte); Werkzeug-Version auf jeder Karte | ja, seit 2026-10-12 (`--set A2`, Feld `tool` in result.json) |
 | B-15: jede Blockade am Turniertag hat eine Standardoption, nach 2 Stunden ohne Antwort gilt sie | ja, seit 2026-10-12 (tournament/README.md) |
 | B-16: strukturelle Umbauten vor Ein-Satz-Varianten (Ensemble, Veto-Rolle, Stufen, Trägheit) | ja, seit 2026-10-12 (backlog #25 bis #30, `"ensemble"`, `"memory"`); E-013 bis E-015 ohne messbaren Unterschied |
-| B-17: Abbruchregel mit Zahlen | offen, Entscheidung Aaron; muss vor der ersten gewerteten Turnierrunde (Sonntag 2026-10-18) stehen |
+| B-17: Abbruchregel mit Zahlen | ja, Aaron 2026-10-13: Bis zur Wertung am 2027-01-10 (13 Turnier-Wochen) braucht ein eingefrorener Prompt t > 1 über mindestens 20 Coins, sonst wechselt die KI die Rolle (Protokoll §13) |
 | Sichtbarer Zähler aller getesteten Varianten | ja (UEBERSICHT.md) |
 | Ergebnis ohne beste Woche mitberichten | ja, und es entscheidet mit (§2) |
 | Jeder Versuch auf allen 30 Coins | teilweise: alle 30 Coins für jeden Kandidaten, aber nicht für jeden Versuch. Grund: das verdreifacht den Verbrauch (14 statt 4,70 USD) für Versuche, die schon auf 10 Coins nichts zeigen. Ein Gewinner muss auf den anderen 20 Coins bestehen, die er nie gesehen hat; das ist strenger als ein Ergebnis über alle 30. |
