@@ -1,0 +1,25 @@
+source = "illustrativ, keine Börsendaten"
+
+[[tier]]
+max_notional = 50000
+max_leverage = 125
+mmr = 0.004
+maint_amount = 0
+
+[[tier]]
+max_notional = 250000
+max_leverage = 100
+mmr = 0.005
+maint_amount = 50
+
+[[tier]]
+max_notional = 3000000
+max_leverage = 50
+mmr = 0.01
+maint_amount = 1300
+
+[[tier]]
+max_notional = 1e15
+max_leverage = 20
+mmr = 0.025
+maint_amount = 46300
