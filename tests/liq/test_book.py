@@ -101,3 +101,28 @@ def test_out_of_range_share():
     b = book()
     b.add(dep("long", "isolated", [1.0, 90], [1.0, 3.0]), cohort=1, ambiguous_frac=0)
     assert b.out_of_range_share() == pytest.approx(0.25)
+
+
+def test_merge_old_never_merges_into_seed():
+    b = Book(Grid(100, 10), max_cohorts=3, start_day=0)
+    b.add(dep("long", "isolated", [90], [1.0]), cohort=Book.SEED, ambiguous_frac=0)
+    for c in (1, 2, 3):
+        b.add(dep("long", "isolated", [90], [1.0]), cohort=c, ambiguous_frac=0)
+    b.merge_old(today=4)
+    assert len(b.cohorts()) == 3 and b.seed_share() == pytest.approx(0.25)
+
+
+def test_out_of_range_mass_stays_at_edge_under_funding():
+    b = book()
+    b.add(dep("long", "isolated", [1.0], [1.0]), cohort=1, ambiguous_frac=0)
+    b.apply_funding(0.01)
+    assert b.distribution("long")[0] == pytest.approx(1.0) and b.out_of_range_share() == pytest.approx(1.0)
+
+
+def test_edge_mass_swept_when_price_leaves_grid_under_funding():
+    b = book()
+    b.add(dep("short", "isolated", [1000.0], [1.0]), cohort=1, ambiguous_frac=0)
+    b.add(dep("short", "isolated", [380.0], [1.0]), cohort=1, ambiguous_frac=0)
+    b.apply_funding(0.01)
+    swept = b.sweep(mark_low=500, mark_high=1000)
+    assert swept["short"] == pytest.approx(2.0) and b.total("short") == 0

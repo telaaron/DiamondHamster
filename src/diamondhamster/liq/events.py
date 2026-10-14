@@ -16,7 +16,7 @@ COLUMNS: dict[str, list[str]] = {
     "gaps": ["start", "end", "reason"],
 }
 REQUIRED = ("trades", "oi", "mark")
-STRICT_TS = ("oi", "mark")
+STRICT_TS = ("oi", "mark", "funding")
 POSITIVE = {"trades": ["price", "qty"], "oi": ["oi"], "mark": ["high", "low", "close"],
             "liquidations": ["price", "qty"]}
 
@@ -53,6 +53,9 @@ def _check(name: str, df: pd.DataFrame) -> None:
     if df.empty:
         return
     key = "start" if name == "gaps" else "ts"
+    bad = df.index[df[key].isna()]
+    if len(bad):
+        _fail(name, int(bad[0]), f"{key} fehlt")
     d = df[key].diff().iloc[1:]
     bad = d[(d <= 0) if name in STRICT_TS else (d < 0)]
     if len(bad):

@@ -1,3 +1,6 @@
+import os
+from concurrent.futures import ProcessPoolExecutor
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -40,15 +43,20 @@ def test_liq_corr_nan_when_few_buckets():
     assert np.isnan(liq_corr(snap, ev))
 
 
+def _score_seed(seed: int) -> dict:
+    base = load_params()
+    ev, truth, ats = simulate(seed, days=20)
+    return {name: score_snapshots(Engine(p).run(ev, ats), truth, ev)["overlap"]
+            for name, p in (("true", truth_params(base, DEFAULT_TRUTH)), ("default", base),
+                            ("baseline", baseline_params(base)))}
+
+
 @pytest.mark.slow
 def test_engine_beats_fixed_leverage_on_sim(capsys):
-    base = load_params()
-    res = {"true": [], "default": [], "baseline": []}
-    for seed in range(1, 6):
-        ev, truth, ats = simulate(seed, days=20)
-        for name, p in (("true", truth_params(base, DEFAULT_TRUTH)), ("default", base),
-                        ("baseline", baseline_params(base))):
-            res[name].append(score_snapshots(Engine(p).run(ev, ats), truth, ev)["overlap"])
+    # Seeds sind unabhängig: parallel rechnen, damit der Test im Standardlauf bleiben kann
+    with ProcessPoolExecutor(max_workers=min(5, os.cpu_count() or 1)) as pool:
+        per_seed = list(pool.map(_score_seed, range(1, 6)))
+    res = {k: [r[k] for r in per_seed] for k in ("true", "default", "baseline")}
     with capsys.disabled():
         print("\noverlap je Seed:", {k: [round(x, 3) for x in v] for k, v in res.items()})
     assert all(t > b for t, b in zip(res["true"], res["baseline"]))

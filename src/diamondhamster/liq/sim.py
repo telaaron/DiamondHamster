@@ -93,7 +93,12 @@ class _Side:
         self.qty, self.liq, self.iso, self.day = self.qty[keep], self.liq[keep], self.iso[keep], self.day[keep]
 
     def hazard(self, today: float, beta: float) -> np.ndarray:
+        """Gewicht je Masseneinheit × Masse: für anteilige Reduktion (Gegenseite, Liquidations-Gegenpart)."""
         return self.qty * np.exp(beta * (today - self.day))
+
+    def pick_weight(self, today: float, beta: float) -> np.ndarray:
+        """Auswahlgewicht je Position für ganze Closes: exp(β·Alter), unabhängig von der Größe."""
+        return np.where(self.qty > 0, np.exp(beta * (today - self.day)), 0.0)
 
 
 def simulate(seed: int, days: int, truth: SimTruth = DEFAULT_TRUTH, pre_days: int = 14, snapshot_every_h: int = 24,
@@ -160,10 +165,10 @@ def simulate(seed: int, days: int, truth: SimTruth = DEFAULT_TRUTH, pre_days: in
         for side, other in (("long", "short"), ("short", "long")):
             s = sides[side]
             k = rng.poisson(truth.close_rate)
-            haz = s.hazard(today, truth.beta)
-            if k == 0 or haz.sum() <= 0:
+            pw = s.pick_weight(today, truth.beta)
+            if k == 0 or pw.sum() <= 0:
                 continue
-            idx = np.unique(rng.choice(len(s.qty), size=k, p=haz / haz.sum()))
+            idx = np.unique(rng.choice(len(s.qty), size=k, p=pw / pw.sum()))
             q = s.qty[idx].copy()
             s.qty[idx] = 0.0
             transfer = rng.random(len(q)) < truth.transfer_share

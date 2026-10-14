@@ -12,17 +12,28 @@ ISO = 0
 
 
 def _shift(arr: np.ndarray, k: int) -> np.ndarray:
-    """Verschiebt entlang der letzten Achse um k Buckets; was herausfällt, landet im Randbucket."""
+    """Verschiebt die inneren Buckets entlang der letzten Achse um k; was herausfällt, landet im Randbucket.
+
+    Die beiden Randbuckets sammeln Masse außerhalb des Gitters und bleiben unverschoben.
+    """
     if k == 0:
         return arr
+    n = arr.shape[-1]
     out = np.zeros_like(arr)
-    if k > 0:
-        out[..., k:] = arr[..., :-k]
-        out[..., -1] += arr[..., -k:].sum(axis=-1)
-    else:
-        out[..., :k] = arr[..., -k:]
-        out[..., 0] += arr[..., :-k].sum(axis=-1)
-    return out
+    out[..., 0], out[..., -1] = arr[..., 0], arr[..., -1]
+    target = np.clip(np.arange(1, n - 1) + k, 0, n - 1)
+    flat_in = arr[..., 1:-1].reshape(-1, n - 2)
+    flat_out = out.reshape(-1, n)
+    for row in range(flat_in.shape[0]):
+        np.add.at(flat_out[row], target, flat_in[row])
+    return flat_out.reshape(arr.shape)
+
+
+def _effective_index(n: int, k: int) -> np.ndarray:
+    """Effektiver Bucket je gespeichertem Bucket bei Shift k (Ränder fest)."""
+    idx = np.clip(np.arange(n) + k, 0, n - 1)
+    idx[0], idx[-1] = 0, n - 1
+    return idx
 
 
 class Book:
@@ -35,6 +46,7 @@ class Book:
         self._mass: dict[int, np.ndarray] = {}   # cohort -> (side, mode, bucket)
         self._amb: dict[int, np.ndarray] = {}
         self._shift: dict[int, float] = {}        # cohort -> log-Preis-Verschiebung (nur isolated)
+        self._eff_cache: dict[int, np.ndarray] = {}
 
     def cohorts(self) -> list[int]:
         return sorted(self._mass)
@@ -51,8 +63,10 @@ class Book:
         self._ensure(cohort)
         s, m = SIDES.index(deposit.side), MODES.index(deposit.mode)
         idx = self.grid.index(deposit.liq_price)
-        if m == ISO:  # gespeichert wird unverschoben; der Kohorten-Shift gilt beim Lesen
-            idx = np.clip(idx - self.grid.shift_buckets(self._shift[cohort]), 0, self.grid.n - 1)
+        k = self.grid.shift_buckets(self._shift[cohort])
+        if m == ISO and k:  # gespeichert wird unverschoben; der Kohorten-Shift gilt beim Lesen. Ränder bleiben Ränder.
+            inner = (idx > 0) & (idx < self.grid.n - 1)
+            idx = np.where(inner, np.clip(idx - k, 1, self.grid.n - 2), idx)
         np.add.at(self._mass[cohort][s, m], idx, deposit.qty)
         np.add.at(self._amb[cohort][s, m], idx, deposit.qty * ambiguous_frac)
 
@@ -62,22 +76,24 @@ class Book:
         a[ISO] = _shift(a[ISO], self.grid.shift_buckets(self._shift[cohort]))
         return a
 
+    def _eff_centers(self, k: int) -> np.ndarray:
+        """Bucket-Mitte je gespeichertem Bucket bei Shift k; monoton steigend, daher per searchsorted schneidbar."""
+        if k not in self._eff_cache:
+            self._eff_cache[k] = self.grid.centers()[_effective_index(self.grid.n, k)]
+        return self._eff_cache[k]
+
     def sweep(self, mark_low: float, mark_high: float) -> dict[str, float]:
-        centers = self.grid.centers()
-        lo = int(np.searchsorted(centers, mark_low, side="left"))       # Long: center >= mark_low
-        hi = int(np.searchsorted(centers, mark_high, side="right")) - 1  # Short: center <= mark_high
         removed = {"long": 0.0, "short": 0.0}
         for c in self._mass:
             for m in range(len(MODES)):
-                k = self.grid.shift_buckets(self._shift[c]) if m == ISO else 0
-                lo_raw, hi_raw = max(lo - k, 0), min(hi - k, self.grid.n - 1)
+                eff = self._eff_centers(self.grid.shift_buckets(self._shift[c]) if m == ISO else 0)
+                lo = int(np.searchsorted(eff, mark_low, side="left"))         # Long: eff >= mark_low
+                hi = int(np.searchsorted(eff, mark_high, side="right"))       # Short: eff <= mark_high
+                removed["long"] += self._mass[c][0, m, lo:].sum()
+                removed["short"] += self._mass[c][1, m, :hi].sum()
                 for store in (self._mass, self._amb):
-                    if store is self._mass:
-                        removed["long"] += store[c][0, m, lo_raw:].sum()
-                        removed["short"] += store[c][1, m, : hi_raw + 1].sum() if hi_raw >= 0 else 0.0
-                    store[c][0, m, lo_raw:] = 0.0
-                    if hi_raw >= 0:
-                        store[c][1, m, : hi_raw + 1] = 0.0
+                    store[c][0, m, lo:] = 0.0
+                    store[c][1, m, :hi] = 0.0
         return removed
 
     def close(self, side: str, qty: float, today: int, beta: float) -> None:
@@ -124,10 +140,14 @@ class Book:
             self._amb[c][s] *= factor
 
     def merge_old(self, today: int) -> None:
-        cs = sorted(self._mass, key=self._day)
-        if len(cs) <= self.max_cohorts:
+        """Legt die ältesten datierten Kohorten zusammen; die Seed-Kohorte bleibt eigenständig (für seed_share)."""
+        if len(self._mass) <= self.max_cohorts:
             return
-        old, keep = cs[: len(cs) - self.max_cohorts + 1], cs[0]
+        dated = sorted(c for c in self._mass if c != self.SEED)
+        old = dated[: len(self._mass) - self.max_cohorts + 1]
+        if len(old) < 2:
+            return
+        keep = old[0]
         weights = np.array([self._mass[c].sum() for c in old])
         rest = float(np.average([self._shift[c] for c in old], weights=weights)) if weights.sum() > 0 else 0.0
         k_rest = self.grid.shift_buckets(rest)

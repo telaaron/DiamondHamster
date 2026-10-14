@@ -33,6 +33,9 @@ Nur Events mit Zeitstempel ≤ `at` gehen ein (kein Blick in die Zukunft).
 - Geprüft nur im Simulator. Der Simulator folgt den Annahmen des Modells; ein Sieg dort zeigt, dass richtig gerechnet
   wird, nicht dass die Karte die Realität trifft.
 - Ergebnis 2026-10-14 (Überlappung der Verteilungen auf 0,1-%-Buckets, 1 = identisch, 5 Seeds, je 20 Tage):
-  Engine mit wahren Parametern 0,38–0,41, mit Standardparametern 0,31–0,34, feste Hebel (Baseline) 0,21–0,25.
+  Engine mit wahren Parametern 0,73–0,79, mit Standardparametern 0,66–0,73, feste Hebel (Baseline) 0,49–0,56.
+- Verlässt der Kurs das Gitter (±4× um den Startpreis), wird die betroffene Seite jedes Intervall neu gesetzt
+  (`quality.reseeds` steigt, `out_of_range_share` hoch). Diese Seite ist dann bedeutungslos; ein mitwanderndes Gitter
+  kommt mit echten Daten (Teilprojekt 2).
 - Tier-Tabelle ist illustrativ, keine Börsendaten. Echte Tiers und Binance-Archiv folgen in Teilprojekt 2,
   Hyperliquid als echte Wahrheitsquelle in Teilprojekt 3.

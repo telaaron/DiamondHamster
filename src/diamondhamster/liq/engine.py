@@ -37,12 +37,17 @@ class Engine:
 
         t0 = int(oi_ts[0])
         k = int(np.searchsorted(mk_ts, t0, side="right"))
-        p0 = mk_c[k - 1] if k else (tr_p[0] if len(tr_p) else mk_c[0])
+        if k:
+            p0 = mk_c[k - 1]
+        elif len(tr_ts) and tr_ts[0] <= t0:
+            p0 = tr_p[int(np.searchsorted(tr_ts, t0, side="right")) - 1]
+        else:  # kein Startpreis aus der Zukunft: Gitter und Seed dürfen nur auf Daten <= t0 beruhen
+            raise ValueError("no mark or trade at or before the first OI timestamp")
         grid = Grid(p0, p.bucket_bp)
         book = Book(grid, p.max_cohorts, start_day=t0 // DAY_MS)
         for d in deposits([p0], [1.0], oi_v[0], p, force_class="mid"):
             book.add(d, Book.SEED, 0.0)
-        quality = {"gaps": [], "max_drift": 0.0, "reseeds": 0}
+        quality = {"gaps": [], "max_drift": 0.0, "reseeds": 0, "oi_exceeds_volume": 0}
         last_close = p0
         out: list[Snapshot] = []
         pending = list(ats)
@@ -55,7 +60,7 @@ class Engine:
                 mark = mk_c[j - 1] if j else p0
                 q = {"warmup": bool(at < t0 + p.warmup_days * DAY_MS), "max_drift": float(quality["max_drift"]),
                      "drift_warning": bool(quality["max_drift"] > p.drift_warn), "gaps": [list(g) for g in quality["gaps"]],
-                     "reseeds": quality["reseeds"]}
+                     "reseeds": quality["reseeds"], "oi_exceeds_volume": quality["oi_exceeds_volume"]}
                 out.append(build_snapshot(book, p, exchange=events.exchange, symbol=events.symbol, at_ms=at,
                                           mark=float(mark), oi=float(oi_v[i]), quality=q,
                                           sources=[f"{events.exchange}:{events.symbol}"],
@@ -74,7 +79,10 @@ class Engine:
             else:
                 last_close = mk_c[mw.stop - 1]
                 tw = _window(tr_ts, t_prev, t)
-                opens, closes, amb = opens_closes(float(tr_q[tw].sum()), oi_v[i] - oi_v[i - 1], p.alpha)
+                volume, d_oi = float(tr_q[tw].sum()), oi_v[i] - oi_v[i - 1]
+                if volume < abs(d_oi):  # Spec 3.6: OI ändert sich mehr als gehandelt, A = 0
+                    quality["oi_exceeds_volume"] += 1
+                opens, closes, amb = opens_closes(volume, d_oi, p.alpha)
                 if opens > 0:
                     prices, qtys = (tr_p[tw], tr_q[tw]) if tw.stop > tw.start else ([last_close], [1.0])
                     for d in deposits(prices, qtys, opens, p):

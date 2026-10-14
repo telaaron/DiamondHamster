@@ -93,3 +93,18 @@ def test_baseline_only_four_leverages():
         nz = {LEVERAGES[i] for i in np.flatnonzero(w)}
         assert nz == {10, 25, 50, 100}
     assert p.cross_share == 0 and p.alpha == 0
+
+
+def test_oi_exceeds_volume_is_logged():
+    es = make_events(1)
+    es.oi.loc[1, "oi"] = es.oi.oi[0] + 1e6  # weit mehr als gehandelt
+    s = run(es, [T0 + STEP])[0]
+    assert s.data["quality"]["oi_exceeds_volume"] == 1
+
+
+def test_start_price_never_from_the_future():
+    es = make_events(3)
+    es.mark = es.mark[es.mark.ts > T0].reset_index(drop=True)
+    es.trades = es.trades[es.trades.ts > T0].reset_index(drop=True)
+    with pytest.raises(ValueError, match="no mark or trade at or before the first OI"):
+        run(es, [T0 + STEP])

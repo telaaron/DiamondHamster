@@ -58,3 +58,14 @@ def test_truth_params_overrides():
     assert p.cross_share == DEFAULT_TRUTH.cross_share and p.beta == DEFAULT_TRUTH.beta
     assert p.alpha == DEFAULT_TRUTH.transfer_share
     assert np.allclose(p.leverage_weights["small"].sum(), 1)
+
+
+def test_close_pick_weight_independent_of_size():
+    # Ganze Positionen werden geschlossen: Auswahl ∝ exp(β·Alter) je Position ergibt je Masseneinheit
+    # dieselbe Rate wie die Engine (Masse·exp(β·Alter) je Kohorte). Größe darf nicht eingehen.
+    from diamondhamster.liq.sim import _Side
+    s = _Side()
+    s.add(np.array([1.0, 100.0]), np.array([1.0, 1.0]), np.array([True, True]), day=0)
+    s.add(np.array([0.0]), np.array([1.0]), np.array([True]), day=0)
+    w = s.pick_weight(today=2.0, beta=0.5)
+    assert w[0] == pytest.approx(w[1]) and w[2] == 0

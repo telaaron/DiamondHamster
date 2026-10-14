@@ -33,3 +33,21 @@ def test_hash_changes_with_file(tmp_path):
 def test_with_overrides_marks_hash():
     p = with_overrides(load_params(), alpha=0.0)
     assert p.alpha == 0.0 and p.params_hash.endswith("+override")
+
+
+def test_override_hash_depends_on_values():
+    from diamondhamster.liq.baseline import baseline_params
+    from diamondhamster.liq.sim import DEFAULT_TRUTH, truth_params
+    base = load_params()
+    assert baseline_params(base).params_hash != truth_params(base, DEFAULT_TRUTH).params_hash
+    assert with_overrides(base, alpha=0.1).params_hash != with_overrides(base, alpha=0.2).params_hash
+
+
+def test_negative_weight_rejected(tmp_path):
+    src = P.DEFAULT_PARAMS_PATH
+    shutil.copytree(src.parent.parent / "tiers", tmp_path / "tiers")
+    (tmp_path / "params").mkdir()
+    dst = tmp_path / "params" / "neg.toml"
+    dst.write_text(src.read_text().replace("small = [2, 3,", "small = [-2, 3,"))
+    with pytest.raises(ValueError, match="non-negative"):
+        load_params(dst)

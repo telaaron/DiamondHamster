@@ -64,3 +64,19 @@ def test_missing_required_file(tmp_path):
     (tmp_path / "oi.csv").unlink()
     with pytest.raises(EventError, match="oi.csv"):
         load_events(tmp_path)
+
+
+def test_duplicate_funding_ts_rejected(tmp_path):
+    es = small_set()
+    es.funding = pd.DataFrame({"ts": [2000, 2000], "rate": [0.0001, 0.0001]})
+    save_events(es, tmp_path)
+    with pytest.raises(EventError, match=r"funding\.csv.*Zeile 2"):
+        load_events(tmp_path)
+
+
+def test_nan_ts_rejected(tmp_path):
+    es = small_set()
+    es.oi = pd.DataFrame({"ts": [1000.0, float("nan"), 3000.0], "oi": [1.0, 1.0, 1.0]})
+    save_events(es, tmp_path)
+    with pytest.raises(EventError, match=r"oi\.csv.*Zeile 2"):
+        load_events(tmp_path)
