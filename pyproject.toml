@@ -14,5 +14,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+"diamondhamster.liq" = ["presets/*.toml", "tiers/*.toml"]
+
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+markers = ["slow: langsamer Test (Simulator-Erfolgskriterium)"]
