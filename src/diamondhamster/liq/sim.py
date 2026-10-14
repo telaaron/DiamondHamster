@@ -112,7 +112,8 @@ def simulate(seed: int, days: int, truth: SimTruth = DEFAULT_TRUTH, pre_days: in
         notional = qty * entry
         max_lev, mmr, k = tier_for(tiers, notional)
         w = _weights(size_class(notional), max_lev, truth.leverage_weights)
-        lev = np.array([rng.choice(LEVERAGES, p=row) for row in w], dtype=float)
+        pick = (rng.random(len(qty))[:, None] > np.cumsum(w, axis=1)).sum(axis=1)  # inverse CDF je Zeile
+        lev = np.asarray(LEVERAGES, dtype=float)[np.minimum(pick, len(LEVERAGES) - 1)]
         iso_price = liq_price_isolated(side, entry, lev, mmr, k, qty)
         is_iso = rng.random(len(qty)) >= truth.cross_share
         liq = np.where(is_iso, iso_price, liq_price_cross(side, entry, iso_price, truth.cross_kappa))
