@@ -27,9 +27,9 @@ class Deposit:
     qty: np.ndarray
 
 
-def _weights(classes: np.ndarray, max_lev: np.ndarray, params: Params) -> np.ndarray:
+def _weights(classes: np.ndarray, max_lev: np.ndarray, leverage_weights: dict) -> np.ndarray:
     lev = np.asarray(LEVERAGES)
-    w = np.stack([params.leverage_weights[c] for c in classes])
+    w = np.stack([leverage_weights[c] for c in classes])
     w = np.where(lev[None, :] <= max_lev[:, None], w, 0.0)
     total = w.sum(axis=1)
     for i in np.flatnonzero(total == 0):  # nichts erlaubt: alles auf den größten erlaubten Hebel
@@ -45,7 +45,7 @@ def deposits(prices: np.ndarray, qtys: np.ndarray, open_qty: float, params: Para
     notional = prices * qtys
     classes = np.full(len(prices), force_class) if force_class else size_class(notional)
     max_lev, mmr, k = tier_for(params.tiers, notional)
-    w = _weights(classes, max_lev, params)
+    w = _weights(classes, max_lev, params.leverage_weights)
     lev = np.asarray(LEVERAGES, dtype=float)[None, :]
     E, Q = prices[:, None], qtys[:, None]
     base = entry_qty[:, None] * w
