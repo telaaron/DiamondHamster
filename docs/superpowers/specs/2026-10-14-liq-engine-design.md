@@ -122,8 +122,8 @@ Schritte je Intervall:
      `w[s, L]` aus den Parametern; Hebel über dem Tier-Maximum für das Notional fallen weg, Gewichte werden
      renormiert.
    - Isoliert (Anteil `1 − c`), Wartungsmarge `m` und Wartungsbetrag `k` aus der Tier-Tabelle:
-     - Long: `P_liq = (E · (1 − 1/L) + k/q) / (1 − m)`
-     - Short: `P_liq = (E · (1 + 1/L) − k/q) / (1 + m)`
+     - Long: `P_liq = (E · (1 − 1/L) − k/q) / (1 − m)`
+     - Short: `P_liq = (E · (1 + 1/L) + k/q) / (1 + m)`
      (Herleitung: Margin `q·E/L` plus Gewinn/Verlust gleich Wartungsmarge `m·q·P − k`. Gebühren vernachlässigt.)
    - Cross (Anteil `c`): Abstand `|E − P_liq|` des isolierten Falls mal Faktor `κ` (Parameter, Standard 2,0),
      weil Kontoguthaben unbekannt ist und den Abstand vergrößert.
@@ -188,7 +188,7 @@ Erzeugt zu angefragten Zeitpunkten, nur aus Events `≤ at`. JSON:
 - Agenten öffnen und schließen Positionen (Poisson-Prozesse), Hebel aus einer *wahren* Mischung, Margin-Modus aus
   wahrem `c`, Schließ-Rate mit wahrem `β`; Liquidation, wenn Mark den Liquidationspreis kreuzt.
 - Ausgabe: Event-Satz (wie 3.2, inkl. `liquidations`) plus wahres Buch `truth.csv` mit Spalten
-  `ts, side, mode, price_lo, price_hi, qty` (Buckets des Engine-Gitters) je angefragtem Zeitpunkt.
+  `ts, side, mode, liq_price, qty` (Positionsebene; `score` bildet auf das Engine-Gitter ab) je angefragtem Zeitpunkt.
 
 `score.py` vergleicht Modell- und wahres Buch je Seite:
 
