@@ -1,0 +1,11 @@
+{
+ "id": "E-021",
+ "parent": "E-003M",
+ "axis": "format",
+ "change": "Seltener entscheiden: Prompt von E-003M unveraendert, die KI entscheidet nur in Woche 1, 5, 9 und 13, dazwischen bleibt ihr Gewicht stehen",
+ "input": "candles",
+ "lookback": 180,
+ "every": 4,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDGE69ZuoqZSaFvT3aVgogE7",
+ "notes": "Backlog #29. Hypothese (Review-002, E-013 bis E-015): eine feste Position schlaegt das Umschichten; weniger Entscheidungen senken die Kosten des Hinterherlaufens, ohne den Prompt zu aendern. Falsifiziert, wenn der Timing-Wert gegenueber E-003M auf A nicht positiv ist (Differenz <= 0). Gemessen wird nach B-12/B-14: messbar erst ab t >= 2, dann genau eine Wiederholung auf A. Vergleich: E-003M (Umschichtung ~0,13, partiell 0,40), E-016 (+0,16 t 1,05, 0,04, -0,15), E-020 (+0,25 t 1,38, 0,025, 0,15). Vorlage aus Paragraph 4a unveraendert; versuche.py vom Branch claude/project-thread-lupsy0 (PR #6)."
+}

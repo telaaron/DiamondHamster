@@ -1,0 +1,11 @@
+{
+ "id": "E-016",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Traegheit mit Gedaechtnis: die KI sieht Gewicht und Kipp-Preis der Vorwoche und aendert nur, wenn der Kipp-Preis gebrochen ist",
+ "input": "candles",
+ "lookback": 180,
+ "memory": true,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDSRBJxoU6KX3yUnwJPrGnU5",
+ "notes": "Backlog #28, Waechter B-16. Hypothese: Ein Teil des Verlusts von E-003M ist Umschichtung ohne neue Information (Lauf-zu-Lauf-Rauschen der Gewichte). Mit Gedaechtnis und Kipp-Preis-Regel bleibt das Gewicht stehen, bis der selbst genannte Preis bricht. Erwartung: deutlich weniger Umschichtung, Timing-Wert ueber E-003M. Falsifiziert, wenn die Differenz zu E-003M auf A nicht t >= 2 erreicht. Gegenrisiko: Kipp-Preise nah am Kurs brechen fast jede Woche, dann aendert sich nichts. Informativ: Umschichtung, Anteil Wochen mit unveraendertem Gewicht, Regeltreue (Gewicht geaendert ohne Bruch). Vorlage aus Paragraph 4a unveraendert bis auf das JSON-Format, 180 Tage Kerzen."
+}

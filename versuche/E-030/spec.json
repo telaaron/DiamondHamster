@@ -1,0 +1,10 @@
+{
+ "id": "E-030",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Gegenrede: je Fenster nach der Marktlage eine Zeile \"Against:\" mit dem staerksten Argument gegen die eigene Einschaetzung, erst danach das Gewicht (ein Satz vor der Vorlage, Vorlage aus Paragraph 4a unveraendert)",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD8nhGvDh6cqAnZEUGoThamg",
+ "notes": "Backlog #22. Basis E-003M (Champion, sauber). Hypothese: Selbstkritik bremst das Hinterherlaufen. Falsifikator (vor dem Lauf festgelegt, Standard aus dem Auftrag): falsifiziert, ausser Umschichtung UND partieller Anker (werkzeuge/anker.py) liegen beide unter E-003M und der Timing-Wert faellt nicht (Differenz zu E-003M >= 0). Vergleichswerte E-003M: Umschichtung 0,121 (Mittel der drei Laeufe 0,109 / 0,110 / 0,142, mittlere absolute Gewichtsaenderung je Coin und Woche), partieller Anker 0,40. Zusaetzlich berichtet: Anteil Gewichtsaenderungen unter 0,15, Exposure, Rank-IC, und wie oft die Against-Zeile vorkommt (Befolgung). Champion-Regeln B-12/B-13/B-14: bei t >= 2 genau eine Wiederholung auf A, Urteil auf dem Mittel; B+C nur dann. Keine Harness-Option; versuche.py vom Branch claude/project-thread-lupsy0 (README par. 4). Vorlage aus Paragraph 4a woertlich unveraendert."
+}

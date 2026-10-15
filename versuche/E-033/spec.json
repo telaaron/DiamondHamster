@@ -1,0 +1,10 @@
+{
+ "id": "E-033",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Kurzer Prompt: Erklaerungen gestrichen (Horizont-Zeile, Beschreibung des Datenformats, Satz zur getrennten Beurteilung der Fenster); nur Aufgabe und Vorlage aus Paragraph 4a bleiben, diese unveraendert",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDLDAEDWtmSdqBXwDEAQFeMF",
+ "notes": "Backlog #12. Hypothese: prueft, ob die Erklaerungen um die Aufgabe helfen oder ablenken. Prompt-Laenge: E-003M 942 Zeichen, E-033 593 Zeichen (-37 %). Die Vorlage aus Paragraph 4a bleibt, weil das Streichen der Analyse eine zweite Aenderung waere; die Fenster tragen weiter ihre Kopfzeile 'day o h l c v'. Falsifikator (vor dem Lauf festgelegt, Standard aus dem Auftrag): die langen Anweisungen 'helfen', wenn E-033 auf dem Timing-Wert schlechter als E-003M ist, und 'lenken ab', wenn E-033 besser ist; falsifiziert (kein Effekt), wenn Timing-Wert (|t| < 2), Umschichtung (E-003M 0,121) und partieller Anker (E-003M 0,40) alle im Rauschen von E-003M bleiben. Als Rauschen fuer Umschichtung und partiellen Anker gilt die Spanne der drei E-003-Laeufe. Zusaetzlich berichtet: Anteil Gewichtsaenderungen unter 0,15, Exposure, Rank-IC, Vergleich mit konstant 0,5. Champion-Regeln B-12/B-13/B-14: bei t >= 2 genau eine Wiederholung auf A, Urteil auf dem Mittel; B+C nur dann. Keine Harness-Option; versuche.py vom Branch claude/project-thread-lupsy0."
+}

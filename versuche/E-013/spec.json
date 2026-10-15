@@ -1,0 +1,11 @@
+{
+ "id": "E-013",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Ensemble: Prompt E-003M unveraendert, 3 unabhaengige Laeufe pro Woche, entschieden wird mit dem mittleren Gewicht",
+ "input": "candles",
+ "lookback": 180,
+ "ensemble": 3,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD1FAEzfSp1ExEC126cZsyuR",
+ "notes": "Backlog #25, Waechter B-16. Hypothese: Laeufe desselben Prompts streuen so stark wie die gemessenen Effekte (0,1 bis 0,17 %/Woche); das zufaellige Umschichten kostet Geld. Das Mittel aus 3 Laeufen daempft das Rauschen im Gewicht, senkt die Umschichtung und hebt den Timing-Wert gegen E-003M. Falsifiziert, wenn die Differenz zu E-003M auf A nicht t >= 2 erreicht. Prompt woertlich gleich E-003M (Paragraph-4a-Vorlage unveraendert), Daten unveraendert (180 Tage Tageskerzen). Kosten etwa dreifach."
+}

@@ -1,0 +1,10 @@
+{
+ "id": "E-035",
+ "parent": "E-003M",
+ "axis": "format",
+ "change": "Nur die Indikatorzeile (19 Kennzahlen, Formatsatz und Legende aus E-001/E-034) je Fenster, keine Kerzentabelle",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD7iZtYV9srWQunhgUZLBZV6",
+ "notes": "Backlog #10. Hypothese: viel weniger Zeichen; zeigt, ob die Rohkerzen ueberhaupt etwas beitragen. Prompt = E-034 (E-003M mit Indikator-Formatsatz und Legende aus E-001), nur der Formatsatz sagt jetzt, dass das Fenster nur aus der Indikatorzeile besteht, plus ein Satz, dass der Schlusskurs des Entscheidungstags 100 ist (damit die Vorlage aus Paragraph 4a mit Preisen auf der 100-Skala sinnvoll bleibt); Vorlage unveraendert. render.py gibt nur snapshot(features.compute(df), t) aus; Indikatoren werden wie bei E-034 aus den Kerzen bis zum Entscheidungstag berechnet. Kein externer Abruf (B-19 entfaellt), keine Harness-Option, versuche.py vom Branch claude/project-thread-lupsy0. Falsifikator (vor dem Lauf festgelegt): die Kerzen tragen etwas bei, wenn E-035 schlechter ist als E-034 (Kerzen + Indikatoren: +0,175 vs E-003M t 1,40, Rank-IC 0,088, partieller Anker 0,67); falsifiziert (Kerzen tragen nichts bei), wenn E-035 auf Timing-Wert UND Rank-IC nicht schlechter ist als E-034. Berichtet: gepaarte Vergleiche gegen E-003M und E-034, Eingabegroesse in Zeichen, partieller Anker (pos_in_180d_range steht in der Zeile), Anteil Gewichtsaenderungen unter 0,15, Umschichtung, Exposure, konstant 0,5. Champion-Regeln B-12/B-13/B-14."
+}

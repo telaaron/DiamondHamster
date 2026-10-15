@@ -222,3 +222,47 @@ def test_memory_feeds_last_weeks_weight_and_rescaled_flip(lab):
         coin = k2[r["id"]]
         close = vs.tournament.read_candles(coin, candles)["close"]
         assert r["window"].startswith(f"last week: weight 0.60, flip price {95.0 * close[t0] / close[t1]:.1f}")
+
+
+def test_every_decides_only_every_nth_week_and_holds_the_weight(lab):
+    home, candles = lab
+    make(home, "E-000")
+    spec = json.loads((home / "E-000" / "spec.json").read_text())
+    spec["every"] = 4
+    (home / "E-000" / "spec.json").write_text(json.dumps(spec))
+    runs = vs.export("E-000", "A", home, candles)
+    assert [r.name for r in runs] == [w.isoformat() for w in vs.WEEKS[::4]]
+    for n, run in enumerate(runs):
+        key = json.loads((run / "key.json").read_text())
+        (run / "responses.json").write_text(json.dumps({"responses": {i: [0.2, 0.8, 0.5][n] for i in key}}))
+    w = vs.weights("E-000", "A", home)
+    assert len(w) == 3 * len(vs.WEEKS)
+    per_week = w.groupby("decision")["weight"].first().tolist()
+    assert per_week == [0.2] * 4 + [0.8] * 4 + [0.5] * (len(vs.WEEKS) - 8)
+
+
+def test_prompt_with_calendar_text_or_project_note_is_refused(lab):
+    home, candles = lab
+    note = "<!-- Projekt-Hinweis: dev-informiert, Jul bis Sep -->\nRegel: Spannenlage ist kein Signal. You may hold."
+    make(home, "E-000", prompt=note)
+    with pytest.raises(ValueError, match="prompt.md"):
+        vs.export("E-000", "A", home, candles)
+    (home / "E-000" / "prompt.md").write_text(note.split("\n", 1)[1])  # line 1 stripped: passes
+    assert vs.export("E-000", "A", home, candles)
+    for bad in ["Juli", "im März", "2026", "Dev-Befunde"]:
+        assert vs.PROMPT_FORBIDDEN.search(bad), bad
+
+
+def test_own_data_fetches_into_the_holdout_must_be_logged(lab, tmp_path, monkeypatch):
+    home, candles = lab
+    make(home, "E-000")
+    raw = home / "E-000" / "daten" / "raw"
+    raw.mkdir(parents=True)
+    (raw / "BTC.request.json").write_text(json.dumps({"symbol": "X:BTC.P", "date_from": "2025-06-01", "date_to": "2026-09-28"}))
+    (raw / "OLD.request.json").write_text(json.dumps({"symbol": "X:OLD", "date_from": "2026-07-01", "date_to": "2026-09-28"}))
+    with pytest.raises(ValueError, match="B-19"):
+        vs.export("E-000", "A", home, candles)
+    assert vs.log_fetches("E-000", "test", home) == 1
+    assert vs.log_fetches("E-000", "test", home) == 0  # once each
+    assert "E-000 own data row X:BTC.P 2025-06-01..2026-09-28 (test)" in (home / "holdout_access.log").read_text()
+    assert vs.export("E-000", "A", home, candles)

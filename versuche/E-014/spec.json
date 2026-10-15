@@ -1,0 +1,10 @@
+{
+ "id": "E-014",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Veto statt Gewicht: eine feste Regel (Schluss ueber 50-Tage-Schnitt = 1, sonst 0) gibt das Signal, die erste Fensterzeile zeigt es; die KI darf ein 1-Signal nur bestaetigen (1) oder per Veto auf 0 setzen, ein 0-Signal bleibt 0",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDLJsu6tSB4T2Gq8pVzx97xX",
+ "notes": "Backlog #26, Waechter B-16 (andere Rolle statt anderer Satz). Hypothese: Die KI verliert als freier Gewichtsgeber, weil sie Trend folgt und zu oft umschichtet. Als Veto-Instanz auf einer festen Trendregel kann sie nur Fehlsignale der Regel abfangen. Erkennt sie Fehlsignale, liegt der Timing-Wert ueber E-003M und ueber der Regel allein. Falsifiziert, wenn die Differenz zu E-003M auf A nicht t >= 2 erreicht. Zusaetzlich (nur informativ): Timing-Wert der Regel ohne KI auf denselben Wochen und Coins, Zahl und Trefferquote der Vetos, Regelverstoesse (Gewicht 1 bei Signal 0 oder Zwischenwerte; das Werkzeug erzwingt die Binaeritaet nicht). Achse: Rolle (Prompt plus eine Datenzeile, beides gehoert zur Rolle). Tabelle unveraendert 180 Tage; Paragraph-4a-Vorlage unveraendert."
+}
