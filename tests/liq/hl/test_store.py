@@ -1,0 +1,64 @@
+import gzip
+import json
+
+import pandas as pd
+
+from diamondhamster.liq.hl.scheduler import Scheduler
+from diamondhamster.liq.hl.store import Store, read_jsonl_gz
+
+DAY = 86_400_000
+T = 1_790_000_000_000  # 2026-09-21
+
+
+def test_append_splits_by_utc_day_and_coin(tmp_path):
+    s = Store(tmp_path)
+    s.append("trades", {"a": 1}, T, coin="BTC")
+    s.append("trades", {"a": 2}, T + DAY, coin="BTC")
+    s.close()
+    files = sorted(p.relative_to(tmp_path).as_posix() for p in (tmp_path / "raw").rglob("*.gz"))
+    assert files == ["raw/trades/BTC/2026-09-21.jsonl.gz", "raw/trades/BTC/2026-09-22.jsonl.gz"]
+
+
+def test_flushed_data_readable_while_open_and_after_reopen(tmp_path):
+    s = Store(tmp_path)
+    s.append("ctx", {"i": 1}, T)
+    s.flush()
+    path = tmp_path / "raw/ctx/2026-09-21.jsonl.gz"
+    recs, broken = read_jsonl_gz(path)
+    assert recs == [{"i": 1}]
+    s.close()
+    s2 = Store(tmp_path)  # Neustart hängt an
+    s2.append("ctx", {"i": 2}, T)
+    s2.close()
+    assert read_jsonl_gz(path) == ([{"i": 1}, {"i": 2}], 0)
+
+
+def test_truncated_tail_counted_not_fatal(tmp_path):
+    path = tmp_path / "x.jsonl.gz"
+    with gzip.open(path, "wt") as f:
+        f.write(json.dumps({"ok": 1}) + "\n")
+    data = gzip.compress(b'{"ok": 2}\n{"half": ')
+    path.write_bytes(path.read_bytes() + data[: len(data) - 5])
+    recs, broken = read_jsonl_gz(path)
+    assert recs[0] == {"ok": 1} and broken >= 1
+
+
+def test_book_gap_status(tmp_path):
+    s = Store(tmp_path)
+    s.write_book("BTC", T, pd.DataFrame({"user": ["a"], "qty": [1.0]}))
+    s.gap(T, T + 5000, "ws")
+    s.write_status({"n": 3})
+    assert pd.read_csv(tmp_path / "book/BTC/20260921T1413Z.csv.gz").qty.tolist() == [1.0]
+    assert json.loads((tmp_path / "gaps.jsonl").read_text()) == {"start": T, "end": T + 5000, "reason": "ws"}
+    assert json.loads((tmp_path / "status.json").read_text()) == {"n": 3}
+
+
+def test_state_roundtrip_restores_scheduler(tmp_path):
+    s = Store(tmp_path)
+    assert s.load_state() is None
+    sch = Scheduler(0)
+    sch.polled("a", 2e6, True, 0)
+    s.save_state({"scheduler": sch.to_state()})
+    assert not list(tmp_path.glob("*.tmp"))
+    back = Scheduler.from_state(Store(tmp_path).load_state()["scheduler"])
+    assert len(back) == 1
