@@ -63,4 +63,20 @@ Gründe: (1) Der Verknüpfungs-Graph ist nicht point-in-time verfügbar (heutige
 
 ## Nachträge
 
-(keine)
+**N1 (2026-10-16 ~18:45 UTC, nach Datenlieferung, vor jeder Ereignis-Rendite und vor dem ersten Lesen):**
+- Benchmark: Token/Aktie ab Open der Einstiegsstunde, Universum-Benchmark ab Open des Einstiegs-*Tages* bis Schluss des Ausstiegstags (Stundenkerzen gibt es nicht für das ganze Universum). Fehler am Einstiegstag ist Rauschen, kein Vorzeichen-Bias (S).
+- Aktien-Volumen: Median der letzten 21 Handelstage (≈ 30 Kalendertage), mindestens 5 Handelstage (≈ 7 Kalendertage). Krypto: 30 Kalendertage, mindestens 7.
+- Ausstieg nach 20 Handelstagen: Kurse enden 2026-10-15, spätere Ausstiege fallen weg (gezählt in gate.json).
+- A1-Kategorien: "Insider" = Team, Investor, VC, Advisor, Contributor, Founder, Seed, Private, Strategic (Regex in code/r3_events.py); Foundation, Treasury, Community, Ecosystem, Airdrop ausgeschlossen. Nur Cliff-Unlocks (einmalige Freigabe). PIT-Daten gibt es nur für 2023 und Anfang 2024 (HTML ab 2024 verschleiert).
+- **Machbarkeits-Tor** (ergebnisse/gate.json, σ als Standardabweichung aus Zufallsfenstern ohne Ereignis):
+
+| Variante | σ | n vorhanden | n nötig (μ = 2 %) | Tor |
+|---|---|---|---|---|
+| A2-S-5 | 9,2 % | 1 085 | 381 | messbar (vor Wortfilter ≥ 300) |
+| A2-S-20 | 15,5 % | 1 066 | 1 070 | nicht messbar |
+| A2-K-5 | 11,6 % | 32 | 606 | nicht messbar |
+| A2-K-20 | 22,2 % | 32 | 2 202 | nicht messbar |
+| A1-a | 27,1 % | 11 | 3 287 | nicht messbar |
+| A1-b | 17,4 % | 11 | 1 355 | nicht messbar |
+
+Folge nach Vorab-Regel: Nur A2-S-5 wird als Test gewertet. A2-S-20, A2-K und A1 laufen deskriptiv und gehen in den Forward-Test. Der Zähler bleibt bei 143 (vorab angemeldet), Bonferroni-α unverändert.
