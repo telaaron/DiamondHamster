@@ -100,3 +100,12 @@ Basisrate vorab in 01-literatur-basisrate.md. Gerechnet nur, wenn B1-O oder B1-C
 6. **Vol-Persistenz (B2):** HAR-Kontrolle; ohne sie wäre jedes Gamma-Signal nur "hohe Vol folgt hoher Vol".
 
 ## Nachträge
+
+**N1 (2026-10-16 ~22:00 UTC, vor jeder Videoliste, jedem Transkript und jeder Rendite):**
+- **Kanäle** (Auswahl per Websuche, Social-Blade-Stand Mitte Oktober 2026, Aaron hat keine eigenen genannt):
+  - K1 **10xTrading**, Handle @1OxTrading (Ziffer 1 + großes O), UCFP64RzRV_OEzPOa9InjCjg, deutsch, ~39 k Abos, ~2 820 Videos, Betreiber laut About-Text Michael Hübner. Nicht verwechseln mit @10xtrading ("Trader George", 14 Videos), @10x.trading, @10xtrader, 10x Research.
+  - K2 **Jaytrading** @jaytrading, UC_lONYOT5HrS1uPaOtGuaSQ, deutsch, ~31 k Abos, ~1 640 Videos, seit 2021, BTC/Altcoins plus Gold/Aktien (bester Größen- und Stil-Match).
+  - K3 **CoinCheck TV** @coinchecktv, UCI-Non6k9qxq7iA6_LyldyQ, deutsch, ~108 k Abos (2,7× K1, oberer Rand), ~1 360 Videos, reiner Krypto-Kanal.
+  - Verworfen: Biturai (zu wenige Videos 2022–24), Crypto Trading DE (erst ab 2024-05), HKCM (≈ 20× größer).
+- **K1 ist kein reiner Krypto-Kanal** (Tesla, Nvidia, DAX, Gold, Silber, BTC, ETH). Deshalb werden **alle** expliziten Calls bewertet, nicht nur Krypto: Krypto mit Binance-Stundenkerzen, alles andere (Aktien, Indizes, Rohstoffe) mit **Tageskerzen** (Yahoo; Stop/Ziel an Tageshoch/-tief, beide am selben Tag → Stop; Einstieg = Open des ersten Handelstags nach Upload). Kosten gleich (0,2 % je Seite + halber Spread). Ergebnis zusätzlich getrennt nach Krypto / Nicht-Krypto (deskriptiv, nicht gezählt).
+- **Pump-Test A-P** nur für Krypto-Assets (für Aktien < 50 Mio USD Tagesvolumen fehlen intraday-Daten außerhalb des Holdouts).
