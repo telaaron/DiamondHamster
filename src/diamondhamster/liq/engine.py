@@ -30,6 +30,7 @@ class Engine:
             raise ValueError("no data at or before at")
         tr_ts = events.trades.ts.to_numpy(np.int64)
         tr_p, tr_q = events.trades.price.to_numpy(float), events.trades.qty.to_numpy(float)
+        tr_n = events.trades.notional.to_numpy(float) if "notional" in events.trades.columns else None
         mk_ts = events.mark.ts.to_numpy(np.int64)
         mk_hi, mk_lo, mk_c = (events.mark[c].to_numpy(float) for c in ("high", "low", "close"))
         fu_ts, fu_r = events.funding.ts.to_numpy(np.int64), events.funding.rate.to_numpy(float)
@@ -84,8 +85,11 @@ class Engine:
                     quality["oi_exceeds_volume"] += 1
                 opens, closes, amb = opens_closes(volume, d_oi, p.alpha)
                 if opens > 0:
-                    prices, qtys = (tr_p[tw], tr_q[tw]) if tw.stop > tw.start else ([last_close], [1.0])
-                    for d in deposits(prices, qtys, opens, p):
+                    if tw.stop > tw.start:
+                        prices, qtys, nots = tr_p[tw], tr_q[tw], (tr_n[tw] if tr_n is not None else None)
+                    else:
+                        prices, qtys, nots = [last_close], [1.0], None
+                    for d in deposits(prices, qtys, opens, p, notionals=nots):
                         book.add(d, today, amb / opens)
                 swept = book.sweep(float(mk_lo[mw].min()), float(mk_hi[mw].max()))
                 for side in SIDES:

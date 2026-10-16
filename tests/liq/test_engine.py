@@ -108,3 +108,17 @@ def test_start_price_never_from_the_future():
     es.trades = es.trades[es.trades.ts > T0].reset_index(drop=True)
     with pytest.raises(ValueError, match="no mark or trade at or before the first OI"):
         run(es, [T0 + STEP])
+
+
+def test_engine_uses_notional_column():
+    from diamondhamster.liq.params import load_params
+    es = make_events(80, seed=3)
+    ats = [int(es.oi.ts.iloc[-1])]
+    base = Engine(load_params()).run(es, ats)[0]
+    same = make_events(80, seed=3)
+    same.trades["notional"] = same.trades.price * same.trades.qty
+    np.testing.assert_allclose(Engine(load_params()).run(same, ats)[0].dist["long"], base.dist["long"])
+    big = make_events(80, seed=3)
+    big.trades["notional"] = 5_000_000.0  # alles "large": weniger Hebel, Masse weiter weg
+    other = Engine(load_params()).run(big, ats)[0]
+    assert not np.allclose(other.dist["long"], base.dist["long"])

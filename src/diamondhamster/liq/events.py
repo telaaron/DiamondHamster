@@ -15,6 +15,7 @@ COLUMNS: dict[str, list[str]] = {
     "liquidations": ["ts", "side", "price", "qty"],
     "gaps": ["start", "end", "reason"],
 }
+OPTIONAL = {"trades": ["notional"]}  # verdichtete Trades: mittleres Einzel-Notional (USD)
 REQUIRED = ("trades", "oi", "mark")
 STRICT_TS = ("oi", "mark", "funding")
 POSITIVE = {"trades": ["price", "qty"], "oi": ["oi"], "mark": ["high", "low", "close"],
@@ -60,7 +61,7 @@ def _check(name: str, df: pd.DataFrame) -> None:
     bad = d[(d <= 0) if name in STRICT_TS else (d < 0)]
     if len(bad):
         _fail(name, int(bad.index[0]), f"{key} nicht {'streng ' if name in STRICT_TS else ''}steigend")
-    for col in POSITIVE.get(name, []):
+    for col in POSITIVE.get(name, []) + [c for c in OPTIONAL.get(name, []) if c in df.columns]:
         bad = df.index[~(df[col] > 0)]
         if len(bad):
             _fail(name, int(bad[0]), f"{col} muss > 0 sein")
@@ -101,4 +102,5 @@ def save_events(es: EventSet, directory: Path) -> None:
     directory.mkdir(parents=True, exist_ok=True)
     (directory / "meta.json").write_text(json.dumps({"exchange": es.exchange, "symbol": es.symbol}))
     for name, cols in COLUMNS.items():
-        getattr(es, name)[cols].to_csv(directory / f"{name}.csv", index=False)
+        df = getattr(es, name)
+        df[cols + [c for c in OPTIONAL.get(name, []) if c in df.columns]].to_csv(directory / f"{name}.csv", index=False)

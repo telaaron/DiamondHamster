@@ -44,3 +44,22 @@ def test_force_class_overrides_size():
     iso_long = next(d for d in a if d.side == "long" and d.mode == "isolated")
     # large hat kein Gewicht über 25x
     assert (iso_long.liq_price[iso_long.qty > 0] < 100 * (1 - 1 / 25) + 1).all()
+
+
+def test_deposits_notional_overrides_class_and_tier():
+    # Menge 1 zu 100 USD wäre "small"; mit notional 5 Mio. USD gelten Klasse large und das 20x-Tier
+    p = load_params()
+    a = deposits(np.array([100.0]), np.array([1.0]), 1.0, p, notionals=np.array([5_000_000.0]))
+    b = deposits(np.array([100.0]), np.array([50_000.0]), 1.0, p)  # echtes 5-Mio.-Notional
+    for da, db in zip(a, b):
+        np.testing.assert_allclose(da.liq_price, db.liq_price)
+        np.testing.assert_allclose(da.qty, db.qty)
+
+
+def test_deposits_without_notionals_unchanged():
+    p = load_params()
+    a = deposits(np.array([100.0, 101.0]), np.array([1.0, 3.0]), 2.0, p)
+    b = deposits(np.array([100.0, 101.0]), np.array([1.0, 3.0]), 2.0, p, notionals=np.array([100.0, 303.0]))
+    for da, db in zip(a, b):
+        np.testing.assert_allclose(da.liq_price, db.liq_price)
+        np.testing.assert_allclose(da.qty, db.qty)

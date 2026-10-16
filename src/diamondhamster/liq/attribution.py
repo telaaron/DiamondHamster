@@ -39,15 +39,18 @@ def _weights(classes: np.ndarray, max_lev: np.ndarray, leverage_weights: dict) -
 
 
 def deposits(prices: np.ndarray, qtys: np.ndarray, open_qty: float, params: Params,
-             force_class: str | None = None) -> list[Deposit]:
+             force_class: str | None = None, notionals=None) -> list[Deposit]:
+    """`notionals` (verdichtete Trades): Klasse, Tier und Positionsgröße für k/q kommen aus dem mittleren
+    Einzel-Notional statt aus price × qty; `qtys` gewichtet dann nur noch die Menge."""
     prices, qtys = np.asarray(prices, dtype=float), np.asarray(qtys, dtype=float)
     entry_qty = open_qty * qtys / qtys.sum()
-    notional = prices * qtys
+    notional = prices * qtys if notionals is None else np.asarray(notionals, dtype=float)
     classes = np.full(len(prices), force_class) if force_class else size_class(notional)
     max_lev, mmr, k = tier_for(params.tiers, notional)
     w = _weights(classes, max_lev, params.leverage_weights)
     lev = np.asarray(LEVERAGES, dtype=float)[None, :]
-    E, Q = prices[:, None], qtys[:, None]
+    E = prices[:, None]
+    Q = (qtys if notionals is None else notional / prices)[:, None]
     base = entry_qty[:, None] * w
     out = []
     for side in ("long", "short"):

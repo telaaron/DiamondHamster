@@ -80,3 +80,24 @@ def test_nan_ts_rejected(tmp_path):
     save_events(es, tmp_path)
     with pytest.raises(EventError, match=r"oi\.csv.*Zeile 2"):
         load_events(tmp_path)
+
+
+def test_events_notional_roundtrip(tmp_path):
+    es = small_set()
+    es.trades["notional"] = [100.0, 201.0, 50.5]
+    save_events(es, tmp_path)
+    back = load_events(tmp_path)
+    assert list(back.trades.notional) == [100.0, 201.0, 50.5]
+
+
+def test_events_without_notional_stay_without(tmp_path):
+    save_events(small_set(), tmp_path)
+    assert "notional" not in load_events(tmp_path).trades.columns
+
+
+def test_events_notional_must_be_positive(tmp_path):
+    es = small_set()
+    es.trades["notional"] = [100.0, 0.0, 50.5]
+    save_events(es, tmp_path)
+    with pytest.raises(EventError, match="trades.csv, Zeile 2: notional"):
+        load_events(tmp_path)
