@@ -1,9 +1,9 @@
 # Quant-Edge Wissensbasis (WB)
 
-Stand: nach Runde 2 (2026-10-16). Wird jede Runde vollständig fortgeschrieben. Bericht Runde 2: [bericht-runde2.md](bericht-runde2.md), Runde 1: [bericht.md](bericht.md).
+Stand: nach Runde 3 (2026-10-16). Wird jede Runde vollständig fortgeschrieben. Bericht Runde 3: [runde-3-aufmerksamkeit/bericht.md](runde-3-aufmerksamkeit/bericht.md), Runde 2: [bericht-runde2.md](bericht-runde2.md), Runde 1: [bericht.md](bericht.md).
 Kennzeichnung: (G) gerechnet, (S) geschätzt mit Herleitung, (L) Literatur mit Quelle.
 
-**Cheatcode-Definition:** Rendite nach Kosten, die (1) einen benannten Zwang oder eine Vorliebe einer Gegenpartei als Quelle hat, (2) in einem echten Forward-Test hält, (3) bei realistischer Größe skaliert, (4) keinen unmodellierten Totalverlust-Tail hat. Fehlt eines, ist es eine Hypothese. **Stand: kein Cheatcode. Zwei Hypothesen laufen als Paper-Forward-Test (F1, F2).**
+**Cheatcode-Definition:** Rendite nach Kosten, die (1) einen benannten Zwang oder eine Vorliebe einer Gegenpartei als Quelle hat, (2) in einem echten Forward-Test hält, (3) bei realistischer Größe skaliert, (4) keinen unmodellierten Totalverlust-Tail hat. Fehlt eines, ist es eine Hypothese. **Stand: kein Cheatcode. Zwei Hypothesen laufen als Paper-Forward-Test (F1, F2). Runde 3 (Aufmerksamkeits-Prämie): rot, F3 als Vorschlag.**
 
 **Annahmen (bis Aaron antwortet):** Kapital 25 000 EUR, Börsenzugang Binance, Bybit, Hyperliquid, OÜ nach estnischem Modell (einbehaltener Gewinn steuerfrei, Ausschüttung besteuert). Folge: Steuer ändert die Rangfolge Carry gegen T-Bill innerhalb der OÜ nicht, beide werden erst bei Ausschüttung besteuert (S).
 
@@ -58,6 +58,22 @@ Kennzeichnung: (G) gerechnet, (S) geschätzt mit Herleitung, (L) Literatur mit Q
 | B2-24 | Binance hat kein öffentliches Liquidations-Archiv; Hyperliquid-Collector seit 2026-10-16 12:17 UTC (4,5 h, 18/18 Marken) | – | G | Datenstand |
 | B2-25 | CME-Basis: Feb 2024 ≈ 25 %, Ende 2024 15–20 %, Mai 2025 ≈ 10 %, Jan 2026 ≈ 4,7–5 % annualisiert | – | L (CF Benchmarks; Bloomberg/Amberdata via Advisor Perspectives 2026-01-22) | lebt; Hinweis: Literatur aus dem Holdout-Zeitraum |
 
+### Runde 3 (2026-10-16): Aufmerksamkeits-Prämie
+| ID | Aussage | Zahl | Kz. | Status |
+|---|---|---|---|---|
+| B3-01 | Literatur: Prämie für langsam verdaute öffentliche Info 1–2 %/Monat ursprünglich, lebt nur in illiquiden Titeln, Kosten fressen 70–100 %; PEAD bei Microcaps 2016–19 weg; LLM-News-Sharpe 6,5 → 1,2 | – | L (Chordia 2009, Martineau 2022, Lopez-Lira/Tang) | lebt |
+| B3-02 | Volumenschwelle für "unbeachtet": < 50 Mio USD/Tag; max. Gewinn je Ereignis V·p³/(27σ²) | 5 900 USD bei p 2 %, σ 5 %, V 50 Mio | S | lebt |
+| B3-03 | SEC-JSON `acceptanceDateTime` falsch in 6 085 von 11 056 8-Ks; Index-Seite der Akte ist korrekt | – | G | lebt (Datenregel) |
+| B3-04 | Kein freier Point-in-Time-Unlock-Kalender (nur Wayback 2023–Anfang 2024); GitHub-Commit-Zeit unbrauchbar, GH Archive brauchbar | – | G | lebt (Datenstand) |
+| B3-05 | Engstelle KI-Tests: nur ~15 Wochen nach Cutoff. Machbarkeits-Tor: nur A2-S-5 messbar (n 1 085, nötig 381); A2-K 32 (nötig 606), A1 11 (nötig 1 355–3 287) | – | G | lebt |
+| B3-06 | A2-S-5: KI liest 8-K kleiner US-Firmen blind, 5 Tage | brutto +1,92 % (p 0,06), netto −0,26 % (p 0,59), n 156; Kosten ≈ 2,2 % pro Runde | G | **tot** (Tor formal verfehlt, N3; schließt netto ≥ ~3 % aus) |
+| B3-07 | A2-S-20 | brutto +0,3 %, netto −2,0 %, n 154 | G | deskriptiv tot |
+| B3-08 | Tiefenlesen bringt nichts: Trades nur aus Volltext netto −1,9 % (n 97), Trades schon aus 50 Wörtern +2,7 % (n 58) | t −1,3 / +1,1 | G | lebt (deskriptiv) |
+| B3-09 | KI belegt wörtlich (20/20), Richtung inhaltlich begründet 17/20, rät nicht aus Tonfall | – | G (Handprüfung) | lebt |
+| B3-10 | Pseudonymisierung: Modell nennt die Firma in 55 % der 8-Ks (sicher 17 %), Krypto-Governance 29/31; erkannte Fälle laufen schlechter (−1,4 % gegen +1,1 %) | – | G | lebt; Bestätigung Sarkar/Vafa |
+| B3-11 | A1-a Short vor Insider-Cliff-Unlock t−30..t−1 (2023–24) | netto +7,6 %, Median +14 %, 9/11 positiv, p 0,23 | G | Hypothese, nicht messbar |
+| B3-12 | A2-K Snapshot-Vorschläge 5/20 Tage | netto −2,1 % / +5,8 %, n 9 | G | nicht messbar |
+
 ## 2. Tote Wege (nicht nochmal testen ohne neuen Mechanismus)
 
 | Was | Warum tot | Test |
@@ -72,6 +88,9 @@ Kennzeichnung: (G) gerechnet, (S) geschätzt mit Herleitung, (L) Literatur mit Q
 | Laufzeit-Future immer rollen (ohne Bedingung) | knapp über T-Bill, ein Drittel negative Monate, schlechter als Perp | Q3 D1/D2, R2 |
 | Liquidations-Kaskade (Preis + OI-Drop) kaufen oder Squeeze verkaufen, 1–24 h | keine Überrendite, auch vor Kosten | Q5, R2 |
 | "Ethena/USDe drückt das Funding" als Erklärung | Vorzeichen falsch (USDe folgt dem Funding) | Q1-d, R2 |
+| KI liest 8-K kleiner US-Firmen blind, 5/20 Tage | netto ≤ 0, Spread (≈ 1,7 % Rundreise) = ganze Prämie | A2-S, R3 |
+| Blindes KI-Lesen von Krypto-Governance (Snapshot) | Modell erkennt die Projekte trotz Pseudonymisierung; zu wenige Fälle nach Cutoff | A2-K, R3 |
+| Querverbindungs-Graph aus heutigen Partnerschaften | nicht point-in-time | A3, R3 (nicht gerechnet) |
 
 ## 3. Offene Fragen (priorisiert)
 
@@ -81,6 +100,9 @@ Kennzeichnung: (G) gerechnet, (S) geschätzt mit Herleitung, (L) Literatur mit Q
 4. Funding-Regime: Nur mit dem Holdout 2025-01..2026-06 wirklich klärbar. Kandidat für den Einmaltest, wenn F1 eine Schwelle braucht.
 5. R5 (Top-4-Funding-Coins) mit realistischen Taker-Kosten und mehr Börsen; DSR heute 0.
 6. B1-10 Mark-Price-Liquidationsrisiko des Short-Beins mit echten Mark-Preisen (ab 2023-10 vorhanden).
+7. **Unlocks (B3-11):** sauberer Test braucht einen bezahlten Kalender (~1 000 Ereignisse ab 2023). Aarons Entscheidung.
+8. **Spread verdienen statt zahlen:** dieselben Microcaps als Liquiditätsgeber; Kosten-Seite war in R3 der Killer.
+9. **F3 (A2-S paper forward, Vorschlag):** wöchentlich 8-Ks lesen, Auswertung bei n ≥ 400; braucht Aarons OK (wöchentliche Mac-Läufe).
 
 ## 4. Test-Zähler
 
@@ -90,17 +112,18 @@ Kumulativ, Quant-Edge-Reihe (ohne die 37 KI-Prompt-Versuche, eigene Familie).
 |---|---|---|---|
 | 1 | 66 | 14 vorab + 1 K1-Variante nachträglich + 10 K1 weitere Coins + 1 K1-12-Portfolio + 20 K2 weitere Coins + 10 K3 weitere Coins + 4 K3-Ablation + 6 Diagnose-Horizonte | 66 |
 | 2 | 71 | 53 vorab (Q1 8, Q2 7, Q3 6, Q4 2, Q5 30) + N1 2 + N2 4 + N3 4 + N4 2 + N5 6 (Nachträge in 01-killkriterien-runde2.md) | **137** |
+| 3 | 24 | 6 vorab (A2-S-5/-20, A2-K-5/-20, A1-a/-b) + 18 Diagnose-Splits (A2-S-5/-20 je ohne/nur Leck, ohne andere 8-K, Long, Short = 10; 50-Wörter-Split 2, Zuversicht 3, Rest-Leck 1, Leck locker 2) | **161** |
 | Forward | 6 | F1 4, F2 2 (eigene Familie, kein Dev-Überlapp) | – |
 
-Korrektur: Bonferroni α = 0,05 / 137 = **0,000365** für p-Werte. Deflated Sharpe Ratio (Bailey/López de Prado 2014) mit N = 135 (vor N4) und der Sharpe-Varianz über 19 Strategie-Reihen dieser Runde: K1 ETH 0,98, K1 BTC 0,88, D3 0,00, R5 0,00 (G). Vorsicht: die Reihen sind verschiedene Strategietypen, die Varianz und damit die Hürde (Sharpe 5,6) ist dadurch sehr hoch; die DSR ist hier eine konservative Grenze.
+Korrektur: Bonferroni α = 0,05 / 161 = **0,00031** für p-Werte (Runde 3 rechnete vorab mit 143 → 0,00035, z 3,39; Urteil unverändert). Runde 2: α = 0,05 / 137 = 0,000365. Deflated Sharpe Ratio (Bailey/López de Prado 2014) mit N = 135 (vor N4) und der Sharpe-Varianz über 19 Strategie-Reihen dieser Runde: K1 ETH 0,98, K1 BTC 0,88, D3 0,00, R5 0,00 (G). Vorsicht: die Reihen sind verschiedene Strategietypen, die Varianz und damit die Hürde (Sharpe 5,6) ist dadurch sehr hoch; die DSR ist hier eine konservative Grenze.
 
 ## 5. Holdout-Register
 
 | Zeitraum | Status | Wer/was hat ihn berührt |
 |---|---|---|
-| bis 2024-12-31 | Entwicklung, frei | Runde 1, 2 |
-| 2025-01-01 .. 2026-06-30 | **reserviert**, von Quant-Edge nie als Kursdaten geladen | R1: 0 Zeilen. R2: 0 Zeilen in 50 Dateien (geprüft, request.json). DefiLlama-USDe lieferte den Zeitraum im Transit, vor dem Speichern verworfen. **Literatur** zum Zeitraum gelesen (CME-Basis 2025, Börsenereignisse 2025–26 wie Bybit-Hack): Vorwissen, kein Test. Projektweit: Binance-Archiv des Hyblock-Threads ab 2025-01 (B-21) |
-| 2026-07-01 .. 2026-10-16 | Dev-Nachschau, kein Beweis | R1, R2 (Q1, Q4, N4) |
+| bis 2024-12-31 | Entwicklung, frei | Runde 1, 2, 3 (A1 Unlocks 2023–24) |
+| 2025-01-01 .. 2026-06-30 | **reserviert**, von Quant-Edge nie als Kursdaten geladen | R1: 0 Zeilen. R2: 0 Zeilen in 50 Dateien (geprüft, request.json). DefiLlama-USDe lieferte den Zeitraum im Transit, vor dem Speichern verworfen. **Literatur** zum Zeitraum gelesen (CME-Basis 2025, Börsenereignisse 2025–26 wie Bybit-Hack): Vorwissen, kein Test. Projektweit: Binance-Archiv des Hyblock-Threads ab 2025-01 (B-21). R3: 0 Kurszeilen in 2,79 Mio geprüften Zeilen (daten/holdout_check.txt); 1 SEC-Indexzeile mit Datum 2025-03 aus dem 2026-07-Index entfernt; Universumslisten (Ticker, Snapshot-Spaces) sind heutige Metadaten; Literatur zum Zeitraum gelesen |
+| 2026-07-01 .. 2026-10-16 | Dev-Nachschau, kein Beweis; für KI-Leser das einzige saubere Fenster (nach Modell-Cutoff) | R1, R2 (Q1, Q4, N4), R3 (A2-K, A2-S) |
 | ab 2026-10-17 | **Forward F1/F2, vorab angemeldet** ([02-forward-test.md](02-forward-test.md)) | – |
 
 ## 6. Meta-Regeln (Filter für künftige Kandidaten)
@@ -108,3 +131,5 @@ Korrektur: Bonferroni α = 0,05 / 137 = **0,000365** für p-Werte. Deflated Shar
 1. **Zahlungsstrom vor Richtung.** Überlebt hat bisher nur, was einen laufenden Zahlungsstrom trägt (Funding, Basis). Alle Richtungs-Familien auf Tagen bis Monaten sind tot (K2, K3, K4, 37 KI-Versuche, Kaskade mit OI-Drop). Ein neuer Richtungs-Kandidat braucht einen Mechanismus, der in keiner toten Familie steckt.
 2. **Umschlag-Budget vorab.** Brutto-Edge pro Jahr muss größer sein als Umschlag × 0,2 % je Seite und Bein. R1–R4 hatten Signal, starben am Umschlag. Den Umschlag vor dem Test schätzen und Kandidaten unter dem Budget gar nicht erst rechnen.
 3. **Die Prämie sitzt beim Gezwungenen, nicht beim Mechanismus.** Hyperliquid zahlt doppeltes Funding (dort sitzen die Hebel-Käufer), die Crash-Prämie braucht keinen Liquidations-Nachweis und hält Stunden. Zuerst fragen: wo handelt die Gegenpartei, die nicht Nein sagen kann, und was kostet Ausführung genau dort.
+4. **Kosten vor Information.** In kleinen Assets, wo Information langsam verdaut wird, kostet der Spread so viel wie die Prämie (R3: 2,2 % gegen 1,9 %). Ein Informations-Kandidat in illiquiden Titeln braucht vorab eine Ausführungsidee (Maker statt Taker), sonst nicht rechnen.
+5. **KI-Blindheit nur nach Cutoff und nur mit Leck-Messung.** Pseudonymisieren reicht nicht (55 % / 94 % Wiedererkennung); jeder KI-Lesetest misst die Wiedererkennung mit und wertet getrennt aus.
