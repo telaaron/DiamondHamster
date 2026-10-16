@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import os
 import plistlib
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -19,12 +20,20 @@ def plist_xml(python: str, data: Path) -> str:
     data = Path(data)
     logs = data / "hl" / "logs"
     d = {"Label": LABEL, "RunAtLoad": True, "KeepAlive": True, "ThrottleInterval": 30,
-         # caffeinate -i: Mac schläft im Leerlauf nicht ein, solange der Sammler läuft
-         "ProgramArguments": ["/usr/bin/caffeinate", "-i", python, "-m", "diamondhamster.liq", "hl-collect",
-                              "--data", str(data)],
+         # Python direkt, damit SIGTERM von launchd beim Sammler ankommt (sauberes Schließen der Dateien);
+         # wach hält ihn hl-collect selbst über keep_awake_cmd
+         "ProgramArguments": [python, "-m", "diamondhamster.liq", "hl-collect", "--data", str(data)],
          "WorkingDirectory": str(data), "StandardOutPath": str(logs / "out.log"),
          "StandardErrorPath": str(logs / "err.log")}
     return plistlib.dumps(d).decode()
+
+
+def keep_awake_cmd(pid: int) -> list[str] | None:
+    """caffeinate -i -w PID: Mac schläft im Leerlauf nicht ein, solange der Prozess PID lebt."""
+    if sys.platform != "darwin":
+        return None
+    path = shutil.which("caffeinate")
+    return [path, "-i", "-w", str(pid)] if path else None
 
 
 def _launchctl(*args: str) -> subprocess.CompletedProcess:

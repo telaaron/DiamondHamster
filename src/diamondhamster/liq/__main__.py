@@ -49,7 +49,15 @@ def _hl_collect(data: Path, coins: tuple[str, ...]) -> int:
     from .hl.collector import Collector
     from .hl.store import Store
 
+    import os
+    import subprocess
+
+    from .hl.service import keep_awake_cmd
+
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    cmd = keep_awake_cmd(os.getpid())
+    if cmd:
+        subprocess.Popen(cmd)  # endet von selbst mit diesem Prozess
     collector = Collector(Store(Path(data) / "hl"), HttpInfo(),
                           lambda: websockets.connect(WS_URL, ping_interval=20, ping_timeout=20, max_size=2**24), coins=coins)
 
