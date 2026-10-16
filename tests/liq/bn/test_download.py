@@ -75,3 +75,19 @@ def test_metrics_ts_in_ms(archive, tmp_path):
     download(SYM, D1, D1, tmp_path, fetch=archive)
     oi = pd.read_csv(tmp_path / "bn" / SYM / "metrics/2025-01-01.csv")
     assert oi.ts.iloc[1] == ms(D1, 5)
+
+
+def test_holdout_fetches_logged(archive, tmp_path):
+    late = date(2026, 7, 1)
+    for d in (date(2026, 6, 30), late):
+        archive.add_day(d)
+    archive.add_funding(2026, 6, [0.0001])
+    archive.add_funding(2026, 7, [0.0001])
+    rep = download(SYM, date(2026, 6, 30), late, tmp_path, fetch=archive)
+    lines = (tmp_path / "bn" / SYM / "holdout_access.log").read_text().splitlines()
+    tags = sorted(l.split("\t")[1].split()[3] for l in lines)
+    assert tags == ["2026-06", "2026-06-30", "2026-06-30", "2026-06-30"]
+    assert all("binance.vision" in l for l in lines)
+    assert rep["holdout"] == 4
+    download(SYM, date(2026, 6, 30), late, tmp_path, fetch=archive)  # bereits fertig: kein neuer Abruf, kein Eintrag
+    assert len((tmp_path / "bn" / SYM / "holdout_access.log").read_text().splitlines()) == 4

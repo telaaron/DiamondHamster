@@ -109,7 +109,7 @@ def _months(start: date, end: date):
 
 def download(symbol: str, start: date, end: date, root: Path, fetch=urllib_fetch, log=print) -> dict:
     base = Path(root) / "bn" / symbol
-    rep = {"done": 0, "skipped": 0, "missing": 0, "errors": 0}
+    rep = {"done": 0, "skipped": 0, "missing": 0, "errors": 0, "holdout": 0}
     jobs = [(kind, d, f"{d:%Y-%m-%d}") for d in (start + timedelta(n) for n in range((end - start).days + 1))
             for kind in DAILY]
     jobs += [("fundingRate", m, f"{m:%Y-%m}") for m in _months(start, end)]
@@ -119,6 +119,9 @@ def download(symbol: str, start: date, end: date, root: Path, fetch=urllib_fetch
             rep["skipped"] += 1
             continue
         url = url_for(kind, symbol, day)
+        if day < HOLDOUT_END:
+            rep["holdout"] += 1
+            _log_holdout(base, symbol, kind, tag, url)
         try:
             payload = fetch(url)
             _verify(payload, fetch(url + ".CHECKSUM"))
@@ -140,6 +143,16 @@ def download(symbol: str, start: date, end: date, root: Path, fetch=urllib_fetch
         if kind == "aggTrades":
             log(f"{tag} fertig")
     return rep
+
+
+HOLDOUT_END = date(2026, 7, 1)  # Regel-Holdout 2025-01..2026-06 (research/forschungsprotokoll.md)
+
+
+def _log_holdout(base: Path, symbol: str, kind: str, tag: str, url: str) -> None:
+    """Jeder Abruf im Holdout-Zeitraum wird protokolliert (Regel B-19/B-21), Format wie data/holdout_access.log."""
+    base.mkdir(parents=True, exist_ok=True)
+    with open(base / "holdout_access.log", "a") as f:
+        f.write(f"{datetime.now(timezone.utc).isoformat()}\tliq bn-download {symbol} {tag} {kind} {url}\n")
 
 
 def _note(base: Path, kind: str, tag: str, reason: str) -> None:

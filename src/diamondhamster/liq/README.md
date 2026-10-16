@@ -82,6 +82,12 @@ Größenklasse) und das Funding. Er prüft jede Datei gegen die sha256-Prüfsumm
 vermerkt fehlende Tage in `missing.jsonl`. Eine Wahrheit gibt es hier nicht; die Snapshots lassen sich nur mit
 anderen Karten (z. B. Hyblock) vergleichen.
 
+**Holdout-Überschneidung:** Der Standardstart 2025-01-01 liegt im eingefrorenen Regel-Holdout 2025-01..2026-06
+(`research/forschungsprotokoll.md`). Jeder Abruf aus diesem Zeitraum landet mit Zeit, Symbol, Tag, Typ und URL in
+`<data>/bn/<SYMBOL>/holdout_access.log` (Format wie `data/holdout_access.log`). Wer diese Daten gesehen hat, kann
+eine spätere Regel auf Liquidationswellen, offene Positionen, Funding oder Kaufdruck auf diesem Zeitraum nicht mehr
+blind testen. Für so eine Regel gilt dann nur noch Vorwärtszeit ab 2026-07 als unberührt.
+
 ```bash
 $PY -m diamondhamster.liq bn-download --symbol BTCUSDT --start 2025-01-01 --data ~/diamondhamster-data
 $PY -m diamondhamster.liq bn-events --symbol BTCUSDT --data ~/diamondhamster-data --out /tmp/bn-btc
