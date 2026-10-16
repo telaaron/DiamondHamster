@@ -80,3 +80,13 @@ Gründe: (1) Der Verknüpfungs-Graph ist nicht point-in-time verfügbar (heutige
 | A1-b | 17,4 % | 11 | 1 355 | nicht messbar |
 
 Folge nach Vorab-Regel: Nur A2-S-5 wird als Test gewertet. A2-S-20, A2-K und A1 laufen deskriptiv und gehen in den Forward-Test. Der Zähler bleibt bei 143 (vorab angemeldet), Bonferroni-α unverändert.
+
+**N2 (2026-10-16 ~19:05 UTC, vor dem ersten Lesen):**
+- A2-K: Vorschläge mit Code-Injektion (`onerror=`, `<script`, `atob(`) sind Phishing, keine Governance; verworfen (1 von 32). Name-Varianten der Spaces ohne Füllwörter (Governance, DAO, Signal, Foundation …) werden mit ersetzt.
+- Beide Kandidaten: Dokumente über 4 000 Wörter werden nach 4 000 Wörtern gekürzt (Tokenbudget), Anteil in lesen/<kand>/key.csv.
+- A2-S: Deckblatt (bis zum ersten "Item x.xx") und Unterschriftenblock werden vor dem Wortfilter entfernt; Telefonnummern, Aktenzeichen, Steuernummern, Postleitzahlen werden ersetzt.
+
+
+**N3 (2026-10-16 ~19:20 UTC, nach dem Lesen, vor jeder A2-S-Rendite):**
+- Sammelmeldungen: Eine 8-K-accession, die für mehrere CIKs gilt (5 Invesco-DB-Rohstofffonds, 1 Dokument), fällt raus. Sie ist keine Firmennachricht und würde ein Urteil fünfmal zählen. Rest-Fonds (Einzel-Trusts) bleiben drin und sind als Schwäche vermerkt.
+- Fallzahl nach Wortfilter und Leser: 499 Dokumente (495 eindeutig), Leser gibt bei 159 eine Richtung (−1: 89, +1: 70). Das Tor rechnete mit allen 1 085 Ereignissen. Mit n ≈ 155 Trades liegt der nachweisbare Effekt bei (3,39 + 0,84) · 9,2 % / √155 ≈ **3,1 %** je Trade (G), nicht bei 2 %. A2-S-5 bleibt der einzige gewertete Test, das Urteil "tot" gilt aber nur für Effekte ≥ ~3 %; darunter heißt das Ergebnis "nicht entscheidbar".
