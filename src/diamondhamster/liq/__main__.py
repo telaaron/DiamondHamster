@@ -51,7 +51,7 @@ def _hl_collect(data: Path, coins: tuple[str, ...]) -> int:
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     collector = Collector(Store(Path(data) / "hl"), HttpInfo(),
-                          lambda: websockets.connect(WS_URL, ping_interval=None, max_size=2**24), coins=coins)
+                          lambda: websockets.connect(WS_URL, ping_interval=20, ping_timeout=20, max_size=2**24), coins=coins)
 
     async def run() -> None:
         stop = asyncio.Event()

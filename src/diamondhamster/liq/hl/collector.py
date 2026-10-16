@@ -6,6 +6,7 @@ damit alles ohne Netz testbar ist.
 from __future__ import annotations
 
 import asyncio
+import inspect
 import json
 import logging
 import time
@@ -33,7 +34,9 @@ class Collector:
         state = store.load_state() or {}
         self.sched = Scheduler.from_state(state["scheduler"]) if "scheduler" in state else Scheduler(self.now())
         self.last_funding: dict[str, int] = dict(state.get("last_funding", {}))
-        self.known = KnownBook()
+        self.known = KnownBook.from_state(state["known"]) if "known" in state else KnownBook()
+        if "t" in state:  # Zeit zwischen letzter Sicherung und Neustart fehlt in allen Daten
+            store.gap(int(state["t"]), self.now(), "restart")
         self.ctx: dict[str, dict] = {}
         self.slow_until = 0
         self.last_tick: int | None = None
@@ -41,6 +44,7 @@ class Collector:
         self.polls: list[int] = []
         self.errors = 0
         self.ws_up = False
+        self._acc = 0.0  # angesparte Abfragen (Bruchteile pro Sekunde)
         self.pool = ThreadPoolExecutor(max_workers=8, thread_name_prefix="hl-poll")
 
     def now(self) -> int:
@@ -54,7 +58,7 @@ class Collector:
             self.sched.seen_in_trade(t["seller"], now)
 
     async def ws_loop(self, stop: asyncio.Event, backoff_start: float = 1.0) -> None:
-        backoff, down_since = backoff_start, None
+        backoff, down_since, last_msg = backoff_start, None, self.now()
         while not stop.is_set():
             try:
                 async with self.ws_connect() as conn:
@@ -71,36 +75,53 @@ class Collector:
                         except asyncio.TimeoutError:
                             await conn.send(json.dumps({"method": "ping"}))
                             continue
-                        self.on_message(msg, self.now())
+                        last_msg = self.now()
+                        self.on_message(msg, last_msg)
             except asyncio.CancelledError:
                 raise
             except Exception as e:  # Netz weg, Server schließt: neu verbinden
                 self.ws_up = False
                 log.warning("WebSocket getrennt: %s", e)
                 if down_since is None:
-                    down_since = self.now()
+                    down_since = last_msg  # Lücke beginnt mit der letzten Nachricht, nicht mit der Fehlermeldung
                 await asyncio.sleep(backoff)
                 backoff = min(backoff * 2, 60.0)
 
     # --- Marktdaten -----------------------------------------------------------------------------
-    def step_market(self, now: int) -> None:
-        self.ctx = api.parse_ctx(self.http.post({"type": "metaAndAssetCtxs"}), self.coins)
-        self.store.append("ctx", {"t": now, "coins": self.ctx}, now)
+    def fetch_market(self, now: int) -> dict:
+        """Nur Netz (läuft im Thread); geschrieben wird in apply_market auf dem Event-Loop."""
+        out = {"ctx": api.parse_ctx(self.http.post({"type": "metaAndAssetCtxs"}), self.coins)}
         if now - self.last_candles >= 5 * MIN:
-            self.last_candles = now
+            out["candles"] = {}
             for coin in self.coins:
                 req = {"coin": coin, "interval": "1m", "startTime": now - 10 * MIN, "endTime": now}
-                for c in api.parse_candles(self.http.post({"type": "candleSnapshot", "req": req})):
-                    self.store.append("candles", c, c["ts"], coin=coin)
+                out["candles"][coin] = api.parse_candles(self.http.post({"type": "candleSnapshot", "req": req}))
         if now - self.last_funding_fetch >= 60 * MIN:
-            self.last_funding_fetch = now
+            out["funding"] = {}
             for coin in self.coins:
                 start = self.last_funding.get(coin, now - 2 * 60 * MIN) + 1
-                for f in api.parse_funding(self.http.post({"type": "fundingHistory", "coin": coin,
-                                                           "startTime": start})):
+                out["funding"][coin] = api.parse_funding(self.http.post({"type": "fundingHistory", "coin": coin,
+                                                                         "startTime": start}))
+        return out
+
+    def apply_market(self, data: dict, now: int) -> None:
+        self.ctx = data["ctx"]
+        self.store.append("ctx", {"t": now, "coins": self.ctx}, now)
+        if "candles" in data:
+            self.last_candles = now
+            for coin, cs in data["candles"].items():
+                for c in cs:
+                    self.store.append("candles", c, c["ts"], coin=coin)
+        if "funding" in data:
+            self.last_funding_fetch = now
+            for coin, fs in data["funding"].items():
+                for f in fs:
                     if f["ts"] > self.last_funding.get(coin, -1):
                         self.store.append("funding", f, f["ts"], coin=coin)
                         self.last_funding[coin] = f["ts"]
+
+    def step_market(self, now: int) -> None:
+        self.apply_market(self.fetch_market(now), now)
 
     # --- Positionen -----------------------------------------------------------------------------
     def poll_rate(self, now: int) -> float:
@@ -154,7 +175,8 @@ class Collector:
     def save(self, now: int) -> None:
         self.store.flush()
         self.store.write_status(self.status(now))
-        self.store.save_state({"scheduler": self.sched.to_state(), "last_funding": self.last_funding})
+        self.store.save_state({"t": now, "scheduler": self.sched.to_state(), "last_funding": self.last_funding,
+                               "known": self.known.to_state()})
 
     def step_snapshot(self, now: int) -> None:
         for coin in self.coins:
@@ -162,40 +184,55 @@ class Collector:
         self.save(now)
 
     # --- Schleifen ------------------------------------------------------------------------------
+    # Jede Schleife fängt Fehler je Durchlauf ab: eine still gestorbene Schleife würde launchd nicht bemerken.
+    def _failed(self, what: str, e: Exception) -> None:
+        self.errors += 1
+        log.exception("%s fehlgeschlagen: %s", what, e)
+
     async def market_loop(self, stop: asyncio.Event) -> None:
         while not stop.is_set():
+            now = self.now()
             try:
-                await asyncio.to_thread(self.step_market, self.now())
+                self.apply_market(await asyncio.to_thread(self.fetch_market, now), now)
             except Exception as e:
-                self.errors += 1
-                log.warning("Marktdaten fehlgeschlagen: %s", e)
+                self._failed("Marktdaten", e)
             await _sleep_until_next(stop, MIN, self.now())
 
-    async def poll_loop(self, stop: asyncio.Event) -> None:
-        acc = 0.0
+    async def poll_once(self, now: int) -> None:
+        self.tick(now)
+        self._acc = min(self._acc + self.poll_rate(now) / 60, self.poll_rate(now))
+        n = int(self._acc)
+        self._acc -= n
+        users = self.sched.take(n, now)
+        if users:
+            results = await asyncio.to_thread(self.fetch_positions, users)
+            self.apply_positions(results, self.now())
+        self.store.flush()
+
+    async def poll_loop(self, stop: asyncio.Event, period_ms: int = 1000) -> None:
         while not stop.is_set():
-            now = self.now()
-            self.tick(now)
-            acc = min(acc + self.poll_rate(now) / 60, self.poll_rate(now))
-            n = int(acc)
-            acc -= n
-            users = self.sched.take(n, now)
-            if users:
-                results = await asyncio.to_thread(self.fetch_positions, users)
-                self.apply_positions(results, self.now())
-            await _sleep_until_next(stop, 1000, self.now())
+            try:
+                r = self.poll_once(self.now())
+                if inspect.isawaitable(r):
+                    await r
+            except Exception as e:
+                self._failed("Positionsabfrage", e)
+            await _sleep_until_next(stop, period_ms, self.now())
 
     async def snapshot_loop(self, stop: asyncio.Event) -> None:
         last_q = self.now() // QUARTER
         while not stop.is_set():
             await _sleep_until_next(stop, MIN, self.now())
             now = self.now()
-            if now // QUARTER != last_q:
-                last_q = now // QUARTER
-                self.step_snapshot(now)
-                self.sched.drop_stale(now)
-            else:
-                self.save(now)
+            try:
+                if now // QUARTER != last_q:
+                    last_q = now // QUARTER
+                    self.step_snapshot(now)
+                    self.sched.drop_stale(now)
+                else:
+                    self.save(now)
+            except Exception as e:
+                self._failed("Sicherung", e)
 
     async def run(self, stop: asyncio.Event) -> None:
         tasks = [asyncio.create_task(f(stop)) for f in (self.ws_loop, self.market_loop, self.poll_loop,

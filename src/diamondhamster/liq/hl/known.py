@@ -47,5 +47,14 @@ class KnownBook:
         return {"long": qty["long"] / oi, "short": qty["short"] / oi,
                 "no_liq_share": no_liq / total if total else 0.0}
 
+    def to_state(self) -> dict:
+        return {u: [t, ps] for u, (t, ps) in self._pos.items()}
+
+    @classmethod
+    def from_state(cls, d: dict) -> "KnownBook":
+        b = cls()
+        b._pos = {u: (int(t), ps) for u, (t, ps) in d.items()}
+        return b
+
     def __len__(self) -> int:
         return len(self._pos)

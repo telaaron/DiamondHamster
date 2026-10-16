@@ -217,3 +217,72 @@ def test_fetch_positions_runs_in_parallel(tmp_path):
     res = c.fetch_positions(users)
     assert _t.perf_counter() - start < 0.45
     assert [u for u, _ in res] == users and not any(isinstance(r, Exception) for _, r in res)
+
+
+def test_market_loop_writes_store_only_on_loop_thread(tmp_path):
+    import threading
+
+    threads = set()
+
+    class Spy(Store):
+        def append(self, *a, **k):
+            threads.add(threading.current_thread().name)
+            super().append(*a, **k)
+
+    c = Collector(Spy(tmp_path), FakeHttp(), None, clock=Clock(T0))
+    _made.append(c)
+
+    async def main():
+        stop = asyncio.Event()
+        task = asyncio.create_task(c.market_loop(stop))
+        await asyncio.sleep(0.2)
+        stop.set()
+        await task
+
+    asyncio.run(main())
+    assert threads == {threading.main_thread().name}
+
+
+def test_poll_loop_survives_exception(tmp_path):
+    c, _ = make(tmp_path)
+    calls = []
+
+    def flaky(now):
+        calls.append(now)
+        if len(calls) == 1:
+            raise OSError("Platte voll")
+
+    c.poll_once = flaky
+
+    async def main():
+        stop = asyncio.Event()
+        task = asyncio.create_task(c.poll_loop(stop, period_ms=10))
+        for _ in range(100):
+            await asyncio.sleep(0.01)
+            if len(calls) >= 3:
+                break
+        stop.set()
+        await task
+
+    asyncio.run(main())
+    assert len(calls) >= 3 and c.errors >= 1
+
+
+def test_restart_writes_gap_from_last_save(tmp_path):
+    c, _ = make(tmp_path)
+    c.save(T0)
+    c.store.close()
+    c2 = Collector(Store(tmp_path), FakeHttp(), None, clock=Clock(T0 + 300_000))
+    _made.append(c2)
+    gaps = [json.loads(l) for l in (tmp_path / "gaps.jsonl").read_text().splitlines()]
+    assert gaps == [{"start": T0, "end": T0 + 300_000, "reason": "restart"}]
+
+
+def test_known_book_restored_after_restart(tmp_path):
+    c, _ = make(tmp_path)
+    c.sched.seen_in_trade("a", T0)
+    c.step_poll(T0, 5)
+    c.save(T0)
+    c2 = Collector(Store(tmp_path), FakeHttp(), None, clock=Clock(T0 + 60_000))
+    _made.append(c2)
+    assert len(c2.known) == 1 and len(c2.known.rows("BTC", T0 + 60_000)) == 1
