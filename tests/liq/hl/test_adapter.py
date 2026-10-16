@@ -15,10 +15,8 @@ T0 = 1_790_000_000_000 // M * M
 DAYS = 3
 
 
-@pytest.fixture
-def raw(tmp_path):
+def make_raw(root, skip_ctx=()):
     rng = np.random.default_rng(0)
-    root = tmp_path / "hl"
     s = Store(root)
     n = DAYS * 1440
     mark = 100_000 * np.exp(np.cumsum(rng.normal(0, 5e-4, n)))
@@ -26,6 +24,8 @@ def raw(tmp_path):
     tid = 0
     for i in range(n):
         t = T0 + i * M
+        if i in skip_ctx:
+            continue
         s.append("ctx", {"t": t, "coins": {"BTC": {"oi": oi[i], "mark": mark[i], "funding": 1e-5, "max_lev": 40}}}, t)
         s.append("candles", {"ts": t - M, "high": mark[i] * 1.002, "low": mark[i] * 0.998}, t - M, coin="BTC")
         for _ in range(3):
@@ -46,6 +46,27 @@ def raw(tmp_path):
     s.gap(T0 + 100 * M, T0 + 103 * M, "ws")
     s.close()
     return root
+
+
+@pytest.fixture
+def raw(tmp_path):
+    return make_raw(tmp_path / "hl")
+
+
+def test_ctx_hole_becomes_gap(tmp_path):
+    root = make_raw(tmp_path / "hl", skip_ctx=range(500, 520))
+    build_events(root, "BTC", tmp_path / "ev")
+    es = load_events(tmp_path / "ev")
+    holes = es.gaps[es.gaps.reason == "ctx"]
+    assert list(zip(holes.start, holes.end)) == [(T0 + 499 * M, T0 + 520 * M)]
+
+
+def test_snapshots_in_or_right_after_gap_dropped(raw, tmp_path):
+    build_events(raw, "BTC", tmp_path / "ev")
+    ats = set(json.loads((tmp_path / "ev" / "ats.json").read_text()))
+    assert T0 + 90 * M in ats
+    assert T0 + 105 * M not in ats and T0 + 120 * M not in ats  # Lücke endet bei 103 min, 30 min Schonfrist
+    assert T0 + 135 * M in ats
 
 
 def test_build_events_end_to_end(raw, tmp_path):
