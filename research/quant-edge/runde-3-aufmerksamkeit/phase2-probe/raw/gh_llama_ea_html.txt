@@ -1,0 +1,1 @@
+HTTP 404 (Header mit Session-Cookies entfernt)

@@ -1,0 +1,1 @@
+Times of manual requests (marked 'manual') are approximate (±1 min); all others are logged automatically to the millisecond. Note: the Nasdaq API daily download (api.nasdaq.com, ~4250 requests in this log) was a fallback while Yahoo returned 429; the data was replaced by Yahoo and is not delivered.

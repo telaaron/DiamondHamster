@@ -1,0 +1,23 @@
+HTTP/2 401 
+date: Fri, 16 Oct 2026 16:37:00 GMT
+content-type: application/json; charset=utf-8
+x-frame-options: SAMEORIGIN
+x-xss-protection: 0
+x-content-type-options: nosniff
+x-permitted-cross-domain-policies: none
+referrer-policy: strict-origin-when-cross-origin
+x-data-source: 2.0
+access-control-allow-origin: *
+access-control-allow-methods: POST, PUT, DELETE, GET, OPTIONS
+access-control-request-method: *
+access-control-allow-headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+access-control-expose-headers: link, per-page, total
+vary: Accept-Encoding, Origin
+cache-control: no-cache
+x-request-id: 569683f4-1095-44d5-8fdc-ee0b12a91352
+x-runtime: 0.002723
+cf-cache-status: EXPIRED
+server: cloudflare
+cf-ray: a4b87c5228584f3e-TXL
+alt-svc: h3=":443"; ma=86400
+
