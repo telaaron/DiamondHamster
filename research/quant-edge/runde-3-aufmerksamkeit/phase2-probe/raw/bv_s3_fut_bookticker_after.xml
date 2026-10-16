@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>data.binance.vision</Name><Prefix>data/futures/um/daily/bookTicker/BTCUSDT/</Prefix><Marker>data/futures/um/daily/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-04</Marker><MaxKeys>4</MaxKeys><Delimiter>/</Delimiter><IsTruncated>false</IsTruncated></ListBucketResult>
