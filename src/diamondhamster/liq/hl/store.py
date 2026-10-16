@@ -31,8 +31,12 @@ def read_jsonl_gz(path: Path) -> tuple[list[dict], int]:
 
 
 class Store:
-    def __init__(self, root: Path):
+    """Jeder Prozesslauf schreibt eigene Teildateien `<tag>.<run_id>.jsonl.gz`: Nach einem Absturz fehlt dem
+    letzten gzip-Glied der Abschluss, und Weiterschreiben in dieselbe Datei machte den Rest des Tages unlesbar."""
+
+    def __init__(self, root: Path, run_id: str | None = None):
         self.root = Path(root)
+        self.run_id = run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f")
         self.root.mkdir(parents=True, exist_ok=True)
         self._open: dict[Path, gzip.GzipFile] = {}
 
@@ -40,7 +44,7 @@ class Store:
         d = self.root / "raw" / kind
         if coin:
             d = d / coin
-        return d / f"{_utc(ts_ms):%Y-%m-%d}.jsonl.gz"
+        return d / f"{_utc(ts_ms):%Y-%m-%d}.{self.run_id}.jsonl.gz"
 
     def append(self, kind: str, rec: dict, ts_ms: int, coin: str | None = None) -> None:
         path = self._path(kind, ts_ms, coin)

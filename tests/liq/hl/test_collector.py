@@ -74,7 +74,7 @@ def test_trade_message_queues_both_users_and_stores_trade(tmp_path):
     c.on_message(trade_msg(), T0)
     c.store.flush()
     assert sorted(c.sched.take(10, T0)) == ["0xb", "0xs"]
-    recs, _ = read_jsonl_gz(tmp_path / "raw/trades/BTC/2026-09-21.jsonl.gz")
+    recs, _ = read_jsonl_gz(next((tmp_path / "raw/trades/BTC").glob("2026-09-21.*.jsonl.gz")))
     assert recs[0]["buyer"] == "0xb" and recs[0]["rt"] == T0
 
 
@@ -102,10 +102,10 @@ def test_market_step_stores_ctx_candles_funding(tmp_path):
     c, _ = make(tmp_path)
     c.step_market(T0)
     c.store.flush()
-    ctx, _ = read_jsonl_gz(tmp_path / "raw/ctx/2026-09-21.jsonl.gz")
+    ctx, _ = read_jsonl_gz(next((tmp_path / "raw/ctx").glob("2026-09-21.*.jsonl.gz")))
     assert ctx[0]["coins"]["BTC"]["oi"] == 10.0 and ctx[0]["t"] == T0
-    assert (tmp_path / "raw/candles/ETH/2026-09-21.jsonl.gz").exists()
-    assert (tmp_path / "raw/funding/BTC/2026-09-21.jsonl.gz").exists()
+    assert list((tmp_path / "raw/candles/ETH").glob("2026-09-21.*.jsonl.gz"))
+    assert list((tmp_path / "raw/funding/BTC").glob("2026-09-21.*.jsonl.gz"))
     calls = len(c.http.calls)
     c.step_market(T0 + 60_000)  # eine Minute später: nur ctx
     assert [x["type"] for x in c.http.calls[calls:]] == ["metaAndAssetCtxs"]
@@ -116,7 +116,7 @@ def test_funding_not_stored_twice(tmp_path):
     c.step_market(T0)
     c.step_market(T0 + 3_600_000)
     c.store.flush()
-    recs, _ = read_jsonl_gz(tmp_path / "raw/funding/BTC/2026-09-21.jsonl.gz")
+    recs, _ = read_jsonl_gz(next((tmp_path / "raw/funding/BTC").glob("2026-09-21.*.jsonl.gz")))
     assert len(recs) == 1
 
 
