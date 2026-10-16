@@ -67,3 +67,11 @@ def test_bad_checksum_not_marked_done(archive, tmp_path):
     rep = download(SYM, D1, D1, tmp_path, fetch=archive)
     assert not (tmp_path / "bn" / SYM / "done/metrics/2025-01-01").exists()
     assert rep["errors"] == 1
+
+
+def test_metrics_ts_in_ms(archive, tmp_path):
+    from .conftest import ms
+    archive.add_day(D1)
+    download(SYM, D1, D1, tmp_path, fetch=archive)
+    oi = pd.read_csv(tmp_path / "bn" / SYM / "metrics/2025-01-01.csv")
+    assert oi.ts.iloc[1] == ms(D1, 5)

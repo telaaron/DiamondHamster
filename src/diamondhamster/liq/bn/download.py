@@ -87,7 +87,7 @@ def normalize(kind: str, df: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame({"ts": _ms(df.open_time) + 60_000, "high": df.high.astype(float),
                              "low": df.low.astype(float), "close": df.close.astype(float)})
     if kind == "metrics":
-        ts = pd.to_datetime(df.create_time, utc=True).astype("int64") // 1_000_000
+        ts = pd.to_datetime(df.create_time, utc=True).dt.as_unit("ms").astype("int64")
         return pd.DataFrame({"ts": ts, "oi": df.sum_open_interest.astype(float)})
     if kind == "fundingRate":
         return pd.DataFrame({"ts": _ms(df.calc_time), "rate": df.last_funding_rate.astype(float)})

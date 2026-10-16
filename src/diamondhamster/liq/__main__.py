@@ -92,10 +92,31 @@ def main(argv: list[str] | None = None) -> int:
     he.add_argument("--data", type=Path, required=True, help="Ordner <data>/hl des Sammlers")
     he.add_argument("--coin", default="BTC")
     he.add_argument("--out", type=Path, required=True)
+    bd = sub.add_parser("bn-download", help="Binance-Archiv laden (fortsetzbar)")
+    bd.add_argument("--symbol", default="BTCUSDT")
+    bd.add_argument("--start", default="2025-01-01")
+    bd.add_argument("--end", help="Standard: gestern (UTC)")
+    bd.add_argument("--data", type=Path, required=True)
+    be = sub.add_parser("bn-events", help="Binance-Archiv in Event-Satz umwandeln")
+    be.add_argument("--symbol", default="BTCUSDT")
+    be.add_argument("--data", type=Path, required=True)
+    be.add_argument("--out", type=Path, required=True)
     a = ap.parse_args(argv)
 
     if a.cmd == "hl-collect":
         return _hl_collect(a.data, tuple(a.coins.split(",")))
+    if a.cmd == "bn-download":
+        from datetime import date, datetime, timedelta, timezone
+
+        from .bn import download as dl
+        end = date.fromisoformat(a.end) if a.end else datetime.now(timezone.utc).date() - timedelta(days=1)
+        rep = dl.download(a.symbol, date.fromisoformat(a.start), end, a.data, fetch=dl.urllib_fetch)
+        print(json.dumps(rep, indent=2))
+        return 0
+    if a.cmd == "bn-events":
+        from .bn.adapter import build_events as bn_build
+        print(json.dumps(bn_build(a.data, a.symbol, a.out), indent=2))
+        return 0
     if a.cmd == "hl-events":
         from .hl.adapter import build_events
         print(json.dumps(build_events(a.data, a.coin, a.out), indent=2))
