@@ -18,7 +18,8 @@ def sim3():
 
 
 def test_sim_is_fast_enough(sim3):
-    assert sim3[1] < 5
+    # Schutz vor Rückschritten um ein Vielfaches, kein Benchmark: lokal ~4 s, GitHub-Runner ~7 s
+    assert sim3[1] < 20
 
 
 def test_sim_is_deterministic(sim3):
