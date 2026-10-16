@@ -39,6 +39,8 @@ def liq_corr(snap: Snapshot, events: EventSet, horizon_ms: int = 86_400_000) -> 
     if reached.sum() < 5:
         return float("nan")
     liq = events.liquidations[(events.liquidations.ts > at) & (events.liquidations.ts <= at + horizon_ms)]
+    if liq.empty:  # ohne gemeldete Liquidationen gibt es nichts zu korrelieren (z. B. Hyperliquid, Binance-Archiv)
+        return float("nan")
     idx = np.clip(np.searchsorted(edges, liq.price.to_numpy(), side="right") - 1, 0, len(centers) - 1)
     actual = np.bincount(idx, weights=liq.qty.to_numpy(), minlength=len(centers))[reached]
     pred = (snap.dist["long"] + snap.dist["short"])[reached]

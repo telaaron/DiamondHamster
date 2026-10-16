@@ -88,10 +88,18 @@ def main(argv: list[str] | None = None) -> int:
     hs.add_argument("action", choices=("install", "uninstall", "status"))
     hs.add_argument("--data", type=Path, required=True)
     hs.add_argument("--python", help="Python des Dienstes (Standard: dieses)")
+    he = sub.add_parser("hl-events", help="Hyperliquid-Rohdaten in Event-Satz + truth.csv umwandeln")
+    he.add_argument("--data", type=Path, required=True, help="Ordner <data>/hl des Sammlers")
+    he.add_argument("--coin", default="BTC")
+    he.add_argument("--out", type=Path, required=True)
     a = ap.parse_args(argv)
 
     if a.cmd == "hl-collect":
         return _hl_collect(a.data, tuple(a.coins.split(",")))
+    if a.cmd == "hl-events":
+        from .hl.adapter import build_events
+        print(json.dumps(build_events(a.data, a.coin, a.out), indent=2))
+        return 0
     if a.cmd == "hl-service":
         from .hl import service
         return service.main(a.action, a.data, a.python)

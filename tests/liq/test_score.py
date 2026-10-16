@@ -61,3 +61,18 @@ def test_engine_beats_fixed_leverage_on_sim(capsys):
         print("\noverlap je Seed:", {k: [round(x, 3) for x in v] for k, v in res.items()})
     assert all(t > b for t, b in zip(res["true"], res["baseline"]))
     assert np.mean(res["default"]) > np.mean(res["baseline"])
+
+
+def test_liq_corr_nan_without_liquidations_and_no_warning():
+    import warnings
+
+    from diamondhamster.liq.engine import Engine
+    from diamondhamster.liq.params import load_params
+    from diamondhamster.liq.score import liq_corr
+
+    from .conftest import make_events
+    es = make_events(40)
+    snap = Engine(load_params()).run(es, [int(es.oi.ts.iloc[5])])[0]
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        assert np.isnan(liq_corr(snap, es))
