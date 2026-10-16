@@ -1,0 +1,18 @@
+# Standardparameter der Liquidations-Engine (Spec 3.3). Gewichte je Größenklasse in der Reihenfolge
+# LEVERAGES = 2, 3, 5, 10, 20, 25, 50, 75, 100, 125; werden beim Laden normiert.
+bucket_bp = 10
+max_cohorts = 90
+alpha = 0.5
+cross_share = 0.3
+cross_kappa = 2.0
+beta = 0.0
+warmup_days = 14
+drift_warn = 0.05
+cluster_min_share = 0.002
+top_n = 10
+tiers = "../tiers/illustrativ.toml"
+
+[leverage_weights]
+small = [2, 3, 8, 20, 20, 12, 15, 7, 10, 3]
+mid = [5, 8, 15, 30, 20, 10, 8, 2, 2, 0]
+large = [15, 15, 25, 30, 10, 5, 0, 0, 0, 0]
