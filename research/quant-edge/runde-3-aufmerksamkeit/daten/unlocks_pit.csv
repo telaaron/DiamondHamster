@@ -1,0 +1,823 @@
+token,snapshot_ts,unlock_date,amount,pct_circ,category,vesting_type,source
+1inch,20230315104635,2023-03-23T20:00:00.000Z,53572.0,0.006421966443536921,Team/Investor/VC,cliff,next_data.nextEventData
+1inch,20230529181645,2023-06-02T00:00:00.000Z,249807669.18999982,30.56715312414382,Team/Investor/VC,cliff,next_data.nextEventData
+1inch,20230604113706,2023-06-10T08:00:00.000Z,21429.0,0.0023312367424002823,Team/Investor/VC,cliff,next_data.nextEventData
+1inch,20230926143722,2023-09-22T08:00:00.000Z,53572.0,0.005193978630799472,Team/Investor/VC,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-22T08:00:00.000Z|perDay=0
+1inch,20230926143722,2023-10-01T08:00:00.000Z,15000.0,0.001454298504106475,Team/Investor/VC,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-01T08:00:00.000Z|perDay=0
+1inch,20240101152440,2023-12-27T12:00:00.000Z,32143.0,0.002853785714308079,Team/Investor/VC,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-27T12:00:00.000Z|perDay=0
+1inch,20240101152440,2023-12-27T12:00:00.000Z,32143.0,0.002853785714308079,Team/Investor/VC,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-27T12:00:00.000Z|perDay=0
+1inch,20240101152440,2024-01-07T20:00:00.000Z,32143.0,0.002853785714308079,Team/Investor/VC,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-07T20:00:00.000Z|perDay=0
+aave,20231002212013,2021-02-09T20:20:38.000Z,1471552.0,,AAVE Ecosystem Reserve,linear,rsc.fiveUnlocks.previousUnlocks|end=2027-09-11T07:46:45.000Z|perDay=612.126455906822
+aave,20231002212013,2021-02-09T20:20:38.000Z,1471552.0,,AAVE Ecosystem Reserve,linear,rsc.fiveUnlocks.previousUnlocks|end=2027-09-11T07:46:45.000Z|perDay=612.126455906822
+acala,20230307223735,2023-03-25T00:00:00.000Z,4657535.0,0.7597179002926512,Crowdloan Participants,cliff,next_data.nextEventData
+acala,20230529181634,2023-06-01T07:00:00.000Z,16183334.0,2.278736579896,Strategic Partners,cliff,next_data.nextEventData
+acala,20230529181634,2023-06-01T07:00:00.000Z,11250000.0,1.5840856107789656,Acala Team,cliff,next_data.nextEventData
+acala,20230604102309,2023-06-25T00:00:00.000Z,4657534.0,0.6558162303212265,Crowdloan Participants,cliff,next_data.nextEventData
+acala,20231207230758,2023-12-01T07:00:00.000Z,11250000.0,1.2701220281875303,Acala Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-01T07:00:00.000Z|perDay=0
+acala,20231207230758,2023-12-01T07:00:00.000Z,16183334.0,1.8270941335925526,Strategic Partners,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-01T07:00:00.000Z|perDay=0
+acala,20231207230758,2023-12-25T00:00:00.000Z,4657534.0,0.525834358260656,Crowdloan Participants,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-25T00:00:00.000Z|perDay=0
+algorand,20231215094840,2023-11-19T14:00:00.000Z,50000000.0,,Public Sale,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-19T14:00:00.000Z|perDay=1666666.6666666667
+algorand,20231215094840,2023-11-19T14:00:00.000Z,17000000.0,,Participation Rewards,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-19T14:00:00.000Z|perDay=566666.6666666666
+algorand,20231215094840,2023-11-19T14:00:00.000Z,4000000.0,,End User Grant,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-19T14:00:00.000Z|perDay=133333.33333333334
+algorand,20231215094840,2023-12-19T14:00:00.000Z,50000000.0,,Public Sale,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-19T14:00:00.000Z|perDay=1612903.2258064516
+algorand,20231215094840,2023-12-19T14:00:00.000Z,17000000.0,,Participation Rewards,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-19T14:00:00.000Z|perDay=548387.0967741936
+algorand,20231215094840,2023-12-19T14:00:00.000Z,4000000.0,,End User Grant,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-19T14:00:00.000Z|perDay=129032.25806451614
+apecoin%20,20230327215454,2023-04-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,next_data.nextEventData
+apecoin%20,20230327215454,2023-04-17T00:00:00.000Z,4166666.0,1.1304223145400594,Yuga Labs,cliff,next_data.nextEventData
+apecoin%20,20230327215454,2023-04-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,next_data.nextEventData
+apecoin%20,20230327215454,2023-04-17T00:00:00.000Z,833334.0,0.22608467994913098,Launch Contributors 3,cliff,next_data.nextEventData
+apecoin%20,20230327215454,2023-04-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,next_data.nextEventData
+apecoin%20,20230327215454,2023-04-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,next_data.nextEventData
+apecoin,20230315104632,2023-03-17T00:00:00.000Z,25000000.0,6.782534972445951,Launch Contributors 1,cliff,next_data.nextEventData
+apecoin,20230315104632,2023-03-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,next_data.nextEventData
+apecoin,20230315104632,2023-03-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,next_data.nextEventData
+apecoin,20230315104632,2023-03-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,next_data.nextEventData
+apecoin,20230315104632,2023-03-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,next_data.nextEventData
+apecoin,20230315104632,2023-03-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,next_data.nextEventData
+apecoin,20230315104632,2023-03-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,next_data.nextEventData
+apecoin,20230604114813,2023-06-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,next_data.nextEventData
+apecoin,20230604114813,2023-06-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,next_data.nextEventData
+apecoin,20230604114813,2023-06-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,next_data.nextEventData
+apecoin,20230604114813,2023-06-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,next_data.nextEventData
+apecoin,20230604114813,2023-06-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,next_data.nextEventData
+apecoin,20230604114813,2023-06-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,next_data.nextEventData
+apecoin,20230712142716,2023-06-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-06-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-06-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-06-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-06-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-06-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-07-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-07-17T00:00:00.000Z,833334.0,0.22608467994913098,Launch Contributors 3,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-07-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-07-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-07-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-17T00:00:00.000Z|perDay=0
+apecoin,20230712142716,2023-07-17T00:00:00.000Z,4166666.0,1.1304223145400594,Yuga Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-08-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-08-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-08-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-08-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-08-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-08-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-09-17T00:00:00.000Z,2222223.0,0.6028922085629504,Yuga Labs founder,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-09-17T00:00:00.000Z,25000000.0,6.782534972445951,Launch Contributors 1,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-09-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-09-17T00:00:00.000Z,277777.0,0.07536128868164477,Charity,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-09-17T00:00:00.000Z,757575.0,0.20553115727002966,Launch Contributors 2,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-09-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230825132357,2023-09-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-08-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-08-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-08-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-08-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-08-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-08-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-09-17T00:00:00.000Z,2222223.0,0.6028922085629504,Yuga Labs founder,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-09-17T00:00:00.000Z,25000000.0,6.782534972445951,Launch Contributors 1,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-09-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-09-17T00:00:00.000Z,277777.0,0.07536128868164477,Charity,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-09-17T00:00:00.000Z,757575.0,0.20553115727002966,Launch Contributors 2,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-09-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20230901191932,2023-09-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-09-17T00:00:00.000Z,2222223.0,0.6028922085629504,Yuga Labs founder,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-09-17T00:00:00.000Z,25000000.0,6.782534972445951,Launch Contributors 1,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-09-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-09-17T00:00:00.000Z,277777.0,0.07536128868164477,Charity,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-09-17T00:00:00.000Z,757575.0,0.20553115727002966,Launch Contributors 2,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-09-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-09-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-10-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-10-17T00:00:00.000Z,833334.0,0.22608467994913098,Launch Contributors 3,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-10-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-10-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-10-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231011005426,2023-10-17T00:00:00.000Z,4166666.0,1.1304223145400594,Yuga Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-10-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-10-17T00:00:00.000Z,833334.0,0.22608467994913098,Launch Contributors 3,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-10-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-10-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-10-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-10-17T00:00:00.000Z,4166666.0,1.1304223145400594,Yuga Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-11-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-11-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-11-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-11-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-11-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231101224015,2023-11-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-11-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-11-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-11-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-11-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-11-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-11-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-12-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-12-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-12-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-12-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-12-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20231208003017,2023-12-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2023-12-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2023-12-17T00:00:00.000Z,833333.0,0.2260844086477321,Launch Contributors 3,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2023-12-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2023-12-17T00:00:00.000Z,757576.0,0.2055314285714286,Launch Contributors 2,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2023-12-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2023-12-17T00:00:00.000Z,4166667.0,1.1304225858414583,Yuga Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2024-01-17T00:00:00.000Z,2222222.0,0.6028919372615515,Yuga Labs founder,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2024-01-17T00:00:00.000Z,833334.0,0.22608467994913098,Launch Contributors 3,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2024-01-17T00:00:00.000Z,277778.0,0.07536155998304367,Charity,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2024-01-17T00:00:00.000Z,757575.0,0.20553115727002966,Launch Contributors 2,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2024-01-17T00:00:00.000Z,7343750.0,1.9923696481559985,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-17T00:00:00.000Z|perDay=0
+apecoin,20240106124917,2024-01-17T00:00:00.000Z,4166666.0,1.1304223145400594,Yuga Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-17T00:00:00.000Z|perDay=0
+aptos,20230315104632,2023-04-12T00:00:00.000Z,3210144.699999988,1.8116147870721826,Community,cliff,next_data.nextEventData
+aptos,20230315104632,2023-04-12T00:00:00.000Z,1333333.33,0.7524540487923187,Foundation,cliff,next_data.nextEventData
+aptos,20230412171148,2023-05-12T00:00:00.000Z,3210144.699999988,1.7659075352377767,Community,cliff,next_data.nextEventData
+aptos,20230412171148,2023-05-12T00:00:00.000Z,1333333.33,0.733469545603563,Foundation,cliff,next_data.nextEventData
+aptos,20230705200815,2023-06-12T00:00:00.000Z,1333333.3399999999,0.6367177591303937,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-12T00:00:00.000Z|perDay=0
+aptos,20230705200815,2023-06-12T00:00:00.000Z,3210144.600000024,1.5329670494825771,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-12T00:00:00.000Z|perDay=0
+aptos,20230705200815,2023-07-12T00:00:00.000Z,1333333.33,0.6367177543550107,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-12T00:00:00.000Z|perDay=0
+aptos,20230705200815,2023-07-12T00:00:00.000Z,3210144.699999988,1.5329670972363916,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-12T00:00:00.000Z|perDay=0
+aptos,20230807212424,2023-07-12T00:00:00.000Z,1333333.33,0.6072434620284611,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-12T00:00:00.000Z|perDay=0
+aptos,20230807212424,2023-07-12T00:00:00.000Z,3210144.699999988,1.4620045395852428,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-12T00:00:00.000Z|perDay=0
+aptos,20230807212424,2023-08-12T00:00:00.000Z,1333333.3299999982,0.6072434620284604,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-12T00:00:00.000Z|perDay=0
+aptos,20230807212424,2023-08-12T00:00:00.000Z,3210144.599999994,1.4620044940419856,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-12T00:00:00.000Z|perDay=0
+aptos,20230913093216,2023-09-12T00:00:00.000Z,1333333.3400000036,0.5676700378834346,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-12T00:00:00.000Z|perDay=0
+aptos,20230913093216,2023-09-12T00:00:00.000Z,3210144.700000018,1.366727215761598,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-12T00:00:00.000Z|perDay=0
+aptos,20230913093216,2023-10-12T00:00:00.000Z,1333333.3299999982,0.5676700336259071,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-12T00:00:00.000Z|perDay=0
+aptos,20230913093216,2023-10-12T00:00:00.000Z,3210144.699999988,1.366727215761585,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-12T00:00:00.000Z|perDay=0
+aptos,20231002202652,2023-09-12T00:00:00.000Z,1333333.3400000036,0.5599014062840066,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-12T00:00:00.000Z|perDay=0
+aptos,20231002202652,2023-09-12T00:00:00.000Z,3210144.700000018,1.34802339218875,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-12T00:00:00.000Z|perDay=0
+aptos,20231002202652,2023-10-12T00:00:00.000Z,1333333.3299999982,0.5599014020847438,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-12T00:00:00.000Z|perDay=0
+aptos,20231002202652,2023-10-12T00:00:00.000Z,3210144.699999988,1.3480233921887375,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-12T00:00:00.000Z|perDay=0
+aptos,20231101224006,2023-10-12T00:00:00.000Z,1333333.3299999982,0.538218538446244,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-12T00:00:00.000Z|perDay=0
+aptos,20231101224006,2023-10-12T00:00:00.000Z,3210144.699999988,1.295819544715763,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-12T00:00:00.000Z|perDay=0
+aptos,20231101224006,2023-11-12T00:00:00.000Z,1333333.3299999982,0.538218538446244,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-12T00:00:00.000Z|perDay=0
+aptos,20231101224006,2023-11-12T00:00:00.000Z,11875000.0,4.79350887002064,Core contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-12T00:00:00.000Z|perDay=0
+aptos,20231101224006,2023-11-12T00:00:00.000Z,8423915.0,3.4004304229726245,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-12T00:00:00.000Z|perDay=0
+aptos,20231101224006,2023-11-12T00:00:00.000Z,3210144.599999994,1.295819504349375,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-12T00:00:00.000Z|perDay=0
+arbitrum,20230320130943,2023-03-23T12:30:00.000Z,4278000000.0,,Arbitrum DAO Treasury,cliff,next_data.nextEventData
+arbitrum,20230320130943,2023-03-23T12:30:00.000Z,1162000000.0,,Individual Wallets,cliff,next_data.nextEventData
+arbitrum,20230320130943,2023-03-23T12:30:00.000Z,113000000.0,,Daos in Arbitrum Ecosystem,cliff,next_data.nextEventData
+arbitrum,20230413203413,2024-03-23T13:00:00.000Z,673500000.0,52.8235294117647,"Team, Future Team + Advisors",cliff,next_data.nextEventData
+arbitrum,20230413203413,2024-03-23T13:00:00.000Z,438250000.0,34.372549019607845,Investors,cliff,next_data.nextEventData
+arbitrum,20230529181651,2024-03-23T13:00:00.000Z,673500000.0,52.8235294117647,"Team, Future Team + Advisors",cliff,next_data.nextEventData
+arbitrum,20230529181651,2024-03-23T13:00:00.000Z,438250000.0,34.372549019607845,Investors,cliff,next_data.nextEventData
+arbitrum,20230920003858,2023-04-17T18:00:00.000Z,699499992.0,,Arbitrum DAO Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2027-04-17T18:00:00.000Z|perDay=478781.65092402464
+arbitrum,20230920003858,2024-03-16T13:00:00.000Z,673500000.0,52.823529411764696,"Team, Future Team + Advisors",cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-03-16T13:00:00.000Z|perDay=0
+arbitrum,20230920003858,2024-03-16T13:00:00.000Z,438250000.0,34.372549019607845,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-03-16T13:00:00.000Z|perDay=0
+arbitrum,20231002204127,2023-04-17T18:00:00.000Z,699499992.0,,Arbitrum DAO Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2027-04-17T18:00:00.000Z|perDay=478781.65092402464
+arbitrum,20231002204127,2024-03-16T13:00:00.000Z,673500000.0,52.823529411764696,"Team, Future Team + Advisors",cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-03-16T13:00:00.000Z|perDay=0
+arbitrum,20231002204127,2024-03-16T13:00:00.000Z,438250000.0,34.372549019607845,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-03-16T13:00:00.000Z|perDay=0
+arkham,20230713183108,2023-07-18T00:00:00.000Z,70000000.0,,Ecosystem Incentives and Grants,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-18T00:00:00.000Z|perDay=0
+arkham,20230713183108,2023-07-18T00:00:00.000Z,303000000.0,,Ecosystem Incentives and Grants,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2030-07-18T00:00:00.000Z|perDay=118498.24012514665
+arkham,20230713183108,2023-07-18T00:00:00.000Z,50000000.0,,Binance Launchpad,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-18T00:00:00.000Z|perDay=0
+arkham,20230713183108,2023-07-18T00:00:00.000Z,30000000.0,,Foundation Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-18T00:00:00.000Z|perDay=0
+arkham,20230713183108,2023-07-18T00:00:00.000Z,142000000.0,,Foundation Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2030-07-18T00:00:00.000Z|perDay=55533.82870551427
+arkham,20231002201111,2023-07-18T00:00:00.000Z,70000000.0,46.666666666666664,Ecosystem Incentives and Grants,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-18T00:00:00.000Z|perDay=0
+arkham,20231002201111,2023-07-18T00:00:00.000Z,303000000.0,,Ecosystem Incentives and Grants,linear,rsc.fiveUnlocks.previousUnlocks|end=2030-07-18T00:00:00.000Z|perDay=118498.24012514665
+arkham,20231002201111,2023-07-18T00:00:00.000Z,50000000.0,33.33333333333333,Binance Launchpad,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-18T00:00:00.000Z|perDay=0
+arkham,20231002201111,2023-07-18T00:00:00.000Z,30000000.0,20.0,Foundation Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-18T00:00:00.000Z|perDay=0
+arkham,20231002201111,2023-07-18T00:00:00.000Z,142000000.0,,Foundation Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2030-07-18T00:00:00.000Z|perDay=55533.82870551427
+arkham,20231002201111,2024-07-18T00:00:00.000Z,175000000.0,,Investors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2027-07-18T00:00:00.000Z|perDay=159817.35159817353
+arkham,20231002201111,2024-07-18T00:00:00.000Z,30000000.0,,Advisors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2027-07-18T00:00:00.000Z|perDay=27397.260273972603
+arkham,20231002201111,2024-07-18T00:00:00.000Z,200000000.0,,Core Contributors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2028-07-18T00:00:00.000Z|perDay=136892.53935660506
+avalanche-2,20230417114925,2023-05-28T00:00:00.000Z,4500000.0,1.3794698267027277,Team,cliff,next_data.nextEventData
+avalanche-2,20230417114925,2023-05-28T00:00:00.000Z,2250000.0,0.6897349133513638,Strategic Partners,cliff,next_data.nextEventData
+avalanche-2,20230417114925,2023-05-28T00:00:00.000Z,1666800.0,0.5109556238106904,Foundation,cliff,next_data.nextEventData
+avalanche-2,20230417114925,2023-05-28T00:00:00.000Z,1125000.0,0.3448674566756819,Airdrop,cliff,next_data.nextEventData
+avalanche-2,20230506021029,2023-05-28T00:00:00.000Z,4500000.0,1.36238686781891,Team,cliff,next_data.nextEventData
+avalanche-2,20230506021029,2023-05-28T00:00:00.000Z,2250000.0,0.681193433909455,Strategic Partners,cliff,next_data.nextEventData
+avalanche-2,20230506021029,2023-05-28T00:00:00.000Z,1666800.0,0.5046280958401242,Foundation,cliff,next_data.nextEventData
+avalanche-2,20230506021029,2023-05-28T00:00:00.000Z,1125000.0,0.3405967169547275,Airdrop,cliff,next_data.nextEventData
+avalanche-2,20230822005324,2023-05-28T00:00:00.000Z,2250000.0,0.6539606741948889,Strategic Partners,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-05-28T00:00:00.000Z|perDay=0
+avalanche-2,20230822005324,2023-05-28T00:00:00.000Z,1666800.0,0.48445406744357367,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-05-28T00:00:00.000Z|perDay=0
+avalanche-2,20230822005324,2023-05-28T00:00:00.000Z,4500000.0,1.3079213483897778,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-05-28T00:00:00.000Z|perDay=0
+avalanche-2,20230822005324,2023-05-28T00:00:00.000Z,1125000.0,0.32698033709744445,Airdrop,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-05-28T00:00:00.000Z|perDay=0
+avalanche-2,20230822005324,2023-08-26T00:00:00.000Z,2250000.0,0.6539606741948889,Strategic Partners,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20230822005324,2023-08-26T00:00:00.000Z,1666800.0,0.48445406744357367,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20230822005324,2023-08-26T00:00:00.000Z,4500000.0,1.3079213483897778,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20230822005324,2023-08-26T00:00:00.000Z,1125000.0,0.32698033709744445,Airdrop,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-08-26T00:00:00.000Z,2250000.0,0.6351969558022149,Strategic Partners,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-08-26T00:00:00.000Z,1666800.0,0.47055390485828086,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-08-26T00:00:00.000Z,4500000.0,1.2703939116044298,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-08-26T00:00:00.000Z,1125000.0,0.31759847790110746,Airdrop,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-11-24T00:00:00.000Z,2250000.0,0.6351969558022149,Strategic Partners,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-11-24T00:00:00.000Z,1666800.0,0.47055390485828086,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-11-24T00:00:00.000Z,4500000.0,1.2703939116044298,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+avalanche-2,20231002222506,2023-11-24T00:00:00.000Z,1125000.0,0.31759847790110746,Airdrop,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-08-26T00:00:00.000Z,2250000.0,0.6335642053606281,Strategic Partners,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-08-26T00:00:00.000Z,1666800.0,0.46934436333115326,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-08-26T00:00:00.000Z,4500000.0,1.2671284107212561,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-08-26T00:00:00.000Z,1125000.0,0.31678210268031404,Airdrop,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-26T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-11-24T00:00:00.000Z,2250000.0,0.6335642053606281,Strategic Partners,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-11-24T00:00:00.000Z,1666800.0,0.46934436333115326,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-11-24T00:00:00.000Z,4500000.0,1.2671284107212561,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+avalanche-2,20231101224044,2023-11-24T00:00:00.000Z,1125000.0,0.31678210268031404,Airdrop,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-24T00:00:00.000Z|perDay=0
+axelar,20231002210224,2022-12-14T07:00:00.000Z,126400000.0,,Series A Investor,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-12-14T07:00:00.000Z|perDay=172913.81668946648
+axelar,20231002210224,2022-12-14T07:00:00.000Z,134000000.0,,Seed Investor,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-12-14T07:00:00.000Z|perDay=183310.53351573186
+axelar,20231002210224,2022-12-14T07:00:00.000Z,35000000.0,,Series B Investor,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-12-14T07:00:00.000Z|perDay=47879.6169630643
+axie-infinity,20230315104632,2023-04-17T13:10:00.000Z,3375000.0,2.918001345007963,Play to Earn,cliff,next_data.nextEventData
+axie-infinity,20230315104632,2023-04-17T13:10:00.000Z,539250.0199999998,0.46623178774979857,Advisors,cliff,next_data.nextEventData
+axie-infinity,20230604104926,2023-07-22T13:10:00.000Z,3425625.0,2.961771365183082,Staking Rewards,cliff,next_data.nextEventData
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,4404375.0,3.807991755235392,Staking Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,5737500.0,4.960602286513536,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,1166.67,0.0010086947049423524,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,14583.330000000002,0.012608644905094807,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,16666.67,0.01440988606720114,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,416666.6699999999,0.36024708251258925,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,55000.0,0.04755261451124087,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,666.6700000000001,0.0005763982093856175,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,1166.67,0.0010086947049423524,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,1800000.0,1.5562673840042467,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,33333.32999999999,0.02881976348847236,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,4725000.0,4.085201883011147,Play to Earn,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-04-23T13:10:00.000Z,1687500.0,1.4590006725039817,Ecosystem Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-23T13:10:00.000Z|perDay=0
+axie-infinity,20230719033740,2023-07-22T13:10:00.000Z,3425625.0,2.961771365183082,Staking Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-22T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-07-22T13:10:00.000Z,3425625.0,2.605111940144394,Staking Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-22T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,6082750.0,4.625796651388669,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,16666.6666666666,0.01267463085881838,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,14583.330000000002,0.011090299466539957,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,16666.660000000003,0.01267462578896609,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,1166.6599999999999,0.0008872190902649465,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,55000.0,0.04182628183410082,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,416666.66000000015,0.3168657664006086,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,666.6599999999999,0.0005069801645003936,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,33333.340000000026,0.025349266787489225,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,3375000.0,2.5666127489107327,Play to Earn,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,1687500.0,1.2833063744553663,Ecosystem Fund,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231017110851,2023-10-20T13:10:00.000Z,3425625.0,2.605111940144394,Staking Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,6082750.0,4.571542175541916,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,16666.6666666666,0.01252597420449056,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,14583.330000000002,0.010960224923734446,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,16666.660000000003,0.012525969194100933,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,1166.6599999999999,0.0008768131839246608,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,55000.0,0.04133571487481902,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,416666.66000000015,0.3131493501018757,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,666.6599999999999,0.0005010339577899426,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,33333.340000000026,0.025051953419370925,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,3375000.0,2.5365097764093485,Play to Earn,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,1687500.0,1.2682548882046742,Ecosystem Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2023-10-20T13:10:00.000Z,3425625.0,2.5745574230554893,Staking Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20231207233325,2024-01-18T13:10:00.000Z,3425625.0,2.5745574230554893,Staking Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-18T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,6082750.0,4.499246038201281,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,16666.6666666666,0.012327883600348699,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,14583.330000000002,0.010786895684728437,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,16666.660000000003,0.012327878669195312,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,1166.6599999999999,0.0008629469208709723,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,55000.0,0.040682015881150876,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,416666.66000000015,0.30819708507756544,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,666.6599999999999,0.0004931104128605097,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,33333.340000000026,0.024655772131850957,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,3375000.0,2.4963964290706215,Play to Earn,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,1687500.0,1.2481982145353108,Ecosystem Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2023-10-20T13:10:00.000Z,3425625.0,2.533842375506681,Staking Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-20T13:10:00.000Z|perDay=0
+axie-infinity,20240104231811,2024-01-18T13:10:00.000Z,3425625.0,2.533842375506681,Staking Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-18T13:10:00.000Z|perDay=0
+balancer,20230424100049,2024-03-22T00:00:00.000Z,14647.21095890411,0.03600436388523113,Liquidity Mining,linear,next_data.nextEventData
+balancer,20230529181704,2024-03-22T00:00:00.000Z,14647.21095890411,0.03547682836896111,Liquidity Mining,linear,next_data.nextEventData
+balancer,20231002222055,2023-03-22T00:00:00.000Z,6357778.0,,Liquidity Mining,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-03-22T00:00:00.000Z|perDay=17370.978142076503
+balancer,20231002222055,2024-03-22T00:00:00.000Z,5346232.0,,Liquidity Mining,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-03-22T00:00:00.000Z|perDay=14647.21095890411
+blur,20230301035622,2023-06-14T18:00:00.000Z,115680251.7,29.241276061538464,Past and Future core contributors,cliff,next_data.nextEventData
+blur,20230301035622,2023-06-14T18:00:00.000Z,75417843.47,19.063876058908725,Investor,cliff,next_data.nextEventData
+blur,20230301035622,2023-06-14T18:00:00.000Z,4901904.8,1.2390874793037858,Advisor,cliff,next_data.nextEventData
+blur,20230529181547,2023-06-14T18:00:00.000Z,115680251.7,24.045128901899268,Past and Future core contributors,cliff,next_data.nextEventData
+blur,20230529181547,2023-06-14T18:00:00.000Z,75417843.47,15.676243274801,Investor,cliff,next_data.nextEventData
+blur,20230529181547,2023-06-14T18:00:00.000Z,4901904.8,1.0189028036220875,Advisor,cliff,next_data.nextEventData
+blur,20231002222138,2023-06-14T18:00:00.000Z,4901904.8,0.5061638805194218,Advisor,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-14T18:00:00.000Z|perDay=0
+blur,20231002222138,2023-06-14T18:00:00.000Z,9803809.600000001,,Advisor,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-02-14T18:00:00.000Z|perDay=40015.549387755105
+blur,20231002222138,2023-06-14T18:00:00.000Z,75417843.47,7.787541755437915,Investor,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-14T18:00:00.000Z|perDay=0
+blur,20231002222138,2023-06-14T18:00:00.000Z,150835686.93,,Investor,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-02-14T18:00:00.000Z|perDay=615655.8650204082
+blur,20231002222138,2023-06-14T18:00:00.000Z,115680251.7,11.944982101638418,Past and Future core contributors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-14T18:00:00.000Z|perDay=0
+blur,20231002222138,2023-06-14T18:00:00.000Z,231360503.5,,Past and Future core contributors,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-02-14T18:00:00.000Z|perDay=944328.5857142857
+blur,20231002222138,2024-02-14T18:00:00.000Z,351000000.0,,Community Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-02-14T18:00:00.000Z|perDay=959016.393442623
+blur,20231002222138,2024-02-14T18:00:00.000Z,11029285.799999999,,Advisor,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-02-14T18:00:00.000Z|perDay=30134.6606557377
+blur,20231002222138,2024-02-14T18:00:00.000Z,169690147.79999998,,Investor,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-02-14T18:00:00.000Z|perDay=463634.28360655735
+blur,20231002222138,2024-02-14T18:00:00.000Z,260280566.40000004,,Past and Future core contributors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-02-14T18:00:00.000Z|perDay=711149.0885245902
+bonk,20231215094838,2023-01-01T00:00:00.000Z,21000000000000.0,,Early Contributor,linear,rsc.fiveUnlocks.previousUnlocks|end=2026-01-01T00:00:00.000Z|perDay=19160583941.60584
+cartesi,20230519213046,2023-06-28T00:00:00.000Z,138819.67213114753,0.01917875956545925,Mining Reserve,linear,next_data.nextEventData
+cartesi,20230604104625,2023-06-28T00:00:00.000Z,138819.67213114753,0.018836810862701413,Mining Reserve,linear,next_data.nextEventData
+cartesi,20231207233051,2023-10-23T04:00:00.000Z,21428572.0,2.7972411515240894,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-23T04:00:00.000Z|perDay=0
+cartesi,20231207233051,2023-12-28T00:00:00.000Z,25404000.0,,Mining Reserve,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-06-28T00:00:00.000Z|perDay=138819.67213114753
+celestia,20231031004259,2023-10-31T14:00:00.000Z,200000000.0,,Public Allocation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-31T14:00:00.000Z|perDay=0
+celestia,20231031004259,2023-10-31T14:00:00.000Z,67000000.0,,R&D & Ecosystem,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-31T14:00:00.000Z|perDay=0
+celestia,20240104144124,2023-10-31T14:00:00.000Z,200000000.0,137.11266519266053,Public Allocation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-31T14:00:00.000Z|perDay=0
+celestia,20240104144124,2023-10-31T14:00:00.000Z,67000000.0,45.93274283954128,R&D & Ecosystem,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-31T14:00:00.000Z|perDay=0
+celestia,20240104144124,2024-10-30T14:00:00.000Z,65010000.0,44.5684718208743,Early Backers: Series A&B,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-10-30T14:00:00.000Z|perDay=0
+celestia,20240104144124,2024-10-30T14:00:00.000Z,131990000.0,,Early Backers: Series A&B,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-10-30T14:00:00.000Z|perDay=361616.4383561644
+celestia,20240104144124,2024-10-30T14:00:00.000Z,52470000.0,35.971507713294486,Early Backers: Seed,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-10-30T14:00:00.000Z|perDay=0
+celestia,20240104144124,2024-10-30T14:00:00.000Z,106530000.0,,Early Backers: Seed,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-10-30T14:00:00.000Z|perDay=291863.01369863015
+celestia,20240104144124,2024-10-30T14:00:00.000Z,58080000.0,39.81751797194861,Initial Core Contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-10-30T14:00:00.000Z|perDay=0
+celestia,20240104144124,2024-10-30T14:00:00.000Z,117920000.0,,Initial Core Contributors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-10-30T14:00:00.000Z|perDay=161534.24657534246
+celestia,20240104144124,2024-10-30T14:00:00.000Z,201000000.0,,R&D & Ecosystem,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2027-10-30T14:00:00.000Z|perDay=183561.64383561644
+coin98,20231002221546,2022-07-23T11:00:00.000Z,50000000.0,,Seed Sale,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-07-23T11:00:00.000Z|perDay=68399.45280437756
+coin98,20231002221546,2022-07-23T11:00:00.000Z,200000000.0,,Team,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-07-23T11:00:00.000Z|perDay=182481.7518248175
+coin98,20231002221546,2022-07-23T11:00:00.000Z,20000000.0,,Advisors,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-07-23T11:00:00.000Z|perDay=27359.781121751024
+coin98,20231002221546,2022-07-23T11:00:00.000Z,147000000.0,,Ecosystem Growth,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-07-23T11:00:00.000Z|perDay=134124.08759124088
+coin98,20231002221546,2022-07-23T11:00:00.000Z,108000000.0,,Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-07-23T11:00:00.000Z|perDay=98540.14598540145
+coin98,20231002221546,2022-07-23T11:00:00.000Z,150000000.0,,Strategic Sale,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-07-23T11:00:00.000Z|perDay=410958.90410958906
+coin98,20231002221546,2022-07-23T11:00:00.000Z,140000000.0,,Community Development,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-07-23T11:00:00.000Z|perDay=127737.22627737226
+compound-governance-token,20231207233439,2020-06-15T00:00:00.000Z,4229949.0,,Users,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-06-15T00:00:00.000Z|perDay=2895.242299794661
+cosmos,20230323135845,2023-04-01T00:00:00.000Z,294133.3333333333,0.10052879106983949,Block Rewards (after upgrade),linear,next_data.nextEventData
+cosmos,20230413203020,2023-05-01T00:00:00.000Z,251261.93548387097,0.0858762192295837,Block Rewards (after upgrade),linear,next_data.nextEventData
+cosmos,20230529181658,2024-05-28T18:00:00.000Z,171466.05934246583,0.049514983560112795,Block Rewards,linear,next_data.nextEventData
+curve-dao-token,20230315104632,2023-08-13T22:17:28.000Z,447688.06830137,0.05818164165466101,Community LP,linear,next_data.nextEventData
+curve-dao-token,20230529181551,2023-08-13T22:17:28.000Z,447688.06830137,0.05466868997677708,Community LP,linear,next_data.nextEventData
+curve-dao-token,20230604104820,2023-08-13T22:17:28.000Z,447688.06830137,0.054520865367493475,Community LP,linear,next_data.nextEventData
+curve-dao-token,20231002221930,2023-08-13T22:17:28.000Z,163406144.93000007,,Community LP,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-08-12T22:17:28.000Z|perDay=447688.06830137
+curve-dao-token,20231002221930,2024-08-12T22:17:28.000Z,137407641.5,,Community LP,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-08-12T22:17:28.000Z|perDay=376459.2917808219
+cyberconnect,20231011135240,2023-09-15T00:00:00.000Z,375000.0,3.3973545932234104,Public Sale Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-09-15T00:00:00.000Z,150000.0,1.358941837289364,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-09-15T00:00:00.000Z,125000.0,1.13245153107447,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-09-15T00:00:00.000Z,250000.0,2.26490306214894,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-09-15T00:00:00.000Z,197917.0,1.7930512774053273,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-09-15T00:00:00.000Z,163200.0,1.478528718970828,Community Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-10-15T00:00:00.000Z,375000.0,3.3973545932234104,Public Sale Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-10-15T00:00:00.000Z,150000.0,1.3589418372893638,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-10-15T00:00:00.000Z,125000.0,1.1324515310744698,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-10-15T00:00:00.000Z,250000.0,2.2649030621489397,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-10-15T00:00:00.000Z,197916.0,1.7930422177930783,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-15T00:00:00.000Z|perDay=0
+cyberconnect,20231011135240,2023-10-15T00:00:00.000Z,163200.0,1.478528718970828,Community Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-15T00:00:00.000Z|perDay=0
+cyberconnect,20231207233402,2023-11-14T18:14:24.000Z,375000.0,2.5301338946857066,Public Sale Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-14T18:14:24.000Z|perDay=0
+cyberconnect,20231207233402,2023-11-14T18:14:24.000Z,163200.0,1.1011142709672195,Community Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-14T18:14:24.000Z|perDay=0
+cyberconnect,20231207233402,2023-11-14T18:14:24.000Z,150000.0,1.0120535578742826,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-14T18:14:24.000Z|perDay=0
+cyberconnect,20231207233402,2023-11-14T18:14:24.000Z,197917.0,1.3353506934253627,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-14T18:14:24.000Z|perDay=0
+cyberconnect,20231207233402,2023-11-14T18:14:24.000Z,250000.0,1.686755929790471,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-14T18:14:24.000Z|perDay=0
+cyberconnect,20231207233402,2023-11-14T18:14:24.000Z,125000.0,0.8433779648952355,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-14T18:14:24.000Z|perDay=0
+cyberconnect,20231207233402,2023-12-15T04:19:12.000Z,375000.0,2.5301338946857066,Public Sale Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-15T04:19:12.000Z|perDay=0
+cyberconnect,20231207233402,2023-12-15T04:19:12.000Z,163200.0,1.1011142709672195,Community Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-15T04:19:12.000Z|perDay=0
+cyberconnect,20231207233402,2023-12-15T04:19:12.000Z,150000.0,1.0120535578742826,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-15T04:19:12.000Z|perDay=0
+cyberconnect,20231207233402,2023-12-15T04:19:12.000Z,197917.0,1.3353506934253627,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-15T04:19:12.000Z|perDay=0
+cyberconnect,20231207233402,2023-12-15T04:19:12.000Z,250000.0,1.686755929790471,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-15T04:19:12.000Z|perDay=0
+cyberconnect,20231207233402,2023-12-15T04:19:12.000Z,125000.0,0.8433779648952355,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-15T04:19:12.000Z|perDay=0
+decentraland,20231207230518,2021-12-19T12:00:00.000Z,18080381.0,,Team,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-12-18T12:00:00.000Z|perDay=16511.763470319635
+dydx,20230315104632,2023-04-11T15:00:00.000Z,2876712.0,1.8900827399041316,Trading Rewards,cliff,next_data.nextEventData
+dydx,20230315104632,2023-04-11T15:00:00.000Z,2492731.0,1.6377961500226528,Community Treasury,cliff,next_data.nextEventData
+dydx,20230315104632,2023-04-11T15:00:00.000Z,1150685.0,0.75603322736742,Liquidity Provider Rewards,cliff,next_data.nextEventData
+dydx,20230604113250,2023-06-06T15:00:00.000Z,2876712.0,1.7857712875382952,Trading Rewards,cliff,next_data.nextEventData
+dydx,20230604113250,2023-06-06T15:00:00.000Z,2492731.0,1.5474080990229895,Community Treasury,cliff,next_data.nextEventData
+dydx,20230604113250,2023-06-06T15:00:00.000Z,1150685.0,0.7143086391689552,Liquidity Provider Rewards,cliff,next_data.nextEventData
+dydx,20230731192451,2023-07-04T15:00:00.000Z,2492731.0,1.456528214987756,Community Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-04T15:00:00.000Z|perDay=0
+dydx,20230731192451,2023-07-04T15:00:00.000Z,1150685.0,0.6723570128759124,Liquidity Provider Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-04T15:00:00.000Z|perDay=0
+dydx,20230731192451,2023-07-04T15:00:00.000Z,2876712.0,1.680892240034668,Trading Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-04T15:00:00.000Z|perDay=0
+dydx,20230731192451,2023-08-01T15:00:00.000Z,2492731.0,1.456528214987756,Community Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-01T15:00:00.000Z|perDay=0
+dydx,20230731192451,2023-08-01T15:00:00.000Z,1150685.0,0.6723570128759124,Liquidity Provider Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-01T15:00:00.000Z|perDay=0
+dydx,20230731192451,2023-08-01T15:00:00.000Z,2876712.0,1.680892240034668,Trading Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-01T15:00:00.000Z|perDay=0
+dydx,20230829113920,2023-08-01T15:00:00.000Z,2492731.0,1.436884541980174,Community Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-01T15:00:00.000Z|perDay=0
+dydx,20230829113920,2023-08-01T15:00:00.000Z,1150685.0,0.6632891752814308,Liquidity Provider Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-01T15:00:00.000Z|perDay=0
+dydx,20230829113920,2023-08-01T15:00:00.000Z,2876712.0,1.658222649988655,Trading Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-01T15:00:00.000Z|perDay=0
+dydx,20230829113920,2023-08-29T15:00:00.000Z,2492731.0,1.436884541980174,Community Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-29T15:00:00.000Z|perDay=0
+dydx,20230829113920,2023-08-29T15:00:00.000Z,1150685.0,0.6632891752814308,Liquidity Provider Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-29T15:00:00.000Z|perDay=0
+dydx,20230829113920,2023-08-29T15:00:00.000Z,2876712.0,1.658222649988655,Trading Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-29T15:00:00.000Z|perDay=0
+dydx,20231115133952,2023-10-31T15:00:00.000Z,1582192.0,0.878681395716278,Trading Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-31T15:00:00.000Z|perDay=0
+dydx,20231115133952,2023-10-31T15:00:00.000Z,575343.0,0.31952075996819007,Liquidity Provider Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-31T15:00:00.000Z|perDay=0
+dydx,20231115133952,2023-11-28T15:00:00.000Z,1582192.0,0.878681395716278,Trading Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-28T15:00:00.000Z|perDay=0
+dydx,20231115133952,2023-11-28T15:00:00.000Z,575343.0,0.31952075996819007,Liquidity Provider Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-28T15:00:00.000Z|perDay=0
+dydx,20231208001526,2023-12-01T00:00:00.000Z,83188521.0,46.148370217209425,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-01T00:00:00.000Z|perDay=0
+dydx,20231208001526,2023-12-01T00:00:00.000Z,45811479.0,25.4136636602773,"Founders, Employees, Advisors, and Consultants",cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-01T00:00:00.000Z|perDay=0
+dydx,20231208001526,2023-12-01T00:00:00.000Z,21000000.0,11.649633421916445,Future Employees,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-01T00:00:00.000Z|perDay=0
+dydx,20231208001526,2023-12-26T15:00:00.000Z,575343.0,0.3191683353269368,Liquidity Provider Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-26T15:00:00.000Z|perDay=0
+edu-coin,20230520141557,2024-04-18T09:37:15.000Z,130136.98630136986,0.0896769950516963,Treasury,linear,next_data.nextEventData
+edu-coin,20230604100219,2024-04-18T09:37:15.000Z,130136.98630136986,0.07830241732799086,Treasury,linear,next_data.nextEventData
+edu-coin,20231207224702,2023-04-28T10:00:00.000Z,50000000.0,21.758839432847985,Binance Launchpad,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-04-28T10:00:00.000Z|perDay=0
+edu-coin,20231207224702,2024-04-18T09:37:15.000Z,95000000.0,,Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-04-18T09:37:15.000Z|perDay=130136.98630136986
+elrond-erd-2,20231019025633,2023-07-04T00:00:00.000Z,1255751.0,,Network Inflation,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-07-04T00:00:00.000Z|perDay=3431.0136612021856
+elrond-erd-2,20231019025633,2024-07-04T00:00:00.000Z,1027433.0,,Network Inflation,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-07-04T00:00:00.000Z|perDay=2814.884931506849
+elrond-erd-2,20231208001858,2023-07-04T00:00:00.000Z,1255751.0,,Network Inflation,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-07-04T00:00:00.000Z|perDay=3431.0136612021856
+elrond-erd-2,20231208001858,2024-07-04T00:00:00.000Z,1027433.0,,Network Inflation,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-07-04T00:00:00.000Z|perDay=2814.884931506849
+ethereum-name-service,20231208000140,2022-05-05T04:09:23.000Z,5374925.0,17.72384351863056,Airdrop,cliff,rsc.fiveUnlocks.previousUnlocks|end=2022-05-05T04:09:23.000Z|perDay=0
+euler,20230307223734,2023-03-15T00:58:40.000Z,107723.0,0.6767332762798739,Community Selected Markets,cliff,next_data.nextEventData
+euler,20230529181647,2023-06-07T14:10:35.000Z,143356.0,0.7976206601145994,Community Selected Markets,cliff,next_data.nextEventData
+euler,20230604101933,2023-06-07T18:07:58.000Z,143356.0,0.7954421685322692,Community Selected Markets,cliff,next_data.nextEventData
+euler,20231207230438,2023-12-07T04:57:30.000Z,129472.0,0.692899775160627,Community Selected Markets,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-07T04:57:30.000Z|perDay=0
+euler,20231207230438,2023-12-21T05:54:10.000Z,123335.0,0.6600561802508336,Community Selected Markets,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-21T05:54:10.000Z|perDay=0
+filecoin,20230315104632,2023-08-10T00:00:00.000Z,38777.37226277372,0.009591602092343181,Simple Minting,linear,next_data.nextEventData
+filecoin,20230529181558,2023-08-10T00:00:00.000Z,38777.37226277372,0.009082001255512197,Simple Minting,linear,next_data.nextEventData
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,171000000.0,,Simple Minting,linear,rsc.fiveUnlocks.previousUnlocks|end=2026-10-15T00:00:00.000Z|perDay=78046.55408489275
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,116000000.0,,Fundraising 36 months,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-10-15T00:00:00.000Z|perDay=105936.07305936073
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,90000000.0,,Protocol Labs Team and Contributors,linear,rsc.fiveUnlocks.previousUnlocks|end=2026-10-15T00:00:00.000Z|perDay=41077.13372889092
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,100000000.0,,Filecoin Foundation,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-10-15T00:00:00.000Z|perDay=91324.200913242
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,300000000.0,66.13202276946706,Mining Reserve,cliff,rsc.fiveUnlocks.previousUnlocks|end=2020-10-15T00:00:00.000Z|perDay=0
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,44000000.0,,Fundraising 6 months,linear,rsc.fiveUnlocks.previousUnlocks|end=2021-04-15T00:00:00.000Z|perDay=241758.24175824175
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,210000000.0,,Protocol Labs,linear,rsc.fiveUnlocks.previousUnlocks|end=2026-10-15T00:00:00.000Z|perDay=95846.64536741214
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,770000000.0,,Baseline Minting,linear,rsc.fiveUnlocks.previousUnlocks|end=2040-10-15T00:00:00.000Z|perDay=105407.2553045859
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,10000000.0,,Fundraising 24 months,linear,rsc.fiveUnlocks.previousUnlocks|end=2022-10-15T00:00:00.000Z|perDay=13698.630136986301
+filecoin,20231002221118,2020-10-15T00:00:00.000Z,30000000.0,,Fundraising 12 months,linear,rsc.fiveUnlocks.previousUnlocks|end=2021-10-15T00:00:00.000Z|perDay=82191.78082191781
+filecoin,20231002221118,2026-10-15T00:00:00.000Z,85000000.0,,Simple Minting,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2032-10-15T00:00:00.000Z|perDay=38777.37226277372
+flow,20230527070101,2023-06-16T00:00:00.000Z,4687500.0,0.45237405906195716,Development Team,cliff,next_data.nextEventData
+flow,20230527070101,2023-06-16T00:00:00.000Z,2604166.660000026,0.2513189210577134,Dapper Labs,cliff,next_data.nextEventData
+flow,20230604113138,2023-06-16T00:00:00.000Z,4687500.0,0.45237405906195716,Development Team,cliff,next_data.nextEventData
+flow,20230604113138,2023-06-16T00:00:00.000Z,2604166.660000026,0.2513189210577134,Dapper Labs,cliff,next_data.nextEventData
+flow,20231002221332,2023-09-16T00:00:00.000Z,4687500.0,0.4523740590619572,Development Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-16T00:00:00.000Z|perDay=0
+flow,20231002221332,2023-09-16T00:00:00.000Z,2604166.660000026,0.2513189210577134,Dapper Labs,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-16T00:00:00.000Z|perDay=0
+flow,20231002221332,2023-10-16T00:00:00.000Z,4687500.0,0.4523740590619572,Development Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-16T00:00:00.000Z|perDay=0
+flow,20231002221332,2023-10-16T00:00:00.000Z,2604166.699999988,0.25131892491796837,Dapper Labs,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-16T00:00:00.000Z|perDay=0
+frax-share,20230315104632,2023-12-20T00:00:00.000Z,5179.7962568306,0.006953482586784436,Liquidity Programs / Farming  / Community,linear,next_data.nextEventData
+frax-share,20231002201424,2022-12-20T00:00:00.000Z,3781251.2600000016,,Liquidity Programs / Farming  / Community,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-20T00:00:00.000Z|perDay=10359.592493150689
+frax-share,20231002201424,2023-12-20T00:00:00.000Z,1895805.4299999997,,Liquidity Programs / Farming  / Community,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-20T00:00:00.000Z|perDay=5179.7962568306
+frax-share,20231208000435,2022-12-20T00:00:00.000Z,3781251.2600000016,,Liquidity Programs / Farming  / Community,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-20T00:00:00.000Z|perDay=10359.592493150689
+frax-share,20231208000435,2023-12-20T00:00:00.000Z,1895805.4299999997,,Liquidity Programs / Farming  / Community,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-20T00:00:00.000Z|perDay=5179.7962568306
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,50000000.0,,Round 1 (Seed),linear,rsc.fiveUnlocks.previousUnlocks|end=2019-10-29T14:00:00.000Z|perDay=543478.2608695652
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,10153808.0,7.599126451810724,Ecosystem Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2019-07-29T14:00:00.000Z|perDay=0
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,6500000.0,,Round 2,linear,rsc.fiveUnlocks.previousUnlocks|end=2019-09-13T14:00:00.000Z|perDay=141304.34782608695
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,10153808.0,7.599126451810724,User Acquisition Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2019-07-29T14:00:00.000Z|perDay=0
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,200384520.0,,Company Tokens,linear,rsc.fiveUnlocks.previousUnlocks|end=2022-07-28T14:00:00.000Z|perDay=182999.56164383562
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,5076904.0,3.799563225905362,Safety Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2019-07-29T14:00:00.000Z|perDay=0
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,5076904.0,3.799563225905362,Backstop Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2019-07-29T14:00:00.000Z|perDay=0
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,14161920.0,,Other Rounds,linear,rsc.fiveUnlocks.previousUnlocks|end=2019-08-29T14:00:00.000Z|perDay=456836.12903225806
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,2800000.0,,Round 3,linear,rsc.fiveUnlocks.previousUnlocks|end=2019-08-29T14:00:00.000Z|perDay=90322.58064516129
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,5076904.0,3.799563225905362,Advisors Tokens,cliff,rsc.fiveUnlocks.previousUnlocks|end=2019-07-29T14:00:00.000Z|perDay=0
+ftx-token,20231002211542,2019-07-29T14:00:00.000Z,20307616.0,15.198252903621448,FTT Liquidity Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2019-07-29T14:00:00.000Z|perDay=0
+gala,20230505131825,2023-07-21T00:00:00.000Z,2140410.7486338797,0.02837801420406514,Founder’s Node Operators,linear,next_data.nextEventData
+gala,20230505131825,2023-07-21T00:00:00.000Z,2140410.7486338797,0.02837801420406514,Gala Games Conservatorship.,linear,next_data.nextEventData
+gala,20230604095825,2023-07-21T00:00:00.000Z,2140410.7486338797,0.008904345163682263,Founder’s Node Operators,linear,next_data.nextEventData
+gala,20230604095825,2023-07-21T00:00:00.000Z,2140410.7486338797,0.008904345163682263,Gala Games Conservatorship.,linear,next_data.nextEventData
+gala,20231207224320,2023-07-21T00:00:00.000Z,783390334.0,,Founder’s Node Operators,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-07-21T00:00:00.000Z|perDay=2140410.7486338797
+gala,20231207224320,2023-07-21T00:00:00.000Z,783390334.0,,Gala Games Conservatorship.,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-07-21T00:00:00.000Z|perDay=2140410.7486338797
+gala,20231207224320,2024-07-21T00:00:00.000Z,390624962.0,,Founder’s Node Operators,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-07-21T00:00:00.000Z|perDay=1070205.3753424657
+gala,20231207224320,2024-07-21T00:00:00.000Z,390624962.0,,Gala Games Conservatorship.,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-07-21T00:00:00.000Z|perDay=1070205.3753424657
+galxe,20231208002543,2023-12-05T00:00:00.000Z,1025000.0,1.1398767821000422,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-05T00:00:00.000Z|perDay=0
+galxe,20231208002543,2023-12-05T00:00:00.000Z,416667.0,0.46336491626075926,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-05T00:00:00.000Z|perDay=0
+galxe,20231208002543,2023-12-05T00:00:00.000Z,586667.0,0.6524176508529614,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-05T00:00:00.000Z|perDay=0
+galxe,20231208002543,2024-01-05T00:00:00.000Z,2000000.0,2.22414981873179,Marketing,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-05T00:00:00.000Z|perDay=0
+galxe,20231208002543,2024-01-05T00:00:00.000Z,416666.6699999999,0.4633645492760391,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-05T00:00:00.000Z|perDay=0
+galxe,20231208002543,2024-01-05T00:00:00.000Z,586666.6699999999,0.6524172838682413,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-05T00:00:00.000Z|perDay=0
+gitcoin,20231019025629,2021-06-11T06:30:13.000Z,18950542.0,31.13620148548888,Existing Stakeholders,cliff,rsc.fiveUnlocks.previousUnlocks|end=2021-06-11T06:30:13.000Z|perDay=0
+gmx,20230422193340,2023-05-09T00:00:00.000Z,403.2258064516129,0.004662048023941263,esGMX Rewards,linear,next_data.nextEventData
+gmx,20230508075529,2023-05-09T00:00:00.000Z,403.2258064516129,0.004638553929330526,esGMX Rewards,linear,next_data.nextEventData
+gmx,20230604094319,2023-06-09T00:00:00.000Z,416.6666666666667,0.004753655614198698,esGMX Rewards,linear,next_data.nextEventData
+gmx,20231002202131,2023-09-09T00:00:00.000Z,12500.0,,esGMX Rewards,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-10-09T00:00:00.000Z|perDay=416.6666666666667
+gmx,20231002202131,2023-10-09T00:00:00.000Z,12500.0,,esGMX Rewards,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-09T00:00:00.000Z|perDay=403.2258064516129
+hashflow,20230524182027,2023-06-07T00:00:00.000Z,2814222.219999999,1.6060239541415122,Ecosystem Development,cliff,next_data.nextEventData
+hashflow,20230524182027,2023-06-07T00:00:00.000Z,416667.0,0.23778405917791443,Community Rewards,cliff,next_data.nextEventData
+hashflow,20230604110500,2023-06-07T00:00:00.000Z,2814222.219999999,1.6060239541415122,Ecosystem Development,cliff,next_data.nextEventData
+hashflow,20230604110500,2023-06-07T00:00:00.000Z,416667.0,0.23778405917791443,Community Rewards,cliff,next_data.nextEventData
+hashflow,20231101224118,2023-10-07T00:00:00.000Z,416667.0,0.19202547934600012,Community Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-10-07T00:00:00.000Z,1722222.2300000004,0.7937046832508629,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-10-07T00:00:00.000Z,1092000.0,0.5032599736620181,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-11-07T00:00:00.000Z,48300000.0,22.25957575812772,Core Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-11-07T00:00:00.000Z,416667.0,0.19202547934600012,Community Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-11-07T00:00:00.000Z,10124477.0,,Community Rewards,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-07T00:00:00.000Z|perDay=165975.03278688525
+hashflow,20231101224118,2023-11-07T00:00:00.000Z,1722222.2199999988,0.7937046786422542,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-11-07T00:00:00.000Z,46350000.0,21.36089723373126,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-11-07T00:00:00.000Z,1092000.0,0.5032599736620181,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-07T00:00:00.000Z|perDay=0
+hashflow,20231101224118,2023-11-07T00:00:00.000Z,62500000.0,28.803798858860922,Early Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2023-12-07T00:00:00.000Z,2415000.0,0.9709031935617899,Core Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2023-12-07T00:00:00.000Z,416667.0,0.1675127622988862,Community Rewards,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2023-12-07T00:00:00.000Z,1722222.2199999988,0.6923855293669043,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2023-12-07T00:00:00.000Z,3862500.0,1.5528420642370238,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2023-12-07T00:00:00.000Z,5208333.0,2.093907719599692,Early Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2024-01-07T00:00:00.000Z,2415000.0,0.9709031935617899,Core Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2024-01-07T00:00:00.000Z,416667.0,0.1675127622988862,Community Rewards,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2024-01-07T00:00:00.000Z,9071220.0,,Community Rewards,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-01-07T00:00:00.000Z|perDay=24784.754098360656
+hashflow,20231207234854,2024-01-07T00:00:00.000Z,1722222.2199999988,0.6923855293669043,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2024-01-07T00:00:00.000Z,3862500.0,1.5528420642370238,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-07T00:00:00.000Z|perDay=0
+hashflow,20231207234854,2024-01-07T00:00:00.000Z,5208334.0,2.09390812163,Early Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-07T00:00:00.000Z|perDay=0
+hedera-hashgraph,20230303000426,2023-06-01T00:00:00.000Z,533953938.0,1.9090491059563353,Purchase Agreements,cliff,next_data.nextEventData
+hedera-hashgraph,20230303000426,2023-06-01T00:00:00.000Z,403529660.0,1.4427423075768455,Ecosystem and Open Source Development,cliff,next_data.nextEventData
+hedera-hashgraph,20230303000426,2023-06-01T00:00:00.000Z,335869893.0,1.2008378875357222,Network Governance and Operations,cliff,next_data.nextEventData
+hedera-hashgraph,20230529181621,2023-06-01T00:00:00.000Z,533953938.0,1.6972808538004092,Purchase Agreements,cliff,next_data.nextEventData
+hedera-hashgraph,20230529181621,2023-06-01T00:00:00.000Z,403529660.0,1.2827008419939565,Ecosystem and Open Source Development,cliff,next_data.nextEventData
+hedera-hashgraph,20230529181621,2023-06-01T00:00:00.000Z,335869893.0,1.0676305542237468,Network Governance and Operations,cliff,next_data.nextEventData
+illuvium,20231207231320,2022-06-30T00:00:00.000Z,1472235.36,,Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2022-07-08T03:00:00.000Z|perDay=184029.42
+illuvium,20231207231320,2022-06-30T00:00:00.000Z,2589846.33,,Team/Seed/Management etc.,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-06-30T00:00:00.000Z|perDay=7095.4693972602745
+illuvium,20231207231320,2022-06-30T00:00:00.000Z,1420972.0,,Team/Seed/Management etc.,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-06-30T00:00:00.000Z|perDay=1296.507299270073
+immutable-x,20230315104632,2023-03-25T10:00:00.000Z,9615384.609999985,1.107019007519636,Project Development,cliff,next_data.nextEventData
+immutable-x,20230315104632,2023-03-25T10:00:00.000Z,8460606.099999994,0.974069384400484,Private Sales,cliff,next_data.nextEventData
+immutable-x,20230519123156,2023-05-20T10:00:00.000Z,9615384.609999985,0.9626138673471408,Project Development,cliff,next_data.nextEventData
+immutable-x,20230519123156,2023-05-20T10:00:00.000Z,8460606.100000024,0.8470068633085958,Private Sales,cliff,next_data.nextEventData
+immutable-x,20230604111233,2023-06-17T10:00:00.000Z,9615384.620000005,0.9626138683482612,Project Development,cliff,next_data.nextEventData
+immutable-x,20230604111233,2023-06-17T10:00:00.000Z,8460606.099999994,0.8470068633085928,Private Sales,cliff,next_data.nextEventData
+immutable-x,20231207235613,2023-12-01T00:00:00.000Z,15914785.0,,Ecosystem Development,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-29T00:00:00.000Z|perDay=568385.1785714285
+immutable-x,20231207235613,2023-12-01T00:00:00.000Z,9615384.0,,Project Development,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-29T00:00:00.000Z|perDay=343406.5714285714
+immutable-x,20231207235613,2023-12-01T00:00:00.000Z,8660594.0,,Private Sale,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-12-29T00:00:00.000Z|perDay=309306.9285714286
+immutable-x,20231207235613,2023-12-29T00:00:00.000Z,15914784.0,,Ecosystem Development,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-26T00:00:00.000Z|perDay=568385.1428571428
+immutable-x,20231207235613,2023-12-29T00:00:00.000Z,9615385.0,,Project Development,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-26T00:00:00.000Z|perDay=343406.60714285716
+immutable-x,20231207235613,2023-12-29T00:00:00.000Z,8660594.0,,Private Sale,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-26T00:00:00.000Z|perDay=309306.9285714286
+injective-protocol,20230803024300,2023-07-21T00:00:00.000Z,333333.3339999998,0.3979835503129415,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-21T00:00:00.000Z|perDay=0
+injective-protocol,20230803024300,2023-07-21T00:00:00.000Z,3333333.34,3.979835503129417,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-21T00:00:00.000Z|perDay=0
+injective-protocol,20230803024300,2023-08-21T00:00:00.000Z,2860000.0,3.4146988548556427,Ecosystem Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-21T00:00:00.000Z|perDay=0
+injective-protocol,20231002215334,2023-08-21T00:00:00.000Z,2860000.0,3.4146988548556427,Ecosystem Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-21T00:00:00.000Z|perDay=0
+injective-protocol,20231002215334,2024-01-21T00:00:00.000Z,333333.3330000001,0.39798354911899125,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-21T00:00:00.000Z|perDay=0
+injective-protocol,20231002215334,2024-01-21T00:00:00.000Z,3333333.33,3.979835491189911,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-21T00:00:00.000Z|perDay=0
+jito-governance-token,20231213110707,2023-12-07T16:00:00.000Z,90000000.0,78.26086956521739,Community Growth,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-07T16:00:00.000Z|perDay=0
+jito-governance-token,20231213110707,2023-12-07T16:00:00.000Z,10000000.0,,Community Growth,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-12-07T16:00:00.000Z|perDay=27322.4043715847
+jito-governance-token,20231213110707,2023-12-07T16:00:00.000Z,250000000.0,,Ecosystem Development,linear,rsc.fiveUnlocks.previousUnlocks|end=2027-12-07T16:00:00.000Z|perDay=171115.67419575632
+jito-governance-token,20231213110707,2024-12-07T16:00:00.000Z,54047619.0,46.99792956521739,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-07T16:00:00.000Z|perDay=0
+jito-governance-token,20231213110707,2024-12-07T16:00:00.000Z,108095238.0,,Investors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2027-12-07T16:00:00.000Z|perDay=98717.11232876712
+jito-governance-token,20231213110707,2024-12-07T16:00:00.000Z,81666667.0,71.01449304347827,Core Contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-07T16:00:00.000Z|perDay=0
+jito-governance-token,20231213110707,2024-12-07T16:00:00.000Z,163333333.0,,Core Contributors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2027-12-07T16:00:00.000Z|perDay=149162.8611872146
+joe,20230416030104,2023-05-03T00:00:00.000Z,54000.0,0.015616475913453689,Liquidity Providers (LP),linear,next_data.nextEventData
+joe,20230529181658,2023-06-03T00:00:00.000Z,43200.0,0.012702847660284096,Liquidity Providers (LP),linear,next_data.nextEventData
+joe,20230529181658,2023-06-03T00:00:00.000Z,17280.0,0.005081139064113639,Dev Team,linear,next_data.nextEventData
+joe,20230529181658,2023-06-03T00:00:00.000Z,17280.0,0.005081139064113639,Treasury,linear,next_data.nextEventData
+joe,20230529181658,2023-06-03T00:00:00.000Z,8640.0,0.0025405695320568195,Future Investors,linear,next_data.nextEventData
+joe,20230604105355,2023-07-03T00:00:00.000Z,38880.0,0.01142909535753753,Liquidity Providers (LP),linear,next_data.nextEventData
+joe,20230604105355,2023-07-03T00:00:00.000Z,15552.0,0.004571638143015012,Dev Team,linear,next_data.nextEventData
+joe,20230604105355,2023-07-03T00:00:00.000Z,15552.0,0.004571638143015012,Treasury,linear,next_data.nextEventData
+joe,20230604105355,2023-07-03T00:00:00.000Z,7776.0,0.002285819071507506,Future Investors,linear,next_data.nextEventData
+joe,20231207233822,2023-11-03T00:00:00.000Z,280240.0,,Liquidity Providers (LP),linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-15T23:22:40.000Z|perDay=23353.333333333332
+joe,20231207233822,2023-11-03T00:00:00.000Z,112096.0,,Dev Team,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-15T23:22:40.000Z|perDay=9341.333333333334
+joe,20231207233822,2023-11-03T00:00:00.000Z,112096.0,,Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-15T23:22:40.000Z|perDay=9341.333333333334
+joe,20231207233822,2023-11-03T00:00:00.000Z,56048.0,,Future Investors,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-15T23:22:40.000Z|perDay=4670.666666666667
+lido-dao,20230315104632,2023-08-25T17:51:08.000Z,8500000.0,0.9951018093880956,Investors,cliff,next_data.nextEventData
+lido-dao,20230529181700,2023-08-25T17:51:08.000Z,8500000.0,0.9666519572165374,Investors,cliff,next_data.nextEventData
+lido-dao,20230604114513,2023-08-25T17:51:08.000Z,8500000.0,0.9666359603958384,Investors,cliff,next_data.nextEventData
+lido-dao,20230821112242,2022-11-01T04:18:31.000Z,115740.74,,Investors,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-01T04:18:31.000Z|perDay=317.09791780821917
+lido-dao,20230821112242,2023-08-25T17:51:08.000Z,8500000.0,0.9668010294602138,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-25T17:51:08.000Z|perDay=0
+lido-dao,20231208002739,2023-09-13T15:33:05.000Z,1500000.0,0.16852872615525072,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-13T15:33:05.000Z|perDay=0
+liquity,20230508094514,2023-06-05T00:00:00.000Z,657350.9100000001,0.7152476851720148,Team and Advisors,cliff,next_data.nextEventData
+matic-network,20231002220946,2022-10-20T05:10:10.000Z,273304816.0,2.9388237051603308,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2022-10-20T05:10:10.000Z|perDay=0
+maverick-protocol,20230712124545,2023-06-28T00:00:00.000Z,30000000.0,12.0,Binance Launchpool,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20230712124545,2023-06-28T00:00:00.000Z,100000000.0,40.0,Liquidity Mining and Airdrops,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20230712124545,2023-06-28T00:00:00.000Z,30000000.0,12.0,Foundation/ Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20230712124545,2023-06-28T00:00:00.000Z,100000000.0,40.0,Public Goods Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20230712124545,2023-12-01T00:00:00.000Z,58800000.0,,Liquidity Mining and Airdrops,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-01T00:00:00.000Z|perDay=160655.73770491802
+maverick-protocol,20230712124545,2023-12-01T00:00:00.000Z,20400000.0,,Foundation/ Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-01T00:00:00.000Z|perDay=55737.70491803279
+maverick-protocol,20230712124545,2023-12-01T00:00:00.000Z,26200000.0,,Public Goods Fund,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-01T00:00:00.000Z|perDay=71584.69945355192
+maverick-protocol,20231002204857,2023-06-28T00:00:00.000Z,30000000.0,12.0,Binance Launchpool,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20231002204857,2023-06-28T00:00:00.000Z,100000000.0,40.0,Liquidity Mining and Airdrops,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20231002204857,2023-06-28T00:00:00.000Z,30000000.0,12.0,Foundation/ Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20231002204857,2023-06-28T00:00:00.000Z,100000000.0,40.0,Public Goods Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-28T00:00:00.000Z|perDay=0
+maverick-protocol,20231002204857,2023-12-01T00:00:00.000Z,58800000.0,,Liquidity Mining and Airdrops,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-01T00:00:00.000Z|perDay=160655.73770491802
+maverick-protocol,20231002204857,2023-12-01T00:00:00.000Z,20400000.0,,Foundation/ Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-01T00:00:00.000Z|perDay=55737.70491803279
+maverick-protocol,20231002204857,2023-12-01T00:00:00.000Z,26200000.0,,Public Goods Fund,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-12-01T00:00:00.000Z|perDay=71584.69945355192
+memecoin-2,20231207225445,2023-11-03T08:00:00.000Z,1380000000.0,15.83701813736953,Binance Launchpool,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-03T08:00:00.000Z|perDay=0
+memecoin-2,20231207225445,2024-05-03T07:30:00.000Z,1035000000.0,11.877763603027148,Advisory,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-05-03T07:30:00.000Z|perDay=0
+memecoin-2,20231207225445,2024-05-03T07:30:00.000Z,828000000.0,9.502210882421718,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-05-03T07:30:00.000Z|perDay=0
+memecoin-2,20231207225445,2024-05-03T07:30:00.000Z,7452000000.0,,Investors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-11-03T07:30:00.000Z|perDay=13573770.49180328
+memecoin-2,20231207225445,2024-05-03T07:30:00.000Z,3450000000.0,39.59254534342382,Airdrop,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-05-03T07:30:00.000Z|perDay=0
+metis-token,20231019054146,2023-08-13T00:00:00.000Z,87500.0,2.009497988930239,Founding Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-13T00:00:00.000Z|perDay=0
+mina-protocol,20230315104632,2024-05-31T00:00:00.000Z,60273.97260273973,0.006944727769134269,Community,linear,next_data.nextEventData
+mina-protocol,20230604093909,2024-05-31T00:00:00.000Z,60273.97260273973,0.006613392940634282,Community,linear,next_data.nextEventData
+mina-protocol,20231002214725,2021-09-21T12:00:00.000Z,36000000.0,,Mina Foundation,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-03-22T00:00:00.000Z|perDay=28191.072826938136
+mina-protocol,20231002214725,2024-05-31T00:00:00.000Z,88000000.0,,Community,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2028-05-30T00:00:00.000Z|perDay=60273.97260273973
+moonbeam,20230307223734,2023-03-11T00:00:00.000Z,6666667.0,1.13881811604414,Seed Funding,cliff,next_data.nextEventData
+moonbeam,20230307223734,2023-03-11T00:00:00.000Z,2192683.329999998,0.3745601061147931,Key Partners & Advisors,cliff,next_data.nextEventData
+moonbeam,20230307223734,2023-03-11T00:00:00.000Z,823529.4100000001,0.14067752464659514,PureStake Early Backers,cliff,next_data.nextEventData
+moonbeam,20231002223123,2023-09-11T00:00:00.000Z,6666667.0,0.8858271003075874,Seed Funding,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-11T00:00:00.000Z|perDay=0
+moonbeam,20231002223123,2023-09-11T00:00:00.000Z,2192683.329999998,0.29135073284846585,Key Partners & Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-11T00:00:00.000Z|perDay=0
+moonbeam,20231002223123,2023-09-11T00:00:00.000Z,823529.4100000001,0.109425694920463,PureStake Early Backers,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-11T00:00:00.000Z|perDay=0
+moonbeam,20231002223123,2023-10-08T00:00:00.000Z,2083333.3299999982,0.27682095456215955,Founders and Early Employees,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-08T00:00:00.000Z|perDay=0
+moonbeam,20231002223123,2023-10-08T00:00:00.000Z,958333.3299999982,0.12733763885941995,Future Employee Incentives,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-08T00:00:00.000Z|perDay=0
+multichain,20231002202022,2023-01-23T10:18:00.000Z,1000000.0,5.164410932880289,MULTI Locked,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-01-23T10:18:00.000Z|perDay=0
+near,20230522025334,2023-10-13T00:00:00.000Z,162295.0819672131,0.017887548089861274,Epoch Rewards,linear,next_data.nextEventData
+near,20230604112300,2023-10-13T00:00:00.000Z,162295.0819672131,0.017784793437459236,Epoch Rewards,linear,next_data.nextEventData
+oasis-network%0a,20230507153243,2023-05-18T16:00:00.000Z,150000000.0,2.9824885072231133,Core Contributors,cliff,next_data.nextEventData
+oasis-network%0a,20230507153243,2023-05-18T16:00:00.000Z,37000000.0,0.7356804984483679,Community,cliff,next_data.nextEventData
+oasis-network%0a,20230507153243,2023-05-18T16:00:00.000Z,12500000.0,0.24854070893525942,Partners & Reserve,cliff,next_data.nextEventData
+oasis-network,20230305182107,2023-05-18T16:00:00.000Z,150000000.0,2.9824885072231133,Core Contributors,cliff,next_data.nextEventData
+oasis-network,20230305182107,2023-05-18T16:00:00.000Z,37000000.0,0.7356804984483679,Community,cliff,next_data.nextEventData
+oasis-network,20230305182107,2023-05-18T16:00:00.000Z,12500000.0,0.24854070893525942,Partners & Reserve,cliff,next_data.nextEventData
+oasis-network,20230508075531,2023-05-18T16:00:00.000Z,150000000.0,2.9824885072231133,Core Contributors,cliff,next_data.nextEventData
+oasis-network,20230508075531,2023-05-18T16:00:00.000Z,37000000.0,0.7356804984483679,Community,cliff,next_data.nextEventData
+oasis-network,20230508075531,2023-05-18T16:00:00.000Z,12500000.0,0.24854070893525942,Partners & Reserve,cliff,next_data.nextEventData
+oasis-network,20231002211240,2023-08-18T16:00:00.000Z,12500000.0,0.24854070893525942,Partners & Reserve,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-18T16:00:00.000Z|perDay=0
+oasis-network,20231002211240,2023-08-18T16:00:00.000Z,140000000.0,2.7836559400749055,Core Contributors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-18T16:00:00.000Z|perDay=0
+oasis-network,20231002211240,2023-08-18T16:00:00.000Z,18500000.0,0.36784024922418396,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-18T16:00:00.000Z|perDay=0
+oasis-network,20231002211240,2023-11-18T16:00:00.000Z,12500000.0,0.24854070893525942,Partners & Reserve,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-18T16:00:00.000Z|perDay=0
+oasis-network,20231002211240,2023-11-18T16:00:00.000Z,25000000.0,0.49708141787051885,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-18T16:00:00.000Z|perDay=0
+oasis-network,20231002211240,2023-11-18T16:00:00.000Z,140000000.0,2.7836559400749055,Core Contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-18T16:00:00.000Z|perDay=0
+oasis-network,20231002211240,2023-11-18T16:00:00.000Z,18500000.0,0.36784024922418396,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-18T16:00:00.000Z|perDay=0
+optimism,20230315104632,2023-05-31T00:00:00.000Z,81604378.62,25.91897640553521,Core contributors,cliff,next_data.nextEventData
+optimism,20230315104632,2023-05-31T00:00:00.000Z,73014444.03,23.190663100190896,Investors,cliff,next_data.nextEventData
+optimism,20230529181709,2023-05-31T00:00:00.000Z,204010946.56,60.830443655170704,Core Contributors,cliff,next_data.nextEventData
+optimism,20230529181709,2023-05-31T00:00:00.000Z,182536110.08,54.42723905988959,Investors,cliff,next_data.nextEventData
+optimism,20230604093602,2023-06-30T04:00:00.000Z,12750684.159999996,1.9780929843146011,Core Contributors,cliff,next_data.nextEventData
+optimism,20230604093602,2023-06-30T04:00:00.000Z,11408506.879999995,1.7698726701762215,Investors,cliff,next_data.nextEventData
+optimism,20230712142826,2023-06-30T04:00:00.000Z,12750684.159999996,1.9780929843146011,Core Contributors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-30T04:00:00.000Z|perDay=0
+optimism,20230712142826,2023-06-30T04:00:00.000Z,11408506.879999995,1.7698726701762215,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-06-30T04:00:00.000Z|perDay=0
+optimism,20230712142826,2023-07-30T04:00:00.000Z,12750684.159999996,1.9780929843146011,Core Contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-30T04:00:00.000Z|perDay=0
+optimism,20230712142826,2023-07-30T04:00:00.000Z,11408506.879999995,1.7698726701762215,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-30T04:00:00.000Z|perDay=0
+optimism,20230925105140,2023-08-30T04:00:00.000Z,12750684.159999996,1.5967951098763693,Core Contributors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-30T04:00:00.000Z|perDay=0
+optimism,20230925105140,2023-08-30T04:00:00.000Z,11408506.879999995,1.4287114140999093,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-30T04:00:00.000Z|perDay=0
+optimism,20230925105140,2023-09-30T04:00:00.000Z,12750684.159999996,1.5967951098763693,Core Contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-30T04:00:00.000Z|perDay=0
+optimism,20230925105140,2023-09-30T04:00:00.000Z,11408506.879999995,1.4287114140999093,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-30T04:00:00.000Z|perDay=0
+optimism,20231002201612,2023-09-30T04:00:00.000Z,12750684.159999996,1.5967951098763693,Core Contributors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-30T04:00:00.000Z|perDay=0
+optimism,20231002201612,2023-09-30T04:00:00.000Z,11408506.879999995,1.4287114140999093,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-30T04:00:00.000Z|perDay=0
+optimism,20231002201612,2023-10-30T04:00:00.000Z,12750684.160000026,1.596795109876373,Core Contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-30T04:00:00.000Z|perDay=0
+optimism,20231002201612,2023-10-30T04:00:00.000Z,11408506.879999995,1.4287114140999093,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-30T04:00:00.000Z|perDay=0
+optimism,20231101224040,2023-10-30T04:00:00.000Z,12750684.160000026,1.4482097528338247,Core Contributors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-30T04:00:00.000Z|perDay=0
+optimism,20231101224040,2023-10-30T04:00:00.000Z,11408506.879999995,1.2957666209565768,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-30T04:00:00.000Z|perDay=0
+optimism,20231101224040,2023-11-30T04:00:00.000Z,12750684.159999967,1.448209752833818,Core Contributors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-30T04:00:00.000Z|perDay=0
+optimism,20231101224040,2023-11-30T04:00:00.000Z,11408506.880000025,1.2957666209565801,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-30T04:00:00.000Z|perDay=0
+osmosis,20230330080357,2023-06-19T00:00:00.000Z,163934.42595628407,0.029534969614084822,Liquidity Mining Incentives,linear,next_data.nextEventData
+osmosis,20230413203211,2023-06-19T00:00:00.000Z,163934.42595628407,0.029104081908034762,Liquidity Mining Incentives,linear,next_data.nextEventData
+osmosis,20230604094043,2023-06-19T00:00:00.000Z,163934.42595628407,0.027728425326783653,Liquidity Mining Incentives,linear,next_data.nextEventData
+osmosis,20230604094043,2023-06-19T00:00:00.000Z,91074.68114754102,0.015404680747371832,Developer Vesting,linear,next_data.nextEventData
+osmosis,20230604094043,2023-06-19T00:00:00.000Z,91074.68114754102,0.015404680747371832,Staking Rewards,linear,next_data.nextEventData
+osmosis,20230604094043,2023-06-19T00:00:00.000Z,18214.93620218579,0.0030809361448529606,Community Pool,linear,next_data.nextEventData
+pendle,20230712030858,2023-07-12T00:00:00.000Z,443453.0,,Liquidity Incentives,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-07-19T00:00:00.000Z|perDay=63350.42857142857
+pendle,20230712030858,2023-07-19T00:00:00.000Z,438575.0,,Liquidity Incentives,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-07-26T00:00:00.000Z|perDay=62653.57142857143
+pendle,20231002204721,2023-09-27T00:00:00.000Z,392651.0,,Liquidity Incentives,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-10-04T00:00:00.000Z|perDay=56093
+pendle,20231002204721,2023-10-04T00:00:00.000Z,388332.0,,Liquidity Incentives,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-11T00:00:00.000Z|perDay=55476
+polkadot,20230522072736,2023-05-26T00:00:00.000Z,364705.90491803276,0.029539683227622984,Staking Rewards,linear,next_data.nextEventData
+polkadot,20230604094422,2024-05-26T00:00:00.000Z,401228.0443835616,0.0323728982528579,Staking Rewards,linear,next_data.nextEventData
+polkadot,20231002202549,2023-05-26T00:00:00.000Z,133482361.19999999,,Staking Rewards,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-05-26T00:00:00.000Z|perDay=364705.90491803276
+polkadot,20231002202549,2024-05-26T00:00:00.000Z,146448236.2,,Staking Rewards,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-05-26T00:00:00.000Z|perDay=401228.0443835616
+polygon-ecosystem-token,20231214235726,2023-10-25T00:00:00.000Z,10000000000.0,14097.102118553255,Migrated from $MATIC,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-25T00:00:00.000Z|perDay=0
+polygon-ecosystem-token,20231214235726,2023-10-25T00:00:00.000Z,100000000.0,,Validator Incentives,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-10-25T00:00:00.000Z|perDay=273224.043715847
+polygon-ecosystem-token,20231214235726,2023-10-25T00:00:00.000Z,100000000.0,,Community Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-10-25T00:00:00.000Z|perDay=273224.043715847
+polygon-ecosystem-token,20231214235726,2024-10-25T00:00:00.000Z,102000000.0,,Validator Incentives,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-10-25T00:00:00.000Z|perDay=279452.05479452055
+polygon-ecosystem-token,20231214235726,2024-10-25T00:00:00.000Z,102000000.0,,Community Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-10-25T00:00:00.000Z|perDay=279452.05479452055
+project-galaxy,20230307223735,2023-03-09T12:00:00.000Z,192307.68999999948,0.4131621625571589,Public Sale,cliff,next_data.nextEventData
+project-galaxy,20230604113024,2023-06-05T12:00:00.000Z,416666.66000000015,0.8951846819597749,Team,cliff,next_data.nextEventData
+project-galaxy,20231208001315,2023-12-05T00:00:00.000Z,1025000.0,1.1398767821000422,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-05T00:00:00.000Z|perDay=0
+project-galaxy,20231208001315,2023-12-05T00:00:00.000Z,416667.0,0.46336491626075926,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-05T00:00:00.000Z|perDay=0
+project-galaxy,20231208001315,2023-12-05T00:00:00.000Z,586667.0,0.6524176508529614,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-05T00:00:00.000Z|perDay=0
+project-galaxy,20231208001315,2024-01-05T00:00:00.000Z,2000000.0,2.22414981873179,Marketing,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-05T00:00:00.000Z|perDay=0
+project-galaxy,20231208001315,2024-01-05T00:00:00.000Z,416666.6699999999,0.4633645492760391,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-05T00:00:00.000Z|perDay=0
+project-galaxy,20231208001315,2024-01-05T00:00:00.000Z,586666.6699999999,0.6524172838682413,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-05T00:00:00.000Z|perDay=0
+pyth-network,20231208002857,2023-11-20T14:00:00.000Z,50000000.0,3.333333333333334,Publisher Reward,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-20T14:00:00.000Z|perDay=0
+pyth-network,20231208002857,2023-11-20T14:00:00.000Z,700000000.0,46.666666666666664,Ecosystem Growth,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-20T14:00:00.000Z|perDay=0
+pyth-network,20231208002857,2023-11-20T14:00:00.000Z,150000000.0,10.0,Protocol Development,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-20T14:00:00.000Z|perDay=0
+pyth-network,20231208002857,2023-11-20T14:00:00.000Z,600000000.0,40.0,Community and Launch,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-20T14:00:00.000Z|perDay=0
+pyth-network,20231208002857,2024-05-20T14:00:00.000Z,537500000.0,35.833333333333336,Publisher Reward,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-05-20T14:00:00.000Z|perDay=0
+pyth-network,20231208002857,2024-05-20T14:00:00.000Z,1125000000.0,75.0,Ecosystem Growth,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-05-20T14:00:00.000Z|perDay=0
+pyth-network,20231208002857,2024-05-20T14:00:00.000Z,212500000.0,14.166666666666666,Protocol Development,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-05-20T14:00:00.000Z|perDay=0
+pyth-network,20231208002857,2024-05-20T14:00:00.000Z,250000000.0,16.666666666666664,Private Sales,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-05-20T14:00:00.000Z|perDay=0
+radiant-capital,20231207225901,2023-03-18T23:40:59.000Z,375131304.0,,Incentives for Suppliers and Borrowers,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-08-30T00:08:34.000Z|perDay=419141.1217877095
+rocket-pool,20231002220640,2021-09-09T00:00:00.000Z,1800000.0,,Oracle DAO,linear,rsc.fiveUnlocks.previousUnlocks|end=2031-09-09T00:00:00.000Z|perDay=492.88061336254106
+rocket-pool,20231002220640,2021-09-09T00:00:00.000Z,540000.0,,Protocol DAO Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2031-09-09T00:00:00.000Z|perDay=147.86418400876232
+rocket-pool,20231002220640,2021-09-09T00:00:00.000Z,360000.0,,Protocol DAO Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2031-09-09T00:00:00.000Z|perDay=98.57612267250822
+rocket-pool,20231002220640,2021-09-09T00:00:00.000Z,900000.0,,Protocol DAO Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2031-09-09T00:00:00.000Z|perDay=246.44030668127053
+rocket-pool,20231002220640,2021-09-09T00:00:00.000Z,8400000.0,,Node Operators,linear,rsc.fiveUnlocks.previousUnlocks|end=2031-09-09T00:00:00.000Z|perDay=2300.1095290251915
+sei-network,20231002201742,2023-08-15T12:00:00.000Z,300000000.0,16.666666666666664,Binance Launchpool,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-15T12:00:00.000Z|perDay=0
+sei-network,20231002201742,2023-08-15T12:00:00.000Z,200000000.0,11.111111111111112,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-15T12:00:00.000Z|perDay=0
+sei-network,20231002201742,2023-08-15T12:00:00.000Z,700000000.0,,Foundation,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-08-15T00:00:00.000Z|perDay=958904.1095890411
+sei-network,20231002201742,2023-08-15T12:00:00.000Z,1300000000.0,72.22222222222221,Ecosystem Reserve,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-15T12:00:00.000Z|perDay=0
+sei-network,20231002201742,2023-08-15T12:00:00.000Z,2937000000.0,,Ecosystem Reserve,linear,rsc.fiveUnlocks.previousUnlocks|end=2030-08-15T12:00:00.000Z|perDay=1148611.6542823622
+sei-network,20231002201742,2024-08-15T12:00:00.000Z,2000000000.0,,Private Sale Investors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2027-08-15T12:00:00.000Z|perDay=1826484.0182648401
+sei-network,20231002201742,2024-08-15T12:00:00.000Z,2000000000.0,,Team,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2029-08-15T12:00:00.000Z|perDay=1095290.251916758
+sei-network,20240101153424,2023-08-15T12:00:00.000Z,300000000.0,13.043478260869565,Binance Launchpool,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-15T12:00:00.000Z|perDay=0
+sei-network,20240101153424,2023-08-15T12:00:00.000Z,200000000.0,8.695652173913043,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-15T12:00:00.000Z|perDay=0
+sei-network,20240101153424,2023-08-15T12:00:00.000Z,700000000.0,,Foundation,linear,rsc.fiveUnlocks.previousUnlocks|end=2025-08-15T00:00:00.000Z|perDay=958904.1095890411
+sei-network,20240101153424,2023-08-15T12:00:00.000Z,1300000000.0,56.52173913043478,Ecosystem Reserve,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-15T12:00:00.000Z|perDay=0
+sei-network,20240101153424,2023-08-15T12:00:00.000Z,2937000000.0,,Ecosystem Reserve,linear,rsc.fiveUnlocks.previousUnlocks|end=2030-08-15T12:00:00.000Z|perDay=1148611.6542823622
+sei-network,20240101153424,2024-08-15T12:00:00.000Z,2000000000.0,,Private Sale Investors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2027-08-15T12:00:00.000Z|perDay=1826484.0182648401
+sei-network,20240101153424,2024-08-15T12:00:00.000Z,2000000000.0,,Team,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2029-08-15T12:00:00.000Z|perDay=1095290.251916758
+singularitynet,20230628125007,2023-07-28T00:00:00.000Z,9974002.699999988,0.8157146654082292,AGIX-ADA Utility,cliff,next_data.nextEventData
+singularitynet,20230925105052,2023-08-28T00:00:00.000Z,9824392.699999988,0.7969917888219701,AGIX-ADA Utility,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-28T00:00:00.000Z|perDay=0
+singularitynet,20230925105052,2023-09-28T00:00:00.000Z,9677026.800000012,0.7850369112189667,AGIX-ADA Utility,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-28T00:00:00.000Z|perDay=0
+singularitynet,20231002221418,2023-09-28T00:00:00.000Z,9677026.800000012,0.7830910981587857,AGIX-ADA Utility,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-28T00:00:00.000Z|perDay=0
+singularitynet,20231002221418,2023-10-28T00:00:00.000Z,9531871.399999976,0.7713447318482465,AGIX-ADA Utility,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-28T00:00:00.000Z|perDay=0
+solana,20230921153533,2023-02-10T00:00:00.000Z,31337823.399999976,,Inflation,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-02-10T00:00:00.000Z|perDay=85857.05041095884
+solana,20230921153533,2024-02-10T00:00:00.000Z,28176777.100000024,,Inflation,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-02-10T00:00:00.000Z|perDay=76985.72978142083
+solana,20231002201901,2023-02-10T00:00:00.000Z,31337823.399999976,,Inflation,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-02-10T00:00:00.000Z|perDay=85857.05041095884
+solana,20231002201901,2024-02-10T00:00:00.000Z,28176777.100000024,,Inflation,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2025-02-10T00:00:00.000Z|perDay=76985.72978142083
+space-id,20230521002642,2023-05-22T00:00:00.000Z,5000000.0,1.7482517482517483,Foundation,cliff,next_data.nextEventData
+space-id,20230521002642,2023-05-22T00:00:00.000Z,4875000.0,1.7045454545454544,Marketing,cliff,next_data.nextEventData
+space-id,20230521002642,2023-05-22T00:00:00.000Z,2777778.0,0.971251048951049,Ecosystem Fund,cliff,next_data.nextEventData
+space-id,20230521002642,2023-05-22T00:00:00.000Z,2500000.0,0.8741258741258742,Community Airdrop,cliff,next_data.nextEventData
+space-id,20230604100306,2023-06-22T00:00:00.000Z,5000000.0,1.7482517482517483,Foundation,cliff,next_data.nextEventData
+space-id,20230604100306,2023-06-22T00:00:00.000Z,4875000.0,1.7045454545454544,Marketing,cliff,next_data.nextEventData
+space-id,20230604100306,2023-06-22T00:00:00.000Z,2777777.0,0.9712506993006994,Ecosystem Fund,cliff,next_data.nextEventData
+space-id,20230604100306,2023-06-22T00:00:00.000Z,2500000.0,0.8741258741258742,Community Airdrop,cliff,next_data.nextEventData
+space-id,20230821222011,2023-07-22T00:00:00.000Z,5833333.0,2.039626923076923,Community Airdrop,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-22T00:00:00.000Z|perDay=0
+space-id,20230821222011,2023-07-22T00:00:00.000Z,2777778.0,0.9712510489510491,Ecosystem Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-22T00:00:00.000Z|perDay=0
+space-id,20230821222011,2023-07-22T00:00:00.000Z,5000000.0,1.7482517482517486,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-22T00:00:00.000Z|perDay=0
+space-id,20230821222011,2023-07-22T00:00:00.000Z,4875000.0,1.7045454545454544,Marketing,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-22T00:00:00.000Z|perDay=0
+space-id,20230821222011,2023-08-22T00:00:00.000Z,5833334.0,2.0396272727272726,Community Airdrop,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-22T00:00:00.000Z|perDay=0
+space-id,20230821222011,2023-08-22T00:00:00.000Z,2777778.0,0.9712510489510491,Ecosystem Fund,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-22T00:00:00.000Z|perDay=0
+space-id,20230821222011,2023-08-22T00:00:00.000Z,5000000.0,1.7482517482517486,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-22T00:00:00.000Z|perDay=0
+space-id,20230821222011,2023-08-22T00:00:00.000Z,4875000.0,1.7045454545454544,Marketing,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-11-22T00:00:00.000Z,5833334.0,1.3549944045860884,Community Airdrop,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-11-22T00:00:00.000Z,2777778.0,0.6452354086329252,Ecosystem Fund,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-11-22T00:00:00.000Z,5000000.0,1.1614236426253737,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-11-22T00:00:00.000Z,4875000.0,1.1323880515597395,Marketing,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-12-22T00:00:00.000Z,5833333.0,1.3549941723013599,Community Airdrop,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-12-22T00:00:00.000Z,2777778.0,0.6452354086329252,Ecosystem Fund,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-12-22T00:00:00.000Z,5000000.0,1.1614236426253737,Foundation,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-22T00:00:00.000Z|perDay=0
+space-id,20231207224745,2023-12-22T00:00:00.000Z,4875000.0,1.1323880515597395,Marketing,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-22T00:00:00.000Z|perDay=0
+stargate-finance,20230307225653,2023-03-17T00:00:00.000Z,549450.5494505494,0.32645948924204615,Protocol Launch,linear,next_data.nextEventData
+stepn,20230307223734,2023-04-01T00:00:00.000Z,580000.0,0.1064494116140047,Team,linear,next_data.nextEventData
+stepn,20230529181558,2023-06-01T00:00:00.000Z,1280000.0,0.14801733146387733,Private Sale,linear,next_data.nextEventData
+stepn,20230529181558,2023-06-01T00:00:00.000Z,840000.0,0.0971363737731695,Move and Earn,linear,next_data.nextEventData
+stepn,20230529181558,2023-06-01T00:00:00.000Z,600000.0,0.06938312412369249,Ecosystem/Treasury,linear,next_data.nextEventData
+stepn,20230529181558,2023-06-01T00:00:00.000Z,580000.0,0.06707035331956943,Team,linear,next_data.nextEventData
+stepn,20230529181558,2023-06-01T00:00:00.000Z,220000.0,0.025440478845353918,Advisors,linear,next_data.nextEventData
+stepn,20231002202453,2023-10-01T00:00:00.000Z,38400000.0,,Private Sale,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-01T00:00:00.000Z|perDay=1238709.677419355
+stepn,20231002202453,2023-10-01T00:00:00.000Z,6600000.0,,Advisors,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-01T00:00:00.000Z|perDay=212903.2258064516
+stepn,20231002202453,2023-10-01T00:00:00.000Z,17400000.0,,Team,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-01T00:00:00.000Z|perDay=561290.3225806452
+stepn,20231002202453,2023-10-01T00:00:00.000Z,18000000.0,,Ecosystem/Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-11-01T00:00:00.000Z|perDay=580645.1612903225
+stepn,20231002202453,2023-11-01T00:00:00.000Z,32400000.0,,Private Sale,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-01T00:00:00.000Z|perDay=1080000
+stepn,20231002202453,2023-11-01T00:00:00.000Z,6000000.0,,Advisors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-01T00:00:00.000Z|perDay=200000
+stepn,20231002202453,2023-11-01T00:00:00.000Z,18000000.0,,Team,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-01T00:00:00.000Z|perDay=600000
+stepn,20231002202453,2023-11-01T00:00:00.000Z,18000000.0,,Ecosystem/Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-01T00:00:00.000Z|perDay=600000
+sui,20230515104422,2023-06-03T00:00:00.000Z,32416666.699999988,6.136339097603941,Community Access Program,cliff,next_data.nextEventData
+sui,20230515104422,2023-06-03T00:00:00.000Z,28666666.659999996,5.426479812118913,Sui Foundation,cliff,next_data.nextEventData
+sui,20230604113402,2023-07-03T00:00:00.000Z,32416666.600000024,6.136339078674367,Community Access Program,cliff,next_data.nextEventData
+sui,20230604113402,2023-07-03T00:00:00.000Z,28666666.67,5.426479814011872,Sui Foundation,cliff,next_data.nextEventData
+sui,20230727210713,2023-07-03T00:00:00.000Z,34615385.0,5.288450679283595,Community Access Program,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-03T00:00:00.000Z|perDay=0
+sui,20230727210713,2023-07-31T00:00:00.000Z,30000000.0,,Stake Subsidies,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-31T00:00:00.000Z|perDay=967741.9354838709
+sui,20230829023550,2023-08-03T00:00:00.000Z,34615385.0,4.786669637402877,Community Access Program,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-03T00:00:00.000Z|perDay=0
+sui,20230829023550,2023-08-31T00:00:00.000Z,30000000.0,,Stake Subsidies,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-09-30T00:00:00.000Z|perDay=1000000
+sui,20230929120435,2023-09-03T00:00:00.000Z,34615384.0,4.371857083302345,Community Access Program,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-09-03T00:00:00.000Z|perDay=0
+sui,20230929120435,2023-09-29T16:59:00.000Z,30000000.0,,Stake Subsidies,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-10-29T16:59:00.000Z|perDay=1000000
+sui,20231017182448,2023-10-03T00:00:00.000Z,34615385.0,4.023206444225099,Community Access Program,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-03T00:00:00.000Z|perDay=0
+sui,20231017182448,2023-10-29T16:59:00.000Z,27000000.0,,Stake Subsidies,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-28T16:59:00.000Z|perDay=900000
+sui,20231101224049,2023-10-31T00:00:00.000Z,4000000.0,0.4142597693728912,Community Reserve,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-10-31T00:00:00.000Z|perDay=0
+sui,20231101224049,2023-11-03T00:00:00.000Z,34615384.0,3.5849402481485173,Community Access Program,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-11-03T00:00:00.000Z|perDay=0
+sui,20231208001654,2023-12-03T00:00:00.000Z,34615385.0,3.3501057322588417,Community Access Program,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-03T00:00:00.000Z|perDay=0
+sui,20231208001654,2023-12-31T00:00:00.000Z,4000000.0,0.3871233247596514,Community Reserve,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-31T00:00:00.000Z|perDay=0
+sushi,20231208001610,2022-08-12T19:54:01.000Z,5331009.900000006,,Liquidity Mining,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-06-10T16:36:11.000Z|perDay=17710.99634551497
+sushi,20231208001610,2022-08-12T19:54:01.000Z,533100.9600000009,,Development Fund,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-06-10T16:36:11.000Z|perDay=1771.099534883724
+terra-luna-2,20230403112853,2023-06-21T00:00:00.000Z,95759.2339261286,0.03930747484790292,Pre-Attack UST holders,linear,next_data.nextEventData
+terra-luna-2,20231002203249,2022-11-24T00:00:00.000Z,245000000.0,,Pre-Attack LUNA holders,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-05-27T00:00:00.000Z|perDay=445454.54545454547
+terra-luna-2,20231002203249,2022-11-24T00:00:00.000Z,70000000.0,,Pre-Attack aUST holders,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-05-27T00:00:00.000Z|perDay=127272.72727272728
+terra-luna-2,20231002203249,2022-11-24T00:00:00.000Z,70000000.0,,Post-Attack LUNA holders,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-05-27T00:00:00.000Z|perDay=127272.72727272728
+terra-luna-2,20231002203249,2022-11-24T00:00:00.000Z,105000000.0,,Post-Attack UST holders,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-05-27T00:00:00.000Z|perDay=190909.0909090909
+the-sandbox,20230315104632,2023-08-14T08:00:00.000Z,102957777.0,5.683621542647796,Seed Sale,cliff,next_data.nextEventData
+the-sandbox,20230315104632,2023-08-14T08:00:00.000Z,96840277.0,5.345914612678358,Company Reserve,cliff,next_data.nextEventData
+the-sandbox,20230315104632,2023-08-14T08:00:00.000Z,71250000.0,3.9332437695663867,Team,cliff,next_data.nextEventData
+the-sandbox,20230315104632,2023-08-14T08:00:00.000Z,37500000.0,2.0701282997717825,Advisors,cliff,next_data.nextEventData
+the-sandbox,20230315104632,2023-08-14T08:00:00.000Z,24000000.0,1.3248821118539407,Strategic Sale,cliff,next_data.nextEventData
+the-sandbox,20230529181639,2023-08-14T08:00:00.000Z,102957777.0,5.55453069235395,Seed Sale,cliff,next_data.nextEventData
+the-sandbox,20230529181639,2023-08-14T08:00:00.000Z,96840277.0,5.224494025862255,Company Reserve,cliff,next_data.nextEventData
+the-sandbox,20230529181639,2023-08-14T08:00:00.000Z,71250000.0,3.843908865963752,Team,cliff,next_data.nextEventData
+the-sandbox,20230529181639,2023-08-14T08:00:00.000Z,37500000.0,2.023109929454607,Advisors,cliff,next_data.nextEventData
+the-sandbox,20230529181639,2023-08-14T08:00:00.000Z,24000000.0,1.2947903548509483,Strategic Sale,cliff,next_data.nextEventData
+the-sandbox,20230604110538,2023-08-14T08:00:00.000Z,102957777.0,5.55453069235395,Seed Sale,cliff,next_data.nextEventData
+the-sandbox,20230604110538,2023-08-14T08:00:00.000Z,96840277.0,5.224494025862255,Company Reserve,cliff,next_data.nextEventData
+the-sandbox,20230604110538,2023-08-14T08:00:00.000Z,71250000.0,3.843908865963752,Team,cliff,next_data.nextEventData
+the-sandbox,20230604110538,2023-08-14T08:00:00.000Z,37500000.0,2.023109929454607,Advisors,cliff,next_data.nextEventData
+the-sandbox,20230604110538,2023-08-14T08:00:00.000Z,24000000.0,1.2947903548509483,Strategic Sale,cliff,next_data.nextEventData
+the-sandbox,20230810225408,2023-02-14T08:00:00.000Z,71250000.0,3.462213647210218,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-02-14T08:00:00.000Z,37500000.0,1.8222177090580098,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-02-14T08:00:00.000Z,39900000.0,1.9388396424377223,Foundation,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-02-14T08:00:00.000Z,96840278.0,4.705708520578687,Company Reserve,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-02-14T08:00:00.000Z,24000000.0,1.166219333797126,Strategic Sale,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-02-14T08:00:00.000Z,103080000.0,5.008912038658657,Seed Sale,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-08-14T08:00:00.000Z,71250000.0,3.462213647210218,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-08-14T08:00:00.000Z,37500000.0,1.8222177090580098,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-08-14T08:00:00.000Z,96840277.0,4.705708471986216,Company Reserve,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-08-14T08:00:00.000Z,24000000.0,1.166219333797126,Strategic Sale,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20230810225408,2023-08-14T08:00:00.000Z,102957777.0,5.002972920923879,Seed Sale,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2023-08-14T08:00:00.000Z,71250000.0,3.445471250599837,Team,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2023-08-14T08:00:00.000Z,37500000.0,1.8134059213683351,Advisors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2023-08-14T08:00:00.000Z,96840277.0,4.6829528463666605,Company Reserve,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2023-08-14T08:00:00.000Z,24000000.0,1.1605797896757344,Strategic Sale,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2023-08-14T08:00:00.000Z,102957777.0,4.978779799005881,Seed Sale,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-08-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2024-02-14T08:00:00.000Z,71250000.0,3.445471250599837,Team,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2024-02-14T08:00:00.000Z,37500000.0,1.8134059213683351,Advisors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-02-14T08:00:00.000Z|perDay=0
+the-sandbox,20231002214649,2024-02-14T08:00:00.000Z,96840278.0,4.682952894724152,Company Reserve,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-02-14T08:00:00.000Z|perDay=0
+tornado-cash,20230307223443,2023-03-08T03:29:50.000Z,91666.66999999993,6.066358677193084,Governance,cliff,next_data.nextEventData
+tornado-cash,20230307223443,2023-03-08T03:29:50.000Z,83333.34000000005,5.514871765369924,Team and Investors,cliff,next_data.nextEventData
+tornado-cash,20230529181617,2023-06-06T03:29:50.000Z,91666.66999999993,6.066358677193084,Governance,cliff,next_data.nextEventData
+tornado-cash,20230529181617,2023-06-06T03:29:50.000Z,83333.33,5.514871103585362,Team and Investors,cliff,next_data.nextEventData
+tornado-cash,20230604105740,2023-06-06T03:29:50.000Z,91666.66999999993,6.066358677193084,Governance,cliff,next_data.nextEventData
+tornado-cash,20230604105740,2023-06-06T03:29:50.000Z,83333.33,5.514871103585362,Team and Investors,cliff,next_data.nextEventData
+tornado-cash,20231207234200,2023-12-03T03:30:33.000Z,13888.890000000014,0.3644850947823461,Team and Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-03T03:30:33.000Z|perDay=0
+tornado-cash,20231207234200,2023-12-03T03:30:33.000Z,910.5299999999988,0.023894970249758535,Team and Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-03T03:30:33.000Z|perDay=0
+tornado-cash,20231207234200,2023-12-03T03:30:33.000Z,91666.66999999993,2.4056015205917807,Governance,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-12-03T03:30:33.000Z|perDay=0
+tornado-cash,20231207234200,2024-01-02T03:30:33.000Z,91666.66999999993,2.4056015205917807,Governance,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2024-01-02T03:30:33.000Z|perDay=0
+uniswap,20230315104632,2023-09-18T00:00:00.000Z,117808.21917808219,0.01562926888860186,Community Treasury,linear,next_data.nextEventData
+uniswap,20230604110555,2023-09-18T00:00:00.000Z,117808.21917808219,0.01562926888860186,Community Treasury,linear,next_data.nextEventData
+uniswap,20230604110555,2023-09-18T00:00:00.000Z,109589.04109589041,0.014538854780094755,Team/Investors/Advisors,linear,next_data.nextEventData
+uniswap,20230903170312,2022-09-18T00:00:00.000Z,86000000.0,,Community Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-09-18T00:00:00.000Z|perDay=235616.43835616438
+uniswap,20230903170312,2022-09-18T00:00:00.000Z,80000000.0,,Team/Investors/Advisors,linear,rsc.fiveUnlocks.previousUnlocks|end=2023-09-18T00:00:00.000Z|perDay=219178.08219178082
+uniswap,20230903170312,2023-09-18T00:00:00.000Z,43000000.0,,Community Treasury,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-09-17T00:00:00.000Z|perDay=117808.21917808219
+uniswap,20230903170312,2023-09-18T00:00:00.000Z,40000000.0,,Team/Investors/Advisors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2024-09-17T00:00:00.000Z|perDay=109589.04109589041
+uniswap,20231207225259,2023-09-18T00:00:00.000Z,43000000.0,,Community Treasury,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-09-17T00:00:00.000Z|perDay=117808.21917808219
+uniswap,20231207225259,2023-09-18T00:00:00.000Z,40000000.0,,Team/Investors/Advisors,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-09-17T00:00:00.000Z|perDay=109589.04109589041
+worldcoin-wld,20230802040353,2023-07-24T04:00:01.000Z,500000000.0,431.0100996824708,Worldcoin Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-24T04:00:01.000Z|perDay=0
+worldcoin-wld,20230802040353,2023-07-24T04:00:01.000Z,3500000000.0,,Worldcoin Community,linear,rsc.fiveUnlocks.previousUnlocks|end=2026-07-24T00:00:00.000Z|perDay=3196347.0319634704
+worldcoin-wld,20230802040353,2024-07-24T00:00:00.000Z,950000000.0,,TFH Investors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-07-24T00:00:00.000Z|perDay=1301369.8630136987
+worldcoin-wld,20230802040353,2024-07-24T00:00:00.000Z,200000000.0,,TFH Reserve,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-07-24T00:00:00.000Z|perDay=273972.602739726
+worldcoin-wld,20230802040353,2024-07-24T00:00:00.000Z,1350000000.0,,Initial Development Team,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-07-24T00:00:00.000Z|perDay=1849315.0684931506
+worldcoin-wld,20231002223331,2023-07-24T04:00:01.000Z,500000000.0,378.6115211263627,Worldcoin Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-07-24T04:00:01.000Z|perDay=0
+worldcoin-wld,20231002223331,2023-07-24T04:00:01.000Z,3500000000.0,,Worldcoin Community,linear,rsc.fiveUnlocks.previousUnlocks|end=2026-07-24T00:00:00.000Z|perDay=3196347.0319634704
+worldcoin-wld,20231002223331,2024-07-24T00:00:00.000Z,950000000.0,,TFH Investors,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-07-24T00:00:00.000Z|perDay=1301369.8630136987
+worldcoin-wld,20231002223331,2024-07-24T00:00:00.000Z,200000000.0,,TFH Reserve,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-07-24T00:00:00.000Z|perDay=273972.602739726
+worldcoin-wld,20231002223331,2024-07-24T00:00:00.000Z,1350000000.0,,Initial Development Team,linear,rsc.fiveUnlocks.upcomingUnlocks|end=2026-07-24T00:00:00.000Z|perDay=1849315.0684931506
+yearn-finance,20231207225742,2022-02-07T12:00:00.000Z,3.0,0.009027149499867104,Key Contributors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2022-02-07T12:00:00.000Z|perDay=0
+yearn-finance,20231207225742,2022-02-07T12:00:00.000Z,15.0,,Key Contributors,linear,rsc.fiveUnlocks.previousUnlocks|end=2024-08-08T00:00:00.000Z|perDay=0.01644736842105263
+yield-guild-games,20230307225858,2023-03-27T13:59:00.000Z,9759259.0,5.271713166779203,Investors,cliff,next_data.nextEventData
+yield-guild-games,20230307225858,2023-03-27T13:59:00.000Z,3710417.0,2.0042765698852127,Community,cliff,next_data.nextEventData
+yield-guild-games,20230307225858,2023-03-27T13:59:00.000Z,1944444.0,1.0503411208642808,Treasury,cliff,next_data.nextEventData
+yield-guild-games,20230307225858,2023-03-27T13:59:00.000Z,1458333.0,0.7877558406482107,Advisors,cliff,next_data.nextEventData
+yield-guild-games,20230529181551,2023-06-27T13:59:00.000Z,9759263.0,5.271715327481432,Investors,cliff,next_data.nextEventData
+yield-guild-games,20230529181551,2023-06-27T13:59:00.000Z,3710417.0,2.0042765698852127,Community,cliff,next_data.nextEventData
+yield-guild-games,20230529181551,2023-06-27T13:59:00.000Z,1944445.0,1.050341661039838,Treasury,cliff,next_data.nextEventData
+yield-guild-games,20230529181551,2023-06-27T13:59:00.000Z,1458333.0,0.7877558406482107,Advisors,cliff,next_data.nextEventData
+yield-guild-games,20230604110827,2023-06-27T13:59:00.000Z,9759263.0,5.271715327481432,Investors,cliff,next_data.nextEventData
+yield-guild-games,20230604110827,2023-06-27T13:59:00.000Z,3710417.0,2.0042765698852127,Community,cliff,next_data.nextEventData
+yield-guild-games,20230604110827,2023-06-27T13:59:00.000Z,1944445.0,1.050341661039838,Treasury,cliff,next_data.nextEventData
+yield-guild-games,20230604110827,2023-06-27T13:59:00.000Z,1458333.0,0.7877558406482107,Advisors,cliff,next_data.nextEventData
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,1234567.888888889,0.4391291209758848,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,925925.9166666698,0.32934684073191467,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,1041666.6666666665,0.3705151995285547,Investors,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,4166666.666666666,1.4820607981142189,Founders,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,208333.33333333302,0.07410303990571084,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,2708333.3333333284,0.9633395187742405,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,677083.3333333358,0.24083487969356146,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,1333333.3333333358,0.47425945539655096,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,2083333.3333333358,0.7410303990571104,Community,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-11-27T14:00:00.000Z,2314814.833333334,0.8233671166503922,Treasury,cliff,rsc.fiveUnlocks.previousUnlocks|end=2023-11-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,1234567.88888889,0.43912912097588513,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,925925.916666666,0.32934684073191334,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,1041666.666666667,0.37051519952855483,Investors,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,4166666.666666668,1.4820607981142195,Founders,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,208333.33333333302,0.07410303990571084,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,2708333.3333333284,0.9633395187742405,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,677083.3333333358,0.24083487969356146,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,1333333.3333333358,0.47425945539655096,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,2083333.3333333358,0.7410303990571104,Community,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
+yield-guild-games,20231207235206,2023-12-27T14:00:00.000Z,2314814.833333334,0.8233671166503922,Treasury,cliff,rsc.fiveUnlocks.upcomingUnlocks|end=2023-12-27T14:00:00.000Z|perDay=0
