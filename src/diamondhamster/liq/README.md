@@ -62,3 +62,31 @@ Netzteil schläft der Mac trotzdem; das steht dann als Lücke in `hl/gaps.jsonl`
 `status.json`: `users` (bekannte Konten), `users_with_pos`, `coverage` (Anteil des OI, den wir kennen, je Seite;
 ab etwa 0,8 taugt das Buch als Wahrheit), `polls_last_min`, `lateness_s` (wie weit der Planer hinterherhinkt),
 `errors`, `ws_connected`.
+
+Prüfen gegen die Wahrheit (nach mindestens 14 Tagen Sammeln, sonst `--include-warmup`):
+
+```bash
+PY=~/.diamondhamster-venv/bin/python
+$PY -m diamondhamster.liq hl-events --data ~/diamondhamster-data/hl --coin BTC --out /tmp/hl-btc
+$PY -m diamondhamster.liq run --events /tmp/hl-btc --params /tmp/hl-btc/params.toml --out /tmp/hl-btc/engine
+$PY -m diamondhamster.liq run --events /tmp/hl-btc --params /tmp/hl-btc/params.toml --model baseline --out /tmp/hl-btc/base
+$PY -m diamondhamster.liq score --events /tmp/hl-btc --snapshots /tmp/hl-btc/engine
+$PY -m diamondhamster.liq score --events /tmp/hl-btc --snapshots /tmp/hl-btc/base
+```
+
+## Binance-Archiv (Teilprojekt 2)
+
+Binance veröffentlicht Tagesdateien (data.binance.vision). Der Downloader holt für ein Symbol die offenen
+Positionen alle 5 Minuten, Mark-Kerzen je Minute, alle Trades (sofort verdichtet auf eine Zeile je Minute und
+Größenklasse) und das Funding. Er prüft jede Datei gegen die sha256-Prüfsumme von Binance, überspringt Fertiges und
+vermerkt fehlende Tage in `missing.jsonl`. Eine Wahrheit gibt es hier nicht; die Snapshots lassen sich nur mit
+anderen Karten (z. B. Hyblock) vergleichen.
+
+```bash
+$PY -m diamondhamster.liq bn-download --symbol BTCUSDT --start 2025-01-01 --data ~/diamondhamster-data
+$PY -m diamondhamster.liq bn-events --symbol BTCUSDT --data ~/diamondhamster-data --out /tmp/bn-btc
+$PY -m diamondhamster.liq run --events /tmp/bn-btc --out /tmp/bn-btc/engine     # ein Snapshot je Tag 00:00 UTC
+```
+
+Grenzen: Tiers sind noch die illustrativen (echte Binance-Tiers brauchen die öffentliche Webseite, siehe Spec 4.3).
+Hyperliquid wird mit einem einzigen Tier aus `maxLeverage` gerechnet (Wartungssatz 1/(2·maxLeverage)).
