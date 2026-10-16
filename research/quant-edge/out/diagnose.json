@@ -1,0 +1,85 @@
+{
+ "carry_stress": {
+  "BTC": {
+   "Covid 2020-03-12": -0.009109891943348658,
+   "Mai-Crash 2021-05-19": 0.0037185714410952198,
+   "LUNA 2022-05": 0.0002166424337703976,
+   "Juni 2022 (Celsius/3AC)": -0.00037153550812207836,
+   "FTX 2022-11": -0.0027648353523482827,
+   "Yen-Carry 2024-08-05": 0.0005212294054728339
+  },
+  "ETH": {
+   "Covid 2020-03-12": -0.005882812755290123,
+   "Mai-Crash 2021-05-19": 0.0025055222259253718,
+   "LUNA 2022-05": -0.0006755080285932857,
+   "Juni 2022 (Celsius/3AC)": -0.0025480414414277286,
+   "FTX 2022-11": -0.002601274500029005,
+   "Yen-Carry 2024-08-05": -0.0004273861643546706
+  },
+  "SOL": {
+   "Mai-Crash 2021-05-19": 0.0005321558301822904,
+   "LUNA 2022-05": -0.009070840538280667,
+   "Juni 2022 (Celsius/3AC)": -0.004276370575118094,
+   "FTX 2022-11": -0.30900129645461893,
+   "Yen-Carry 2024-08-05": 8.029663592834524e-05
+  }
+ },
+ "short_horizon": {
+  "1": {
+   "events": 178,
+   "excess_weighted": 0.0020343020134553163,
+   "coins_positive": 5,
+   "coins": 12,
+   "round_trip_cost": 0.004
+  },
+  "3": {
+   "events": 178,
+   "excess_weighted": -0.00038254907686012594,
+   "coins_positive": 7,
+   "coins": 12,
+   "round_trip_cost": 0.004
+  },
+  "7": {
+   "events": 177,
+   "excess_weighted": 0.0034976828552526033,
+   "coins_positive": 7,
+   "coins": 12,
+   "round_trip_cost": 0.004
+  },
+  "14": {
+   "events": 135,
+   "excess_weighted": 0.00663641688289538,
+   "coins_positive": 7,
+   "coins": 12,
+   "round_trip_cost": 0.004
+  },
+  "28": {
+   "events": 109,
+   "excess_weighted": -0.02567675737278993,
+   "coins_positive": 5,
+   "coins": 12,
+   "round_trip_cost": 0.004
+  },
+  "56": {
+   "events": 77,
+   "excess_weighted": -0.050105070075651514,
+   "coins_positive": 6,
+   "coins": 12,
+   "round_trip_cost": 0.004
+  }
+ },
+ "funding_streaks": {
+  "BTC": {
+   "longest_negative_days": 9,
+   "worst_30d_funding_sum": -0.01311426
+  },
+  "ETH": {
+   "longest_negative_days": 13,
+   "worst_30d_funding_sum": -0.01777489
+  },
+  "SOL": {
+   "longest_negative_days": 27,
+   "worst_30d_funding_sum": -0.35965102000000004
+  }
+ }
+}
