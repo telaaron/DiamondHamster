@@ -33,6 +33,37 @@ def _load_snapshots(directory: Path) -> list[Snapshot]:
     return out
 
 
+def _hl_collect(data: Path, coins: tuple[str, ...]) -> int:
+    try:
+        import websockets
+    except ImportError:
+        websockets = None
+    if websockets is None:
+        print("hl-collect braucht das Paket websockets: pip install -e '.[collector]'", file=sys.stderr)
+        return 2
+    import asyncio
+    import logging
+    import signal
+
+    from .hl.api import WS_URL, HttpInfo
+    from .hl.collector import Collector
+    from .hl.store import Store
+
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    collector = Collector(Store(Path(data) / "hl"), HttpInfo(),
+                          lambda: websockets.connect(WS_URL, ping_interval=None, max_size=2**24), coins=coins)
+
+    async def run() -> None:
+        stop = asyncio.Event()
+        loop = asyncio.get_running_loop()
+        for sig in (signal.SIGINT, signal.SIGTERM):
+            loop.add_signal_handler(sig, stop.set)
+        await collector.run(stop)
+
+    asyncio.run(run())
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="python -m diamondhamster.liq", description="Liquidations-Engine")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -50,7 +81,20 @@ def main(argv: list[str] | None = None) -> int:
     c.add_argument("--events", type=Path, required=True)
     c.add_argument("--snapshots", type=Path, required=True)
     c.add_argument("--include-warmup", action="store_true")
+    h = sub.add_parser("hl-collect", help="Hyperliquid-Sammler im Vordergrund (läuft dauerhaft)")
+    h.add_argument("--data", type=Path, required=True)
+    h.add_argument("--coins", default="BTC,ETH")
+    hs = sub.add_parser("hl-service", help="Sammler als macOS-Dienst: install, uninstall, status")
+    hs.add_argument("action", choices=("install", "uninstall", "status"))
+    hs.add_argument("--data", type=Path, required=True)
+    hs.add_argument("--python", help="Python des Dienstes (Standard: dieses)")
     a = ap.parse_args(argv)
+
+    if a.cmd == "hl-collect":
+        return _hl_collect(a.data, tuple(a.coins.split(",")))
+    if a.cmd == "hl-service":
+        from .hl import service
+        return service.main(a.action, a.data, a.python)
 
     if a.cmd == "simulate":
         write_sim(a.out, *simulate(a.seed, a.days))

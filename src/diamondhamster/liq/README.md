@@ -39,3 +39,26 @@ Nur Events mit Zeitstempel ≤ `at` gehen ein (kein Blick in die Zukunft).
   kommt mit echten Daten (Teilprojekt 2).
 - Tier-Tabelle ist illustrativ, keine Börsendaten. Echte Tiers und Binance-Archiv folgen in Teilprojekt 2,
   Hyperliquid als echte Wahrheitsquelle in Teilprojekt 3.
+
+## Hyperliquid-Sammler (Teilprojekt 3)
+
+Hyperliquid ist eine Börse, deren Konten öffentlich sind. Der Sammler lernt aktive Konten aus dem Trade-Strom
+(jeder Trade nennt Käufer- und Verkäufer-Adresse), fragt deren Positionen reihum ab und speichert alle 15 Minuten
+das echte Liquidationsbuch. Das ist die Wahrheit, gegen die die Engine geprüft wird. Nur öffentliche Endpunkte,
+kein Schlüssel, keine Orders. Läuft auf dem Mac, weil die Cloud Hyperliquid blockt.
+
+```bash
+python3 -m venv ~/.diamondhamster-venv
+~/.diamondhamster-venv/bin/pip install '.[collector]'      # im Repo-Ordner; kopiert den Code in die venv
+~/.diamondhamster-venv/bin/python -m diamondhamster.liq hl-collect --data ~/diamondhamster-data   # Vordergrund, Strg+C stoppt
+~/.diamondhamster-venv/bin/python -m diamondhamster.liq hl-service install --data ~/diamondhamster-data
+~/.diamondhamster-venv/bin/python -m diamondhamster.liq hl-service status --data ~/diamondhamster-data
+```
+
+Der Dienst startet nach Absturz und Neuanmeldung von selbst und hält den Mac im Leerlauf wach. Zugeklappt ohne
+Netzteil schläft der Mac trotzdem; das steht dann als Lücke in `hl/gaps.jsonl`. Nach einem Code-Update die
+`pip install`-Zeile wiederholen und `hl-service install` erneut ausführen.
+
+`status.json`: `users` (bekannte Konten), `users_with_pos`, `coverage` (Anteil des OI, den wir kennen, je Seite;
+ab etwa 0,8 taugt das Buch als Wahrheit), `polls_last_min`, `lateness_s` (wie weit der Planer hinterherhinkt),
+`errors`, `ws_connected`.
