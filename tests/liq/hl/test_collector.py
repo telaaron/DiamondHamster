@@ -201,3 +201,19 @@ def test_ws_reconnects_and_records_gap(tmp_path):
     assert subs == ["BTC", "ETH"]
     gaps = [json.loads(l) for l in (tmp_path / "gaps.jsonl").read_text().splitlines()]
     assert gaps[0]["reason"] == "ws"
+
+
+def test_fetch_positions_runs_in_parallel(tmp_path):
+    import time as _t
+
+    class Slow(FakeHttp):
+        def post(self, body):
+            _t.sleep(0.1)
+            return super().post(body)
+
+    c, _ = make(tmp_path, http=Slow())
+    users = [f"u{i}" for i in range(8)]
+    start = _t.perf_counter()
+    res = c.fetch_positions(users)
+    assert _t.perf_counter() - start < 0.45
+    assert [u for u, _ in res] == users and not any(isinstance(r, Exception) for _, r in res)

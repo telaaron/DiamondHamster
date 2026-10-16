@@ -9,6 +9,7 @@ import asyncio
 import json
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 from . import api
 from .known import KnownBook
@@ -40,6 +41,7 @@ class Collector:
         self.polls: list[int] = []
         self.errors = 0
         self.ws_up = False
+        self.pool = ThreadPoolExecutor(max_workers=8, thread_name_prefix="hl-poll")
 
     def now(self) -> int:
         return int(self.clock() * 1000)
@@ -105,17 +107,15 @@ class Collector:
         rate = (self.budget - self.MARKET_WEIGHT) / api.WEIGHTS["clearinghouseState"]
         return rate / 2 if now < self.slow_until else rate
 
+    def _fetch_one(self, user: str) -> object:
+        try:
+            return self.http.post({"type": "clearinghouseState", "user": user})
+        except Exception as e:  # RateLimited und Netzfehler werden in apply_positions behandelt
+            return e
+
     def fetch_positions(self, users: list[str]) -> list[tuple[str, object]]:
-        out: list[tuple[str, object]] = []
-        for i, user in enumerate(users):
-            try:
-                out.append((user, self.http.post({"type": "clearinghouseState", "user": user})))
-            except api.RateLimited as e:
-                out.extend((u, e) for u in users[i:])
-                break
-            except Exception as e:
-                out.append((user, e))
-        return out
+        """Parallel, weil jede Abfrage vor allem auf das Netz wartet (seriell nur ~2 pro Sekunde)."""
+        return list(zip(users, self.pool.map(self._fetch_one, users)))
 
     def apply_positions(self, results: list[tuple[str, object]], now: int) -> int:
         ok = 0
@@ -208,6 +208,7 @@ class Collector:
             await asyncio.gather(*tasks, return_exceptions=True)
             self.save(self.now())
             self.store.close()
+            self.pool.shutdown(wait=False)
 
 
 async def _sleep_until_next(stop: asyncio.Event, period_ms: int, now: int) -> None:
