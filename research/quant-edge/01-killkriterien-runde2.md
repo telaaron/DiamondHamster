@@ -63,4 +63,9 @@ Daten: Binance-Perp 15-Minuten-Kerzen und 15-Minuten-Open-Interest BTC, ETH, 202
 Q1 8 + Q2 7 + Q3 6 + Q4 2 + Q5 30 = **53**. N_kum = 119.
 
 ## Nachträge
-(keine)
+- **N1 (2026-10-16, vor dem Q1-Lauf, nach Blick nur auf Datumsbereiche):** Die Dev-Nachschau beginnt 2026-07-01 ohne Vorgeschichte (Holdout-Lücke). Eine 90-Tage-Rendite wäre erst ab 2026-09-29 berechenbar. Q1-b/Q1-c verwenden deshalb nur 30-Tage-Rendite und 30-Tage-Volatilität; Ziel bleibt das 30-Tage-Funding-Mittel. Prognosefenster damit ab 2026-07-31. Zusatzprüfung gegen die Gegenhypothese "Modell liegt außerhalb der Stichprobe immer daneben": gleiche Spezifikation, Fit bis 2022-12, Prognose 2023-01..2024-12 (zählt als 2 weitere Tests, N_kum = 121, α bleibt gerundet 0,00042 → exakt 0,000413).
+- **N2 (2026-10-16, nach dem Q1-Lauf, nachträglich):** Newey-West-t ist bei ~80 überlappenden Tagen mit starker Persistenz überoptimistisch (Gegenhypothese). Gegentest: Leave-one-year-out-Fit in der Entwicklung, rollierende Residuen-Mittel gleicher Länge als empirische Nullverteilung, für Q1-b und Q1-c je Coin (4 Rechnungen). Kann ein Ergebnis nur entwerten, nie bestätigen.
+- **N3 (nachträglich, nach dem Q5-Lauf):** Gegentest "Bid-Ask-Bounce" für die Preis-Kontrolle H = 4 h: Einstieg 1 und 4 Bars später (4 Rechnungen).
+- **N4 (nachträglich, nach Blick auf Funding-Niveaus je Börse):** K1 mit Short-Bein auf Hyperliquid, BTC und ETH (2 Rechnungen). Ohne Hyperliquid-Kurse, Binance-Perp als Stellvertreter, also Obergrenze. Data Snooping: Idee entstand aus den Q2-Zahlen.
+- **N5 (nachträglich, Diagnose):** Q2-Regeln und Benchmark ohne Umschichtungskosten (6 Rechnungen), um zu sehen, ob Signal oder Kosten entscheiden.
+- **Zählung final Runde 2:** 53 vorab + 2 (N1) + 4 (N2) + 4 (N3) + 2 (N4) + 6 (N5) = **71**. N_kum = **137**, α = 0,05/137 = **0,000365**. Kein vorab angemeldetes Urteil ändert sich durch die strengere Schwelle.
