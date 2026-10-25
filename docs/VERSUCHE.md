@@ -55,6 +55,7 @@ In den ersten Tests konnte die KI versehentlich sehen, wie es nach einer Woche w
 | E-011 | erst Wahrscheinlichkeiten für hoch, seitwärts, runter | kein Unterschied |
 | E-012 | KI als Risikomanager: Verluste klein halten statt Rendite jagen | läuft |
 | H-002 | QS-Zyklen-Indikator (ohne KI) | verworfen |
+| H-004 | SK-System von Stefan Kassing, mechanisch (ohne KI) | verworfen |
 
 "Kein Unterschied" heißt: Der Versuch war mal etwas besser, mal etwas schlechter, aber nicht klar genug, um es vom Zufall zu unterscheiden.
 
