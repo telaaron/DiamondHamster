@@ -1,0 +1,10 @@
+{
+ "id": "E-023",
+ "parent": "E-003M",
+ "axis": "daten",
+ "change": "E-003M plus eine Zeile je Fenster mit der Perp-Basis: 7-Tage-Mittel von Close(BINANCE:<COIN>USDT.P)/Close(Spot)-1 als Perzentil der eigenen letzten 180 Tage; prompt.md erklaert die Zeile in zwei Saetzen ohne Handelsregel",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDCR15K2Dcgphwu4Y7Xyto3E",
+ "notes": "Backlog #36. Basis E-003M (nicht E-017, sauber statt dev-informiert). Daten: TradingView get_ohlcv 1D BINANCE:<COIN>USDT.P fuer die 10 Coins von Set A, abgerufen 2026-10-12; Tool-Antworten unveraendert in daten/raw/ (aus dem Sitzungsprotokoll extrahiert, nicht abgetippt), eingefroren in daten/basis_frozen.csv zusammen mit den Spot-Schlusskursen aus tournament/candles. render.py nutzt nur Zeilen bis zum Entscheidungstag und findet den Coin ueber die Spot-Schlusskurse der letzten 30 Tage (genau ein Treffer, sonst Abbruch); keine Harness-Aenderung. Format nach Backlog-Zeile (Perzentil 180 Tage), nicht nach basis.md par. 7 (365 Tage, mehrere Felder). Hypothese (Wissens-Thread, BIS WP 1087): hoher Carry, schwaechere Renditen ueber 1 bis 3 Monate; die KI senkt das Gewicht bei hoher Basis, Rank-IC steigt. Falsifiziert, wenn Rank-IC (E-003M: 0,059) und Timing-Wert (Differenz zu E-003M) nicht steigen. Champion-Regeln B-12/B-13/B-14: bei t >= 2 genau eine Wiederholung auf A, Urteil auf dem Mittel; B+C nur bei t >= 2. Karte nennt Anteil Gewichtsaenderungen unter 0,15, partiellen Anker (werkzeuge/anker.py) und Rank-IC. Vorlage aus Paragraph 4a unveraendert."
+}

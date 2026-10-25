@@ -1,0 +1,10 @@
+{
+ "id": "E-017",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Wissensblock: research/wissen/trader-wissen.md (ab Zeile 2, mit Abschnitt Wochenrhythmus) vor der Aufgabe",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD8nxdETMG94sm97xbtBkjor",
+ "notes": "Backlog #31. dev-informiert (Auflagen Waechter B-18): Teile der Datei, vor allem Grundsaetze 3, 5 und 7, wurden mit Kenntnis der Dev-Befunde geschrieben. Ein Sieg auf A oder B+C gilt hoechstens als Kandidat, nie als Nachweis; zaehlt als eine Variante; bei Sieg folgen Ablationen (ohne Kernregeln 3 und 5; nur Kernregeln) als neue Backlog-Zeilen. Hypothese: Umschichtung und Korrelation des Gewichts zur Lage in der 180-Tage-Spanne sinken, der Timing-Wert steigt Richtung 0. Falsifiziert, wenn Umschichtung und Spannen-Korrelation nicht beide gegenueber E-003M sinken. Abschnitt Wochenrhythmus vom Waechter am 2026-10-12 09:58 UTC freigegeben. Vorlage aus Paragraph 4a unveraendert; versuche.py vom Branch claude/project-thread-lupsy0 (PR #6)."
+}

@@ -1,0 +1,10 @@
+{
+ "id": "E-018",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Wissensblock Kurzfassung: research/wissen/kernregeln-kurz.md (ab Zeile 2) vor der Aufgabe, Laengenkontrolle zu E-017",
+ "input": "candles",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDE65qghcumVywxYhuLnuyAp",
+ "notes": "Backlog #34. dev-informiert (Auflagen Waechter B-18): Kurzfassung der Grundsaetze aus trader-wissen.md, mit Kenntnis der Dev-Befunde geschrieben. Ein Sieg gilt hoechstens als Kandidat, zaehlt als eine Variante, bei Sieg folgen Ablationen. Hypothese: Zeigt E-018 dasselbe wie E-017 (Umschichtung -44 %, Timing-Wert +0,30 vs E-003M), liegt es an den Kernregeln, nicht an der Laenge. Platzierung wie E-017 (nach der Titelzeile). Vorlage aus Paragraph 4a unveraendert; versuche.py vom Branch claude/project-thread-lupsy0 (PR #6)."
+}

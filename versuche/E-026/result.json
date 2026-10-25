@@ -1,0 +1,31 @@
+{
+ "id": "E-026",
+ "vs": "E-003M",
+ "A": {
+  "sets": "A",
+  "coins": 10,
+  "weeks": 13,
+  "decisions": 130,
+  "timing_week_pct": -0.373,
+  "timing_t": -0.95,
+  "base_timing_week_pct": -0.244,
+  "diff_week_pct": -0.129,
+  "diff_t": -1.12,
+  "diff_ex_best_week_pct": -0.171,
+  "best_week": "2026-07-26",
+  "exposure": 0.413,
+  "base_exposure": 0.463,
+  "rank_ic": 0.064,
+  "weeks_better": 4
+ },
+ "check": null,
+ "verdict": "kein messbarer Unterschied",
+ "repeated_A": false,
+ "model": "claude-opus-5-5",
+ "usage": {
+  "calls": 13,
+  "chars": 1043737,
+  "cost_usd_list": 6.75
+ },
+ "tool": "f2794e9 versuche.py@764f343a01"
+}

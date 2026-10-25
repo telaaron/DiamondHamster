@@ -48,7 +48,7 @@ Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`).
 1. **Eine Änderung pro Versuch**, Basis ist der Champion beim Start. Sonst weiß niemand, was gewirkt hat.
 2. **Kein Nachwürfeln.** Ein Versuch läuft einmal. `export` und `decide` überspringen Vorhandenes. Antworten löschen oder neu würfeln ist verboten; eine Wiederholung bekommt eine neue ID und zählt als eigene Variante.
 3. **Nur der eigene Ordner.** Ein Versuchs-Thread schreibt nur in `E-NNN/`. `champion.json`, `UEBERSICHT.md` und Ordner anderer Versuche ändert nur das Werkzeug bzw. der Forschungs-Thread.
-4. **Keine Datums- oder Coin-Hinweise.** Jedes Fenster wird vor dem Versand geprüft: keine Jahreszahl, kein Monatsname, kein Ticker. Preise auf 100 normiert. Treffer bricht den Export ab.
+4. **Keine Datums- oder Coin-Hinweise.** Jedes Fenster wird vor dem Versand geprüft: keine Jahreszahl, kein Monatsname, kein Ticker. Preise auf 100 normiert. Treffer bricht den Export ab. Seit 2026-10-12 (B-18) wird auch prompt.md geprüft, mit jedem Wissensblock darin: keine Jahreszahl, kein Monatsname auf Englisch oder Deutsch, kein HTML-Kommentar (`<!--`), kein „dev-“. Wer eine Datei aus research/wissen/ einbaut, lässt Zeile 1 weg, den Herkunftsvermerk; bleibt sie drin, bricht der Export ab. Eigene Datenzeilen (B-19): Jeder Abruf liegt mit seiner Anfrage als daten/raw/<COIN>.request.json im Versuch. Reicht er vor 2026-07, muss er vor dem Export geloggt sein (`python -m diamondhamster.versuche log-fetches E-NNN --reason "..."`, schreibt research/versuche/holdout_access.log; der Forschungs-Thread überträgt es nach data/holdout_access.log). Sonst bricht der Export ab. Nur so weit zurück abrufen, wie der Rückblick braucht.
 5. **Keine Zukunft im Fenster.** Die Aufbereitung (`render.py`) bekommt nur Kerzen bis zum Entscheidungstag. Batches sind pro Woche quer über Coins gebaut. Der frühere Fehler (Batches mit aufeinanderfolgenden Wochen eines Coins: das spätere Fenster zeigt, was nach dem früheren kam) betrifft die Dev-Läufe von T-001 und T-002 vom 11.10. Hier und im Turnier ist er ausgeschlossen.
 6. **Decider ohne Zugriff.** Geprüft am 2026-10-11: keine Werkzeuge, kann keine Dateien lesen, kein Netz. Er kennt das heutige Datum aus seinem Systemprompt; das verrät ihm nicht, welche Woche ein Fenster zeigt.
 7. **Kein Holdout.** Der Prüfstand nutzt nur Jul bis Sep 2026. Der Regel-Holdout (2025-01 bis 2026-06) bleibt unberührt.
@@ -59,7 +59,7 @@ Ein neuer Dev-Champion wird Basis für die folgenden Versuche (`champion.json`).
 
 ```bash
 cd <repo>   # Branch main (git pull origin main vor jedem Versuch)
-# Bis PR #5 gemergt ist: git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
+# PR #5 ist gemergt (2026-10-12), main reicht. Für alle Versuche, bis PR #6 gemergt ist (every, Prüfung von prompt.md B-18, Holdout-Sperre für Datenzeilen B-19): git fetch origin claude/project-thread-lupsy0 && git checkout origin/claude/project-thread-lupsy0 -- src/diamondhamster/versuche.py
 #   (nötig für die Referenz E-003M und die Referenz-Prüfung)
 H=/mnt/project-files/research/versuche
 N=E-0XX     # nächste freie Nummer; mkdir reserviert sie (schlägt fehl, wenn vergeben)
@@ -86,6 +86,7 @@ Lesbare Kopie im Repo (Ordner `versuche/`, ohne `runs/`): `python -m diamondhams
 Weitere Felder in spec.json:
 - `"ensemble": k` – k unabhängige Batches pro Woche (eigene Reihenfolge und IDs), entschieden wird mit dem mittleren Gewicht. Kostet k-fach.
 - `"memory": true` – die Wochen laufen nacheinander; jedes Fenster beginnt mit `last week: weight W, flip price F on today's scale` (Kipp-Preis der Vorwoche auf die heutige 100-Skala umgerechnet) bzw. `last week: no decision`. Der Prompt verlangt dann das JSON als `{"id": {"weight": w, "flip": Preis}}`. Nicht mit `ensemble` kombinierbar.
+- `"every": n` – die KI entscheidet nur jede n-te Woche (Woche 1, 1+n, …); dazwischen bleibt ihr Gewicht stehen, gewertet werden trotzdem alle 13 Wochen. Nicht mit `memory` kombinierbar.
 - `"composite": [IDs]` – nur für Referenzen: Mittel des Timing-Werts mehrerer Läufe (E-003M).
 
 `card` schreibt auch `E-NNN/denken.md`: die volle Antwort des Deciders für jede Woche, unverändert, mit den Coin-Namen erst nachträglich eingesetzt.
@@ -127,7 +128,7 @@ Gemessen an E-000 (2026-10-11): ein Versuch auf Set A = 13 Claude-Aufrufe, etwa 
 
 Stündlich nur Set A: etwa 24 × 4,70 = 113 USD Listenpreis am Tag, plus Kandidaten. Ob das in Aarons Limit passt, kann von hier niemand sehen. Regel: Meldet ein Lauf ein Nutzungslimit, setzt der Coordinator den Takt auf alle 3 Stunden und sagt es Aaron. Jede Karte zeigt den Verbrauch, die Übersicht die Summe.
 
-## 7. Vorschläge des Methodik-Wächters (B-09 bis B-11)
+## 7. Vorschläge des Methodik-Wächters (B-09 bis B-17)
 
 | Vorschlag | Übernommen? |
 |---|---|
@@ -135,12 +136,18 @@ Stündlich nur Set A: etwa 24 × 4,70 = 113 USD Listenpreis am Tag, plus Kandida
 | Höchstens eine Beförderung ins Turnier pro Woche | ja (§5) |
 | B-12: Champion nur, wenn er auch E-003 schlägt; Turnier erst bei t ≥ 2 auf B+C | ja (§2, §5), seit 2026-10-12; Referenz ist inzwischen E-003M |
 | B-14: Wiederholung eines Kandidaten vorab festgelegt (eine, Mittel beider Läufe muss t ≥ 2 halten; keine dritte); Werkzeug-Version auf jeder Karte | ja, seit 2026-10-12 (`--set A2`, Feld `tool` in result.json) |
+| B-15: jede Blockade am Turniertag hat eine Standardoption, nach 2 Stunden ohne Antwort gilt sie | ja, seit 2026-10-12 (tournament/README.md) |
+| B-16: strukturelle Umbauten vor Ein-Satz-Varianten (Ensemble, Veto-Rolle, Stufen, Trägheit) | ja, seit 2026-10-12 (backlog #25 bis #30, `"ensemble"`, `"memory"`); E-013 bis E-015 ohne messbaren Unterschied |
+| B-17: Abbruchregel mit Zahlen | ja, Aaron 2026-10-13: Bis zur Wertung am 2027-01-10 (13 Turnier-Wochen) braucht ein eingefrorener Prompt t > 1 über mindestens 20 Coins, sonst wechselt die KI die Rolle (Protokoll §13) |
 | Sichtbarer Zähler aller getesteten Varianten | ja (UEBERSICHT.md) |
 | Ergebnis ohne beste Woche mitberichten | ja, und es entscheidet mit (§2) |
 | Jeder Versuch auf allen 30 Coins | teilweise: alle 30 Coins für jeden Kandidaten, aber nicht für jeden Versuch. Grund: das verdreifacht den Verbrauch (14 statt 4,70 USD) für Versuche, die schon auf 10 Coins nichts zeigen. Ein Gewinner muss auf den anderen 20 Coins bestehen, die er nie gesehen hat; das ist strenger als ein Ergebnis über alle 30. |
 | Verbrauch pro Versuch protokollieren | ja (Karte und Übersicht) |
 
 ## 8. Erste Ergebnisse auf diesem Prüfstand
+
+- **Anker-Metrik (seit 2026-10-12, E-019):** Im Prüfstand hängt die Spannenlage stark an Momentum (Korrelation 0,75) und am Abstand zum 100-Tage-Schnitt (0,94). Die einfache Korrelation Gewicht ~ Spannenlage trennt deshalb keine Strategien. Maßgeblich ist die partielle Korrelation nach Herausrechnen beider Größen: `PYTHONPATH=src python /mnt/project-files/research/versuche/werkzeuge/anker.py E-NNN`. Stand: E-003M 0,40, E-016 (Gedächtnis) −0,15, E-017 0,43, E-018 0,31, E-019 0,41. Falsifikatoren zur Spannenlage nutzen ab jetzt den partiellen Wert.
+- **E-020 (Wissen plus Gedächtnis):** die einzige Variante bisher, die den Anker-Falsifikator besteht: partiell 0,15, Umschichtung 0,025, in 103 von 120 Fällen bleibt das Gewicht unverändert. Der Timing-Wert ist +0,25 %/Woche bei t 1,38, also kein messbarer Unterschied. Nach den Regeln gibt es keine Wiederholung und kein B+C. Champion bleibt E-003M. Der Timing-Wert ist Exposure-neutral: Er misst gegen eine konstante Position mit der eigenen mittleren Exposure, hier 0,29.
 
 - **E-000 = T-001**: Timing-Wert −0,24 % pro Woche auf A, −0,30 % auf B+C (t ≈ −0,8 bis −0,9). Das Hin- und Herschieben verliert also auch über 30 Coins leicht gegen eine feste Position. Exposure im Mittel 37 bis 45 %.
 - **E-001 = T-002** (plus Indikatoren): auf A besser (+0,12 % pro Woche, t 1,7, 9 von 13 Wochen), auf B+C schlechter (−0,06 %). Urteil: kein messbarer Unterschied. Der frühere Dev-Befund "T-002 schlechter" (2 Coins, mit Überlappungs-Leak) war damit Rauschen in die andere Richtung.

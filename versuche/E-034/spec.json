@@ -1,0 +1,10 @@
+{
+ "id": "E-034",
+ "parent": "E-003M",
+ "axis": "daten",
+ "change": "E-001 mit Analyse: E-003M plus eine Zeile mit 19 Indikatoren je Fenster (Formatsatz und Legende aus E-001/prompt.md)",
+ "input": "indicators",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDB5ePCgT1XjDU5TihTiVgug",
+ "notes": "Backlog #18. Hypothese: ohne Analyse (E-001) kein messbarer Unterschied; mit der Pflicht-Analyse kann die KI die Kennzahlen anders nutzen. Einzige Aenderung gegen E-003M: der Satz zum Datenformat wird durch den aus E-001 ersetzt und die Indikator-Legende aus E-001 eingefuegt; Vorlage aus Paragraph 4a unveraendert. Falsifikator (vor dem Lauf festgelegt): falsifiziert, ausser der Timing-Wert liegt ueber E-003M UND der Rank-IC steigt ueber E-003M (0,059). Weil pos_in_180d_range selbst in der Indikatorzeile steht, wird zusaetzlich berichtet: partieller Anker (E-003M 0,40) und ob die Gewichte pos_in_180d_range enger folgen als bei E-003M (einfache und partielle Korrelation). Ausserdem: Anteil Gewichtsaenderungen unter 0,15, Umschichtung (E-003M 0,121), Exposure, Vergleich mit konstant 0,5. Champion-Regeln B-12/B-13/B-14: bei t >= 2 genau eine Wiederholung auf A, Urteil auf dem Mittel; B+C nur dann. Keine Harness-Option; kein externer Abruf (B-19 entfaellt); versuche.py vom Branch claude/project-thread-lupsy0."
+}

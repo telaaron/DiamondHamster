@@ -1,0 +1,11 @@
+{
+ "id": "E-020",
+ "parent": "E-003M",
+ "axis": "prompt",
+ "change": "Wissen plus Gedaechtnis: Wissensblock aus E-017 (#31) und memory wie E-016 (#28), JSON mit Gewicht und Kipp-Preis",
+ "input": "candles",
+ "lookback": 180,
+ "memory": true,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguD2CU7ZGxMchocvP7NzBYzvE",
+ "notes": "Backlog #35. dev-informiert (Auflagen Waechter B-18 wie #31): ein Sieg gilt hoechstens als Kandidat, zaehlt als eine Variante, bei Sieg folgen Ablationen, nur das Turnier beweist etwas. Prompt = E-017/prompt.md plus dieselbe Gedaechtnis-Aenderung wie E-016 gegenueber E-003M. Hypothese: beide zusammen senken Umschichtung und Spannen-Anker. Falsifiziert, wenn der partielle Ankerwert (werkzeuge/anker.py) ueber 0,2 oder die Umschichtung ueber 0,07 liegt. Vergleich: E-016 (+0,16 t 1,05, Umschichtung 0,04, partiell -0,15), E-017 (+0,30 t 1,57, 0,074, 0,43), E-019 (+0,19 t 1,70, 0,07, 0,41). Vorlage aus Paragraph 4a unveraendert bis auf das JSON-Format; versuche.py vom Branch claude/project-thread-lupsy0 (PR #6)."
+}

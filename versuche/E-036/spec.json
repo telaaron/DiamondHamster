@@ -1,0 +1,10 @@
+{
+ "id": "E-036",
+ "parent": "E-003M",
+ "axis": "daten",
+ "change": "E-003M plus eine Zeile je Fenster mit der realisierten Volatilitaet ueber 7, 30 und 90 Tage (annualisiert, ganze Prozent), berechnet aus den eigenen Kerzen des Fensters bis zum Entscheidungstag; prompt.md erklaert die Zeile in zwei Saetzen ohne Handelsregel",
+ "input": "custom",
+ "lookback": 180,
+ "thread": "https://claude.ai/code/project/chan_01VH1Un8SQtbifKwzD9jDguD?thread=cmsg_01VH1Un8SQtbifKwzD9jDguDKqwJruejf8azSbxGK5KpQd",
+ "notes": "Backlog #13. Hypothese: mit der Volatilitaetszeile gewichtet die KI nach Risiko statt nach Richtung. Daten: kein externer Abruf (B-19 entfaellt); Volatilitaet = Standardabweichung (ddof 1) der taeglichen Log-Renditen der Schlusskurse der letzten 7/30/90 Tage bis einschliesslich Entscheidungstag, mal sqrt(365), in Prozent, ganzzahlig gerundet; skalenfrei, kein Niveau, kein Datum. 'volatility not available' bei weniger als 91 Schlusskursen. Einzige Aenderung gegen E-003M: Zeile vor der Kerzentabelle plus zwei neutrale Saetze in prompt.md; Vorlage aus Paragraph 4a unveraendert. Falsifikator (vor dem Lauf festgelegt): falsifiziert, ausser (a) der Timing-Wert liegt ueber E-003M UND (b) die Gewichte korrelieren negativer mit der 30-Tage-Volatilitaet als bei E-003M. Mass fuer (b): Mittel ueber die 13 Wochen der Spearman-Korrelation Gewicht ~ 30d-Vola quer ueber die 10 Coins der Woche; fuer E-003M das Mittel ueber die drei E-003-Laeufe. Zusaetzlich berichtet: gepoolte Pearson-Korrelation ueber alle 130 Entscheidungen, partieller Anker (werkzeuge/anker.py, E-003M 0,40), Anteil Gewichtsaenderungen unter 0,15, Umschichtung (E-003M 0,121), Exposure, Rank-IC, Vergleich mit konstant 0,5. Champion-Regeln B-12/B-13/B-14: bei t >= 2 genau eine Wiederholung auf A, Urteil auf dem Mittel; B+C nur dann. Keine Harness-Option; versuche.py vom Branch claude/project-thread-lupsy0."
+}
