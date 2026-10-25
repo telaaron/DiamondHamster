@@ -1,0 +1,10 @@
+{
+ "8k_total_index": 13748,
+ "8k_with_ticker": 11056,
+ "8k_with_ticker_meta_found": 11056,
+ "8k_with_ticker_not_only_507_701_901": 9596,
+ "acceptance_from_index": 11056,
+ "json_vs_index_mismatch": 6085,
+ "docs_sampled": 3000,
+ "docs_ok": 3000
+}

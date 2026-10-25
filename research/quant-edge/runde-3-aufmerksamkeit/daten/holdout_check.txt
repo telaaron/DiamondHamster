@@ -1,0 +1,1 @@
+2026-10-16T18:24:38.954382+00:00 Holdout check 2025-01-01..2026-06-30 UTC: 2793779 rows with ts/date across all CSVs, 0 in holdout. (Before: 1 row in sec_8k_index.csv, filing date 2025-03-06 from the 2026-07 daily index, NITCHES INC, OTC, removed.) snapshot_proposals: 0 in holdout. unlocks_pit.csv unlock_date = document text from 2023/24 snapshots.

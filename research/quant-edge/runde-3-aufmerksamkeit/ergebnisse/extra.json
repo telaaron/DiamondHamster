@@ -1,0 +1,91 @@
+{
+ "a2s_stil": {
+  "n": 495,
+  "gleich_alle": 0.7838383838383839,
+  "n_richtung": 159,
+  "gleich_bei_richtung": 0.3710691823899371,
+  "gegenteil_bei_richtung": 0.006289308176100629
+ },
+ "a2k_stil": {
+  "n": 31,
+  "gleich_alle": 0.8709677419354839,
+  "n_richtung": 9,
+  "gleich_bei_richtung": 0.6666666666666666,
+  "gegenteil_bei_richtung": 0.0
+ },
+ "a2s_5_nach_50w": {
+  "gleiche_richtung_wie_50w": {
+   "n": 58,
+   "mean": 0.026738278801120417,
+   "median": -0.0040862808601452,
+   "t": 1.1281834368655281
+  },
+  "nur_volltext": {
+   "n": 97,
+   "mean": -0.018698971968236194,
+   "median": -0.0104377126681406,
+   "t": -1.3058481305633727
+  }
+ },
+ "a2s_5_nach_zuversicht": {
+  "1": {
+   "n": 80,
+   "mean": -0.001235982701132637,
+   "median": -0.01147095593827735,
+   "t": -0.06598055420543625
+  },
+  "2": {
+   "n": 60,
+   "mean": -0.00993515225584482,
+   "median": -0.008929150072163751,
+   "t": -0.47621627529439703
+  },
+  "3": {
+   "n": 16,
+   "mean": 0.01846173855549361,
+   "median": -0.0036644877432019003,
+   "t": 0.9512600148412939
+  }
+ },
+ "a2s_resttext_leck": {
+  "dokumente": 10,
+  "von": 499,
+  "trades_h5": 2,
+  "ohne_diese": {
+   "n": 154,
+   "mean": 0.0004206110603322315,
+   "median": -0.008929150072163751,
+   "t": 0.034024940172963376
+  }
+ },
+ "a2s_5_leck": {
+  "streng_anteil": 0.48717948717948717,
+  "locker_anteil": 0.5384615384615384,
+  "erkannt": {
+   "n": 84,
+   "mean": -0.013870838957099455,
+   "median": -0.02382557910396705,
+   "t": -0.7786084432501335
+  },
+  "nicht_erkannt": {
+   "n": 72,
+   "mean": 0.010632646358929885,
+   "median": 0.0092651344830029,
+   "t": 0.5966538639089123
+  },
+  "leser_sicher3_anteil": 0.17373737373737375,
+  "leser_name_genannt": 0.5474747474747474
+ },
+ "survivorship": {
+  "achtk_zeilen": 13747,
+  "ohne_ticker_anteil": 0.1227176838582964,
+  "ohne_ticker_ciks": 676,
+  "trades_mit_kurzer_historie": 0
+ },
+ "a2s_5_kosten": {
+  "mittel": 0.021766069979438887,
+  "median_halber_spread": 0.00692675243705625,
+  "mittel_halber_spread": 0.008609581591266022,
+  "gebuehr_rundreise": 0.004
+ }
+}

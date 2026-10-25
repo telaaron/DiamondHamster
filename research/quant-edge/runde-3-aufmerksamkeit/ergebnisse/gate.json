@@ -1,0 +1,56 @@
+{
+ "A2-S-5": {
+  "sigma_sd": 0.09217216700035524,
+  "sigma_mad": 0.04863125125504645,
+  "n_random": 4000,
+  "n_available": 1085,
+  "n_needed_sd": 381,
+  "n_needed_mad": 106,
+  "gate": "messbar"
+ },
+ "A2-S-20": {
+  "sigma_sd": 0.15459797665349084,
+  "sigma_mad": 0.08006769517721818,
+  "n_random": 3478,
+  "n_available": 1066,
+  "n_needed_sd": 1070,
+  "n_needed_mad": 287,
+  "gate": "nicht messbar"
+ },
+ "A2-K-5": {
+  "sigma_sd": 0.1163538167040662,
+  "sigma_mad": 0.0823746817523046,
+  "n_random": 4000,
+  "n_available": 32,
+  "n_needed_sd": 606,
+  "n_needed_mad": 304,
+  "gate": "nicht messbar"
+ },
+ "A2-K-20": {
+  "sigma_sd": 0.22185601558727203,
+  "sigma_mad": 0.165100463631795,
+  "n_random": 4000,
+  "n_available": 32,
+  "n_needed_sd": 2202,
+  "n_needed_mad": 1220,
+  "gate": "nicht messbar"
+ },
+ "A1-a": {
+  "sigma_sd": 0.27106949158490795,
+  "sigma_mad": 0.12152545968759339,
+  "n_random": 4000,
+  "n_available": 11,
+  "n_needed_sd": 3287,
+  "n_needed_mad": 661,
+  "gate": "nicht messbar"
+ },
+ "A1-b": {
+  "sigma_sd": 0.1740294432643057,
+  "sigma_mad": 0.09269346567880944,
+  "n_random": 4000,
+  "n_available": 11,
+  "n_needed_sd": 1355,
+  "n_needed_mad": 385,
+  "gate": "nicht messbar"
+ }
+}
