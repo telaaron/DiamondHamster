@@ -61,6 +61,16 @@ Vor dem ersten Datenpunkt gilt [PREREGISTRIERUNG.md](PREREGISTRIERUNG.md) (Metho
 
 Cookies bleiben auf dem Mac. Nie ins Repo, nie in den Chat.
 
+## Collector (H-X1)
+
+`collector.py` macht einen Durchgang: Timeline (20 Posts) je Account aus `accounts-v1.csv`, dann einmal Replies (max. 40) für jeden eigenen Post, der 3-24 h alt ist.
+Rohdaten nach `~/.diamondhamster/x-daten/raw/YYYY-MM-DD/` (gz + request.json + Tages-Manifest sha256.txt), Zustand in `state.sqlite`.
+
+- Startet nicht ohne eingefrorene PREREGISTRIERUNG.md, ausgefüllte `accounts-v1.csv` (User-IDs) und twscrape-DB.
+- Technik-Test vorher: `--allow-unfrozen` schreibt nach `TEST-unfrozen/`, zählt nie.
+- Alle 30 min per launchd: Vorlage `de.diamondhamster.x-collector.plist` (REPO-Pfad eintragen, nach `~/Library/LaunchAgents`, `launchctl load ...`). Log `/tmp/x-collector.log`.
+- MacBook schläft mit zugeklapptem Deckel, dann fehlen Läufe. Dauerbetrieb später auf dem Mac Mini (Abdeckung < 80 % = Test ungültig).
+
 ## Offene Punkte
 
 - DNS-Filter auf dem Mac (Resolver Tailscale 100.100.100.100 bzw. 192.168.178.120) blockt `syndication.twitter.com`, `cdn.syndication.twimg.com`, `nitter.poast.org`. Wahrscheinlich Pi-hole-Blockliste. Für die Empfehlung egal.

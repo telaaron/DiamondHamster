@@ -25,7 +25,7 @@ Klassifizierung je Text durch einen Claude-Subagenten mit eingefrorenem Prompt (
 
 Tageswert um 00:00 UTC über ein rollierendes 7-Tage-Fenster:
 - P = bullisch / (bullisch + bärisch) über alle Posts; jeder Account höchstens 5 Posts pro Fenster (damit Vielposter nicht dominieren).
-- R = dasselbe über Replies; höchstens 40 Replies je Post, die ersten 40 nach Zeit.
+- R = dasselbe über Replies; je Post genau ein Abruf 3-24 h nach Erscheinen, höchstens 40 Replies in der Reihenfolge, die X dabei anzeigt (X sortiert nach eigener Relevanz, nicht nach Zeit; das ist Teil der Messung).
 - S = 100 × (0,5·P + 0,5·R). Fehlt P oder R (keine Haltung), zählt der vorhandene Teil allein; fehlen beide, S = 50.
 
 ## 4. Horizont, Baseline, Test
@@ -47,6 +47,7 @@ Tageswert um 00:00 UTC über ein rollierendes 7-Tage-Fenster:
 - Jede Antwort roh speichern: `daten/raw/YYYY-MM-DD/HHMMSS_<endpoint>_<user_id>.json.gz` plus `request.json` (Endpoint, Parameter, Zeitstempel UTC, Route, twscrape-Version).
 - Täglich `daten/raw/YYYY-MM-DD/sha256.txt`; Dateien nie überschreiben oder nachträglich bearbeiten.
 - Klassifizierungs-Ergebnisse getrennt, je Zeile mit Prompt-sha256, damit eine neue Prompt-Version nie alte Werte überschreibt.
+- Technik-Tests vor dem Einfrieren landen in `TEST-unfrozen/` und zählen nie für H-X1 (Collector erzwingt das).
 - Rohdaten bleiben auf dem Mac (später Mac Mini), nicht im Repo (Größe, fremde Inhalte); im Repo nur Manifeste und Hashes.
 
 ## 7. Offen (Aaron entscheidet vor dem Einfrieren)

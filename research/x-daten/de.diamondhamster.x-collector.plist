@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Vorlage: REPO durch den Pfad zum Repo ersetzen, nach ~/Library/LaunchAgents kopieren,
+     dann: launchctl load ~/Library/LaunchAgents/de.diamondhamster.x-collector.plist -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>de.diamondhamster.x-collector</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string><string>-c</string>
+    <string>cd "REPO" &amp;&amp; TWS_TELEMETRY=0 "$HOME/.diamondhamster/xvenv/bin/python" research/x-daten/collector.py</string>
+  </array>
+  <key>StartInterval</key><integer>1800</integer>
+  <key>StandardOutPath</key><string>/tmp/x-collector.log</string>
+  <key>StandardErrorPath</key><string>/tmp/x-collector.log</string>
+</dict>
+</plist>
