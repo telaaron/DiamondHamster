@@ -42,6 +42,10 @@ Nitter-RSS als Fallback für Posts. Bei Bann: neuer Burner, nicht mehr Accounts 
 
 Nicht machen: Hauptaccount, gekaufte Accounts, Account-Pools, Proxys zur Tarnung. Das erhöht Bann- und Rechtsrisiko und ist für 50 Accounts unnötig.
 
+## Vorab-Festlegung
+
+Vor dem ersten Datenpunkt gilt [PREREGISTRIERUNG.md](PREREGISTRIERUNG.md) (Methodik-Befund B-24). Kein Collector-Start ohne eingefrorene Fassung.
+
 ## Burner einrichten (Aaron, ~10 min)
 
 1. Neuen X-Account mit eigener E-Mail anlegen (nicht der Hauptaccount, nicht mit ihm verknüpfen). Ein paar Tage normal benutzen, den ~50 Ziel-Accounts folgen.
